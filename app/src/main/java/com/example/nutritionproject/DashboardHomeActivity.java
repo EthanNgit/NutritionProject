@@ -23,8 +23,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     //region References
     private BottomNavigationView bottomNavView;
 
-    private CustomUIMethods uiManager = new CustomUIMethods();
-    private CustomFitMethods fitManager = new CustomFitMethods();
+    private final CustomUIMethods uiManager = new CustomUIMethods();
+    private final CustomFitMethods fitManager = new CustomFitMethods();
 
     private Button getTdeeButton;
 
@@ -50,9 +50,12 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
 
         bottomNavView.setItemIconTintList(null);
 
+        bottomNavView.getMenu().findItem(R.id.homeBtn).setChecked(true);
+
         bottomNavView.setOnItemSelectedListener(this);
         getTdeeButton.setOnClickListener(this);
 
+        /*
         if (CurrentProfile.goals.calorieGoal == 0) {
             //TODO: Extract to separate Method???
 
@@ -61,6 +64,9 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         } else {
             showCalorieGraph();
         }
+        */
+        firstTimeCalCard.setVisibility(View.VISIBLE);
+        dayCalorieProgressCard.setVisibility(View.GONE);
     }
 
     @Override
@@ -79,15 +85,24 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         uiManager.uncheckAllNavItems(bottomNavView.getMenu());
 
         //TODO: Implement other Dashboard pages
+        //TODO: Make easier to do this???
 
         if (id == R.id.homeBtn) {
             Log.d("NORTH_DASHBOARD", "Home button pressed " + item.isChecked());
             uiManager.checkNavItem(item);
         } else if (id == R.id.searchBtn) {
             Log.d("NORTH_DASHBOARD", "Search button pressed "+ item.isChecked());
+
+            startActivity(new Intent(DashboardHomeActivity.this, DashboardSearchActivity.class));
+            finish();
+
             uiManager.checkNavItem(item);
         } else if (id == R.id.statsBtn) {
             Log.d("NORTH_DASHBOARD", "Stats button pressed " + item.isChecked());
+
+            startActivity(new Intent(DashboardHomeActivity.this, DashboardStatsActivity.class));
+            finish();
+
             uiManager.checkNavItem(item);
         }
         return false;

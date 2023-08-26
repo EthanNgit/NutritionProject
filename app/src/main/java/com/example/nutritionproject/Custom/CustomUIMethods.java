@@ -1,5 +1,7 @@
 package com.example.nutritionproject.Custom;
 
+import static java.security.AccessController.getContext;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +24,8 @@ import com.example.nutritionproject.R;
 import java.util.Map;
 
 public class CustomUIMethods {
+
+    public boolean keyboardShown;
 
     /**
      *
@@ -152,6 +157,34 @@ public class CustomUIMethods {
 
         buttonToVisualMap.get(currentView).setVisibility(View.VISIBLE);
         currentView.setTextColor(ContextCompat.getColor(context, selectedTextColor));
+    }
+
+    /**
+     *
+     * @param context Context in which this function will use to getSystemService
+     * @param editText the editText you want to force keyboard on
+     */
+    public void showKeyboard(Context context, EditText editText) {
+        keyboardShown = true;
+        editText.requestFocus();
+        editText.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+            }
+        }, 100);
+    }
+
+    /**
+     *
+     * @param context Context in which this function will use to getSystemService
+     */
+    public void hideKeyboard(Context context) {
+        if (keyboardShown) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        }
     }
 
 }

@@ -1104,23 +1104,39 @@
                         <!--Result Label-->
                         <androidx.cardview.widget.CardView
                             android:layout_width="370dp"
-                            android:layout_height="48dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="10dp"
                             android:layout_gravity="center"
                             app:cardCornerRadius="2dp"
                             android:backgroundTint="@color/darkTheme_Background">
 
+                            <EditText
+                                android:id="@+id/manualResultTextField"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:background="@drawable/rounded_less_midground_background_highlighted"
+                                android:inputType="number"
+                                android:hint="calories"
+                                android:textColorHint="@color/darkTheme_TextMed"
+                                android:textColor="@color/darkTheme_TextFull"
+                                android:gravity="center_vertical"
+                                android:paddingStart="15dp"
+                                android:textSize="22dp"
+                                android:visibility="gone"/>
+
+
                             <TextView
                                 android:id="@+id/calorieResultLabelText"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="48dp"
                                 android:gravity="center_vertical"
                                 android:paddingStart="15dp"
                                 android:text="0 Calories"
                                 android:textSize="22dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_TextMed"
+                                android:visibility="visible"/>
 
 
                         </androidx.cardview.widget.CardView>
@@ -1140,13 +1156,25 @@
                             android:layout_gravity="center"/>
 
                         <TextView
+                            android:id="@+id/setManualGoalButton"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:text="Set Manual Goal"
+                            android:text="Set manual goal"
                             android:textSize="20dp"
                             android:gravity="center"
                             android:textColor="@color/darkTheme_TextFull"
                             android:fontFamily="@font/circular_med"/>
+
+                        <TextView
+                            android:id="@+id/getAutomaticGoalButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="Get automatic goal"
+                            android:textSize="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/darkTheme_TextFull"
+                            android:fontFamily="@font/circular_med"
+                            android:visibility="gone"/>
 
 
 

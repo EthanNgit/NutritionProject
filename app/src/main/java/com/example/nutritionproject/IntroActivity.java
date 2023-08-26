@@ -49,6 +49,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
             //TODO: Update to saving userprofile and authenticating though there, when profiles are needed
             Gson gson = new Gson();
 
+            //TODO: Create Error when Database is not online / No internet connection, currently Crashes application
             dbManager.login(skipEmail, skipPassword);
 
             startActivity(new Intent(IntroActivity.this, DashboardHomeActivity.class));

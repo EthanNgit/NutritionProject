@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".DashboardStatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DashboardSearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".TdeeActivity"
             android:exported="false" />
         <activity

@@ -7,11 +7,13 @@ import static com.example.nutritionproject.Custom.CustomDBMethods.CurrentProfile
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -137,7 +139,13 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
     //endregion
 
     private TextView resultCalorieTxt;
+
+    private EditText manualCalorieField;
     private Button setGoalButton;
+    private TextView manualSetGoalButton;
+    private TextView automaticGetGoalButton;
+
+    private boolean isUpdatingManually = false;
 
     private int currentCalorieResult = 0;
     //endregion
@@ -245,8 +253,11 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         //endregion
 
         resultCalorieTxt = findViewById(R.id.calorieResultLabelText);
+        manualCalorieField = findViewById(R.id.manualResultTextField);
         
         setGoalButton = findViewById(R.id.setGoalButton);
+        manualSetGoalButton = findViewById(R.id.setManualGoalButton);
+        automaticGetGoalButton = findViewById(R.id.getAutomaticGoalButton);
         //endregion
 
         //region Filling TDEE maps
@@ -275,7 +286,15 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         maleGenderTwoWayButton.setOnClickListener(this);
         femaleGenderTwoWayButton.setOnClickListener(this);
 
+        firstCarouselNextButton.setOnClickListener(this);
+        secondCarouselBackButton.setOnClickListener(this);
+        secondCarouselNextbutton.setOnClickListener(this);
+        thirdCarouselBackButton.setOnClickListener(this);
+
         setGoalButton.setOnClickListener(this);
+
+        manualSetGoalButton.setOnClickListener(this);
+        automaticGetGoalButton.setOnClickListener(this);
         
         for (TextView button : activityButtonToSelectViewMap.keySet()) {
             button.setOnClickListener(this);
@@ -284,11 +303,6 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         for (TextView button : goalButtonToSelectViewMap.keySet()) {
             button.setOnClickListener(this);
         }
-
-        firstCarouselNextButton.setOnClickListener(this);
-        secondCarouselBackButton.setOnClickListener(this);
-        secondCarouselNextbutton.setOnClickListener(this);
-        thirdCarouselBackButton.setOnClickListener(this);
 
         //endregion
 
@@ -306,6 +320,8 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         heightMetricFeetEditText.addTextChangedListener(this);
         heightMetricInchesEditText.addTextChangedListener(this);
         heightImperialEditText.addTextChangedListener(this);
+
+        manualCalorieField.setOnFocusChangeListener(this);
         //endregion
 
         //endregion
@@ -403,6 +419,30 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         
         if (id == setGoalButton.getId()) {
             setGoal();
+
+        } else if (id == manualSetGoalButton.getId()) {
+            resultCalorieTxt.setVisibility(View.GONE);
+            manualCalorieField.setVisibility(View.VISIBLE);
+
+            manualCalorieField.setText("");
+
+            manualSetGoalButton.setVisibility(View.GONE);
+            automaticGetGoalButton.setVisibility(View.VISIBLE);
+
+            uiManager.showKeyboard(this, manualCalorieField);
+
+            isUpdatingManually = true;
+
+        } else if (id == automaticGetGoalButton.getId()) {
+            resultCalorieTxt.setVisibility(View.VISIBLE);
+            manualCalorieField.setVisibility(View.GONE);
+
+            automaticGetGoalButton.setVisibility(View.GONE);
+            manualSetGoalButton.setVisibility(View.VISIBLE);
+
+            isUpdatingManually = false;
+
+            //uiManager.hideKeyboard(this);
         }
         //endregion
     }
@@ -547,8 +587,22 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
     private void setGoal() {
         //TODO: Give errors if fields arent filled in on click
 
-        if (currentCalorieResult > 0) {
+        if (currentCalorieResult > 0 && !isUpdatingManually) {
             dbManager.updateGoals(CurrentProfile.id, currentCalorieResult, 0, 0,0);
+        } else if (isUpdatingManually) {
+            int manualCals = 0;
+
+            try {
+                manualCals = Integer.parseInt(manualCalorieField.getText().toString());
+
+            } catch (NumberFormatException e) {
+                //Error
+                return;
+            }
+
+            if (manualCals > 0) {
+                dbManager.updateGoals(CurrentProfile.id, manualCals, 0, 0,0);
+            }
         }
     }
 

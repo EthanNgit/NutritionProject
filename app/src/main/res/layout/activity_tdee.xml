@@ -40,7 +40,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Caloric goal"
-                        android:textColor="@color/darkTheme_TextFull"
+                        android:textColor="@color/darkTheme_WhiteFull"
                         android:fontFamily="@font/circular"
                         android:textSize="15dp"
                         android:paddingTop="25dp"
@@ -82,7 +82,7 @@
                             android:layout_marginTop="15dp"
                             android:paddingStart="25dp"
                             android:text="Measurement"
-                            android:textColor="@color/darkTheme_TextMed"
+                            android:textColor="@color/darkTheme_WhiteMed"
                             android:textSize="15dp"
                             android:fontFamily="@font/circular_med"/>
 
@@ -101,7 +101,7 @@
                                 android:layout_width="185dp"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background" />
+                                android:src="@drawable/bg_green_2dp" />
 
                             <TextView
                                 android:id="@+id/metricMeasurementButton"
@@ -122,7 +122,7 @@
                                 android:text="Imperial"
                                 android:textSize="22dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
                         </androidx.cardview.widget.CardView>
@@ -134,7 +134,7 @@
                             android:layout_marginTop="15dp"
                             android:paddingStart="25dp"
                             android:text="Age (yrs)"
-                            android:textColor="@color/darkTheme_TextMed"
+                            android:textColor="@color/darkTheme_WhiteMed"
                             android:textSize="15dp"
                             android:fontFamily="@font/circular_med"/>
 
@@ -153,11 +153,11 @@
                                 android:id="@+id/ageTextField"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rounded_less_midground_background_highlighted"
+                                android:background="@drawable/bg_black_2dp_stroke_white"
                                 android:inputType="number"
                                 android:hint="yrs"
-                                android:textColorHint="@color/darkTheme_TextMed"
-                                android:textColor="@color/darkTheme_TextFull"
+                                android:textColorHint="@color/darkTheme_WhiteMed"
+                                android:textColor="@color/darkTheme_WhiteFull"
                                 android:gravity="center_vertical"
                                 android:paddingStart="15dp"
                                 android:textSize="15dp"/>
@@ -186,7 +186,7 @@
                             android:layout_marginTop="15dp"
                             android:paddingStart="25dp"
                             android:text="Weight (lbs)"
-                            android:textColor="@color/darkTheme_TextMed"
+                            android:textColor="@color/darkTheme_WhiteMed"
                             android:textSize="15dp"
                             android:fontFamily="@font/circular_med"/>
 
@@ -206,11 +206,11 @@
                                 android:id="@+id/poundsTextField"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rounded_less_midground_background_highlighted"
+                                android:background="@drawable/bg_black_2dp_stroke_white"
                                 android:inputType="number"
                                 android:hint="lbs"
-                                android:textColorHint="@color/darkTheme_TextMed"
-                                android:textColor="@color/darkTheme_TextFull"
+                                android:textColorHint="@color/darkTheme_WhiteMed"
+                                android:textColor="@color/darkTheme_WhiteFull"
                                 android:gravity="center_vertical"
                                 android:paddingStart="15dp"
                                 android:textSize="15dp"/>
@@ -235,11 +235,11 @@
                                 android:id="@+id/kgTextField"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rounded_less_midground_background_highlighted"
+                                android:background="@drawable/bg_black_2dp_stroke_white"
                                 android:inputType="number"
                                 android:hint="kg"
-                                android:textColorHint="@color/darkTheme_TextMed"
-                                android:textColor="@color/darkTheme_TextFull"
+                                android:textColorHint="@color/darkTheme_WhiteMed"
+                                android:textColor="@color/darkTheme_WhiteFull"
                                 android:gravity="center_vertical"
                                 android:paddingStart="15dp"
                                 android:textSize="15dp"/>
@@ -268,7 +268,7 @@
                             android:layout_marginTop="15dp"
                             android:paddingStart="25dp"
                             android:text="Height (ft/in)"
-                            android:textColor="@color/darkTheme_TextMed"
+                            android:textColor="@color/darkTheme_WhiteMed"
                             android:textSize="15dp"
                             android:fontFamily="@font/circular_med"/>
 
@@ -293,11 +293,11 @@
                                     android:id="@+id/feetTextField"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/rounded_less_midground_background_highlighted"
+                                    android:background="@drawable/bg_black_2dp_stroke_white"
                                     android:inputType="number"
                                     android:hint="ft"
-                                    android:textColorHint="@color/darkTheme_TextMed"
-                                    android:textColor="@color/darkTheme_TextFull"
+                                    android:textColorHint="@color/darkTheme_WhiteMed"
+                                    android:textColor="@color/darkTheme_WhiteFull"
                                     android:maxLength="1"
                                     android:gravity="center_vertical"
                                     android:paddingStart="15dp"
@@ -320,11 +320,11 @@
                                     android:id="@+id/inchTextField"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/rounded_less_midground_background_highlighted"
+                                    android:background="@drawable/bg_black_2dp_stroke_white"
                                     android:inputType="number"
                                     android:hint="in"
-                                    android:textColorHint="@color/darkTheme_TextMed"
-                                    android:textColor="@color/darkTheme_TextFull"
+                                    android:textColorHint="@color/darkTheme_WhiteMed"
+                                    android:textColor="@color/darkTheme_WhiteFull"
                                     android:maxLength="1"
                                     android:gravity="center_vertical"
                                     android:paddingStart="15dp"
@@ -352,11 +352,11 @@
                                 android:id="@+id/cmHeightField"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rounded_less_midground_background_highlighted"
+                                android:background="@drawable/bg_black_2dp_stroke_white"
                                 android:inputType="number"
                                 android:hint="cm"
-                                android:textColorHint="@color/darkTheme_TextMed"
-                                android:textColor="@color/darkTheme_TextFull"
+                                android:textColorHint="@color/darkTheme_WhiteMed"
+                                android:textColor="@color/darkTheme_WhiteFull"
                                 android:gravity="center_vertical"
                                 android:paddingStart="15dp"
                                 android:textSize="15dp"/>
@@ -384,7 +384,7 @@
                             android:layout_marginTop="15dp"
                             android:paddingStart="25dp"
                             android:text="Gender"
-                            android:textColor="@color/darkTheme_TextMed"
+                            android:textColor="@color/darkTheme_WhiteMed"
                             android:textSize="15dp"
                             android:fontFamily="@font/circular_med"/>
 
@@ -403,7 +403,7 @@
                                 android:layout_width="185dp"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background" />
+                                android:src="@drawable/bg_green_2dp" />
 
                             <TextView
                                 android:id="@+id/maleGenderButton"
@@ -424,7 +424,7 @@
                                 android:text="Female"
                                 android:textSize="22dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
                         </androidx.cardview.widget.CardView>
@@ -441,7 +441,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="2dp"
                                 android:layout_margin="10dp"
-                                app:srcCompat="@drawable/rounded_midground_background_normal"
+                                app:srcCompat="@drawable/bg_gray_6dp"
                                 app:tint="@color/darkTheme_Background"/>
 
                             <!--Back - Next Buttons-->
@@ -468,7 +468,7 @@
                                         android:layout_height="match_parent"
                                         android:text="Back"
                                         android:textSize="20dp"
-                                        android:textColor="@color/darkTheme_TextMed"
+                                        android:textColor="@color/darkTheme_WhiteMed"
                                         android:fontFamily="@font/circular_med"
                                         android:gravity="center_vertical"/>
 
@@ -487,7 +487,7 @@
                                         android:layout_height="match_parent"
                                         android:text="Next"
                                         android:textSize="20dp"
-                                        android:textColor="@color/darkTheme_TextFull"
+                                        android:textColor="@color/darkTheme_WhiteFull"
                                         android:fontFamily="@font/circular_med"
                                         android:gravity="center_vertical"/>
 
@@ -534,7 +534,7 @@
                             android:layout_marginTop="15dp"
                             android:paddingStart="25dp"
                             android:text="Activity (1-5)"
-                            android:textColor="@color/darkTheme_TextMed"
+                            android:textColor="@color/darkTheme_WhiteMed"
                             android:textSize="15dp"
                             android:fontFamily="@font/circular_med"/>
 
@@ -553,7 +553,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="visible"/>
 
                             <TextView
@@ -587,7 +587,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="invisible"/>
 
                             <TextView
@@ -599,7 +599,7 @@
                                 android:text="Light Exercise (1-2 days/week)"
                                 android:textSize="20dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
 
@@ -621,7 +621,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="invisible"/>
 
                             <TextView
@@ -633,7 +633,7 @@
                                 android:text="Moderate Exercise (3-5 days/week)"
                                 android:textSize="20dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
 
@@ -655,7 +655,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="invisible"/>
 
                             <TextView
@@ -667,7 +667,7 @@
                                 android:text="Heavy Exercise (6-7 days/week)"
                                 android:textSize="20dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
 
@@ -689,7 +689,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="invisible"/>
 
                             <TextView
@@ -701,7 +701,7 @@
                                 android:text="Athlete (2x per day)"
                                 android:textSize="20dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
                         </androidx.cardview.widget.CardView>
@@ -718,7 +718,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="2dp"
                                 android:layout_margin="10dp"
-                                app:srcCompat="@drawable/rounded_midground_background_normal"
+                                app:srcCompat="@drawable/bg_gray_6dp"
                                 app:tint="@color/darkTheme_Background"
                                 />
 
@@ -746,7 +746,7 @@
                                         android:layout_height="match_parent"
                                         android:text="Back"
                                         android:textSize="20dp"
-                                        android:textColor="@color/darkTheme_TextFull"
+                                        android:textColor="@color/darkTheme_WhiteFull"
                                         android:fontFamily="@font/circular_med"
                                         android:gravity="center_vertical"/>
 
@@ -765,7 +765,7 @@
                                         android:layout_height="match_parent"
                                         android:text="Next"
                                         android:textSize="20dp"
-                                        android:textColor="@color/darkTheme_TextFull"
+                                        android:textColor="@color/darkTheme_WhiteFull"
                                         android:fontFamily="@font/circular_med"
                                         android:gravity="center_vertical"/>
 
@@ -813,7 +813,7 @@
                             android:layout_marginTop="15dp"
                             android:paddingStart="25dp"
                             android:text="Caloric goal"
-                            android:textColor="@color/darkTheme_TextMed"
+                            android:textColor="@color/darkTheme_WhiteMed"
                             android:textSize="15dp"
                             android:fontFamily="@font/circular_med"/>
 
@@ -832,7 +832,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="visible"/>
 
                             <TextView
@@ -863,7 +863,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="gone"/>
 
                             <TextView
@@ -875,7 +875,7 @@
                                 android:text="Heavy cut (1000 kcal deficit)"
                                 android:textSize="20dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
 
@@ -897,7 +897,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="invisible"/>
 
                             <TextView
@@ -909,7 +909,7 @@
                                 android:text="Light cut (500 kcal deficit)"
                                 android:textSize="20dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
 
@@ -931,7 +931,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="invisible"/>
 
                             <TextView
@@ -943,7 +943,7 @@
                                 android:text="Light bulk (250 kcal surplus)"
                                 android:textSize="20dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
 
@@ -965,7 +965,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="2dp"
-                                android:src="@drawable/rounded_less_midground_background"
+                                android:src="@drawable/bg_green_2dp"
                                 android:visibility="invisible"/>
 
                             <TextView
@@ -977,7 +977,7 @@
                                 android:text="Heavy bulk (500 kcal surplus)"
                                 android:textSize="20dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"/>
+                                android:textColor="@color/darkTheme_WhiteMed"/>
 
 
                         </androidx.cardview.widget.CardView>
@@ -989,7 +989,7 @@
                             android:text="* It is not safe to eat in a deficit for long periods of time \n* It is recommended for males to eat above 1500kcals \n and for females to eat above 1200kcals\n* If you plan to go under recommended amounts, do so under supervision of a health professional"
                             android:fontFamily="@font/circular_light"
                             android:textSize="12dp"
-                            android:textColor="@color/darkTheme_TextMed"/>
+                            android:textColor="@color/darkTheme_WhiteMed"/>
 
                         <LinearLayout
                         android:layout_width="match_parent"
@@ -1002,7 +1002,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_margin="10dp"
-                            app:srcCompat="@drawable/rounded_midground_background_normal"
+                            app:srcCompat="@drawable/bg_gray_6dp"
                             app:tint="@color/darkTheme_Background"/>
 
                         <!--Back - Next Buttons-->
@@ -1030,7 +1030,7 @@
                                     android:layout_height="match_parent"
                                     android:text="Back"
                                     android:textSize="20dp"
-                                    android:textColor="@color/darkTheme_TextFull"
+                                    android:textColor="@color/darkTheme_WhiteFull"
                                     android:fontFamily="@font/circular_med"
                                     android:gravity="center_vertical"/>
 
@@ -1049,7 +1049,7 @@
                                     android:layout_height="match_parent"
                                     android:text="Next"
                                     android:textSize="20dp"
-                                    android:textColor="@color/darkTheme_TextMed"
+                                    android:textColor="@color/darkTheme_WhiteMed"
                                     android:fontFamily="@font/circular_med"
                                     android:gravity="center_vertical"/>
 
@@ -1097,7 +1097,7 @@
                             android:layout_marginTop="15dp"
                             android:paddingStart="25dp"
                             android:text="Result"
-                            android:textColor="@color/darkTheme_TextMed"
+                            android:textColor="@color/darkTheme_WhiteMed"
                             android:textSize="15dp"
                             android:fontFamily="@font/circular_med"/>
 
@@ -1115,11 +1115,11 @@
                                 android:id="@+id/manualResultTextField"
                                 android:layout_width="match_parent"
                                 android:layout_height="48dp"
-                                android:background="@drawable/rounded_less_midground_background_highlighted"
+                                android:background="@drawable/bg_black_2dp_stroke_white"
                                 android:inputType="number"
                                 android:hint="calories"
-                                android:textColorHint="@color/darkTheme_TextMed"
-                                android:textColor="@color/darkTheme_TextFull"
+                                android:textColorHint="@color/darkTheme_WhiteMed"
+                                android:textColor="@color/darkTheme_WhiteFull"
                                 android:gravity="center_vertical"
                                 android:paddingStart="15dp"
                                 android:textSize="22dp"
@@ -1135,7 +1135,7 @@
                                 android:text="0 Calories"
                                 android:textSize="22dp"
                                 android:fontFamily="@font/circular_med"
-                                android:textColor="@color/darkTheme_TextMed"
+                                android:textColor="@color/darkTheme_WhiteMed"
                                 android:visibility="visible"/>
 
 
@@ -1146,7 +1146,7 @@
                             android:id="@+id/setGoalButton"
                             android:layout_width="300dp"
                             android:layout_height="50dp"
-                            android:background="@drawable/rounded_midground_button"
+                            android:background="@drawable/bg_green_100dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="20dp"
                             android:text="Set Goal"
@@ -1162,7 +1162,7 @@
                             android:text="Set manual goal"
                             android:textSize="20dp"
                             android:gravity="center"
-                            android:textColor="@color/darkTheme_TextFull"
+                            android:textColor="@color/darkTheme_WhiteFull"
                             android:fontFamily="@font/circular_med"/>
 
                         <TextView
@@ -1172,7 +1172,7 @@
                             android:text="Get automatic goal"
                             android:textSize="20dp"
                             android:gravity="center"
-                            android:textColor="@color/darkTheme_TextFull"
+                            android:textColor="@color/darkTheme_WhiteFull"
                             android:fontFamily="@font/circular_med"
                             android:visibility="gone"/>
 
@@ -1196,8 +1196,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemBackground="@null"
-        app:itemIconTint="@color/darkTheme_TextFull"
-        app:itemTextColor="@color/darkTheme_TextFull"
+        app:itemIconTint="@color/darkTheme_WhiteFull"
+        app:itemTextColor="@color/darkTheme_WhiteFull"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

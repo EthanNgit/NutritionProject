@@ -7,13 +7,11 @@ import static com.example.nutritionproject.Custom.CustomDBMethods.CurrentProfile
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -339,11 +337,11 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         //region TDEE OnClick
         //region Measurement Two way button OnClick
         if (id == metricMeasurementTwoWayButton.getId()) {
-            uiManager.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_TextMed);
+            uiManager.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMetric = true;
             setMetricFields();
         } else if (id == imperialMeasurementTwoWayButton.getId()) {
-            uiManager.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_TextMed);
+            uiManager.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMetric = false;
             setImperialFields();
         }
@@ -351,11 +349,11 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
         //region Gender Two way button OnClick
         if (id == maleGenderTwoWayButton.getId()) {
-            uiManager.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_TextMed);
+            uiManager.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMale = true;
             onTDEEInformationChanged.invoke();
         } else if (id == femaleGenderTwoWayButton.getId()) {
-            uiManager.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_TextMed);
+            uiManager.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMale = false;
             onTDEEInformationChanged.invoke();
         }
@@ -481,13 +479,13 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
     //region Reusable Methods
     private void setActivityLevel(TextView buttonClicked, WorkoutIntensity intensityLevel) {
-        uiManager.setNListButton(this, activityButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_TextMed);
+        uiManager.setNListButton(this, activityButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
         currentIntensity = intensityLevel;
         onTDEEInformationChanged.invoke();
     }
 
     private void setGoalLevel(TextView buttonClicked, WorkoutGoals goal) {
-        uiManager.setNListButton(this, goalButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_TextMed);
+        uiManager.setNListButton(this, goalButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
         currentGoal = goal;
         onTDEEInformationChanged.invoke();
     }

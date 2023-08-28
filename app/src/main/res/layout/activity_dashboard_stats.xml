@@ -65,16 +65,9 @@
                     android:gravity="bottom"
                     android:fontFamily="@font/circular"
                     android:text="Statistics"
-                    android:textColor="@color/darkTheme_TextFull"
+                    android:textColor="@color/darkTheme_WhiteFull"
                     android:textSize="24sp" />
 
-                <Button
-                    android:id="@+id/settingsButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="25dp"
-                    android:gravity="bottom"
-                    android:background="@drawable/rounded_midground_button" />
 
             </LinearLayout>
 
@@ -107,8 +100,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemBackground="@null"
-        app:itemIconTint="@color/darkTheme_TextFull"
-        app:itemTextColor="@color/darkTheme_TextFull"
+        app:itemIconTint="@color/darkTheme_WhiteFull"
+        app:itemTextColor="@color/darkTheme_WhiteFull"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -64,22 +64,22 @@ public class SignupActivity extends AppCompatActivity implements View.OnFocusCha
     public void onFocusChange(View view, boolean b) {
         int id = view.getId();
 
-        uiManager.setTextFieldBackgrounds(this, new EditText[]{emailField, passwordField}, R.drawable.rounded_midground_background);
+        uiManager.setTextFieldBackgrounds(this, new EditText[]{emailField, passwordField}, R.drawable.bg_gray_6dp_stroke_gray);
         uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "");
         uiManager.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "");
 
         if (id == emailField.getId()) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.rounded_midground_background_highlighted);
+            uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_white);
         } else if (id == passwordField.getId()) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.rounded_midground_background_highlighted);
+            uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_white);
         }
 
         if (emailField.getText().length() != 0 && !dbManager.isEmailValid(emailField.getText().toString().trim())) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.rounded_midground_background_error);
+            uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_red);
             uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
         }
         if (passwordField.getText().length() != 0 && !dbManager.isPasswordValid(passwordField.getText().toString().trim())) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.rounded_midground_background_error);
+            uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_red);
             uiManager.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "Invalid password");
         }
 

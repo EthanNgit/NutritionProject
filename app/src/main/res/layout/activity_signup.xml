@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/circular"
         android:text="Sign Up"
-        android:textColor="@color/darkTheme_TextFull"
+        android:textColor="@color/darkTheme_WhiteFull"
         android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
         android:fontFamily="@font/circular"
         android:text="To search our database for food \n and start tracking macros"
         android:textAlignment="center"
-        android:textColor="@color/darkTheme_TextFull"
+        android:textColor="@color/darkTheme_WhiteFull"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/normalSignUpLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,8 +61,8 @@
             android:paddingEnd="10dp"
             android:text="Email"
             android:fontFamily="@font/circular"
-            android:textColor="@color/darkTheme_TextFull"
-            android:textColorHint="@color/darkTheme_TextFull"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textColorHint="@color/darkTheme_WhiteFull"
             android:textSize="12sp" />
 
         <!-- Email Text Field -->
@@ -71,7 +71,7 @@
             android:layout_width="340dp"
             android:layout_height="48dp"
             android:autofillHints="emailAddress"
-            android:background="@drawable/rounded_midground_background"
+            android:background="@drawable/bg_gray_6dp_stroke_gray"
             android:fontFamily="@font/circular_med"
             android:hint="Email"
             android:focusable="true"
@@ -80,8 +80,8 @@
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
             android:singleLine="true"
-            android:textColor="@color/darkTheme_TextFull"
-            android:textColorHint="@color/darkTheme_TextMed"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textColorHint="@color/darkTheme_WhiteMed"
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/emailTextLabel" />
 
@@ -108,7 +108,7 @@
             android:paddingEnd="10dp"
             android:text="Password"
             android:fontFamily="@font/circular"
-            android:textColor="@color/darkTheme_TextFull"
+            android:textColor="@color/darkTheme_WhiteFull"
             android:textSize="12sp" />
 
         <!-- Password Text Field -->
@@ -117,7 +117,7 @@
             android:layout_width="340dp"
             android:layout_height="48dp"
             android:autofillHints="password"
-            android:background="@drawable/rounded_midground_background"
+            android:background="@drawable/bg_gray_6dp_stroke_gray"
             android:fontFamily="@font/circular_med"
             android:hint="Password"
             android:focusable="true"
@@ -126,8 +126,8 @@
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
             android:singleLine="true"
-            android:textColor="@color/darkTheme_TextFull"
-            android:textColorHint="@color/darkTheme_TextMed"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textColorHint="@color/darkTheme_WhiteMed"
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/emailTextLabel" />
 
@@ -151,7 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:background="@drawable/rounded_midground_button"
+            android:background="@drawable/bg_green_100dp"
             android:fontFamily="@font/circular"
             android:text="Sign Up"
             android:textAllCaps="false"
@@ -166,7 +166,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/darkTheme_Error"
             android:text="Account already exists"
-            android:textColor="@color/darkTheme_TextFull"
+            android:textColor="@color/darkTheme_WhiteFull"
             android:textSize="15sp"
             android:gravity="center"
             android:visibility="gone"/>
@@ -176,7 +176,7 @@
             android:layout_height="2dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="10dp"
-            app:srcCompat="@drawable/rounded_midground_background_normal" />
+            app:srcCompat="@drawable/bg_gray_6dp" />
 
     </LinearLayout>
 
@@ -199,7 +199,7 @@
             android:fontFamily="@font/circular"
             android:text="Already have an account?"
             android:textAlignment="textEnd"
-            android:textColor="@color/darkTheme_TextFull"
+            android:textColor="@color/darkTheme_WhiteFull"
             android:textSize="12sp" />
 
         <Button

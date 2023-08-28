@@ -65,7 +65,7 @@
                     android:gravity="bottom"
                     android:fontFamily="@font/circular"
                     android:text="Dashboard"
-                    android:textColor="@color/darkTheme_TextFull"
+                    android:textColor="@color/darkTheme_WhiteFull"
                     android:textSize="24sp" />
 
                 <Button
@@ -74,7 +74,7 @@
                     android:layout_height="50dp"
                     android:layout_marginEnd="25dp"
                     android:gravity="bottom"
-                    android:background="@drawable/rounded_midground_button" />
+                    android:background="@drawable/bg_green_100dp" />
 
             </LinearLayout>
 
@@ -106,7 +106,7 @@
                             android:layout_height="match_parent"
                             android:paddingTop="10dp"
                             android:text="Daily Caloric Intake"
-                            android:textColor="@color/darkTheme_TextFull"
+                            android:textColor="@color/darkTheme_WhiteFull"
                             android:textSize="18dp"
                             android:fontFamily="@font/circular_med"
                             android:textAlignment="center"/>
@@ -117,7 +117,7 @@
                             android:paddingTop="55dp"
                             android:paddingStart="20dp"
                             android:text="Looks like you have not \n set a calorie limit yet."
-                            android:textColor="@color/darkTheme_TextHigh"
+                            android:textColor="@color/darkTheme_WhiteHigh"
                             android:textAlignment="viewStart"
                             />
 
@@ -127,7 +127,7 @@
                             android:layout_height="40dp"
                             android:layout_marginTop="55dp"
                             android:layout_marginStart="225dp"
-                            android:background="@drawable/rounded_midground_button"
+                            android:background="@drawable/bg_green_100dp"
                             android:text="Set goal"
                             android:textSize="15dp"
                             android:fontFamily="@font/circular"
@@ -172,8 +172,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemBackground="@null"
-        app:itemIconTint="@color/darkTheme_TextFull"
-        app:itemTextColor="@color/darkTheme_TextFull"
+        app:itemIconTint="@color/darkTheme_WhiteFull"
+        app:itemTextColor="@color/darkTheme_WhiteFull"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

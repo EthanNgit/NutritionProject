@@ -7,12 +7,11 @@
     <color name="darkTheme_Foreground">#121212</color>
     <color name="darkTheme_Brand">#1dc85a</color>
 
-    <color name="darkTheme_TextFull">#ffffff</color>
-    <color name="darkTheme_TextHigh">#DEffffff</color>
-    <color name="darkTheme_TextMed">#99ffffff</color>
-    <color name="darkTheme_TextMin">#61ffffff</color>
+    <color name="darkTheme_WhiteFull">#ffffff</color>
+    <color name="darkTheme_WhiteHigh">#DEffffff</color>
+    <color name="darkTheme_WhiteMed">#99ffffff</color>
+    <color name="darkTheme_WhiteMin">#61ffffff</color>
     <color name="darkTheme_Error">#e91429</color>
-
 
 
     <!--

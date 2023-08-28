@@ -1,7 +1,15 @@
 package com.example.nutritionproject.Custom;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.nutritionproject.DashboardHomeActivity;
+import com.example.nutritionproject.IntroActivity;
 import com.example.nutritionproject.Model.UserModel;
 import com.example.nutritionproject.Retrofit.ApiClient;
 import com.example.nutritionproject.Retrofit.ApiInterface;
@@ -36,6 +44,7 @@ public class CustomDBMethods {
         //TODO: (DB METHODS) check if user has account and send a recovery email to the email
         // Send email to users email with a code
         // For the user to reset the code they have to enter the code along with their new password
+
 
     }
 
@@ -125,6 +134,17 @@ public class CustomDBMethods {
     }
 
     //region Reusable Methods
+    public void logout(Context context) {
+        if (CurrentProfile.email != null) {
+            CurrentProfile = new UserProfile();
+            //Clear preferences
+            SharedPreferences preferences = context.getSharedPreferences("login", MODE_PRIVATE);
+            preferences.edit().clear().apply();
+
+            Log.d("NORTH_DATABASE", "Logged out successfully");
+        }
+    }
+
     private void setUserProfile(UserModel user) {
         CurrentProfile.id = user.getId();
         CurrentProfile.email = user.getEmail();

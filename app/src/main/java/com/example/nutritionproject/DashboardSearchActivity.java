@@ -7,18 +7,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.CustomUIMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class DashboardSearchActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
+public class DashboardSearchActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
 
     private BottomNavigationView bottomNavView;
 
     private final CustomUIMethods uiManager = new CustomUIMethods();
     private final CustomFitMethods fitManager = new CustomFitMethods();
+
+    private TextView searchButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +35,24 @@ public class DashboardSearchActivity extends AppCompatActivity implements Naviga
 
         bottomNavView = findViewById(R.id.bottomNavigationView);
 
+        searchButton = findViewById(R.id.searchBtn);
+
         bottomNavView.setItemIconTintList(null);
 
         bottomNavView.getMenu().findItem(R.id.searchBtn).setChecked(true);
 
         bottomNavView.setOnItemSelectedListener(this);
+
+        searchButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == searchButton.getId()) {
+            startActivity(new Intent(DashboardSearchActivity.this, SearchActivity.class));
+        }
     }
 
     @Override
@@ -65,5 +84,10 @@ public class DashboardSearchActivity extends AppCompatActivity implements Naviga
         }
 
         return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

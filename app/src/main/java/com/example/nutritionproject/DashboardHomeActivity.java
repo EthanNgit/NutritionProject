@@ -26,6 +26,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     private final CustomUIMethods uiManager = new CustomUIMethods();
     private final CustomFitMethods fitManager = new CustomFitMethods();
 
+    private Button profileButton;
+
     private Button getTdeeButton;
 
     private CardView firstTimeCalCard;
@@ -42,6 +44,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
 
         uiManager.setAndroidUI(this, R.color.darkTheme_Background);
 
+        profileButton = findViewById(R.id.settingsButton);
+
         bottomNavView = findViewById(R.id.bottomNavigationView);
         getTdeeButton = findViewById(R.id.takeCalorieEstimateButton);
 
@@ -51,6 +55,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         bottomNavView.setItemIconTintList(null);
 
         bottomNavView.getMenu().findItem(R.id.homeBtn).setChecked(true);
+
+        profileButton.setOnClickListener(this);
 
         bottomNavView.setOnItemSelectedListener(this);
         getTdeeButton.setOnClickListener(this);
@@ -73,7 +79,11 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == R.id.takeCalorieEstimateButton) {
+        if (id == profileButton.getId()) {
+            startActivity(new Intent(DashboardHomeActivity.this, ProfileActivity.class));
+        }
+
+        if (id == getTdeeButton.getId()) {
             startActivity(new Intent(DashboardHomeActivity.this, TdeeActivity.class));
         }
     }

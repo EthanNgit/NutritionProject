@@ -61,6 +61,10 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         bottomNavView.setOnItemSelectedListener(this);
         getTdeeButton.setOnClickListener(this);
 
+
+        uiManager.setProfileButton(this, profileButton);
+
+
         /*
         if (CurrentProfile.goals.calorieGoal == 0) {
             //TODO: Extract to separate Method???

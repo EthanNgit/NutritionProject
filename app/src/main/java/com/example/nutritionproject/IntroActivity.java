@@ -12,12 +12,11 @@ import android.widget.Button;
 
 import com.example.nutritionproject.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.CustomUIMethods;
-import com.google.gson.Gson;
 
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private CustomUIMethods uiManager = new CustomUIMethods();
-    private CustomDBMethods dbManager = new CustomDBMethods();
+    private final CustomUIMethods uiManager = new CustomUIMethods();
+    private final CustomDBMethods dbManager = new CustomDBMethods();
     private Button loginBtn;
     private Button signUpBtn;
 
@@ -35,6 +34,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         loginBtn.setOnClickListener(this);
         signUpBtn.setOnClickListener(this);
 
+
         SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
 
         //preferences.edit().clear().commit();
@@ -47,7 +47,6 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
         if (rememberMeString.equals("true") && !skipEmail.isEmpty() && !skipPassword.isEmpty()) {
             //TODO: Update to saving userprofile and authenticating though there, when profiles are needed
-            Gson gson = new Gson();
 
             //TODO: Create Error when Database is not online / No internet connection, currently Crashes application
             dbManager.login(skipEmail, skipPassword);

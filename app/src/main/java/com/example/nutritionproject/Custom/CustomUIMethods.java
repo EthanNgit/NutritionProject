@@ -4,6 +4,7 @@ import static java.security.AccessController.getContext;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Pair;
@@ -14,14 +15,17 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
+import com.example.nutritionproject.DashboardHomeActivity;
 import com.example.nutritionproject.R;
 
 import java.util.Map;
+import java.util.Random;
 
 public class CustomUIMethods {
 
@@ -187,4 +191,19 @@ public class CustomUIMethods {
         }
     }
 
+    public static String getRandomLightColorHex() {
+        Random rand = new Random();
+
+        float r = (float) (rand.nextFloat() / 2f + 0.5);
+        float g = (float) (rand.nextFloat() / 2f + 0.5);
+        float b = (float) (rand.nextFloat() / 2f + 0.5);
+
+        String randomColor = String.format("#%02x%02x%02x", r, g, b);
+
+        return randomColor;
+    }
+
+    public void setProfileButton(Context context, Button profileButton) {
+        profileButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(getRandomLightColorHex())));
+    }
 }

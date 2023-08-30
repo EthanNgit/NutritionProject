@@ -26,5 +26,6 @@ Current Version:
   * 0.1.1.1 Added manual TDEE option, finished setting base dashboard up
   * 0.1.2.1 Added settings, logout, and more ui.
   * 0.1.3.1 Added most menus, added auto generated profile picture
+  * 0.1.4.1 Added reset password and otp generation (still need verify user exists and for security reasons probly shift it over to php hosting otp instead, but ill leave that out as of now)
 
 

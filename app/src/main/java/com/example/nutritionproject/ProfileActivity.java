@@ -124,32 +124,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.uncheckAllNavItems(bottomNavView.getMenu());
-
-        //TODO: Make easier to do this???
-
-        if (id == R.id.homeBtn) {
-            Log.d("NORTH_DASHBOARD", "Home button pressed " + item.isChecked());
-
-            startActivity(new Intent(ProfileActivity.this, DashboardHomeActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        } else if (id == R.id.searchBtn) {
-            Log.d("NORTH_DASHBOARD", "Search button pressed "+ item.isChecked());
-
-            startActivity(new Intent(ProfileActivity.this, DashboardSearchActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        } else if (id == R.id.statsBtn) {
-            Log.d("NORTH_DASHBOARD", "Stats button pressed " + item.isChecked());
-
-            startActivity(new Intent(ProfileActivity.this, DashboardStatsActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        }
+        uiManager.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
     }

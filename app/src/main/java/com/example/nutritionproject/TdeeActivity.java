@@ -4,6 +4,7 @@ import static com.example.nutritionproject.Custom.CustomConversionMethods.getImp
 import static com.example.nutritionproject.Custom.CustomConversionMethods.getImperialWeight;
 import static com.example.nutritionproject.Custom.CustomDBMethods.CurrentProfile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,11 +26,13 @@ import com.example.nutritionproject.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.Event;
 import com.example.nutritionproject.Custom.WorkoutGoals;
 import com.example.nutritionproject.Custom.WorkoutIntensity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TdeeActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, TextWatcher {
+public class TdeeActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, TextWatcher, NavigationBarView.OnItemSelectedListener {
 
     private CustomUIMethods uiManager = new CustomUIMethods();
     private CustomFitMethods fitManager = new CustomFitMethods();
@@ -38,6 +42,8 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView headerText;
     private ImageView backBtn;
+
+    private BottomNavigationView bottomNavView;
 
     //region TDEE references
     //region Measurement two way button
@@ -157,8 +163,16 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
         headerText = findViewById(R.id.secondaryHeader);
         backBtn = findViewById(R.id.backButton);
+        bottomNavView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavView.setItemIconTintList(null);
+
+        bottomNavView.getMenu().findItem(R.id.homeBtn).setChecked(true);
+
+        bottomNavView.setOnItemSelectedListener(this);
 
         backBtn.setOnClickListener(this);
+
 
         //region TDEE
 
@@ -443,6 +457,15 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
             //uiManager.hideKeyboard(this);
         }
         //endregion
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        uiManager.setBottomNavBar(this, id, bottomNavView, item);
+
+        return false;
     }
 
     @Override

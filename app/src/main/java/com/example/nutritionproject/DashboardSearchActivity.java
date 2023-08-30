@@ -59,29 +59,7 @@ public class DashboardSearchActivity extends AppCompatActivity implements Naviga
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.uncheckAllNavItems(bottomNavView.getMenu());
-
-        //TODO: Implement other Dashboard pages
-        //TODO: Make easier to do this???
-
-        if (id == R.id.homeBtn) {
-            Log.d("NORTH_DASHBOARD", "Home button pressed " + item.isChecked());
-
-            startActivity(new Intent(DashboardSearchActivity.this, DashboardHomeActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        } else if (id == R.id.searchBtn) {
-            Log.d("NORTH_DASHBOARD", "Search button pressed "+ item.isChecked());
-            uiManager.checkNavItem(item);
-        } else if (id == R.id.statsBtn) {
-            Log.d("NORTH_DASHBOARD", "Stats button pressed " + item.isChecked());
-
-            startActivity(new Intent(DashboardSearchActivity.this, DashboardStatsActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        }
+        uiManager.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
     }

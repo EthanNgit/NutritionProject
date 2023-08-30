@@ -17,6 +17,14 @@ public interface ApiInterface {
     Call<UserModel> register(@Field("email") String email, @Field("password") String password);
 
     @FormUrlEncoded
+    @POST("getUser.php")
+    Call<UserModel> getUser(@Field("email") String email);
+
+    @FormUrlEncoded
     @POST("setGoals.php")
     Call<UserModel> setGoals(@Field("userid") int userId, @Field("calorie") int calorie, @Field("protein") int protein, @Field("carb") int carb, @Field("fat") int fat);
+
+    @FormUrlEncoded
+    @POST("setPassword.php")
+    Call<UserModel> setPassword(@Field("email") String email, @Field("password") String password);
 }

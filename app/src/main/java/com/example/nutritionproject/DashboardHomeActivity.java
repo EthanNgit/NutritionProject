@@ -88,28 +88,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.uncheckAllNavItems(bottomNavView.getMenu());
+        uiManager.setBottomNavBar(this, id, bottomNavView, item);
 
-        //TODO: Make easier to do this???
-
-        if (id == R.id.homeBtn) {
-            Log.d("NORTH_DASHBOARD", "Home button pressed " + item.isChecked());
-            uiManager.checkNavItem(item);
-        } else if (id == R.id.searchBtn) {
-            Log.d("NORTH_DASHBOARD", "Search button pressed "+ item.isChecked());
-
-            startActivity(new Intent(DashboardHomeActivity.this, DashboardSearchActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        } else if (id == R.id.statsBtn) {
-            Log.d("NORTH_DASHBOARD", "Stats button pressed " + item.isChecked());
-
-            startActivity(new Intent(DashboardHomeActivity.this, DashboardStatsActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        }
         return false;
 
     }

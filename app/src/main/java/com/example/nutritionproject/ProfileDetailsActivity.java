@@ -55,39 +55,9 @@ public class ProfileDetailsActivity extends AppCompatActivity implements Navigat
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.uncheckAllNavItems(bottomNavView.getMenu());
-
-        //TODO: Implement other Dashboard pages
-        //TODO: Make easier to do this???
-
-        if (id == R.id.homeBtn) {
-            Log.d("NORTH_DASHBOARD", "Home button pressed " + item.isChecked());
-
-            startActivity(new Intent(ProfileDetailsActivity.this, DashboardHomeActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        } else if (id == R.id.searchBtn) {
-            Log.d("NORTH_DASHBOARD", "Search button pressed "+ item.isChecked());
-
-            startActivity(new Intent(ProfileDetailsActivity.this, DashboardSearchActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        } else if (id == R.id.statsBtn) {
-            Log.d("NORTH_DASHBOARD", "Stats button pressed " + item.isChecked());
-
-            startActivity(new Intent(ProfileDetailsActivity.this, DashboardStatsActivity.class));
-            finish();
-
-            uiManager.checkNavItem(item);
-        }
+        uiManager.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        super.onPointerCaptureChanged(hasCapture);
-    }
 }

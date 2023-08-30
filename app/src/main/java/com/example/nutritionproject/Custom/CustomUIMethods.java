@@ -1,5 +1,6 @@
 package com.example.nutritionproject.Custom;
 
+import static androidx.core.content.ContextCompat.startActivity;
 import static com.example.nutritionproject.Custom.CustomDBMethods.CurrentProfile;
 import static java.security.AccessController.getContext;
 
@@ -41,7 +42,7 @@ public class CustomUIMethods {
 
     /**
      *
-     * @param context Context in which this function will use to getDrawable
+     * @param context Context in which this function will use
      * @param editTexts Array of all textFields that will be changed
      * @param background int id of the drawable background to be set to
      */
@@ -115,7 +116,7 @@ public class CustomUIMethods {
 
     /**
      *
-     * @param context Context in which this function will use to getDrawable
+     * @param context Context in which this function will
      * @param optionOne First button option
      * @param optionTwo Second button option
      * @param selectorImage Underlay visual image (placed under current selected button)
@@ -151,7 +152,7 @@ public class CustomUIMethods {
 
     /**
      *
-     * @param context Context in which this function will use to getDrawable
+     * @param context Context in which this function will use
      * @param buttonToVisualMap Map in format of <Button, Visual>
      * @param currentView Button that has been Selected
      * @param selectedTextColor Text color of the selected button
@@ -173,7 +174,7 @@ public class CustomUIMethods {
 
     /**
      *
-     * @param context Context in which this function will use to getSystemService
+     * @param context Context in which this function will use
      * @param editText the editText you want to force keyboard on
      */
     public void showKeyboard(Context context, EditText editText) {
@@ -190,7 +191,7 @@ public class CustomUIMethods {
 
     /**
      *
-     * @param context Context in which this function will use to getSystemService
+     * @param context Context in which this function will use
      */
     public void hideKeyboard(Context context) {
         if (keyboardShown) {
@@ -199,6 +200,10 @@ public class CustomUIMethods {
         }
     }
 
+    /**
+     *
+     * @apiNote Returns an array of random values for R, G, B that result in a light color
+     */
     public static float[] getRandomLightColorHex() {
         Random rand = new Random();
 
@@ -209,10 +214,51 @@ public class CustomUIMethods {
         return new float[]{r, g, b};
     }
 
+    /**
+     *
+     * @param context Context in which this function will use
+     * @param profileButton Button that is also the background Image
+     * @param profileButtonText Text that displays the Initial of the users email
+     */
     public void setProfileButton(Context context, CardView profileButton, TextView profileButtonText) {
         profileButton.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(CurrentProfile.userColorHex[0], CurrentProfile.userColorHex[1], CurrentProfile.userColorHex[2])));
         profileButtonText.setText(String.valueOf(CurrentProfile.email.charAt(0)).toUpperCase());
     }
 
+    /**
+     *
+     * @param context Context in which this function will use
+     * @param id Id that is gotten from an onclick view
+     * @param bottomNavView the layouts bottomNavigationView
+     * @param item the item that has been selected from the bottomNavigationView
+     */
+    public void setBottomNavBar(Context context, int id, BottomNavigationView bottomNavView, MenuItem item) {
+        uncheckAllNavItems(bottomNavView.getMenu());
+
+        //TODO: Make easier to do this???
+
+        if (id == R.id.homeBtn) {
+            Log.d("NORTH_DASHBOARD", "Home button pressed " + item.isChecked());
+
+            context.startActivity(new Intent(((Activity)context), DashboardHomeActivity.class));
+            ((Activity) context).finish();
+
+            checkNavItem(item);
+        } else if (id == R.id.searchBtn) {
+            Log.d("NORTH_DASHBOARD", "Search button pressed "+ item.isChecked());
+
+            context.startActivity(new Intent(((Activity)context), DashboardSearchActivity.class));
+            ((Activity) context).finish();
+
+            checkNavItem(item);
+        } else if (id == R.id.statsBtn) {
+            Log.d("NORTH_DASHBOARD", "Stats button pressed " + item.isChecked());
+
+            context.startActivity(new Intent(((Activity)context), DashboardStatsActivity.class));
+            ((Activity) context).finish();
+
+            checkNavItem(item);
+        }
+    }
 
 }

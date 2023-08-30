@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.LoginResetActivity;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Method;
@@ -24,6 +25,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     //region References
     private CustomUIMethods uiManager = new CustomUIMethods();
     private CustomDBMethods dbManager = new CustomDBMethods();
+
+    public static String otpEmail;
 
     private EditText emailField;
     private EditText passwordField;
@@ -72,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         rememberMeSwitch.setOnCheckedChangeListener(this);
 
         addListeners();
+
     }
 
 
@@ -106,13 +110,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         int id = view.getId();
 
         if (id == forgotPasswordBtn.getId()) {
-
+            forgotPassword();
         } else if (id == loginBtn.getId()) {
             dbManager.login(emailField.getText().toString().trim(), passwordField.getText().toString().trim());
+
         } else if (id == signUpBtn.getId()) {
             startActivity(new Intent(LoginActivity.this, SignupActivity.class));
             finish();
+
         }
+
     }
 
     @Override
@@ -120,13 +127,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         if (compoundButton.getId() == rememberMeSwitch.getId()) {
             shouldRememberMe = b;
         }
+
     }
 
     @Override
     protected void onDestroy() {
         removeListeners();
-
         super.onDestroy();
+
     }
 
     //endregion
@@ -135,13 +143,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     private void addListeners() {
         dbManager.onLoginSuccess.addListener(this, "loginSuccessCallback");
         dbManager.onLoginFailure.addListener(this, "loginFailureCallback");
+        dbManager.onRecoveryMailSentSuccess.addListener(this, "passwordResetSuccessCallback");
+        dbManager.onRecoveryMailSentFailure.addListener(this, "passwordResetFailureCallback");
+        dbManager.onRecoveryOTPExpired.addListener(this, "recoveryOTPExpiredCallback");
         dbManager.onConnectionFailure.addListener(this, "connectionFailureCallback");
+
     }
 
     private void removeListeners() {
         dbManager.onLoginSuccess.removeListener(this, "loginSuccessCallback");
         dbManager.onLoginFailure.removeListener(this, "loginFailureCallback");
+        dbManager.onRecoveryMailSentSuccess.removeListener(this, "passwordResetSuccessCallback");
+        dbManager.onRecoveryMailSentFailure.removeListener(this, "passwordResetFailureCallback");
+        dbManager.onRecoveryOTPExpired.removeListener(this, "recoveryOTPExpiredCallback");
         dbManager.onConnectionFailure.removeListener(this, "connectionFailureCallback");
+
     }
 
     private void setLoginPreferences() {
@@ -153,6 +169,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         editor.putString("password", shouldRememberMe? passwordField.getText().toString().trim() : "");
         editor.apply();
 
+    }
+
+    private void forgotPassword() {
+        if (emailField.getText().toString().isEmpty()) {
+            //Give Error
+            uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
+            uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Enter email to be sent a recovery mail");
+
+            return;
+        }
+
+        dbManager.resetPassword(emailField.getText().toString().trim());
 
     }
 
@@ -167,12 +195,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         finish();
 
         return null;
+
     }
 
     public Method loginFailureCallback() {
         Log.d("NORTH_LOGIN", "Login Failure Event Fired");
 
         uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Email or password is incorrect.");
+
+        return null;
+
+    }
+
+    public Method passwordResetSuccessCallback() {
+        //open OTP stuff
+
+        otpEmail = emailField.getText().toString().trim();
+        startActivity(new Intent(LoginActivity.this, LoginResetActivity.class));
+
+        Log.d("NORTH_TEXT", "OTP PASSWORD IS: " + dbManager.currentOTPValue);
+
+        return null;
+    }
+
+    public Method passwordResetFailureCallback() {
+
+        uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Recovery mail failed to send.");
+
+        return null;
+    }
+
+    public Method recoveryOTPExpiredCallback() {
+        Log.d("NORTH_TEXT", "OTP PASSWORD HAS EXPIRED");
 
         return null;
     }
@@ -183,6 +237,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "No Internet Connection.");
 
         return null;
+
     }
 
     //endregion

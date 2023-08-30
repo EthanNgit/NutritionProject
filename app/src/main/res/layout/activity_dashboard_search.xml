@@ -8,29 +8,6 @@
     android:backgroundTint="@color/darkTheme_Background"
     tools:context=".DashboardSearchActivity">
 
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ref_img" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ref2_img"
-        android:visibility="visible"/>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -86,9 +63,7 @@
                         android:layout_height="55dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
-                        app:cardCornerRadius="6dp"
-                        android:alpha=".5">
-
+                        app:cardCornerRadius="6dp">
 
                         <TextView
                             android:id="@+id/searchBtn"

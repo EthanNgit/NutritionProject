@@ -1,12 +1,15 @@
 package com.example.nutritionproject.Custom;
 
+import static com.example.nutritionproject.Custom.CustomDBMethods.CurrentProfile;
 import static java.security.AccessController.getContext;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,10 +22,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.example.nutritionproject.DashboardHomeActivity;
+import com.example.nutritionproject.DashboardSearchActivity;
+import com.example.nutritionproject.DashboardStatsActivity;
 import com.example.nutritionproject.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Map;
 import java.util.Random;
@@ -191,19 +199,20 @@ public class CustomUIMethods {
         }
     }
 
-    public static String getRandomLightColorHex() {
+    public static float[] getRandomLightColorHex() {
         Random rand = new Random();
 
         float r = (float) (rand.nextFloat() / 2f + 0.5);
         float g = (float) (rand.nextFloat() / 2f + 0.5);
         float b = (float) (rand.nextFloat() / 2f + 0.5);
 
-        String randomColor = String.format("#%02x%02x%02x", r, g, b);
-
-        return randomColor;
+        return new float[]{r, g, b};
     }
 
-    public void setProfileButton(Context context, Button profileButton) {
-        profileButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(getRandomLightColorHex())));
+    public void setProfileButton(Context context, CardView profileButton, TextView profileButtonText) {
+        profileButton.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(CurrentProfile.userColorHex[0], CurrentProfile.userColorHex[1], CurrentProfile.userColorHex[2])));
+        profileButtonText.setText(String.valueOf(CurrentProfile.email.charAt(0)).toUpperCase());
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.nutritionproject;
 
 import static com.example.nutritionproject.Custom.CustomDBMethods.CurrentProfile;
+import static com.example.nutritionproject.Custom.CustomUIMethods.getRandomLightColorHex;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +13,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.CustomUIMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import org.w3c.dom.Text;
 
 public class DashboardHomeActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener {
 
@@ -26,7 +30,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     private final CustomUIMethods uiManager = new CustomUIMethods();
     private final CustomFitMethods fitManager = new CustomFitMethods();
 
-    private Button profileButton;
+    private CardView profileButton;
+    private TextView profileButtonText;
 
     private Button getTdeeButton;
 
@@ -44,7 +49,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
 
         uiManager.setAndroidUI(this, R.color.darkTheme_Background);
 
-        profileButton = findViewById(R.id.settingsButton);
+        profileButton = findViewById(R.id.profileButton);
+        profileButtonText = findViewById(R.id.profileButtonText);
 
         bottomNavView = findViewById(R.id.bottomNavigationView);
         getTdeeButton = findViewById(R.id.takeCalorieEstimateButton);
@@ -61,22 +67,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         bottomNavView.setOnItemSelectedListener(this);
         getTdeeButton.setOnClickListener(this);
 
-
-        uiManager.setProfileButton(this, profileButton);
-
-
-        /*
-        if (CurrentProfile.goals.calorieGoal == 0) {
-            //TODO: Extract to separate Method???
-
-            firstTimeCalCard.setVisibility(View.VISIBLE);
-            dayCalorieProgressCard.setVisibility(View.GONE);
-        } else {
-            showCalorieGraph();
-        }
-        */
-        firstTimeCalCard.setVisibility(View.VISIBLE);
-        dayCalorieProgressCard.setVisibility(View.GONE);
+        setProfileButton();
+        showCalorieGraph();
     }
 
     @Override
@@ -98,7 +90,6 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
 
         uiManager.uncheckAllNavItems(bottomNavView.getMenu());
 
-        //TODO: Implement other Dashboard pages
         //TODO: Make easier to do this???
 
         if (id == R.id.homeBtn) {
@@ -127,10 +118,29 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
 
     //region reusable Methods
     private void showCalorieGraph() {
-        firstTimeCalCard.setVisibility(View.GONE);
-        dayCalorieProgressCard.setVisibility(View.VISIBLE);
+        /*
+        if (CurrentProfile.goals.calorieGoal == 0) {
+            firstTimeCalCard.setVisibility(View.VISIBLE);
+            dayCalorieProgressCard.setVisibility(View.GONE);
+        } else {
+            firstTimeCalCard.setVisibility(View.GONE);
+            dayCalorieProgressCard.setVisibility(View.VISIBLE);
+        }
+        */
+
+        firstTimeCalCard.setVisibility(View.VISIBLE);
+        dayCalorieProgressCard.setVisibility(View.GONE);
 
         //TODO: Implement simple round progress bar ui
     }
+
+    private void setProfileButton() {
+        if (CurrentProfile.userColorHex == null) {
+            CurrentProfile.userColorHex = CustomUIMethods.getRandomLightColorHex();
+        }
+
+        uiManager.setProfileButton(this, profileButton, profileButtonText);
+    }
+
     //endregion
 }

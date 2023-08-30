@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -33,7 +34,6 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
         loginBtn.setOnClickListener(this);
         signUpBtn.setOnClickListener(this);
-
 
         SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
 

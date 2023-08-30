@@ -1,8 +1,5 @@
 package com.example.nutritionproject.Custom;
 
-import static com.example.nutritionproject.Custom.CustomUIMethods.getRandomLightColorHex;
-
-import android.graphics.Color;
 
 import androidx.annotation.NonNull;
 
@@ -11,7 +8,7 @@ public class UserProfile {
     public String email;
     public UserGoals goals;
 
-    public String userColor = getRandomLightColorHex();
+    public float[] userColorHex;
 
     @NonNull
     @Override

@@ -109,9 +109,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         if (id == detailsButton.getId()) {
-
+            startActivity(new Intent(ProfileActivity.this, ProfileDetailsActivity.class));
         } else if (id == goalsButton.getId()) {
-
+            startActivity(new Intent(ProfileActivity.this, ProfileGoalsActivity.class));
         } else if (id == logOutButton.getId()) {
             dbManager.logout(this);
 
@@ -126,7 +126,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         uiManager.uncheckAllNavItems(bottomNavView.getMenu());
 
-        //TODO: Implement other Dashboard pages
         //TODO: Make easier to do this???
 
         if (id == R.id.homeBtn) {

@@ -2,6 +2,7 @@ package com.example.nutritionproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.CustomUIMethods;
-import com.example.nutritionproject.Custom.LoginResetActivity;
+import com.example.nutritionproject.Custom.EventCallback;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Method;
@@ -94,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
             uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_white);
         }
 
-        if (emailField.getText().length() != 0 && !dbManager.isEmailValid(emailField.getText().toString().trim())) {
+        if (emailField.getText().length() != 0 && !dbManager.isEmailValid(CustomDBMethods.formatEmail(emailField.getText().toString()))) {
             uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_red);
             uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
         }
@@ -112,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         if (id == forgotPasswordBtn.getId()) {
             forgotPassword();
         } else if (id == loginBtn.getId()) {
-            dbManager.login(emailField.getText().toString().trim(), passwordField.getText().toString().trim());
+            dbManager.login(CustomDBMethods.formatEmail(emailField.getText().toString()), passwordField.getText().toString().trim());
 
         } else if (id == signUpBtn.getId()) {
             startActivity(new Intent(LoginActivity.this, SignupActivity.class));
@@ -165,7 +166,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("rememberMe", shouldRememberMe? "true" : "false");
-        editor.putString("email", shouldRememberMe? emailField.getText().toString().trim() : "");
+        editor.putString("email", shouldRememberMe? CustomDBMethods.formatEmail(emailField.getText().toString()) : "");
         editor.putString("password", shouldRememberMe? passwordField.getText().toString().trim() : "");
         editor.apply();
 
@@ -180,7 +181,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
             return;
         }
 
-        dbManager.resetPassword(emailField.getText().toString().trim());
+        final Context outerContext = this;
+        dbManager.getUser(CustomDBMethods.formatEmail(emailField.getText().toString()), new EventCallback() {
+
+            @Override
+            public void onSuccess() {
+                dbManager.resetPassword(CustomDBMethods.formatEmail(emailField.getText().toString()));
+            }
+
+            @Override
+            public void onFailure() {
+                uiManager.setPopupMessage(outerContext, errorView, R.color.darkTheme_Error, "User has not registered an account");
+            }
+        });
 
     }
 
@@ -210,7 +223,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     public Method passwordResetSuccessCallback() {
         //open OTP stuff
 
-        otpEmail = emailField.getText().toString().trim();
+        otpEmail = CustomDBMethods.formatEmail(emailField.getText().toString());
         startActivity(new Intent(LoginActivity.this, LoginResetActivity.class));
 
         Log.d("NORTH_TEXT", "OTP PASSWORD IS: " + dbManager.currentOTPValue);

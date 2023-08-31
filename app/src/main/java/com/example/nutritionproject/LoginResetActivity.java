@@ -1,4 +1,4 @@
-package com.example.nutritionproject.Custom;
+package com.example.nutritionproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.nutritionproject.Custom.CustomDBMethods;
+import com.example.nutritionproject.Custom.CustomUIMethods;
 import com.example.nutritionproject.LoginActivity;
 import com.example.nutritionproject.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -82,6 +84,7 @@ public class LoginResetActivity extends AppCompatActivity implements View.OnClic
             passCard.setVisibility(View.VISIBLE);
         } else {
             uiManager.setPopupMessage(this, otpErrorText, R.color.darkTheme_Transparent, "Invalid OTP");
+            uiManager.setTextFieldBackgrounds(this, new EditText[]{otpField}, R.drawable.bg_gray_6dp_stroke_red);
         }
     }
 
@@ -91,6 +94,7 @@ public class LoginResetActivity extends AppCompatActivity implements View.OnClic
             finish();
         } else {
             uiManager.setPopupMessage(this, passwordErrorText, R.color.darkTheme_Transparent, "Invalid Password");
+            uiManager.setTextFieldBackgrounds(this, new EditText[]{passwordField}, R.drawable.bg_gray_6dp_stroke_red);
         }
     }
 }

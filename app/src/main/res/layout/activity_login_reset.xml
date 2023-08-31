@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkTheme_Background"
     android:backgroundTint="@color/darkTheme_Background"
-    tools:context=".Custom.LoginResetActivity">
+    tools:context=".LoginResetActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import java.util.Set;
 public class Event {
 
     //Custom Made Class to mimic C# event callback, since I am comfortable with them
+    public EventCallback callback;
 
     private Map<Context, Set<Method>> objectToListenersMap = new HashMap<>();
 

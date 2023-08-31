@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Custom.LoginResetActivity"
+            android:name=".LoginResetActivity"
             android:exported="false" />
         <activity
             android:name=".ProfileGoalsActivity"

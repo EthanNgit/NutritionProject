@@ -74,7 +74,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnFocusCha
             uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_white);
         }
 
-        if (emailField.getText().length() != 0 && !dbManager.isEmailValid(emailField.getText().toString().trim())) {
+        if (emailField.getText().length() != 0 && !dbManager.isEmailValid(CustomDBMethods.formatEmail(emailField.getText().toString()))) {
             uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_red);
             uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
         }
@@ -121,7 +121,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnFocusCha
     }
 
     private void validateRegister() {
-        String email = emailField.getText().toString().trim();
+        String email = CustomDBMethods.formatEmail(emailField.getText().toString());
         String password = passwordField.getText().toString().trim();
 
         if (dbManager.isEmailValid(email) && dbManager.isPasswordValid(password)) {

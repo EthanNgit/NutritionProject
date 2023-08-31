@@ -38,7 +38,7 @@ public class CustomDBMethods {
     public static UserProfile CurrentProfile = new UserProfile();
 
     public static String currentOTPValue;
-    boolean firstOTPCallToSkip = false;
+    private boolean firstOTPCallToSkip = false;
 
     //region Callback Events
     public Event onLoginSuccess = new Event();
@@ -51,6 +51,8 @@ public class CustomDBMethods {
     public Event onRecoveryMailSentFailure = new Event();
     public Event onRecoveryOTPExpired = new Event();
 
+    public Event onPasswordResetSuccess = new Event();
+    public Event getOnPasswordResetFailure = new Event();
     public Event onGoalsChangedSuccess = new Event();
     public Event onGoalsChangedFailure = new Event();
 
@@ -261,7 +263,7 @@ public class CustomDBMethods {
 
     }
 
-    public void getUser(String email) {
+    public void getUser(String email, EventCallback callback) {
         Call<UserModel> userModelCall = apiInterface.getUser(email);
 
         userModelCall.enqueue(new Callback<UserModel>() {
@@ -272,8 +274,10 @@ public class CustomDBMethods {
 
                     if (userModel.isSuccess()) {
                         Log.d("NORTH_DATABASE", "User exists");
+                        callback.onSuccess();
                     } else {
                         Log.d("NORTH_DATABASE", "User does not Exist");
+                        callback.onFailure();
                     }
                 }
             }
@@ -312,6 +316,10 @@ public class CustomDBMethods {
     public static boolean isPasswordValid(CharSequence password) {
         int minPasswordLength = 6;
         return (password.length() >= minPasswordLength);
+    }
+
+    public static String formatEmail(String email) {
+        return email.toString().trim().toLowerCase();
     }
 
     public String generateOneTimePassword(int length) {

@@ -30,5 +30,6 @@ Current Version:
   * 0.1.4.1 Added reset password and otp generation (for security reasons probly shift it over to php hosting otp instead, but ill leave that out as of now)
   * 0.1.4.2 / 0.1.4.3 Fixing a git error i made and finishing up
 * V: 0.2 Food and nutrient Objects, along with there serialization adapters, started the barcode scanner.
+* 0.2.1.1 Fixed some last second food object problems I figured out (serving size)
 
 

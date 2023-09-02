@@ -1,4 +1,4 @@
-package com.example.nutritionproject.Custom.java;
+package com.example.nutritionproject.Custom.java.UserModel;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;

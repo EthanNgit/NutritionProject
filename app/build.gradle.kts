@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.example.nutritionproject"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.nutritionproject"
         minSdk = 29
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "Alpha 0.1"
 
@@ -42,7 +42,11 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     implementation ("androidx.preference:preference-ktx:1.1.1")
 
+    implementation("net.danlew:android.joda:2.12.5")
+
     testImplementation("junit:junit:4.13.2")
+
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -51,7 +55,14 @@ dependencies {
     implementation("com.sun.mail:android-mail:1.6.2")
     implementation("com.sun.mail:android-activation:1.6.2")
 
-    implementation("com.google.mlkit:barcode-scanning:17.0.3")
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
+    implementation("com.google.mlkit:object-detection:17.0.0")
+
+    val camerax_version = "1.3.0-rc01"
+    implementation("androidx.camera:camera-core:${camerax_version}")
+    implementation("androidx.camera:camera-lifecycle:${camerax_version}")
+    implementation("androidx.camera:camera-view:${camerax_version}")
+    implementation("androidx.camera:camera-extensions:${camerax_version}")
 
     api("com.google.guava:guava:30.1-jre")
 }

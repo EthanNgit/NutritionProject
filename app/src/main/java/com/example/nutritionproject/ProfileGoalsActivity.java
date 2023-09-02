@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.nutritionproject.Custom.java.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

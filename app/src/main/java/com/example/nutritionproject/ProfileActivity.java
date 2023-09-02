@@ -1,6 +1,6 @@
 package com.example.nutritionproject;
 
-import static com.example.nutritionproject.Custom.java.CustomDBMethods.CurrentProfile;
+import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +15,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nutritionproject.Custom.java.CustomDBMethods;
-import com.example.nutritionproject.Custom.java.CustomFitMethods;
-import com.example.nutritionproject.Custom.java.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

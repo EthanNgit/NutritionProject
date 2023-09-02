@@ -14,8 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.example.nutritionproject.Custom.java.CustomUIMethods;
-import com.example.nutritionproject.Custom.java.Event;
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Utility.Event;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -31,6 +31,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private EditText searchField;
     private ImageView backBtn;
     private ImageView barcodeBtn;
+    private CardView addItemBtn;
 
     private LinearLayout emptySearchLayout;
 
@@ -59,6 +60,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchField = findViewById(R.id.searchTextField);
         backBtn = findViewById(R.id.backButton);
         barcodeBtn = findViewById(R.id.barcodeScanButton);
+        addItemBtn = findViewById(R.id.addBtn);
 
         emptySearchLayout = findViewById(R.id.emptySearchLayout);
 
@@ -79,6 +81,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             finish();
         } else if (id == barcodeBtn.getId()) {
             startActivity(new Intent(SearchActivity.this, SearchScanActivity.class));
+        } else if (id == addItemBtn.getId()) {
+            //Go To add item menu
         }
 
 

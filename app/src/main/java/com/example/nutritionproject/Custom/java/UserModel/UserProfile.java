@@ -1,4 +1,4 @@
-package com.example.nutritionproject.Custom.java;
+package com.example.nutritionproject.Custom.java.UserModel;
 
 
 import androidx.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.example.nutritionproject.Custom.java;
+package com.example.nutritionproject.Custom.java.UserModel;
 
 import androidx.annotation.NonNull;
 
@@ -18,6 +18,6 @@ public class UserGoals {
     @NonNull
     @Override
     public String toString() {
-        return String.format("{ calorie : %s, protein : %s, carb: %s, fat : %s}", calorieGoal, proteinGoal, carbGoal, fatGoal);
+        return String.format("{ Calorie : %s, Protein : %s, Carb: %s, Fat : %s}", calorieGoal, proteinGoal, carbGoal, fatGoal);
     }
 }

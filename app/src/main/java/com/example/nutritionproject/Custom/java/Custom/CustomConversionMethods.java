@@ -1,4 +1,4 @@
-package com.example.nutritionproject.Custom.java;
+package com.example.nutritionproject.Custom.java.Custom;
 
 public class CustomConversionMethods {
     private static final double LBS_TO_KG = 2.205;

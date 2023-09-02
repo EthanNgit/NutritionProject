@@ -1,4 +1,4 @@
-package com.example.nutritionproject.Custom.java;
+package com.example.nutritionproject.Custom.java.Custom;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -7,6 +7,10 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
 
+import com.example.nutritionproject.Custom.java.Utility.Event;
+import com.example.nutritionproject.Custom.java.Utility.EventCallback;
+import com.example.nutritionproject.Custom.java.UserModel.UserGoals;
+import com.example.nutritionproject.Custom.java.UserModel.UserProfile;
 import com.example.nutritionproject.Model.UserModel;
 import com.example.nutritionproject.Retrofit.ApiClient;
 import com.example.nutritionproject.Retrofit.ApiInterface;

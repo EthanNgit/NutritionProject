@@ -1,8 +1,8 @@
 package com.example.nutritionproject;
 
-import static com.example.nutritionproject.Custom.java.CustomConversionMethods.getImperialHeight;
-import static com.example.nutritionproject.Custom.java.CustomConversionMethods.getImperialWeight;
-import static com.example.nutritionproject.Custom.java.CustomDBMethods.CurrentProfile;
+import static com.example.nutritionproject.Custom.java.Custom.CustomConversionMethods.getImperialHeight;
+import static com.example.nutritionproject.Custom.java.Custom.CustomConversionMethods.getImperialWeight;
+import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,12 +20,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.nutritionproject.Custom.java.CustomDBMethods;
-import com.example.nutritionproject.Custom.java.CustomFitMethods;
-import com.example.nutritionproject.Custom.java.CustomUIMethods;
-import com.example.nutritionproject.Custom.java.Event;
-import com.example.nutritionproject.Custom.java.WorkoutGoals;
-import com.example.nutritionproject.Custom.java.WorkoutIntensity;
+import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Utility.Event;
+import com.example.nutritionproject.Custom.java.Enums.WorkoutGoals;
+import com.example.nutritionproject.Custom.java.Enums.WorkoutIntensity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

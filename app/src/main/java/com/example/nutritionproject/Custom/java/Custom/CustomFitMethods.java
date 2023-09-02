@@ -1,4 +1,7 @@
-package com.example.nutritionproject.Custom.java;
+package com.example.nutritionproject.Custom.java.Custom;
+
+import com.example.nutritionproject.Custom.java.Enums.WorkoutGoals;
+import com.example.nutritionproject.Custom.java.Enums.WorkoutIntensity;
 
 public class CustomFitMethods {
 

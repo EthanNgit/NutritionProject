@@ -14,9 +14,9 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.nutritionproject.Custom.java.CustomDBMethods;
-import com.example.nutritionproject.Custom.java.CustomUIMethods;
-import com.example.nutritionproject.Custom.java.EventCallback;
+import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Method;

@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.nutritionproject.Custom.java.CustomDBMethods;
-import com.example.nutritionproject.Custom.java.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener{
 

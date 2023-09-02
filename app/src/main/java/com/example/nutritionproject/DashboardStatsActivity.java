@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.nutritionproject.Custom.java.CustomFitMethods;
-import com.example.nutritionproject.Custom.java.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

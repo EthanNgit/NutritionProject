@@ -1,4 +1,4 @@
-package com.example.nutritionproject.Custom.java;
+package com.example.nutritionproject.Custom.java.Enums;
 
 public enum WorkoutGoals {
     HeavyCut(-1000),

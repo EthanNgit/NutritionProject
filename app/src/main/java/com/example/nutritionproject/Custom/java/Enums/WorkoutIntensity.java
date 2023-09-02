@@ -1,4 +1,4 @@
-package com.example.nutritionproject.Custom.java;
+package com.example.nutritionproject.Custom.java.Enums;
 
 /**
  * @apiNote Each level of activity multiplies the bmr by a value to get a representation of their burned non bmr calories

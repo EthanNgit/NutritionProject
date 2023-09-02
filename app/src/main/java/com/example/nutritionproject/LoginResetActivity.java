@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nutritionproject.Custom.java.CustomDBMethods;
-import com.example.nutritionproject.Custom.java.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 
 public class LoginResetActivity extends AppCompatActivity implements View.OnClickListener {
     private final CustomUIMethods uiManager = new CustomUIMethods();

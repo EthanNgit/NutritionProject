@@ -1,6 +1,6 @@
-package com.example.nutritionproject.Custom.java;
+package com.example.nutritionproject.Custom.java.Custom;
 
-import static com.example.nutritionproject.Custom.java.CustomDBMethods.CurrentProfile;
+import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
 import android.app.Activity;
 import android.content.Context;

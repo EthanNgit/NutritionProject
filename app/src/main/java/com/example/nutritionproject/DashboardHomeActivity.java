@@ -1,6 +1,6 @@
 package com.example.nutritionproject;
 
-import static com.example.nutritionproject.Custom.java.CustomDBMethods.CurrentProfile;
+import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,15 +8,28 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.nutritionproject.Custom.java.CustomFitMethods;
-import com.example.nutritionproject.Custom.java.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Enums.FoodTag;
+import com.example.nutritionproject.Custom.java.Enums.Nutrient;
+import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
+import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
+
+import org.joda.time.LocalDate;
+
+import java.lang.reflect.GenericSignatureFormatError;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DashboardHomeActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener {
 

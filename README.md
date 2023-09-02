@@ -12,6 +12,7 @@ Plans:
   * Adding functionality
   * Searching functionality
   * Barcode functionality
+  * (I just remembered people can cook food at home) Object based personal recipe items
  * V. 0.3
   * Macro counting
   * Meal Planner
@@ -27,5 +28,7 @@ Current Version:
   * 0.1.2.1 Added settings, logout, and more ui.
   * 0.1.3.1 Added most menus, added auto generated profile picture
   * 0.1.4.1 Added reset password and otp generation (for security reasons probly shift it over to php hosting otp instead, but ill leave that out as of now)
+  * 0.1.4.2 / 0.1.4.3 Fixing a git error i made and finishing up
+* V: 0.2 Food and nutrient Objects, along with there serialization adapters, started the barcode scanner.
 
 

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkTheme_Background">
+
+
+    <TextView
+        android:id="@+id/loginTextLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/circular"
+        android:text="Login"
+        android:textColor="@color/darkTheme_WhiteFull"
+        android:textSize="38sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12" />
+
+    <LinearLayout
+        android:id="@+id/normalLoginLayout"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/darkTheme_Transparent"
+        android:backgroundTint="@color/darkTheme_Transparent"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginTextLabel"
+        app:layout_constraintVertical_bias="0.2">
+
+        <!-- "Email" Text -->
+        <TextView
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:paddingStart="10dp"
+            android:paddingTop="22dp"
+            android:paddingEnd="10dp"
+            android:text="Email"
+            android:fontFamily="@font/circular"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textColorHint="@color/darkTheme_WhiteFull"
+            android:textSize="12sp" />
+
+        <!-- Email Text Field -->
+        <EditText
+            android:id="@+id/emailTextField"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/bg_gray_6dp_stroke_gray"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/circular_med"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:singleLine="true"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textColorHint="@color/darkTheme_WhiteMed"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/emailTextLabel" />
+
+        <TextView
+            android:id="@+id/emailErrorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:fontFamily="@font/circular_med"
+            android:text="Invalid email"
+            android:textColor="@color/darkTheme_Error"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:paddingStart="10dp"
+            android:paddingTop="22dp"
+            android:paddingEnd="10dp"
+            android:text="Password"
+            android:fontFamily="@font/circular"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/passwordTextField"
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:autofillHints="password"
+            android:background="@drawable/bg_gray_6dp_stroke_gray"
+            android:fontFamily="@font/circular_med"
+            android:hint="Password"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:inputType="textPassword"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:singleLine="true"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textColorHint="@color/darkTheme_WhiteMed"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/emailTextLabel" />
+
+        <TextView
+            android:id="@+id/passwordErrorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:fontFamily="@font/circular_med"
+            android:text="Invalid password"
+            android:textColor="@color/darkTheme_Error"
+            android:textSize="12sp"
+            android:visibility="gone"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <Switch
+                android:id="@+id/rememberMeSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:thumb="@drawable/sw_dark_thumb"
+                android:track="@drawable/bg_switch_track"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:fontFamily="@font/circular"
+                android:text="Remember me"
+                android:textColor="@color/darkTheme_WhiteFull"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_green_100dp"
+            android:fontFamily="@font/circular"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/darkTheme_Background"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/forgotPasswordButton"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/darkTheme_Transparent"
+            android:fontFamily="@font/circular"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:layout_marginTop="10dp"
+            android:text="Reset password"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/loginErrorText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/circular_med"
+            android:layout_marginTop="0dp"
+            android:background="@color/darkTheme_Error"
+            android:text="Account does not exist"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:srcCompat="@drawable/bg_gray_6dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/normalLoginLayout"
+        app:layout_constraintVertical_bias="0.05">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/circular"
+            android:text="Don't have an account?"
+            android:textAlignment="textEnd"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:fontFamily="@font/circular"
+            android:text="Sign Up"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@color/darkTheme_Brand"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

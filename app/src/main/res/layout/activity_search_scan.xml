@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchScanActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/darkTheme_Background_two"
+        app:cardCornerRadius="0dp">
+
+        <TextView
+            android:id="@+id/secondaryHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Scan"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:fontFamily="@font/circular"
+            android:textSize="15dp"
+            android:paddingTop="25dp"
+            android:gravity="center"/>
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="35dp"
+            android:src="@drawable/ic_backarrow"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <RelativeLayout
+        android:id="@+id/barcodeFoundLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/darkTheme_Transparent"
+        android:layout_gravity="bottom"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-5dp"
+            android:background="@color/darkTheme_Background"
+            android:backgroundTint="@color/darkTheme_Background"
+            app:cardCornerRadius="5dp">
+
+            <ImageView
+                android:id="@+id/backInfoButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="15dp"
+                android:padding="15dp"
+                android:src="@drawable/ic_backarrow"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="Barcode found"
+                android:textColor="@color/darkTheme_WhiteFull"
+                android:textSize="18dp"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/upcidTextLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="10dp"
+                android:text="UPC id: 000000000000"
+                android:textColor="@color/darkTheme_WhiteFull"
+                android:textSize="14dp"
+                android:textAlignment="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/searchBtn"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="90dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/darkTheme_Background_two"
+                    app:cardCornerRadius="100dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Search"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:textColor="@color/darkTheme_WhiteFull"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/addBtn"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="90dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="10dp"
+                    android:backgroundTint="@color/darkTheme_Background_two"
+                    app:cardCornerRadius="100dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Add item"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:textColor="@color/darkTheme_WhiteFull"/>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -12,6 +12,7 @@ Plans:
   * Adding functionality
   * Searching functionality
   * Barcode functionality
+  * (I just remembered people can cook food at home) Object based personal recipe items
  * V. 0.3
   * Macro counting
   * Meal Planner

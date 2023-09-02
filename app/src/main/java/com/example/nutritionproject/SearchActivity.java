@@ -83,6 +83,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(SearchActivity.this, SearchScanActivity.class));
         } else if (id == addItemBtn.getId()) {
             //Go To add item menu
+            startActivity(new Intent(SearchActivity.this, AddFoodItemActivity.class));
         }
 
 

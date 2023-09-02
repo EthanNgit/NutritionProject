@@ -16,6 +16,8 @@ public class FoodNutritionAdapter extends TypeAdapter<FoodNutrition> {
         writer.beginObject();
 
         writer.name("calories").value(value.calories);
+        writer.name("servingSize").value(value.servingSize);
+        writer.name("servingMeasurement").value(value.servingMeasurement);
 
         HashMap<Nutrient, Double> nutrients = value.nutrients;
 

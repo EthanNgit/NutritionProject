@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Enums.FoodTag;
+import com.example.nutritionproject.Custom.java.Enums.Measurement;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;

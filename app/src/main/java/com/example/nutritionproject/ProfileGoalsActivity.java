@@ -13,9 +13,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class ProfileGoalsActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
-
-    private final CustomUIMethods uiManager = new CustomUIMethods();
-
     private BottomNavigationView bottomNavView;
 
     private ImageView backBtn;
@@ -25,7 +22,7 @@ public class ProfileGoalsActivity extends AppCompatActivity implements Navigatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_goals);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         backBtn = findViewById(R.id.backButton);
 
@@ -53,7 +50,7 @@ public class ProfileGoalsActivity extends AppCompatActivity implements Navigatio
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
     }

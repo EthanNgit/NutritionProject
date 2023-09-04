@@ -24,7 +24,6 @@ import java.lang.reflect.Method;
 public class LoginActivity extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     //region References
-    private CustomUIMethods uiManager = new CustomUIMethods();
     private CustomDBMethods dbManager = new CustomDBMethods();
 
     public static String otpEmail;
@@ -51,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         emailField = findViewById(R.id.emailTextField);
         passwordField = findViewById(R.id.passwordTextField);
@@ -84,24 +83,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     public void onFocusChange(View view, boolean b) {
         int id = view.getId();
 
-        uiManager.setTextFieldBackgrounds(this, new EditText[]{emailField, passwordField}, R.drawable.bg_gray_6dp_stroke_gray);
-        uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "");
-        uiManager.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{emailField, passwordField}, R.drawable.bg_gray_6dp_stroke_gray);
+        CustomUIMethods.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "");
 
 
         if (id == emailField.getId()) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_white);
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_white);
         } else if (id == passwordField.getId()) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_white);
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_white);
         }
 
         if (emailField.getText().length() != 0 && !dbManager.isEmailValid(CustomDBMethods.formatEmail(emailField.getText().toString()))) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_red);
-            uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
         }
         if (passwordField.getText().length() != 0 && !dbManager.isPasswordValid(passwordField.getText().toString().trim())) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_red);
-            uiManager.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "Invalid password");
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "Invalid password");
         }
 
     }
@@ -175,8 +174,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     private void forgotPassword() {
         if (emailField.getText().toString().isEmpty()) {
             //Give Error
-            uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
-            uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Enter email to be sent a recovery mail");
+            CustomUIMethods.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
+            CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Enter email to be sent a recovery mail");
 
             return;
         }
@@ -191,7 +190,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
 
             @Override
             public void onFailure() {
-                uiManager.setPopupMessage(outerContext, errorView, R.color.darkTheme_Error, "User has not registered an account");
+                CustomUIMethods.setPopupMessage(outerContext, errorView, R.color.darkTheme_Error, "User has not registered an account");
             }
         });
 
@@ -214,7 +213,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     public Method loginFailureCallback() {
         Log.d("NORTH_LOGIN", "Login Failure Event Fired");
 
-        uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Email or password is incorrect.");
+        CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Email or password is incorrect.");
 
         return null;
 
@@ -233,7 +232,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
 
     public Method passwordResetFailureCallback() {
 
-        uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Recovery mail failed to send.");
+        CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Recovery mail failed to send.");
 
         return null;
     }
@@ -247,7 +246,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
     public Method connectionFailureCallback() {
         Log.d("NORTH_LOGIN", "Connection Failure Event Fired");
 
-        uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "No Internet Connection.");
+        CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "No Internet Connection.");
 
         return null;
 

@@ -15,7 +15,6 @@ import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private final CustomUIMethods uiManager = new CustomUIMethods();
     private final CustomDBMethods dbManager = new CustomDBMethods();
     private Button loginBtn;
     private Button signUpBtn;
@@ -26,7 +25,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_intro);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         loginBtn = findViewById(R.id.introLoginButton);
         signUpBtn = findViewById(R.id.introSignUpButton);

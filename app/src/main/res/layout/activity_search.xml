@@ -45,7 +45,7 @@
                         android:background="@color/darkTheme_Transparent"
                         android:fontFamily="@font/circular_med"
                         android:gravity="center_vertical"
-                        android:hint="Search database"
+                        android:hint="@string/search_bar_text"
                         android:paddingStart="55dp"
                         android:paddingTop="30dp"
                         android:textColor="@color/darkTheme_WhiteFull"
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="250dp"
-                        android:text="Not finding the item?"
+                        android:text="@string/not_finding_item_text"
                         android:textColor="@color/darkTheme_WhiteFull"
                         android:textSize="20dp" />
 
@@ -96,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="14dp"
-                        android:text="Add the item into the database."
+                        android:text="@string/not_finding_item_description_text"
                         android:textAlignment="center"
                         android:textColor="@color/darkTheme_WhiteMed"
                         android:textSize="15dp" />
@@ -106,6 +106,7 @@
                         android:layout_width="200dp"
                         android:layout_height="48dp"
                         android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         app:cardCornerRadius="100dp"
                         android:layout_gravity="center"
                         android:backgroundTint="@color/darkTheme_Background_two">
@@ -115,7 +116,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:clickable="false"
-                            android:text="Add item"
+                            android:text="@string/add_item_text"
                             android:textColor="@color/darkTheme_WhiteFull"/>
 
 

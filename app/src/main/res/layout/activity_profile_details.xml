@@ -40,7 +40,7 @@
                         android:id="@+id/secondaryHeader"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Details"
+                        android:text="@string/details_text"
                         android:textColor="@color/darkTheme_WhiteFull"
                         android:fontFamily="@font/circular"
                         android:textSize="15dp"
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
                         android:paddingStart="23dp"
-                        android:text="Details"
+                        android:text="@string/details_text"
                         android:textSize="18dp"
                         android:fontFamily="@font/circular"
                         android:textColor="@color/darkTheme_WhiteFull"/>

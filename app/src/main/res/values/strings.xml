@@ -1,3 +1,58 @@
 <resources>
     <string name="app_name">NutritionProject</string>
+
+    // Common
+    <string name="login_text">Login</string>
+    <string name="logout_text">Log out</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Password</string>
+
+    // Filler
+    <string name="filler_email">email@email.com</string>
+    <string name="filler_email_logged_in_as">You are logged in as email@email.com</string>
+    <string name="filler_error">Invalid entry</string>
+    <string name="filler_calories">- - - - Calories</string>
+    <string name="filler_version">Alpha 0.0</string>
+
+    // Intro Activity
+    <string name="intro_call_to_action">\tTrack Macros. \n\n Large Database.</string>
+    <string name="signup_button_text">Sign up free</string>
+
+    // Login Activity
+    <string name="remember_me_text">Remember me</string>
+    <string name="reset_password_text">Reset password</string>
+    <string name="register_question">Don\'t have an account?</string>
+    <string name="signup_text">Sign up</string>
+
+    // Login Reset Activity
+    <string name="otp_code_text">Otp code</string>
+    <string name="verify_text">Verify</string>
+    <string name="new_password_text">New password</string>
+
+    // Sign up Activity
+    <string name="signup_call_to_action">To search our database for food \n and start tracking macros</string>
+    <string name="login_question">Already have an account?</string>
+
+
+    // Settings Activity
+    <string name="settings_text">Settings</string>
+    <string name="account_text">Account</string>
+    <string name="details_text">Details</string>
+    <string name="goals_text">Goals</string>
+    <string name="about_text">About</string>
+    <string name="version_text">Version</string>
+    <string name="terms_and_conditions_text">Terms and Conditions</string>
+    <string name="terms_and_conditions_description_text">All things terms and conditions</string>
+    <string name="credits_text">Credits</string>
+    <string name="credits_description_text">All things credits</string>
+    <string name="other_text">Other</string>
+
+    // Search Activity
+    <string name="search_bar_text">Search database</string>
+    <string name="not_finding_item_text">Not finding the item?</string>
+    <string name="not_finding_item_description_text">Add the item into the database.</string>
+    <string name="add_item_text">Add item</string>
+
+    // TDEE activity, dashboards, bottom navbar
+
 </resources>

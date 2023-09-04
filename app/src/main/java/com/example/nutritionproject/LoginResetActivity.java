@@ -14,8 +14,6 @@ import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 
 public class LoginResetActivity extends AppCompatActivity implements View.OnClickListener {
-    private final CustomUIMethods uiManager = new CustomUIMethods();
-
     private final CustomDBMethods dbManager = new CustomDBMethods();
 
     private ImageView backBtn;
@@ -37,7 +35,7 @@ public class LoginResetActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_reset);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         backBtn = findViewById(R.id.backButton);
 
@@ -79,8 +77,8 @@ public class LoginResetActivity extends AppCompatActivity implements View.OnClic
             otpCard.setVisibility(View.GONE);
             passCard.setVisibility(View.VISIBLE);
         } else {
-            uiManager.setPopupMessage(this, otpErrorText, R.color.darkTheme_Transparent, "Invalid OTP");
-            uiManager.setTextFieldBackgrounds(this, new EditText[]{otpField}, R.drawable.bg_gray_6dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, otpErrorText, R.color.darkTheme_Transparent, "Invalid OTP");
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{otpField}, R.drawable.bg_gray_6dp_stroke_red);
         }
     }
 
@@ -89,8 +87,8 @@ public class LoginResetActivity extends AppCompatActivity implements View.OnClic
             dbManager.setPassword(LoginActivity.otpEmail, newPassword);
             finish();
         } else {
-            uiManager.setPopupMessage(this, passwordErrorText, R.color.darkTheme_Transparent, "Invalid Password");
-            uiManager.setTextFieldBackgrounds(this, new EditText[]{passwordField}, R.drawable.bg_gray_6dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, passwordErrorText, R.color.darkTheme_Transparent, "Invalid Password");
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{passwordField}, R.drawable.bg_gray_6dp_stroke_red);
         }
     }
 }

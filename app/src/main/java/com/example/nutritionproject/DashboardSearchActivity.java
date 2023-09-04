@@ -18,7 +18,6 @@ public class DashboardSearchActivity extends AppCompatActivity implements Naviga
 
     private BottomNavigationView bottomNavView;
 
-    private final CustomUIMethods uiManager = new CustomUIMethods();
     private final CustomFitMethods fitManager = new CustomFitMethods();
 
     private TextView searchButton;
@@ -30,7 +29,7 @@ public class DashboardSearchActivity extends AppCompatActivity implements Naviga
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_search);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         bottomNavView = findViewById(R.id.bottomNavigationView);
 
@@ -58,7 +57,7 @@ public class DashboardSearchActivity extends AppCompatActivity implements Naviga
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
     }

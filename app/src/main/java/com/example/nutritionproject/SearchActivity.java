@@ -24,8 +24,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private BottomNavigationView bottomNavView;
 
-    private final CustomUIMethods uiManager = new CustomUIMethods();
-
     private Event onSearchUpdated = new Event();
 
     private EditText searchField;
@@ -43,7 +41,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         onSearchUpdated.addListener(this, "updateSearchResults");
 
@@ -64,10 +62,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         emptySearchLayout = findViewById(R.id.emptySearchLayout);
 
-        uiManager.showKeyboard(this, searchField);
+        CustomUIMethods.showKeyboard(this, searchField);
 
         backBtn.setOnClickListener(this);
         barcodeBtn.setOnClickListener(this);
+        addItemBtn.setOnClickListener(this);
         searchField.addTextChangedListener(this);
 
     }
@@ -117,7 +116,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
     }

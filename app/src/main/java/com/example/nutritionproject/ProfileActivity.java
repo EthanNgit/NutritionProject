@@ -22,8 +22,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener {
-
-    private final CustomUIMethods uiManager = new CustomUIMethods();
     private final CustomFitMethods fitManager = new CustomFitMethods();
     private final CustomDBMethods dbManager = new CustomDBMethods();
 
@@ -47,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         bottomNavView = findViewById(R.id.bottomNavigationView);
 
@@ -120,7 +118,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
     }

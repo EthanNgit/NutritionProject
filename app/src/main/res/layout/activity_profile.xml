@@ -40,7 +40,7 @@
                         android:id="@+id/secondaryHeader"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Settings"
+                        android:text="@string/settings_text"
                         android:textColor="@color/darkTheme_WhiteFull"
                         android:fontFamily="@font/circular"
                         android:textSize="15dp"
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
                         android:paddingStart="23dp"
-                        android:text="Account"
+                        android:text="@string/account_text"
                         android:textSize="18dp"
                         android:fontFamily="@font/circular"
                         android:textColor="@color/darkTheme_WhiteFull"/>
@@ -92,7 +92,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="27dp"
                                 android:paddingStart="23dp"
-                                android:text="Details"
+                                android:text="@string/details_text"
                                 android:textSize="18dp"
                                 android:textColor="@color/darkTheme_WhiteFull"/>
 
@@ -102,7 +102,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="4dp"
                                 android:paddingStart="23dp"
-                                android:text="email@email.com"
+                                android:text="@string/filler_email"
                                 android:textSize="14dp"
                                 android:textColor="@color/darkTheme_WhiteMed"/>
 
@@ -136,7 +136,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="27dp"
                                 android:paddingStart="23dp"
-                                android:text="Goals"
+                                android:text="@string/goals_text"
                                 android:textSize="18dp"
                                 android:textColor="@color/darkTheme_WhiteFull"/>
 
@@ -146,7 +146,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="4dp"
                                 android:paddingStart="23dp"
-                                android:text="- - - - Calories"
+                                android:text="@string/filler_calories"
                                 android:textSize="14dp"
                                 android:textColor="@color/darkTheme_WhiteMed"/>
 
@@ -168,7 +168,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="42dp"
                         android:paddingStart="23dp"
-                        android:text="About"
+                        android:text="@string/about_text"
                         android:textSize="18dp"
                         android:fontFamily="@font/circular"
                         android:textColor="@color/darkTheme_WhiteFull"/>
@@ -189,7 +189,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="27dp"
                                 android:paddingStart="23dp"
-                                android:text="Version"
+                                android:text="@string/version_text"
                                 android:textSize="18dp"
                                 android:textColor="@color/darkTheme_WhiteFull"/>
 
@@ -199,7 +199,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="4dp"
                                 android:paddingStart="23dp"
-                                android:text="Alpha 0.0"
+                                android:text="@string/filler_version"
                                 android:textSize="14dp"
                                 android:textColor="@color/darkTheme_WhiteMed"/>
 
@@ -225,7 +225,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="27dp"
                                 android:paddingStart="23dp"
-                                android:text="Terms and Conditions"
+                                android:text="@string/terms_and_conditions_text"
                                 android:textSize="18dp"
                                 android:textColor="@color/darkTheme_WhiteFull"/>
 
@@ -234,7 +234,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="4dp"
                                 android:paddingStart="23dp"
-                                android:text="All things terms and conditions"
+                                android:text="@string/terms_and_conditions_description_text"
                                 android:textSize="14dp"
                                 android:textColor="@color/darkTheme_WhiteMed"/>
 
@@ -260,7 +260,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="27dp"
                                 android:paddingStart="23dp"
-                                android:text="Credits"
+                                android:text="@string/credits_text"
                                 android:textSize="18dp"
                                 android:textColor="@color/darkTheme_WhiteFull"/>
 
@@ -269,7 +269,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="4dp"
                                 android:paddingStart="23dp"
-                                android:text="All things credits"
+                                android:text="@string/credits_description_text"
                                 android:textSize="14dp"
                                 android:textColor="@color/darkTheme_WhiteMed"/>
 
@@ -283,7 +283,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="42dp"
                         android:paddingStart="23dp"
-                        android:text="Other"
+                        android:text="@string/other_text"
                         android:textSize="18dp"
                         android:fontFamily="@font/circular"
                         android:textColor="@color/darkTheme_WhiteFull"/>
@@ -305,7 +305,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="27dp"
                                 android:paddingStart="23dp"
-                                android:text="Log out"
+                                android:text="@string/logout_text"
                                 android:textSize="18dp"
                                 android:textColor="@color/darkTheme_WhiteFull"/>
 
@@ -315,7 +315,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="4dp"
                                 android:paddingStart="23dp"
-                                android:text="You are logged in as email@email.com"
+                                android:text="@string/filler_email_logged_in_as"
                                 android:textSize="14dp"
                                 android:textColor="@color/darkTheme_WhiteMed"/>
 

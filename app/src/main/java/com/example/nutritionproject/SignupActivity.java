@@ -14,11 +14,11 @@ import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.Executors;
 
 public class SignupActivity extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener {
 
     //region References
-    private CustomUIMethods uiManager = new CustomUIMethods();
     private CustomDBMethods dbManager = new CustomDBMethods();
 
     private EditText emailField;
@@ -39,7 +39,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnFocusCha
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         emailField = findViewById(R.id.emailTextField);
         passwordField = findViewById(R.id.passwordTextField);
@@ -64,23 +64,23 @@ public class SignupActivity extends AppCompatActivity implements View.OnFocusCha
     public void onFocusChange(View view, boolean b) {
         int id = view.getId();
 
-        uiManager.setTextFieldBackgrounds(this, new EditText[]{emailField, passwordField}, R.drawable.bg_gray_6dp_stroke_gray);
-        uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "");
-        uiManager.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{emailField, passwordField}, R.drawable.bg_gray_6dp_stroke_gray);
+        CustomUIMethods.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "");
 
         if (id == emailField.getId()) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_white);
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_white);
         } else if (id == passwordField.getId()) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_white);
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_white);
         }
 
         if (emailField.getText().length() != 0 && !dbManager.isEmailValid(CustomDBMethods.formatEmail(emailField.getText().toString()))) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_red);
-            uiManager.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
         }
         if (passwordField.getText().length() != 0 && !dbManager.isPasswordValid(passwordField.getText().toString().trim())) {
-            uiManager.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_red);
-            uiManager.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "Invalid password");
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "Invalid password");
         }
 
     }
@@ -144,7 +144,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnFocusCha
     public Method registerFailureCallback() {
         Log.d("NORTH_SIGNUP", "Register Failure Event Fired");
 
-        uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "User already exists.");
+        CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "User already exists.");
 
         return null;
     }
@@ -152,7 +152,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnFocusCha
     public Method connectionFailureCallback() {
         Log.d("NORTH_SIGNUP", "Connection Failure Event Fired");
 
-        uiManager.setPopupMessage(this, errorView, R.color.darkTheme_Error, "No Internet Connection.");
+        CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "No Internet Connection.");
 
         return null;
     }

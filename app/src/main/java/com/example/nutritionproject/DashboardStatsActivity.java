@@ -15,7 +15,6 @@ public class DashboardStatsActivity extends AppCompatActivity implements Navigat
 
     private BottomNavigationView bottomNavView;
 
-    private final CustomUIMethods uiManager = new CustomUIMethods();
     private final CustomFitMethods fitManager = new CustomFitMethods();
 
     @Override
@@ -23,7 +22,7 @@ public class DashboardStatsActivity extends AppCompatActivity implements Navigat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_stats);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         bottomNavView = findViewById(R.id.bottomNavigationView);
 
@@ -38,7 +37,7 @@ public class DashboardStatsActivity extends AppCompatActivity implements Navigat
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
     }

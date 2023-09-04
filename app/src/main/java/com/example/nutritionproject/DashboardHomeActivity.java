@@ -37,7 +37,6 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     //region References
     private BottomNavigationView bottomNavView;
 
-    private final CustomUIMethods uiManager = new CustomUIMethods();
     private final CustomFitMethods fitManager = new CustomFitMethods();
 
     private CardView profileButton;
@@ -57,7 +56,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_home);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         profileButton = findViewById(R.id.profileButton);
         profileButtonText = findViewById(R.id.profileButtonText);
@@ -98,7 +97,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
 
@@ -129,7 +128,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
             CurrentProfile.userColorHex = CustomUIMethods.getRandomLightColorHex();
         }
 
-        uiManager.setProfileButton(this, profileButton, profileButtonText);
+        CustomUIMethods.setProfileButton(this, profileButton, profileButtonText);
     }
 
     //endregion

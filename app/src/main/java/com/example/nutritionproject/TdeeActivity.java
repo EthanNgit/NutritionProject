@@ -34,7 +34,6 @@ import java.util.Map;
 
 public class TdeeActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, TextWatcher, NavigationBarView.OnItemSelectedListener {
 
-    private CustomUIMethods uiManager = new CustomUIMethods();
     private CustomFitMethods fitManager = new CustomFitMethods();
     private CustomDBMethods dbManager = new CustomDBMethods();
 
@@ -159,7 +158,7 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tdee);
 
-        uiManager.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         headerText = findViewById(R.id.secondaryHeader);
         backBtn = findViewById(R.id.backButton);
@@ -351,11 +350,11 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         //region TDEE OnClick
         //region Measurement Two way button OnClick
         if (id == metricMeasurementTwoWayButton.getId()) {
-            uiManager.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMetric = true;
             setMetricFields();
         } else if (id == imperialMeasurementTwoWayButton.getId()) {
-            uiManager.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMetric = false;
             setImperialFields();
         }
@@ -363,11 +362,11 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
         //region Gender Two way button OnClick
         if (id == maleGenderTwoWayButton.getId()) {
-            uiManager.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMale = true;
             onTDEEInformationChanged.invoke();
         } else if (id == femaleGenderTwoWayButton.getId()) {
-            uiManager.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMale = false;
             onTDEEInformationChanged.invoke();
         }
@@ -441,7 +440,7 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
             manualSetGoalButton.setVisibility(View.GONE);
             automaticGetGoalButton.setVisibility(View.VISIBLE);
 
-            uiManager.showKeyboard(this, manualCalorieField);
+            CustomUIMethods.showKeyboard(this, manualCalorieField);
 
             isUpdatingManually = true;
 
@@ -463,7 +462,7 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        uiManager.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
     }
@@ -502,13 +501,13 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
     //region Reusable Methods
     private void setActivityLevel(TextView buttonClicked, WorkoutIntensity intensityLevel) {
-        uiManager.setNListButton(this, activityButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+        CustomUIMethods.setNListButton(this, activityButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
         currentIntensity = intensityLevel;
         onTDEEInformationChanged.invoke();
     }
 
     private void setGoalLevel(TextView buttonClicked, WorkoutGoals goal) {
-        uiManager.setNListButton(this, goalButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+        CustomUIMethods.setNListButton(this, goalButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
         currentGoal = goal;
         onTDEEInformationChanged.invoke();
     }
@@ -517,14 +516,14 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         weightTxt.setText("Weight");
         weightTxt.setVisibility(View.GONE);
 
-        uiManager.setPopupMessage(this, weightErrorTxt , R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setPopupMessage(this, weightErrorTxt , R.color.darkTheme_Transparent, "");
         weightMetricCardView.setVisibility(View.GONE);
         weightImperialCardView.setVisibility(View.GONE);
 
         heightTxt.setText("Height");
         heightTxt.setVisibility(View.GONE);
 
-        uiManager.setPopupMessage(this, heightErrorTxt, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setPopupMessage(this, heightErrorTxt, R.color.darkTheme_Transparent, "");
         heightMetricLayout.setVisibility(View.GONE);
         heightImperialCardView.setVisibility(View.GONE);
     }

@@ -31,5 +31,6 @@ Current Version:
   * 0.1.4.2 / 0.1.4.3 Fixing a git error i made and finishing up
 * V: 0.2 Food and nutrient Objects, along with there serialization adapters, started the barcode scanner.
 * 0.2.1.1 Fixed some last second food object problems I figured out (serving size)
+* 0.2.2.1 Added Barcode scanner after 6 tries (Had to use Kotlin, could not get it right with java), still needs more QOL, for better scanning UX
 
 

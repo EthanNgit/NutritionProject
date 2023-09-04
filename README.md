@@ -16,24 +16,24 @@ Past Versions:
 
 Plans: 
  * V. 0.1
-  * Base Login system (Register / Login / Remember me / Forgot Password)
-  * Tdee calculator
-  * Dashboard ui
-  * Other base uis (profile, settings, other smaller menus...)
+  ** Base Login system (Register / Login / Remember me / Forgot Password)
+  ** Tdee calculator
+  ** Dashboard ui
+  ** Other base uis (profile, settings, other smaller menus...)
  * V. 0.2
-  * Food item database system
-  * Adding functionality
-  * Searching functionality
-  * Barcode functionality
-  * Object based personal recipe items
+  ** Food item database system
+  ** Adding functionality
+  ** Searching functionality
+  ** Barcode functionality
+  ** Object based personal recipe items
  * V. 0.3
-  * Macro counting
-  * Meal Planner
-  * User history
+  ** Macro counting
+  ** Meal Planner
+  ** User history
  * V. 0.4
-  * Data analysis
+  ** Data analysis
  * V. 0.5
-  * Undecided (Most likely polish and implementing some potential features if I feel the need to)
+  ** Undecided (Most likely polish and implementing some potential features if I feel the need to)
 
 Potential Plans:
 *Search settings (would have to create a new relationship table in db to then be able to sort by those instead of the json method in use currently)

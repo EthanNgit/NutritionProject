@@ -41,8 +41,8 @@ Potential Plans:
 * Resarch into more security for the database
 * Api for the food database (most likely to happen, with python)
 * Admin console for regulating db (most likely to happen, with wpf c#)
- * Ability to verify products easily
- * Ability to implement a check feature (someone adds item -> they use temperary version of it -> admin checks it -> admin can add it to db)
+  * Ability to verify products easily
+  * Ability to implement a check feature (someone adds item -> they use temperary version of it -> admin checks it -> admin can add it to db)
    
 
 

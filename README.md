@@ -36,10 +36,14 @@ Plans:
    * Undecided (Most likely polish and implementing some potential features if I feel the need to)
 
 Potential Plans:
-*Search settings (would have to create a new relationship table in db to then be able to sort by those instead of the json method in use currently)
-*Database based reset password
-*Resarch into more security for the database
-*Api for the food database (most likely to happen)
+* Search settings (would have to create a new relationship table in db to then be able to sort by those instead of the json method in use currently)
+* Database based reset password
+* Resarch into more security for the database
+* Api for the food database (most likely to happen, with python)
+* Admin console for regulating db (most likely to happen, with wpf c#)
+ * Ability to verify products easily
+ * Ability to implement a check feature (someone adds item -> they use temperary version of it -> admin checks it -> admin can add it to db)
+   
 
 
 

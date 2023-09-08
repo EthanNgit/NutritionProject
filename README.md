@@ -15,16 +15,16 @@ Past Versions:
 * V: 0.1 Login / Register System with mySQL database Android preferences for Remember me TDEE Calculator
 
 Plans: 
- * V. 0.1
-   * Base Login system (Register / Login / Remember me / Forgot Password)
-   * Tdee calculator
-   * Dashboard ui
-   * Other base uis (profile, settings, other smaller menus...)
- * V. 0.2
-   * Food item database system
-   * Adding functionality
+ ~~* V. 0.1~~
+  ~~* Base Login system (Register / Login / Remember me / Forgot Password)~~
+  ~~* Tdee~~
+  ~~* Dashboard ui~~
+  ~~* Other base uis (profile, settings, other smaller menus...)~~
+ ~~* V. 0.2~~
+   ~~* Food item database system~~
+   ~~* Adding functionality~~
    * Searching functionality
-   * Barcode functionality
+   ~~* Barcode functionality~~
    * Object based personal recipe items
  * V. 0.3
    * Macro counting
@@ -39,6 +39,7 @@ Potential Plans:
 * Search settings (would have to create a new relationship table in db to then be able to sort by those instead of the json method in use currently)
 * Database based reset password
 * Resarch into more security for the database
+* Stronger / More user friendly search algorithm
 * Api for the food database (most likely to happen, with python)
 * Admin console for regulating db (most likely to happen, with wpf c#)
   * Ability to verify products easily

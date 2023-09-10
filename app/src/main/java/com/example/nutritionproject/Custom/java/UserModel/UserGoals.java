@@ -8,6 +8,13 @@ public class UserGoals {
     public int carbGoal;
     public int fatGoal;
 
+    public UserGoals() {
+        this.calorieGoal = 0;
+        this.proteinGoal = 0;
+        this.carbGoal = 0;
+        this.fatGoal = 0;
+    }
+
     public UserGoals(int calGoal, int pGoal, int cGoal, int fGoal) {
         this.calorieGoal = calGoal;
         this.proteinGoal = pGoal;

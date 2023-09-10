@@ -1,6 +1,7 @@
 package com.example.nutritionproject;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -12,6 +13,8 @@ import android.widget.Button;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Utility.EventCallback;
+import com.example.nutritionproject.Custom.java.Utility.EventContext;
 
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -47,10 +50,21 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
             //TODO: Update to saving userprofile and authenticating though there, when profiles are needed
 
             //TODO: Create Error when Database is not online / No internet connection, currently Crashes application
-            dbManager.login(skipEmail, skipPassword);
+            dbManager.login(skipEmail, skipPassword, new EventCallback() {
+                @Override
+                public void onSuccess(@Nullable EventContext context) {
+                    startActivity(new Intent(IntroActivity.this, DashboardHomeActivity.class));
+                    finish();
+                }
 
-            startActivity(new Intent(IntroActivity.this, DashboardHomeActivity.class));
-            finish();
+                @Override
+                public void onFailure(@Nullable EventContext context) {
+                    startActivity(new Intent(IntroActivity.this, LoginActivity.class));
+                    finish();
+                }
+            });
+
+
         }
 
 

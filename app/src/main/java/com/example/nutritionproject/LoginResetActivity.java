@@ -84,7 +84,7 @@ public class LoginResetActivity extends AppCompatActivity implements View.OnClic
 
     private void verifyPassword(String newPassword) {
         if (CustomDBMethods.isPasswordValid(newPassword)) {
-            dbManager.setPassword(LoginActivity.otpEmail, newPassword);
+            dbManager.setPassword(LoginActivity.otpEmail, newPassword, null);
             finish();
         } else {
             CustomUIMethods.setPopupMessage(this, passwordErrorText, R.color.darkTheme_Transparent, "Invalid Password");

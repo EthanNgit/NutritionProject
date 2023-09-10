@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
+import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Method;
@@ -112,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         if (id == forgotPasswordBtn.getId()) {
             forgotPassword();
         } else if (id == loginBtn.getId()) {
-            dbManager.login(CustomDBMethods.formatEmail(emailField.getText().toString()), passwordField.getText().toString().trim());
+            dbManager.login(CustomDBMethods.formatEmail(emailField.getText().toString()), passwordField.getText().toString().trim(), null);
 
         } else if (id == signUpBtn.getId()) {
             startActivity(new Intent(LoginActivity.this, SignupActivity.class));
@@ -184,12 +185,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
         dbManager.getUser(CustomDBMethods.formatEmail(emailField.getText().toString()), new EventCallback() {
 
             @Override
-            public void onSuccess() {
-                dbManager.resetPassword(CustomDBMethods.formatEmail(emailField.getText().toString()));
+            public void onSuccess(EventContext context) {
+                dbManager.resetPassword(CustomDBMethods.formatEmail(emailField.getText().toString()), null);
             }
 
             @Override
-            public void onFailure() {
+            public void onFailure(EventContext context) {
                 CustomUIMethods.setPopupMessage(outerContext, errorView, R.color.darkTheme_Error, "User has not registered an account");
             }
         });

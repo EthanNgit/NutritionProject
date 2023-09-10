@@ -608,7 +608,7 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         //TODO: Give errors if fields arent filled in on click
 
         if (currentCalorieResult > 0 && !isUpdatingManually) {
-            dbManager.updateGoals(CurrentProfile.id, currentCalorieResult, 0, 0,0);
+            dbManager.updateGoals(CurrentProfile.id, currentCalorieResult, 0, 0,0, null);
         } else if (isUpdatingManually) {
             int manualCals = 0;
 
@@ -621,7 +621,7 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             if (manualCals > 0) {
-                dbManager.updateGoals(CurrentProfile.id, manualCals, 0, 0,0);
+                dbManager.updateGoals(CurrentProfile.id, manualCals, 0, 0,0, null);
             }
         }
     }

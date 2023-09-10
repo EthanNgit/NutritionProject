@@ -15,14 +15,22 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
 
     private ImageView backBtn;
 
+    private String incUpcid = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food_item);
 
+        if (getIntent().getStringExtra("upcid") != null) {
+            incUpcid = getIntent().getStringExtra("upcid");
+        }
+
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
         backBtn = findViewById(R.id.backButton);
+
+        backBtn.setOnClickListener(this);
     }
 
     @Override

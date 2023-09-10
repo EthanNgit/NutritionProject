@@ -43,15 +43,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/darkTheme_Transparent"
-                        android:fontFamily="@font/circular_med"
                         android:gravity="center_vertical"
+                        android:inputType="text"
+                        android:fontFamily="@font/circular_med"
                         android:hint="@string/search_bar_text"
                         android:paddingStart="55dp"
                         android:paddingTop="30dp"
+                        android:singleLine="true"
                         android:textColor="@color/darkTheme_WhiteFull"
                         android:textColorHint="@color/darkTheme_WhiteMed"
-                        android:textSize="18dp" />
-
+                        android:textSize="18dp"
+                        android:imeOptions="actionSearch"
+                        android:maxLines="1"/>
 
                     <ImageView
                         android:id="@+id/backButton"

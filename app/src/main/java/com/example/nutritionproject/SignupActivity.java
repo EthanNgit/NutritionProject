@@ -125,7 +125,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnFocusCha
         String password = passwordField.getText().toString().trim();
 
         if (dbManager.isEmailValid(email) && dbManager.isPasswordValid(password)) {
-            dbManager.register(email, password);
+            dbManager.register(email, password, null);
         }
     }
 

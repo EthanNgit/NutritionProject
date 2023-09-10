@@ -27,7 +27,7 @@ public class FoodProfileAdapter extends TypeAdapter<FoodProfile> {
             }
         }
 
-        writer.name("dateAdded").value(String.valueOf(value.dateAdded));
+        writer.name("dateAdded").value(value.dateAdded);
         writer.name("isCommon").value(value.isCommon);
         writer.name("brandName").value(value.brandName);
         writer.name("isVerified").value(value.isVerified);

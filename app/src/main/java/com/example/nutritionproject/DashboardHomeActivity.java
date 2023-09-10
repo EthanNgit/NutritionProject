@@ -3,6 +3,7 @@ package com.example.nutritionproject;
 import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -14,22 +15,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Enums.FoodTag;
-import com.example.nutritionproject.Custom.java.Enums.Measurement;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
+import com.example.nutritionproject.Custom.java.Utility.EventCallback;
+import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
-import java.lang.reflect.GenericSignatureFormatError;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class DashboardHomeActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener {
@@ -37,6 +41,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     //region References
     private BottomNavigationView bottomNavView;
 
+    private final CustomDBMethods dbManager = new CustomDBMethods();
     private final CustomFitMethods fitManager = new CustomFitMethods();
 
     private CardView profileButton;
@@ -78,6 +83,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
 
         setProfileButton();
         showCalorieGraph();
+
     }
 
     @Override
@@ -124,10 +130,6 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     }
 
     private void setProfileButton() {
-        if (CurrentProfile.userColorHex == null) {
-            CurrentProfile.userColorHex = CustomUIMethods.getRandomLightColorHex();
-        }
-
         CustomUIMethods.setProfileButton(this, profileButton, profileButtonText);
     }
 

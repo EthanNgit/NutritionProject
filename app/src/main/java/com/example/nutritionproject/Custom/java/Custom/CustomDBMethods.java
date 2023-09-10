@@ -7,17 +7,36 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
+import com.example.nutritionproject.Custom.java.Enums.FoodTag;
+import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
+import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.example.nutritionproject.Custom.java.Utility.Event;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.UserModel.UserGoals;
 import com.example.nutritionproject.Custom.java.UserModel.UserProfile;
+import com.example.nutritionproject.Custom.java.Utility.EventContext;
+import com.example.nutritionproject.Custom.java.Utility.EventContextStrings;
+import com.example.nutritionproject.Model.FoodModel;
 import com.example.nutritionproject.Model.UserModel;
 import com.example.nutritionproject.Retrofit.ApiClient;
 import com.example.nutritionproject.Retrofit.ApiInterface;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
 
+import org.joda.time.LocalDate;
+
+import java.lang.reflect.Type;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,10 +55,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CustomDBMethods {
-
+    // I personally tried converting this class to static for convenience, but I noticed a performance decrease
+    // so I will leave it as is for now. (If i were to take a guess its 2 reasons api and event calls that make it slow)
     private ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
-    public static UserProfile CurrentProfile = new UserProfile();
+    public static UserProfile CurrentProfile = null;
 
     public static String currentOTPValue;
     private boolean firstOTPCallToSkip = false;
@@ -61,9 +81,22 @@ public class CustomDBMethods {
     public Event onGoalsChangedFailure = new Event();
 
     public Event onConnectionFailure = new Event();
+
+    public Event onFoodItemAddedSuccess = new Event();
+    public Event onFoodItemAddedFailure = new Event();
+
+    public Event onFoodItemSearchSuccess = new Event();
+    public Event onFoodItemSearchFailure = new Event();
     //endregion
 
-    public void resetPassword(String email) {
+    // C# > Java (at least for anything that has interfaces; optional params and built in events are great)
+
+    //region User Methods
+
+    /**
+     * @apiNote Provide email to send recover email to and an optional callback
+     */
+    public void resetPassword(String email, @Nullable EventCallback callback) {
         // Potential need for scalability - seems gmail has sending limits, in which if you function is overused
         // or gets abused, it will disable your sending account...
 
@@ -135,21 +168,29 @@ public class CustomDBMethods {
             });
 
             emailThread.start();
+            if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Recovery mail sent successfully");
+            if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.passwordRecoverMailSuccess).build());
             onRecoveryMailSentSuccess.invoke();
 
         } catch (AddressException e) {
+            if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Recovery email failed to send: " + e.getMessage());
+            if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.invalidInput).build());
             onRecoveryMailSentFailure.invoke();
             throw new RuntimeException(e);
 
         } catch (MessagingException e) {
+            if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Recovery email failed to send: " + e.getMessage());
+            if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
             onRecoveryMailSentFailure.invoke();
             throw new RuntimeException(e);
         }
 
     }
 
-    // C# > Java
-    public void login(String email, String password) {
+    /**
+     * @apiNote Provide email and password of an existing account to log into an account to and an optional callback
+     */
+    public void login(String email, String password, @Nullable EventCallback callback) {
         Call<UserModel> userModelCall = apiInterface.login(email, password);
 
         userModelCall.enqueue(new Callback<UserModel>() {
@@ -159,11 +200,14 @@ public class CustomDBMethods {
                     UserModel userModel = response.body();
 
                     if (userModel.isSuccess()) {
-                        Log.d("NORTH_DATABASE", "Logged in successfully");
                         setUserProfile(userModel);
+
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Logged in successfully");
+                        if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.loginSuccess).build());
                         onLoginSuccess.invoke();
                     } else {
-                        Log.d("NORTH_DATABASE", "Failed to log in");
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed to log in");
+                        if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
                         onLoginFailure.invoke();
                     }
                 }
@@ -171,14 +215,18 @@ public class CustomDBMethods {
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.connectionError).build());
                 onConnectionFailure.invoke();
             }
         });
 
     }
 
-    public void register(String email, String password) {
+    /**
+     * @apiNote Provide email and password to a new account to register an account and an optional callback
+     */
+    public void register(String email, String password, @Nullable EventCallback callback) {
         Call<UserModel> userModelCall = apiInterface.register(email, password);
 
         userModelCall.enqueue(new Callback<UserModel>() {
@@ -188,10 +236,12 @@ public class CustomDBMethods {
                     UserModel userModel = response.body();
 
                     if (userModel.isSuccess()) {
-                        Log.d("NORTH_DATABASE", "Account successfully created");
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Account successfully created");
+                        if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.registerSuccess).build());
                         onRegisterSuccess.invoke();
                     } else {
-                        Log.d("NORTH_DATABASE", "Failed to register account");
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed to register account");
+                        if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
                         onRegisterFailure.invoke();
                     }
                 }
@@ -199,14 +249,18 @@ public class CustomDBMethods {
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.connectionError).build());
                 onConnectionFailure.invoke();
             }
         });
 
     }
 
-    public void updateGoals(int userid, int calorie, int protein, int carb, int fat) {
+    /**
+     * @apiNote Provide user id belonging to the account, along with the target goals and an optional callback
+     */
+    public void updateGoals(int userid, int calorie, int protein, int carb, int fat, @Nullable EventCallback callback) {
         Call<UserModel> userModelCall = apiInterface.setGoals(userid, calorie, protein, carb, fat);
 
         userModelCall.enqueue(new Callback<UserModel>() {
@@ -216,10 +270,12 @@ public class CustomDBMethods {
                     UserModel userModel = response.body();
 
                     if (userModel.isSuccess()) {
-                        Log.d("NORTH_DATABASE", "Goals successfully updated");
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Goals successfully updated");
+                        if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.updateGoalSuccess).build());
                         onGoalsChangedSuccess.invoke();
                     } else {
-                        Log.d("NORTH_DATABASE", "Goals failed to update");
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Goals failed to update");
+                        if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
                         onGoalsChangedFailure.invoke();
                     }
                 }
@@ -227,14 +283,18 @@ public class CustomDBMethods {
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.connectionError).build());
                 onConnectionFailure.invoke();
             }
         });
 
     }
 
-    public void setPassword(String email, String newPassword) {
+    /**
+     * @apiNote Provide email and new password to an existing account to reset an account's password and an optional callback
+     */
+    public void setPassword(String email, String newPassword, @Nullable EventCallback callback) {
         Call<UserModel> userModelCall = apiInterface.setPassword(email, newPassword);
 
         userModelCall.enqueue(new Callback<UserModel>() {
@@ -244,24 +304,28 @@ public class CustomDBMethods {
                     UserModel userModel = response.body();
 
                     if (userModel.isSuccess()) {
-                        Log.d("NORTH_DATABASE", "Password successfully reset");
-
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Password successfully reset");
+                        if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.passwordResetSuccess).build());
                     } else {
-                        Log.d("NORTH_DATABASE", "Password failed to reset");
-
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Password failed to reset");
+                        if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.connectionError).build());
                 onConnectionFailure.invoke();
             }
         });
 
     }
 
+    /**
+     * @apiNote Provide email to an existing account to search for it in the database and an optional callback
+     */
     public void getUser(String email, EventCallback callback) {
         Call<UserModel> userModelCall = apiInterface.getUser(email);
 
@@ -272,40 +336,135 @@ public class CustomDBMethods {
                     UserModel userModel = response.body();
 
                     if (userModel.isSuccess()) {
-                        Log.d("NORTH_DATABASE", "User exists");
-                        callback.onSuccess();
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "User exists");
+                        if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.userSearchSuccess).build());
                     } else {
-                        Log.d("NORTH_DATABASE", "User does not Exist");
-                        callback.onFailure();
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "User does not Exist");
+                        if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (callback != null) callback.onFailure(new EventContext.Builder().withMessage(EventContextStrings.connectionError).build());
                 onConnectionFailure.invoke();
             }
         });
 
     }
 
+    //endregion
+
+    //region Food db Methods
+    /**
+     * @apiNote Provide the item you want to add and an optional callback
+     */
+    public void addFoodItem(FoodProfile item, @Nullable EventCallback callback) {
+        @Nullable String upcId = item.upcId;
+        String name = item.name;
+        @Nullable Set<FoodTag> tags = item.tags;
+        String dateAdded = item.dateAdded;
+        boolean isCommon = item.isCommon;
+        @Nullable String brandName = item.brandName;
+        boolean isVerified = item.isVerified;
+        @Nullable FoodNutrition nutrition = item.nutrition;
+
+        Gson gson = new Gson();
+
+        Call<FoodModel> foodModelCall = apiInterface.addFoodItem(upcId, name, gson.toJson(tags), dateAdded, isCommon, brandName, isVerified, gson.toJson(nutrition));
+
+        foodModelCall.enqueue(new Callback<FoodModel>() {
+            @Override
+            public void onResponse(Call<FoodModel> call, Response<FoodModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    FoodModel foodModel = response.body();
+
+                    if (foodModel.isSuccess()) {
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Food item added successfully");
+
+                        if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.foodAddSuccess).build());
+                        onFoodItemAddedSuccess.invoke();
+                    } else {
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Food item failed to create" + foodModel.getMessage());
+                        if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
+                        onFoodItemAddedFailure.invoke();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FoodModel> call, Throwable t) {
+                if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed connection, " + t.getMessage());
+                if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.connectionError).build());
+                onConnectionFailure.invoke();
+            }
+        });
+    }
+
+    /**
+     * @apiNote Provide upcid or name of an existing item to search for it and an optional callback.
+     *  (results will be sent to context.getData, make sure to type-cast the result)
+     */
+    public void searchFoodItem(@Nullable String upcId, @Nullable String name, @Nullable EventCallback callback) {
+        if (upcId == null && name == null) {
+            if (callback != null) callback.onFailure(new EventContext.Builder().withMessage(EventContextStrings.invalidInput).build());
+            return;
+        }
+
+        Call<List<FoodModel>> foodModelCall = apiInterface.searchFoodItem(upcId, name);
+
+        foodModelCall.enqueue(new Callback<List<FoodModel>>() {
+            @Override
+            public void onResponse(Call<List<FoodModel>> call, Response<List<FoodModel>> response) {
+                List<FoodModel> foodModel = response.body();
+                List<FoodProfile> profiles = new ArrayList<>();
+                Gson gson = new Gson();
+                Type setType = new TypeToken<HashSet<FoodTag>>(){}.getType();
+                for(FoodModel model : foodModel) {
+                    profiles.add(new FoodProfile(model.getUpcId(), model.getName(), gson.fromJson(model.getTags(), setType),
+                            model.getDateAdded(), model.getIsCommon() != 0, model.getBrandName(),
+                            model.getIsVerified() != 0, gson.fromJson(model.getNutrition(), FoodNutrition.class)));
+                }
+
+                if (profiles.size() > 0) {
+                    if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", profiles.size() + " Search results found");
+                    if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.foodSearchSuccess).withData(profiles).build());
+                    onFoodItemSearchSuccess.invoke();
+                } else {
+                    if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", profiles.size() + "0 Search results found");
+                    if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
+                    onFoodItemSearchFailure.invoke();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<FoodModel>> call, Throwable t) {
+                if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed connection, " + t.getMessage());
+                if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.connectionError).build());
+                onConnectionFailure.invoke();
+            }
+        });
+    }
+    //endregion
+
     //region Reusable Methods
     public void logout(Context context) {
         if (CurrentProfile.email != null) {
-            CurrentProfile = new UserProfile();
+            CurrentProfile = null;
 
             SharedPreferences preferences = context.getSharedPreferences("login", MODE_PRIVATE);
             preferences.edit().clear().apply();
 
-            Log.d("NORTH_DATABASE", "Logged out successfully");
+            if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Logged out successfully");
         }
     }
 
-    private void setUserProfile(UserModel user) {
-        CurrentProfile.id = user.getId();
-        CurrentProfile.email = user.getEmail();
-        CurrentProfile.goals = new UserGoals(user.getCalorie(), user.getProtein(), user.getCarb(), user.getFat());
+    private static void setUserProfile(UserModel user) {
+        CurrentProfile = new UserProfile(user.getId(), user.getEmail(),
+                new UserGoals(user.getCalorie(), user.getProtein(), user.getCarb(), user.getFat()), null);
     }
 
     public static boolean isEmailValid(CharSequence email) {
@@ -321,7 +480,7 @@ public class CustomDBMethods {
         return email.toString().trim().toLowerCase();
     }
 
-    public String generateOneTimePassword(int length) {
+    public static String generateOneTimePassword(int length) {
         //TODO: To make more ux friendly create a "battle royale" between palindrome, repeated, and sequential otp codes
         if (length >= 1) {
             Random randomOTP = new Random();
@@ -343,7 +502,7 @@ public class CustomDBMethods {
         return "";
     }
 
-    public String generateRandomID(int length) {
+    public static String generateRandomID(int length) {
         final String allChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         SecureRandom secureRandom= new SecureRandom();
 
@@ -352,7 +511,5 @@ public class CustomDBMethods {
             stringBuilder.append(allChars.charAt(secureRandom.nextInt(allChars.length())));
         return stringBuilder.toString();
     }
-
-
     //endregion
 }

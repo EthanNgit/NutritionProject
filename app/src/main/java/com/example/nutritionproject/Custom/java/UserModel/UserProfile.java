@@ -2,6 +2,9 @@ package com.example.nutritionproject.Custom.java.UserModel;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 
 public class UserProfile {
     public int id;
@@ -9,6 +12,26 @@ public class UserProfile {
     public UserGoals goals;
 
     public float[] userColorHex;
+
+    public UserProfile() {
+        this.id = -1;
+        this.email = "";
+        this.goals = new UserGoals();
+        this.userColorHex = CustomUIMethods.getRandomLightColorHex();
+    }
+
+    public UserProfile(int id, String email, UserGoals goals, @Nullable float[] userColorHex) {
+        this.id = id;
+        this.email = email;
+        this.goals = goals;
+
+        if (userColorHex == null) {
+            this.userColorHex = CustomUIMethods.getRandomLightColorHex();
+        } else {
+            this.userColorHex = userColorHex;
+        }
+
+    }
 
     @NonNull
     @Override

@@ -3,6 +3,8 @@ package com.example.nutritionproject.Custom.java.Utility;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.nutritionproject.Custom.java.Custom.CustomUtilityMethods;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -13,13 +15,12 @@ import java.util.Set;
 
 public class Event {
 
-    //Custom Made Class to mimic C# event callback, since I am comfortable with them
+    //Custom made class to mimic C# event callback, since I am comfortable with them
     public EventCallback callback;
-
     private Map<Context, Set<Method>> objectToListenersMap = new HashMap<>();
 
     public void addListener(Context context, String listener) {
-        Log.d("NORTH_EVENT", "added listener");
+        if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", "Added listener");
         try {
             Method method = context.getClass().getDeclaredMethod(listener);
 
@@ -32,12 +33,12 @@ public class Event {
             }
 
         } catch (NoSuchMethodException e) {
-            Log.d("NORTH_EVENT", e.getMessage());
+            if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", e.getMessage());
         }
     }
 
     public void removeListener(Context context, String listener) {
-        Log.d("NORTH_EVENT", "removed listener");
+        if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", "Removed listener");
         try {
             Method method = context.getClass().getDeclaredMethod(listener);
 
@@ -46,14 +47,14 @@ public class Event {
                 objectToListenersMap.get(context).remove(method);
             }
         } catch (NoSuchMethodException e) {
-            Log.d("NORTH_EVENT", e.getMessage());
+            if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", e.getMessage());
         }
 
     }
 
     public void invoke()
     {
-        Log.d("NORTH_EVENT", "invocation occurred");
+        if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", "Invocation occurred");
 
         for (Context context : objectToListenersMap.keySet()) {
 
@@ -61,9 +62,9 @@ public class Event {
                 try {
                     method.invoke(context);
                 } catch (IllegalAccessException e) {
-                    Log.d("NORTH_EVENT", e.getMessage());
+                    if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", e.getMessage());
                 } catch (InvocationTargetException e) {
-                    Log.d("NORTH_EVENT", e.getMessage());
+                    if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", e.getMessage());
                 }
             }
 

@@ -40,6 +40,7 @@ Potential Plans:
 * Search settings (would have to create a new relationship table in db to then be able to sort by those instead of the json method in use currently)
 * Database based reset password
 * Resarch into more security for the database
+* Add a barcode api to show what the item would be if it isnt added
 * Stronger / More user friendly search algorithm
 * Api for the food database (most likely to happen, with python)
 * Admin console for regulating db (most likely to happen, with wpf c#)

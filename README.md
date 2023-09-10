@@ -23,7 +23,7 @@ Plans:
  * V. 0.2
    * Food item database system ✅
    * Adding functionality ✅
-   * Searching functionality
+   * Searching functionality✅
    * Barcode functionality ✅
    * Object based personal recipe items
  * V. 0.3

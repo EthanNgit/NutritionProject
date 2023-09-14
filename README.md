@@ -26,7 +26,7 @@ Plans:
    * Adding functionality ✅
    * Searching functionality✅
    * Barcode functionality ✅
-   * Adding / Searching ui (search lists and add forms)
+   * Adding / Searching ui (search lists and add forms) ✅
    * Object based personal recipe items
  * V. 0.3
    * Macro counting

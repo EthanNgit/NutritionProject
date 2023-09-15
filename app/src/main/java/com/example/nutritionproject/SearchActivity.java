@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,13 +25,16 @@ import android.widget.TextView;
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUtilityMethods;
+import com.example.nutritionproject.Custom.java.Custom.UI.FoodListAdapter;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.example.nutritionproject.Custom.java.Utility.Event;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
+import com.example.nutritionproject.Model.FoodModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,6 +52,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private CardView addItemBtn;
 
     private LinearLayout emptySearchLayout;
+    private RecyclerView fullSearchLayout;
 
     private CardView settingsPanel;
     private static String passedUpcId = "";
@@ -81,6 +88,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         addItemBtn = findViewById(R.id.addBtn);
 
         emptySearchLayout = findViewById(R.id.emptySearchLayout);
+        fullSearchLayout = findViewById(R.id.searchRecyclerView);
+
+        emptySearchLayout.setVisibility(View.VISIBLE);
+        fullSearchLayout.setVisibility(View.GONE);
 
         CustomUIMethods.showKeyboard(this, searchField);
 
@@ -124,9 +135,32 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         if (searchField.getText().toString().isEmpty()) { return; }
 
-        if (CustomUtilityMethods.shouldDebug(SearchActivity.class)) Log.d("NORTH_SEARCH", "Updated search results");
-
         //TODO: Update a layout with information
+        Context parentContext = this;
+        String searchText = searchField.getText().toString().trim().toLowerCase();
+        boolean shouldUseUpc = dbManager.isOnlyDigits(searchText) ? true : false;
+        dbManager.searchFoodItem(shouldUseUpc ? searchText : "", shouldUseUpc ? "" : searchText, new EventCallback() {
+            @Override
+            public void onSuccess(@Nullable EventContext context) {
+                emptySearchLayout.setVisibility(View.GONE);
+                fullSearchLayout.setVisibility(View.VISIBLE);
+
+                ArrayList<FoodProfile> profiles = (ArrayList<FoodProfile>) context.getData();
+
+                if (profiles.size() > 0) {
+                    FoodListAdapter adapter = new FoodListAdapter(parentContext, profiles);
+                    fullSearchLayout.setAdapter(adapter);
+                    fullSearchLayout.setLayoutManager(new LinearLayoutManager(parentContext));
+                }
+            }
+
+            @Override
+            public void onFailure(@Nullable EventContext context) {
+                emptySearchLayout.setVisibility(View.VISIBLE);
+                fullSearchLayout.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     @Override

@@ -34,6 +34,7 @@ import java.util.Map;
 
 public class TdeeActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, TextWatcher, NavigationBarView.OnItemSelectedListener {
 
+    //TODO: Add errors
     private CustomFitMethods fitManager = new CustomFitMethods();
     private CustomDBMethods dbManager = new CustomDBMethods();
 

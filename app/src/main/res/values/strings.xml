@@ -13,6 +13,8 @@
     <string name="filler_error">Invalid entry</string>
     <string name="filler_calories">- - - - Calories</string>
     <string name="filler_version">Alpha 0.0</string>
+    <string name="filler_food_name">Item name</string>
+    <string name="filler_food_info">Brand | Cal | Pro</string>
 
     // Intro Activity
     <string name="intro_call_to_action">\tTrack Macros. \n\n Large Database.</string>
@@ -32,7 +34,6 @@
     // Sign up Activity
     <string name="signup_call_to_action">To search our database for food \n and start tracking macros</string>
     <string name="login_question">Already have an account?</string>
-
 
     // Settings Activity
     <string name="settings_text">Settings</string>

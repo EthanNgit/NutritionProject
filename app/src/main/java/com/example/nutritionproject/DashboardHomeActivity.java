@@ -130,7 +130,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     }
 
     private void setProfileButton() {
-        CustomUIMethods.setProfileButton(this, profileButton, profileButtonText);
+        CustomUIMethods.setProfileButton(this, profileButton, profileButtonText, CurrentProfile.email);
     }
 
     //endregion

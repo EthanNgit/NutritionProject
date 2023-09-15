@@ -39,6 +39,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -418,11 +420,11 @@ public class CustomDBMethods {
         foodModelCall.enqueue(new Callback<List<FoodModel>>() {
             @Override
             public void onResponse(Call<List<FoodModel>> call, Response<List<FoodModel>> response) {
-                List<FoodModel> foodModel = response.body();
+                List<FoodModel> foodModels = response.body();
                 List<FoodProfile> profiles = new ArrayList<>();
                 Gson gson = new Gson();
                 Type setType = new TypeToken<HashSet<FoodTag>>(){}.getType();
-                for(FoodModel model : foodModel) {
+                for(FoodModel model : foodModels) {
                     profiles.add(new FoodProfile(model.getUpcId(), model.getName(), gson.fromJson(model.getTags(), setType),
                             model.getDateAdded(), model.getIsCommon() != 0, model.getBrandName(),
                             model.getIsVerified() != 0, gson.fromJson(model.getNutrition(), FoodNutrition.class)));
@@ -474,6 +476,17 @@ public class CustomDBMethods {
     public static boolean isPasswordValid(CharSequence password) {
         int minPasswordLength = 6;
         return (password.length() >= minPasswordLength);
+    }
+
+    public static boolean isOnlyDigits(String str) {
+        Pattern p = Pattern.compile("[0-9]+");
+
+        if (str == null) {
+            return false;
+        }
+
+        Matcher m = p.matcher(str);
+        return m.matches();
     }
 
     public static String formatEmail(String email) {

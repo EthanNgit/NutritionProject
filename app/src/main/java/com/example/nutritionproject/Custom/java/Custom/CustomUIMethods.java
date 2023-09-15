@@ -214,10 +214,10 @@ public class CustomUIMethods {
      * @param profileButton Button that is also the background Image
      * @param profileButtonText Text that displays the Initial of the users email
      */
-    public static void setProfileButton(Context context, CardView profileButton, TextView profileButtonText) {
+    public static void setProfileButton(Context context, CardView profileButton, TextView profileButtonText, String name) {
         if (CurrentProfile != null) {
             profileButton.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(CurrentProfile.userColorHex[0], CurrentProfile.userColorHex[1], CurrentProfile.userColorHex[2])));
-            profileButtonText.setText(String.valueOf(CurrentProfile.email.charAt(0)).toUpperCase());
+            profileButtonText.setText(String.valueOf(name.charAt(0)).toUpperCase());
         }
     }
 

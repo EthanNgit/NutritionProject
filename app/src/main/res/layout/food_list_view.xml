@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/darkTheme_Background"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/listItemIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            app:cardCornerRadius="100dp"
+            android:backgroundTint="@color/darkTheme_Brand"
+            android:clickable="false">
+
+            <TextView
+                android:id="@+id/listItemIconText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="A"
+                android:textSize="23dp"
+                android:textColor="@color/darkTheme_Background"
+                android:gravity="center"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/listItemName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:paddingStart="80dp"
+            android:paddingTop="15dp"
+            android:text="@string/filler_food_name"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/listItemDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:paddingStart="80dp"
+            android:paddingTop="40dp"
+            android:text="@string/filler_food_info"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/listItemVerified"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="right"
+            android:background="@drawable/ic_verified"
+            android:backgroundTint="@color/darkTheme_Brand"
+            android:visibility="gone"/>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

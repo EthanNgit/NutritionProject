@@ -22,17 +22,17 @@ Plans:
   * Tdee ✅
   * Dashboard ui ✅
   * Other base uis (profile, settings, other smaller menus...) ✅
- * V. 0.2
+ * V. 0.2 ✅
    * Food item database system ✅
    * Adding functionality ✅
    * Searching functionality✅
    * Barcode functionality ✅
    * Adding / Searching ui (search lists and add forms) ✅
-   * Object based personal recipe items
  * V. 0.3
    * Macro counting
    * Meal Planner
    * User history
+   * Object based personal recipe items
  * V. 0.4
    * Data analysis
  * V. 0.5

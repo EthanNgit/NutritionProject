@@ -1,7 +1,6 @@
 package com.example.nutritionproject.Custom.java.Custom.UI;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
-import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
-import com.example.nutritionproject.Model.FoodModel;
 import com.example.nutritionproject.R;
 import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyViewHolder> {
     Context context;

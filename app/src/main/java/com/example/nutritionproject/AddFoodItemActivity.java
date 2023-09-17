@@ -97,6 +97,8 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
 
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
+        //region Searching and setting
+        //region Frame items
         backBtn = findViewById(R.id.backButton);
         bottomNavView = findViewById(R.id.bottomNavigationView);
 
@@ -107,7 +109,8 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         bottomNavView.setOnItemSelectedListener(this);
 
         backBtn.setOnClickListener(this);
-
+        //endregion
+        //region Finding card1
         addCard1 = findViewById(R.id.addItemCard1);
         itemNameTextField = findViewById(R.id.itemNameTextField);
         itemNameErrorText = findViewById(R.id.nameErrorLabelText);
@@ -121,7 +124,8 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         itemBrandLayout = findViewById(R.id.brandNameLayout);
         itemBrandTextField = findViewById(R.id.brandTextField);
         itemBrandErrorText = findViewById(R.id.brandErrorLabelText);
-
+        //endregion
+        //region Finding card2
         addCard2 = findViewById(R.id.addCard2);
         servingAmtTextField = findViewById(R.id.servingAmtTextField);
         servingSizeTextField = findViewById(R.id.servingSizeTextField);
@@ -138,12 +142,14 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
 
         itemFatTextField = findViewById(R.id.fatTextField);
         itemFatErrorText = findViewById(R.id.fatErrorLabelText);
-
+        //endregion
+        //region Finding rest
         addButton = findViewById(R.id.addBtn);
 
         firstCarouselNextButton = findViewById(R.id.carouselForwardFirstButton);
         secondCarouselBackButton = findViewById(R.id.carouselBackSecondButton);
-
+        //endregion
+        //region Setting listeners
         itemNameTextField.setOnFocusChangeListener(this);
         itemUPCTextField.setOnFocusChangeListener(this);
         itemBrandTextField.setOnFocusChangeListener(this);
@@ -158,7 +164,8 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
 
         firstCarouselNextButton.setOnClickListener(this);
         secondCarouselBackButton.setOnClickListener(this);
-
+        //endregion
+        //endregion
 
         Intent intent = this.getIntent();
         if (intent != null && intent.getStringExtra("upcid") != null) {
@@ -214,8 +221,48 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        //TODO: ux for fields
+    public void onFocusChange(View view, boolean hasFocus) {
+        int id = view.getId();
+
+        CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{itemNameTextField, itemUPCTextField, itemBrandTextField, servingAmtTextField, servingSizeTextField}, R.drawable.bg_black_2dp_stroke_gray);
+        CustomUIMethods.setPopupMessage(this, itemNameErrorText, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setPopupMessage(this, itemUPCErrorText, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setPopupMessage(this, itemBrandErrorText, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setPopupMessage(this, servingErrorTextField, R.color.darkTheme_Transparent, "");
+
+        if (id == itemNameTextField.getId()) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemNameTextField}, R.drawable.bg_black_2dp_stroke_white);
+        } else if (id == itemUPCTextField.getId()) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemUPCTextField}, R.drawable.bg_black_2dp_stroke_white);
+        } else if (id == itemBrandTextField.getId()) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemBrandTextField}, R.drawable.bg_black_2dp_stroke_white);
+        } else if (id == servingSizeTextField.getId()) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingSizeTextField}, R.drawable.bg_black_2dp_stroke_white);
+        } else if (id == servingAmtTextField.getId()) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingAmtTextField}, R.drawable.bg_black_2dp_stroke_white);
+        }
+
+        if (itemNameTextField.getText().length() != 0 && itemNameTextField.getText().length() < 1) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemNameTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, itemNameErrorText, R.color.darkTheme_Transparent, "Invalid name");
+        }
+        if (itemUPCTextField.getText().length() != 0 && itemUPCTextField.getText().length() <= 12) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemUPCTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, itemUPCErrorText, R.color.darkTheme_Transparent, "Invalid UPC-A");
+        }
+        if (itemBrandTextField.getText().length() != 0 && !isCommon) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemBrandTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, itemBrandErrorText, R.color.darkTheme_Transparent, "Invalid brand name");
+        }
+        if (servingSizeTextField.getText().length() != 0) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingSizeTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, servingErrorTextField, R.color.darkTheme_Transparent, "Invalid serving size");
+        }
+        if (servingAmtTextField.getText().length() != 0) {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingAmtTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, servingErrorTextField, R.color.darkTheme_Transparent, "Invalid serving amount");
+        }
+
     }
 
     @Override
@@ -241,7 +288,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void addItem(@Nullable EventCallback callback) {
-        //TODO: give errors if not filled out, make form more advanced for adding vitamins and types of, perhaps by scanning nutrition label
+        //TODO: make form more advanced for adding vitamins and types of, perhaps by scanning nutrition label
         String itemName = itemNameTextField.getText().toString();
         String itemUpc = itemUPCTextField.getText().toString();
         //Tags
@@ -293,4 +340,5 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
 
 
     }
+
 }

@@ -84,6 +84,19 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         setProfileButton();
         showCalorieGraph();
 
+
+        dbManager.updateNutrition(CurrentProfile.id, 15, 1, 1, 1, String.valueOf(new LocalDate()), new EventCallback() {
+            @Override
+            public void onSuccess(@Nullable EventContext context) {
+                Log.d("NORTH_", "Updated");
+            }
+
+            @Override
+            public void onFailure(@Nullable EventContext context) {
+                Log.d("NORTH_", "did not update");
+            }
+        });
+
     }
 
     @Override

@@ -15,6 +15,7 @@ public class EventContextStrings {
     public static final String registerSuccess = "User register success";
     public static final String updateGoalSuccess = "User goal update success";
     public static final String userSearchSuccess = "User search success";
+    public static final String userNutritionUpdateSuccess = "User current nutrition update success";
 
     // Food responses
     public static final String foodAddSuccess = "Food item add success";

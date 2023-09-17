@@ -47,4 +47,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("searchFoodItem.php")
     Call<List<FoodModel>> searchFoodItem(@Field("upcid") String upcId, @Field("name") String name);
+
+    @FormUrlEncoded
+    @POST("updateUserNutrition.php")
+    Call<UserModel> updateNutrition(@Field("userid") int userId, @Field("currentcalories") int calorie, @Field("currentprotein") int protein, @Field("currentcarbs") int carb, @Field("currentfats") int fat, @Field("date") String date);
 }

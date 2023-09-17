@@ -89,6 +89,22 @@
 
                     </androidx.cardview.widget.CardView>
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="40dp"
+                        android:paddingStart="24dp"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textSize="20dp"
+                        android:text="Recent recipes"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recentRecipeRecycletView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"/>
+
+
 
                 </LinearLayout>
 
@@ -101,7 +117,6 @@
 
 
     </ScrollView>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -116,5 +131,11 @@
 
         app:menu="@menu/bottom_navmenu" />
 
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ref_8"
+        android:alpha="0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

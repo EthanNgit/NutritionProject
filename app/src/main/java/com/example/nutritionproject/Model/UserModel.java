@@ -34,6 +34,10 @@ public class UserModel {
     private int fat;
 
     @Expose
+    @SerializedName("date")
+    private String date;
+
+    @Expose
     @SerializedName("success")
     private boolean success;
 
@@ -91,6 +95,14 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public boolean isSuccess() {

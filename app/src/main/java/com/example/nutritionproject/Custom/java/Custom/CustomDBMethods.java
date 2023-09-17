@@ -20,6 +20,7 @@ import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.Custom.java.Utility.EventContextStrings;
 import com.example.nutritionproject.Model.FoodModel;
 import com.example.nutritionproject.Model.UserModel;
+import com.example.nutritionproject.R;
 import com.example.nutritionproject.Retrofit.ApiClient;
 import com.example.nutritionproject.Retrofit.ApiInterface;
 import com.google.gson.Gson;
@@ -81,6 +82,8 @@ public class CustomDBMethods {
     public Event getOnPasswordResetFailure = new Event();
     public Event onGoalsChangedSuccess = new Event();
     public Event onGoalsChangedFailure = new Event();
+    public Event onUserCurrentNutritionUpdateSuccess = new Event();
+    public Event onUserCurrentNutritionUpdateFailure = new Event();
 
     public Event onConnectionFailure = new Event();
 
@@ -208,7 +211,7 @@ public class CustomDBMethods {
                         if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.loginSuccess).build());
                         onLoginSuccess.invoke();
                     } else {
-                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed to log in");
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed to log in, " + userModel.getMessage());
                         if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
                         onLoginFailure.invoke();
                     }
@@ -291,6 +294,42 @@ public class CustomDBMethods {
             }
         });
 
+    }
+
+    /**
+     *
+     * @apiNote Provide user id belonging to the account, along with the current macros and an optional callback.
+     * If the user has not set goals yet, it will create a new entry with no goals.
+     * If the user is creating a new days entree will automatically create a new day and store previous in history.
+     */
+    public void updateNutrition(int userid, int currentCalories, int currentProtein, int currentCarbs, int currentFat, String currentDate, @Nullable EventCallback callback) {
+        Call<UserModel> userModelCall = apiInterface.updateNutrition(userid, currentCalories, currentProtein, currentCarbs, currentFat, currentDate);
+
+        userModelCall.enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserModel userModel = response.body();
+
+                    if (userModel.isSuccess()) {
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Current nutrition successfully updated");
+                        if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.userNutritionUpdateSuccess).build());
+                        onUserCurrentNutritionUpdateSuccess.invoke();
+                    } else {
+                        if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Current nutrition failed to update, " + userModel.getMessage());
+                        if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
+                        onUserCurrentNutritionUpdateFailure.invoke();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed connection," + t.getMessage());
+                if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.connectionError).build());
+                onConnectionFailure.invoke();
+            }
+        });
     }
 
     /**

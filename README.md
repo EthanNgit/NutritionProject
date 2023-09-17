@@ -54,6 +54,7 @@ Passive Plans (Will do slowly / is on back burner):
 * Switch to a strings xml layout (also dimesions)
 * Switch "Custom...Method" classes to static (so events can be called on multiple layers at once)
 * Create more event callbacks (and be more descriptive)
+* Switch to php (server side) local time
    
 
 

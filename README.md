@@ -33,6 +33,7 @@ Plans:
    * Macro counting ✅
    * Meal Planner
    * User history ✅
+   * Day review
    * Object based personal recipe items
  * V. 0.4
    * Data analysis

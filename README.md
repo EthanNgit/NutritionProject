@@ -32,6 +32,7 @@ Plans:
  * V. 0.3
    * Macro counting ✅
    * Meal Planner
+   * Meal History
    * User history ✅
    * Day review
    * Object based personal recipe items
@@ -46,6 +47,7 @@ Potential Plans:
 * Resarch into more security for the database
 * Add a barcode api to show what the item would be if it isnt added
 * Stronger / More user friendly search algorithm
+* Security update (given that i were inclined to publicly release this, there is some must-do changes)
 * Api for the food database (most likely to happen, with python)
 * Admin console for regulating db (most likely to happen, with wpf c#)
   * Ability to verify products easily

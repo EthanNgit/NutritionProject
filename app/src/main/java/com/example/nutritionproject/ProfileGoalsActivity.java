@@ -1,12 +1,17 @@
 package com.example.nutritionproject;
 
+import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -17,12 +22,16 @@ public class ProfileGoalsActivity extends AppCompatActivity implements Navigatio
 
     private ImageView backBtn;
 
+    private Button tdeeButton;
+    private TextView calorieLabel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_goals);
 
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
+        TdeeActivity.onTDEEUserGoalUpdated.addListener(this, "updateGoals");
 
         backBtn = findViewById(R.id.backButton);
 
@@ -35,6 +44,19 @@ public class ProfileGoalsActivity extends AppCompatActivity implements Navigatio
         bottomNavView.setOnItemSelectedListener(this);
 
         backBtn.setOnClickListener(this);
+
+        tdeeButton = findViewById(R.id.takeCalorieEstimateButton);
+        calorieLabel = findViewById(R.id.calorieResultLabelText);
+
+        tdeeButton.setOnClickListener(this);
+
+        updateGoals();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        TdeeActivity.onTDEEUserGoalUpdated.removeListener(this, "updateCalories");
     }
 
     @Override
@@ -43,6 +65,8 @@ public class ProfileGoalsActivity extends AppCompatActivity implements Navigatio
 
         if (id == backBtn.getId()) {
             finish();
+        } else if (id == tdeeButton.getId()) {
+            startActivity(new Intent(ProfileGoalsActivity.this, TdeeActivity.class));
         }
     }
 
@@ -53,6 +77,11 @@ public class ProfileGoalsActivity extends AppCompatActivity implements Navigatio
         CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
 
         return false;
+    }
+
+    public void updateGoals() {
+        //set graph etc
+        calorieLabel.setText(String.valueOf(CurrentProfile.goals.calories) + " Calories");
     }
 
 }

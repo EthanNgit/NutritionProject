@@ -11,51 +11,46 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
+import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.example.nutritionproject.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyViewHolder> {
+public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyViewHolder> {
     Context context;
-    ArrayList<FoodProfile> profileList;
+    ArrayList<MealProfile> profileList;
 
 
-    public FoodListAdapter(Context context, ArrayList<FoodProfile> profileList) {
+    public MealListAdapter(Context context, ArrayList<MealProfile> profileList) {
         this.context = context;
         this.profileList = profileList;
     }
 
     @NonNull
     @Override
-    public FoodListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MealListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.food_list_view, parent, false);
-        return new FoodListAdapter.MyViewHolder(view);
+        return new MealListAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodListAdapter.MyViewHolder holder, int position) {
-        FoodProfile curProfile = profileList.get(position);
+    public void onBindViewHolder(@NonNull MealListAdapter.MyViewHolder holder, int position) {
+        MealProfile curProfile = profileList.get(position);
 
-        CustomUIMethods.setProfileButton(context, holder.imageIcon, CustomUIMethods.getRandomLightColorHex(), holder.imageIconText, curProfile.name);
-        holder.itemName.setText(curProfile.name);
+        CustomUIMethods.setProfileButton(context, holder.imageIcon, CustomUIMethods.getRandomLightColorHex(), holder.imageIconText, curProfile.mealProfile.name);
+        holder.itemName.setText(curProfile.mealProfile.name);
         Gson gson = new Gson();
         // is common / brand | xxx cal | xxx protein
-        String detailString = curProfile.isCommon ? "Common" : curProfile.brandName + " | "
-                + (int) curProfile.nutrition.calories + " Cal | "
-                + curProfile.nutrition.nutrients.getOrDefault(Nutrient.Protein, 0.0).intValue() + " P";
+        String detailString = curProfile.mealProfile.nutrition.calories + " Cal | "
+                + (curProfile.mealProfile.nutrition.nutrients.getOrDefault(Nutrient.Protein, 0.0)).intValue()  + " Pro | "
+                + curProfile.mealProfile.dateAdded + " Time";
         holder.itemDetails.setText(detailString);
 
-        if (curProfile.isVerified) {
-            holder.itemVerified.setVisibility(View.VISIBLE);
-        } else {
-            holder.itemVerified.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -69,7 +64,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
         TextView imageIconText;
         TextView itemName;
         TextView itemDetails;
-        ImageView itemVerified;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,7 +72,6 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
             imageIconText = itemView.findViewById(R.id.listItemIconText);
             itemName = itemView.findViewById(R.id.listItemName);
             itemDetails = itemView.findViewById(R.id.listItemDetails);
-            itemVerified = itemView.findViewById(R.id.listItemVerified);
         }
     }
 }

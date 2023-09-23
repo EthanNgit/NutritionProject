@@ -6,18 +6,53 @@
     <string name="logout_text">Log out</string>
     <string name="email_text">Email</string>
     <string name="password_text">Password</string>
+    <string name="calories_text">Calories</string>
+    <string name="protein_text">Protein</string>
+    <string name="carbs_text">Carbs</string>
+    <string name="fats_text">Fats</string>
+    <string name="dashboard_text">Dashboard</string>
+    <string name="search_text">Search</string>
+    <string name="stats_text">Statistics</string>
+    <string name="common_text">Common</string>
+    <string name="branded_text">Branded</string>
+    <string name="back_text">Back</string>
+    <string name="next_text">Next</string>
+    <string name="scan_text">Scan</string>
 
     // Filler
     <string name="filler_email">email@email.com</string>
     <string name="filler_email_logged_in_as">You are logged in as email@email.com</string>
     <string name="filler_error">Invalid entry</string>
+    <string name="filler_error_email">Invalid email</string>
+    <string name="filler_error_password">Invalid password</string>
+    <string name="filler_error_name">Invalid name</string>
+    <string name="filler_error_upc">Invalid upc id</string>
+    <string name="filler_error_code">Invalid code</string>
+    <string name="filler_error_brand">Invalid brand name</string>
+    <string name="filler_error_serving">Invalid serving size</string>
+    <string name="filler_error_calories">Invalid calorie amount</string>
+    <string name="filler_error_protein">Invalid protein amount</string>
+    <string name="filler_error_carbs">Invalid carb amount</string>
+    <string name="filler_error_fat">Invalid fat amount</string>
+    <string name="filler_number">- - - -</string>
     <string name="filler_calories">- - - - Calories</string>
+    <string name="filler_of_kcal">of - - - - kcal</string>
+    <string name="filler_kcal">
+        <font size="30">---- </font><font size="16"> kcal</font>
+    </string>
+    <string name="filler_protein">- - - - Protein</string>
+    <string name="filler_carbs">- - - - Carbs</string>
+    <string name="filler_fats">- - - - Fats</string>
     <string name="filler_version">Alpha 0.0</string>
     <string name="filler_food_name">Item name</string>
     <string name="filler_food_info">Brand | Cal | Pro</string>
+    <string name="filler_food_info_time">Cal | Pro | Time</string>
+    <string name="filler_time_day">00:00</string>
+    <string name="filler_profile_text">A</string>
+    <string name="filler_upc_found_text">UPC id: 000000000000</string>
 
     // Intro Activity
-    <string name="intro_call_to_action">\tTrack Macros. \n\n Large Database.</string>
+    <string name="intro_call_to_action">\tTrack Macros and use our \n\n  nutritional Database.</string>
     <string name="signup_button_text">Sign up free</string>
 
     // Login Activity
@@ -25,6 +60,7 @@
     <string name="reset_password_text">Reset password</string>
     <string name="register_question">Don\'t have an account?</string>
     <string name="signup_text">Sign up</string>
+    <string name="account_does_not_exist_text">Account does not exist</string>
 
     // Login Reset Activity
     <string name="otp_code_text">Otp code</string>
@@ -50,10 +86,38 @@
 
     // Search Activity
     <string name="search_bar_text">Search database</string>
+
     <string name="not_finding_item_text">Not finding the item?</string>
     <string name="not_finding_item_description_text">Add the item into the database.</string>
     <string name="add_item_text">Add item</string>
+    <string name="recent_recipes_header">Recent recipes</string>
 
     // TDEE activity, dashboards, bottom navbar
+
+    //Profile - Setting - Goal
+
+    //Home Page Tdee First Time Card
+    <string name="first_time_set_tdee_card_title">Daily caloric intake</string>
+    <string name="first_time_set_tdee_card_description">Looks like you have not \n set a calorie limit yet.</string>
+    <string name="first_time_set_tdee_card_set_goal">Set goal</string>
+
+    //Home Page Meals List
+    <string name="meals_list_title">Recent meals</string>
+    <string name="meals_list_add_meal">Add meal</string>
+    <string name="empty_meal_planner">You have had no meals</string>
+    <string name="add_to_meal_planner">Add a meal to your planner</string>
+
+    //Add item page
+    <string name="upcid_header">Barcode id (UPC-A)</string>
+    <string name="upca_fill">UPC-A</string>
+    <string name="tags_header">Tags</string>
+    <string name="item_type_fill">Item type</string>
+    <string name="brand_header">Brand name</string>
+    <string name="serving_header">Serving size (Amt/Size)</string>
+    <string name="amt_fill">Amt</string>
+    <string name="size_fill">Size</string>
+
+    //Search scan
+    <string name="barcode_scan_success_header">Barcode found</string>
 
 </resources>

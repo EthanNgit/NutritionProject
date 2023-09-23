@@ -14,21 +14,16 @@ import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.example.nutritionproject.Custom.java.Utility.Event;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
-import com.example.nutritionproject.Custom.java.UserModel.UserGoals;
+import com.example.nutritionproject.Custom.java.UserModel.UserMacros;
 import com.example.nutritionproject.Custom.java.UserModel.UserProfile;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.Custom.java.Utility.EventContextStrings;
 import com.example.nutritionproject.Model.FoodModel;
 import com.example.nutritionproject.Model.UserModel;
-import com.example.nutritionproject.R;
 import com.example.nutritionproject.Retrofit.ApiClient;
 import com.example.nutritionproject.Retrofit.ApiInterface;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
-
-import org.joda.time.LocalDate;
 
 import java.lang.reflect.Type;
 import java.security.SecureRandom;
@@ -375,6 +370,7 @@ public class CustomDBMethods {
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     UserModel userModel = response.body();
+                    setUserProfile(userModel);
 
                     if (userModel.isSuccess()) {
                         if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "User exists");
@@ -503,9 +499,11 @@ public class CustomDBMethods {
         }
     }
 
-    private static void setUserProfile(UserModel user) {
+    public static void setUserProfile(UserModel user) {
         CurrentProfile = new UserProfile(user.getId(), user.getEmail(),
-                new UserGoals(user.getCalorie(), user.getProtein(), user.getCarb(), user.getFat()), null);
+                new UserMacros(user.getCalorie(), user.getProtein(), user.getCarb(), user.getFat()),
+                new UserMacros(user.getCurrentCalories(), user.getCurrentProtein(), user.getCurrentCarbs(), user.getCurrentFats()),
+                null);
     }
 
     public static boolean isEmailValid(CharSequence email) {

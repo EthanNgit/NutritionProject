@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/_62sdp"
         android:backgroundTint="@color/darkTheme_Background_two"
         app:cardCornerRadius="0dp">
 
@@ -16,22 +16,21 @@
             android:id="@+id/secondaryHeader"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Scan"
+            android:text="@string/scan_text"
             android:textColor="@color/darkTheme_WhiteFull"
             android:fontFamily="@font/circular"
-            android:textSize="15dp"
-            android:paddingTop="25dp"
+            android:textSize="@dimen/_15ssp"
+            android:paddingTop="@dimen/_23sdp"
             android:gravity="center"/>
 
         <ImageView
             android:id="@+id/backButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginStart="35dp"
-            android:src="@drawable/ic_backarrow"
-            />
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_27sdp"
+            android:layout_marginTop="@dimen/_27sdp"
+            android:padding="@dimen/_7sdp"
+            android:src="@drawable/ic_backarrow" />
 
     </androidx.cardview.widget.CardView>
 
@@ -39,7 +38,7 @@
         android:id="@+id/previewView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="80dp"/>
+        android:layout_marginTop="@dimen/_62sdp"/>
 
     <RelativeLayout
         android:id="@+id/barcodeFoundLayout"
@@ -52,37 +51,35 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-5dp"
             android:background="@color/darkTheme_Background"
             android:backgroundTint="@color/darkTheme_Background"
-            app:cardCornerRadius="5dp">
+            app:cardCornerRadius="@dimen/_5sdp">
 
             <ImageView
                 android:id="@+id/backInfoButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="15dp"
-                android:padding="15dp"
-                android:src="@drawable/ic_backarrow"/>
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_27sdp"
+                android:layout_marginTop="@dimen/_27sdp"
+                android:padding="@dimen/_7sdp"
+                android:src="@drawable/ic_backarrow" />
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:text="Barcode found"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/barcode_scan_success_header"
                 android:textColor="@color/darkTheme_WhiteFull"
-                android:textSize="18dp"
+                android:textSize="@dimen/_14ssp"
                 android:textAlignment="center"/>
 
             <TextView
                 android:id="@+id/upcidTextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="10dp"
-                android:text="UPC id: 000000000000"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:text="@string/filler_upc_found_text"
                 android:textColor="@color/darkTheme_WhiteFull"
                 android:textSize="14dp"
                 android:textAlignment="center"/>
@@ -94,19 +91,19 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/searchBtn"
-                    android:layout_width="150dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="90dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_38sdp"
+                    android:layout_marginTop="@dimen/_70sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:backgroundTint="@color/darkTheme_Background_two"
                     app:cardCornerRadius="100dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Search"
+                        android:text="@string/search_text"
                         android:textAlignment="center"
                         android:gravity="center"
                         android:textColor="@color/darkTheme_WhiteFull"/>
@@ -115,19 +112,19 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/addBtn"
-                    android:layout_width="150dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="90dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginEnd="50dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_38sdp"
+                    android:layout_marginTop="@dimen/_70sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
                     android:backgroundTint="@color/darkTheme_Background_two"
                     app:cardCornerRadius="100dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Add item"
+                        android:text="@string/add_item_text"
                         android:textAlignment="center"
                         android:gravity="center"
                         android:textColor="@color/darkTheme_WhiteFull"/>

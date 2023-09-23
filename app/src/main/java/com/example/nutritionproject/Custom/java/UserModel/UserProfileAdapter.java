@@ -14,12 +14,12 @@ public class UserProfileAdapter extends TypeAdapter<UserProfile> {
 
         writer.name("id").value(value.id);
         writer.name("email").value(value.email);
-        UserGoals goals = value.goals;
+        UserMacros goals = value.goals;
         if (goals != null) {
-            writer.name("calorie").value(goals.calorieGoal);
-            writer.name("protein").value(goals.proteinGoal);
-            writer.name("carb").value(goals.carbGoal);
-            writer.name("fat").value(goals.fatGoal);
+            writer.name("calorie").value(goals.calories);
+            writer.name("protein").value(goals.proteins);
+            writer.name("carb").value(goals.carbs);
+            writer.name("fat").value(goals.fats);
         }
 
         writer.endObject();

@@ -46,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_profile);
 
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
+        TdeeActivity.onTDEEUserGoalUpdated.addListener(this, "updateCalories");
 
         bottomNavView = findViewById(R.id.bottomNavigationView);
 
@@ -74,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         logOutButton.setOnClickListener(this);
 
         emailTextLabel.setText(CurrentProfile.email);
-        goalsTextLabel.setText(CurrentProfile.goals.calorieGoal + " Calories");
+        updateCalories();
 
         PackageManager manager = getPackageManager();
         PackageInfo info = null;
@@ -92,6 +93,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         logOutTextLabel.setText("You are currently logged in as " + CurrentProfile.email);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        TdeeActivity.onTDEEUserGoalUpdated.removeListener(this, "updateCalories");
     }
 
     @Override
@@ -123,5 +130,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         return false;
     }
 
+    public void updateCalories() {
+        goalsTextLabel.setText(CurrentProfile.goals.calories + " Calories");
+    }
 
 }

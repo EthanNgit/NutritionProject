@@ -18,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,30 +26,30 @@
             <!--Header-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="@dimen/_100sdp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingBottom="25dp"
-                    android:paddingTop="0dp"
-                    android:paddingStart="25dp"
-                    android:paddingEnd="0dp"
+                    android:paddingBottom="@dimen/_19sdp"
+                    android:paddingStart="@dimen/_19sdp"
                     android:gravity="bottom"
                     android:fontFamily="@font/circular"
-                    android:text="Dashboard"
+                    android:text="@string/dashboard_text"
                     android:textColor="@color/darkTheme_WhiteFull"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/_18ssp"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/profileButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="25dp"
-                    app:cardCornerRadius="100dp"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_19sdp"
+                    android:layout_marginTop="@dimen/_19sdp"
+                    app:cardCornerRadius="@dimen/_100sdp"
                     android:backgroundTint="@color/darkTheme_Brand"
                     android:layout_gravity="center_vertical">
 
@@ -58,16 +57,17 @@
                         android:id="@+id/profileButtonText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="A"
-                        android:textSize="25dp"
+                        android:text="@string/filler_profile_text"
+                        android:textSize="@dimen/_20ssp"
                         android:textColor="@color/darkTheme_Background"
                         android:fontFamily="@font/circular_med"
                         android:gravity="center"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         />
 
 
                 </androidx.cardview.widget.CardView>
-
 
 
             </LinearLayout>
@@ -77,81 +77,255 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <!--First time calorie notification card-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/firstTimeCalSetCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_95sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    app:cardMaxElevation="@dimen/_12sdp"
+                    app:cardPreventCornerOverlap="true"
+                    android:layout_margin="@dimen/_15sdp"
+                    app:cardBackgroundColor="@color/darkTheme_Background_two"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="@dimen/_9sdp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="@string/first_time_set_tdee_card_title"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textSize="@dimen/_14ssp"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="@dimen/_44sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:text="@string/first_time_set_tdee_card_description"
+                        android:textSize="@dimen/_11ssp"
+                        android:textColor="@color/darkTheme_WhiteHigh"
+                        android:textAlignment="viewStart"
+                        />
+
+                    <Button
+                        android:id="@+id/takeCalorieEstimateButton"
+                        android:layout_width="@dimen/_92sdp"
+                        android:layout_height="@dimen/_32sdp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:background="@drawable/bg_green_100dp"
+                        android:text="@string/first_time_set_tdee_card_set_goal"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/circular"
+                        android:textAllCaps="false" />
+
+
+                </androidx.cardview.widget.CardView>
+
+                <!--Calorie notification card-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/calProgressChartCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_155sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    app:cardMaxElevation="@dimen/_12sdp"
+                    app:cardPreventCornerOverlap="true"
+                    android:layout_margin="@dimen/_15sdp"
+                    app:cardBackgroundColor="@color/darkTheme_Background_two"
+                    android:visibility="gone">
+
+                    <me.bastanfar.semicirclearcprogressbar.SemiCircleArcProgressBar
+                        android:id="@+id/calProgressBar"
+                        android:layout_width="@dimen/_190sdp"
+                        android:layout_height="@dimen/_95sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/_25sdp"
+                        app:percent="0"
+                        app:progressBarColor="@color/darkTheme_Brand"
+                        app:progressBarWidth="60"
+                        app:progressPlaceHolderColor="@color/darkTheme_Background"
+                        app:progressPlaceHolderWidth="70"/>
+
+                    <TextView
+                        android:id="@+id/currentCalorieLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/_24sdp"
+                        android:text="@string/filler_kcal"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+                    <TextView
+                        android:id="@+id/currentGoalCalorieLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/_24sdp"
+                        android:text="@string/filler_of_kcal"
+                        android:textColor="@color/darkTheme_WhiteMed"
+                        android:textSize="@dimen/_12ssp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <!--Meals-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/mealHistoryCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_10sdp"
+                    app:cardMaxElevation="@dimen/_12sdp"
+                    app:cardPreventCornerOverlap="true"
+                    android:layout_margin="@dimen/_15sdp"
+                    app:cardBackgroundColor="@color/darkTheme_Background_two"
+                    android:visibility="visible">
 
-                    <!--First time Calorie notification card-->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/firstTimeCalSetCard"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="10dp"
-                        app:cardMaxElevation="12dp"
-                        app:cardPreventCornerOverlap="true"
-                        android:layout_margin="20dp"
-                        app:cardBackgroundColor="@color/darkTheme_Background_two"
-                        android:visibility="gone">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingTop="10dp"
-                            android:text="Daily Caloric Intake"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_40sdp"
+                            android:paddingStart="@dimen/_15sdp"
+                            android:paddingTop="@dimen/_15sdp"
+                            android:text="@string/meals_list_title"
                             android:textColor="@color/darkTheme_WhiteFull"
-                            android:textSize="18dp"
-                            android:fontFamily="@font/circular_med"
-                            android:textAlignment="center"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingTop="55dp"
-                            android:paddingStart="20dp"
-                            android:text="Looks like you have not \n set a calorie limit yet."
-                            android:textColor="@color/darkTheme_WhiteHigh"
-                            android:textAlignment="viewStart"
-                            />
+                            android:layout_weight="1"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <Button
-                            android:id="@+id/takeCalorieEstimateButton"
-                            android:layout_width="120dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="55dp"
-                            android:layout_marginStart="225dp"
+                            android:id="@+id/addMealButton"
+                            android:layout_width="@dimen/_78sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
                             android:background="@drawable/bg_green_100dp"
-                            android:text="Set goal"
-                            android:textSize="15dp"
+                            android:text="@string/meals_list_add_meal"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/_8ssp"
                             android:fontFamily="@font/circular"
-                            android:textAllCaps="false" />
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
+                    </LinearLayout>
 
-                    </androidx.cardview.widget.CardView>
-
-                    <!--First time Calorie notification card-->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/calProgressChartCard"
+                    <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="10dp"
-                        app:cardMaxElevation="12dp"
-                        app:cardPreventCornerOverlap="true"
-                        android:layout_margin="20dp"
-                        app:cardBackgroundColor="@color/darkTheme_Background_two"
-                        android:visibility="visible">
+                        android:layout_height="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_45sdp"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:background="@color/darkTheme_Background"/>
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_46sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:overScrollMode="always"
+                        android:scrollbars="vertical"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <!--If you have history-->
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/mealPlannerRecyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:listitem="@layout/meal_list_view"
+                                android:visibility="gone">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <!--Empty meal history--> <!--X-->
+                            <LinearLayout
+                                android:id="@+id/emptyMealPlannerLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_24sdp"
+                                    android:text="@string/empty_meal_planner"
+                                    android:textColor="@color/darkTheme_WhiteFull"
+                                    android:textSize="@dimen/_15ssp"
+                                    android:maxLines="1"
+                                    android:ellipsize="end"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_11sdp"
+                                    android:text="@string/add_to_meal_planner"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/darkTheme_WhiteMed"
+                                    android:textSize="@dimen/_11ssp"
+                                    android:maxLines="1"
+                                    android:ellipsize="end"/>
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/addBtn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/_38sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:layout_marginBottom="@dimen/_15sdp"
+                                    app:cardCornerRadius="@dimen/_100sdp"
+                                    android:layout_gravity="center"
+
+                                    android:backgroundTint="@color/darkTheme_Background_two">
+
+                                    <Button
+                                        android:id="@+id/emptyAddMealButton"
+                                        android:layout_width="@dimen/_100sdp"
+                                        android:layout_height="@dimen/_32sdp"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/bg_green_100dp"
+                                        android:text="@string/meals_list_add_meal"
+                                        android:textAllCaps="false"
+                                        android:textSize="@dimen/_11ssp"
+                                        android:fontFamily="@font/circular"
+                                        android:maxLines="1"
+                                        android:ellipsize="end"/>
 
 
+                                </androidx.cardview.widget.CardView>
 
 
-                    </androidx.cardview.widget.CardView>
+                            </LinearLayout>
 
-                </LinearLayout>
+                        </LinearLayout>
+
+                    </ScrollView>
 
 
-
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 
@@ -159,7 +333,6 @@
 
 
     </ScrollView>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

@@ -54,7 +54,8 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
 
     private TextView itemTypeCommonTwoWayButton;
     private TextView itemTypeBrandedTwoWayButton;
-    private ImageView itemTypeWayVisual;
+    private ImageView itemTypeWayVisualOne;
+    private ImageView itemTypeWayVisualTwo;
 
     private LinearLayout itemBrandLayout;
     private EditText itemBrandTextField;
@@ -119,7 +120,8 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
 
         itemTypeCommonTwoWayButton = findViewById(R.id.commonButton);
         itemTypeBrandedTwoWayButton = findViewById(R.id.brandedButton);
-        itemTypeWayVisual = findViewById(R.id.itemTypeTwoWayVisual);
+        itemTypeWayVisualOne = findViewById(R.id.itemTypeTwoWayVisualOne);
+        itemTypeWayVisualTwo = findViewById(R.id.itemTypeTwoWayVisualTwo);
 
         itemBrandLayout = findViewById(R.id.brandNameLayout);
         itemBrandTextField = findViewById(R.id.brandTextField);
@@ -196,10 +198,10 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         }
 
         if (id == itemTypeCommonTwoWayButton.getId()) {
-            CustomUIMethods.setTwoWayButton(this, itemTypeCommonTwoWayButton, itemTypeBrandedTwoWayButton, itemTypeWayVisual, 370, true,  R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, itemTypeCommonTwoWayButton, itemTypeBrandedTwoWayButton, itemTypeWayVisualOne, itemTypeWayVisualTwo, true,  R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             setBrandField(true);
         } else if (id == itemTypeBrandedTwoWayButton.getId()) {
-            CustomUIMethods.setTwoWayButton(this, itemTypeCommonTwoWayButton, itemTypeBrandedTwoWayButton, itemTypeWayVisual, 370, false,  R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, itemTypeCommonTwoWayButton, itemTypeBrandedTwoWayButton, itemTypeWayVisualOne, itemTypeWayVisualTwo, false,  R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             setBrandField(false);
         }
 
@@ -300,7 +302,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         String carbs = itemCarbTextField.getText().toString();
         String fat = itemFatTextField.getText().toString();
 
-        if (itemName.isEmpty() || itemUpc.isEmpty() || servingAmt.isEmpty() || servingSize.isEmpty()) {
+        if (itemName.isEmpty() || servingAmt.isEmpty() || servingSize.isEmpty()) {
             callback.onFailure(new EventContext.Builder().withError("Empty fields").build());
             return;
         }
@@ -309,6 +311,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
             return;
         }
 
+        itemUpc = !itemUpc.isEmpty() ? itemUpc : "";
         calories = !calories.isEmpty() ? calories : "0";
         protein = !protein.isEmpty() ? protein : "0";
         carbs = !carbs.isEmpty() ? carbs : "0";

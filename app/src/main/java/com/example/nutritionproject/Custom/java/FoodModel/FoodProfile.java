@@ -76,6 +76,6 @@ public class FoodProfile {
             tagString = !tagsString.isEmpty()? (tagsPrefix + tagsString + tagsSuffix) : "";
         }
 
-        return String.format("FoodProfile : { %s%s%s}", normalString, tagString, (nutrition != null)? (", " + nutrition.toString()) : "");
+        return String.format("FoodProfile : { %s%s%s }", normalString, tagString, (nutrition != null)? (", " + nutrition.toString()) : "");
     }
 }

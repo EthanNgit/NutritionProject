@@ -6,22 +6,22 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class UserGoalsAdapter extends TypeAdapter<UserGoals> {
+public class UserGoalsAdapter extends TypeAdapter<UserMacros> {
 
     @Override
-    public void write(JsonWriter writer, UserGoals value) throws IOException {
+    public void write(JsonWriter writer, UserMacros value) throws IOException {
         writer.beginObject();
 
-        writer.name("calorie").value(value.calorieGoal);
-        writer.name("protein").value(value.proteinGoal);
-        writer.name("carb").value(value.carbGoal);
-        writer.name("fat").value(value.fatGoal);
+        writer.name("calorie").value(value.calories);
+        writer.name("protein").value(value.proteins);
+        writer.name("carb").value(value.carbs);
+        writer.name("fat").value(value.fats);
 
         writer.endObject();
     }
 
     @Override
-    public UserGoals read(JsonReader in) throws IOException {
+    public UserMacros read(JsonReader in) throws IOException {
         return null;
     }
 

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/darkTheme_Background"
-        app:cardCornerRadius="0dp"
+        app:cardCornerRadius="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +22,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_10sdp"
-            app:cardCornerRadius="100dp"
+            app:cardCornerRadius="@dimen/_100sdp"
             android:backgroundTint="@color/darkTheme_Brand"
             android:clickable="false">
 
@@ -29,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="A"
-                android:textSize="@dimen/_20ssp"
+                android:textSize="@dimen/_18ssp"
                 android:textColor="@color/darkTheme_Background"
                 android:gravity="center"/>
 
@@ -39,42 +41,32 @@
             android:id="@+id/listItemName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="false"
             android:paddingStart="@dimen/_62sdp"
             android:paddingTop="@dimen/_13sdp"
             android:text="@string/filler_food_name"
             android:textColor="@color/darkTheme_WhiteFull"
-            android:textSize="@dimen/_16ssp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:scrollHorizontally="true"/>
+            android:textSize="@dimen/_16sdp"/>
 
         <TextView
             android:id="@+id/listItemDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="false"
             android:paddingStart="@dimen/_62sdp"
-            android:paddingTop="@dimen/_33sdp"
-            android:text="@string/filler_food_info"
-            android:textColor="@color/darkTheme_WhiteFull"
-            android:textSize="@dimen/_12ssp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:scrollHorizontally="true"/>
+            android:paddingTop="@dimen/_32sdp"
+            android:text="@string/filler_food_info_time"
+            android:textColor="@color/darkTheme_WhiteFull"/>
 
-        <ImageView
-            android:id="@+id/listItemVerified"
-            android:layout_width="@dimen/_17sdp"
-            android:layout_height="@dimen/_17sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:layout_gravity="right"
-            android:background="@drawable/ic_verified"
-            android:backgroundTint="@color/darkTheme_Brand"
-            android:visibility="visible"/>
-
-
+        <Button
+            android:id="@+id/moreInfoButton"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:background="@drawable/bg_green_100dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="More info"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_9ssp"
+            android:fontFamily="@font/circular" />
 
     </androidx.cardview.widget.CardView>
 

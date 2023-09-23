@@ -34,6 +34,22 @@ public class UserModel {
     private int fat;
 
     @Expose
+    @SerializedName("currentcalories")
+    private int currentCalories;
+
+    @Expose
+    @SerializedName("currentprotein")
+    private int currentProtein;
+
+    @Expose
+    @SerializedName("currentcarbs")
+    private int currentCarbs;
+
+    @Expose
+    @SerializedName("currentfats")
+    private int currentFats;
+
+    @Expose
     @SerializedName("date")
     private String date;
 
@@ -75,6 +91,38 @@ public class UserModel {
 
     public void setFat(int fat) {
         this.fat = fat;
+    }
+
+    public int getCurrentCalories() {
+        return currentCalories;
+    }
+
+    public void setCurrentCalories(int currentCalories) {
+        this.currentCalories = currentCalories;
+    }
+
+    public int getCurrentProtein() {
+        return currentProtein;
+    }
+
+    public void setCurrentProtein(int currentProtein) {
+        this.currentProtein = currentProtein;
+    }
+
+    public int getCurrentCarbs() {
+        return currentCarbs;
+    }
+
+    public void setCurrentCarbs(int currentCarbs) {
+        this.currentCarbs = currentCarbs;
+    }
+
+    public int getCurrentFats() {
+        return currentFats;
+    }
+
+    public void setCurrentFats(int currentFats) {
+        this.currentFats = currentFats;
     }
 
     public int getId() { return id; }

@@ -27,12 +27,13 @@ import com.example.nutritionproject.DashboardStatsActivity;
 import com.example.nutritionproject.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Random;
 
 public class CustomUIMethods {
 
-    public static boolean keyboardShown;
+    private static boolean keyboardShown;
 
     /**
      *
@@ -113,31 +114,24 @@ public class CustomUIMethods {
      * @param context Context in which this function will
      * @param optionOne First button option
      * @param optionTwo Second button option
-     * @param selectorImage Underlay visual image (placed under current selected button)
-     * @param buttonWidth Length of the the entire two way button
+     * @param selectorImageOne Underlay visual image (placed under first selected button)
+     * @param selectorImageTwo Underlay visual image (placed under second selected button)
      * @param firstOption Is this the first option?
      * @param selectedTextColor Text color of the selected button
      * @param deselectedTextColor Text color of the unselected button
      */
-    public static void setTwoWayButton(Context context, TextView optionOne, TextView optionTwo, ImageView selectorImage, int buttonWidth, boolean firstOption, int selectedTextColor, int deselectedTextColor) {
-        ViewGroup.MarginLayoutParams  selectorImageMargins = (ViewGroup.MarginLayoutParams) selectorImage.getLayoutParams();
-
-        float dpRatio = context.getResources().getDisplayMetrics().density;
-
+    public static void setTwoWayButton(Context context, TextView optionOne, TextView optionTwo, ImageView selectorImageOne, ImageView selectorImageTwo, boolean firstOption, int selectedTextColor, int deselectedTextColor) {
         if (!firstOption) {
             //Toggle to second option
-            int pixelForDp = (int) ((buttonWidth / 2) * dpRatio);
-            selectorImageMargins.setMarginStart(pixelForDp);
-
-            selectorImage.setLayoutParams(selectorImageMargins);
+            selectorImageOne.setVisibility(View.GONE);
+            selectorImageTwo.setVisibility(View.VISIBLE);
 
             optionOne.setTextColor(ContextCompat.getColor(context, deselectedTextColor));
             optionTwo.setTextColor(ContextCompat.getColor(context, selectedTextColor));
         } else {
             //Toggle to first option
-            selectorImageMargins.setMarginStart(0);
-
-            selectorImage.setLayoutParams(selectorImageMargins);
+            selectorImageOne.setVisibility(View.VISIBLE);
+            selectorImageTwo.setVisibility(View.GONE);
 
             optionOne.setTextColor(ContextCompat.getColor(context, selectedTextColor));
             optionTwo.setTextColor(ContextCompat.getColor(context, deselectedTextColor));
@@ -214,7 +208,7 @@ public class CustomUIMethods {
      * @param profileButton Button that is also the background Image
      * @param profileButtonText Text that displays the Initial of the users email
      */
-    public static void setProfileButton(Context context, CardView profileButton, TextView profileButtonText, String name) {
+    public static void setProfileButton(Context context, CardView profileButton, float[] BackgroundColorHexList, TextView profileButtonText, String name) {
         if (CurrentProfile != null) {
             profileButton.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(CurrentProfile.userColorHex[0], CurrentProfile.userColorHex[1], CurrentProfile.userColorHex[2])));
             profileButtonText.setText(String.valueOf(name.charAt(0)).toUpperCase());

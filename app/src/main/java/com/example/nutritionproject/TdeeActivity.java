@@ -5,6 +5,7 @@ import static com.example.nutritionproject.Custom.java.Custom.CustomConversionMe
 import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -26,6 +27,8 @@ import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Utility.Event;
 import com.example.nutritionproject.Custom.java.Enums.WorkoutGoals;
 import com.example.nutritionproject.Custom.java.Enums.WorkoutIntensity;
+import com.example.nutritionproject.Custom.java.Utility.EventCallback;
+import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -40,6 +43,8 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
     private Event onTDEEInformationChanged = new Event();
 
+    public static Event onTDEEUserGoalUpdated = new Event();
+
     private TextView headerText;
     private ImageView backBtn;
 
@@ -49,7 +54,8 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
     //region Measurement two way button
     private TextView metricMeasurementTwoWayButton;
     private TextView imperialMeasurementTwoWayButton;
-    private ImageView measurementTwoWayVisual;
+    private ImageView measurementTwoWayVisualOne;
+    private ImageView measurementTwoWayVisualTwo;
 
     private boolean isMetric = true;
     //endregion
@@ -81,7 +87,8 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
     //region Gender two way button
     private TextView maleGenderTwoWayButton;
     private TextView femaleGenderTwoWayButton;
-    private ImageView genderTwoWayVisual;
+    private ImageView genderTwoWayVisualOne;
+    private ImageView genderTwoWayVisualTwo;
 
     private boolean isMale = true;
     //endregion
@@ -180,7 +187,8 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
         //region Finding TDEE components
         //region Finding measurement components
-        measurementTwoWayVisual = findViewById(R.id.measurementTwoWayVisual);
+        measurementTwoWayVisualOne = findViewById(R.id.measurementTwoWayVisualOne);
+        measurementTwoWayVisualTwo = findViewById(R.id.measurementTwoWayVisualTwo);
         metricMeasurementTwoWayButton = findViewById(R.id.metricMeasurementButton);
         imperialMeasurementTwoWayButton = findViewById(R.id.imperialMeasurementButton);
         //endregion
@@ -210,7 +218,8 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         //endregion
 
         //region Finding gender components
-        genderTwoWayVisual = findViewById(R.id.genderTwoWayVisual);
+        genderTwoWayVisualOne = findViewById(R.id.genderTwoWayVisualOne);
+        genderTwoWayVisualTwo = findViewById(R.id.genderTwoWayVisualTwo);
         maleGenderTwoWayButton = findViewById(R.id.maleGenderButton);
         femaleGenderTwoWayButton = findViewById(R.id.femaleGenderButton);
         //endregion
@@ -351,11 +360,11 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         //region TDEE OnClick
         //region Measurement Two way button OnClick
         if (id == metricMeasurementTwoWayButton.getId()) {
-            CustomUIMethods.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisualOne, measurementTwoWayVisualTwo, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMetric = true;
             setMetricFields();
         } else if (id == imperialMeasurementTwoWayButton.getId()) {
-            CustomUIMethods.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, metricMeasurementTwoWayButton, imperialMeasurementTwoWayButton, measurementTwoWayVisualOne, measurementTwoWayVisualTwo, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMetric = false;
             setImperialFields();
         }
@@ -363,11 +372,11 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
         //region Gender Two way button OnClick
         if (id == maleGenderTwoWayButton.getId()) {
-            CustomUIMethods.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisualOne, genderTwoWayVisualTwo, true, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMale = true;
             onTDEEInformationChanged.invoke();
         } else if (id == femaleGenderTwoWayButton.getId()) {
-            CustomUIMethods.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisual, 370, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+            CustomUIMethods.setTwoWayButton(this, maleGenderTwoWayButton, femaleGenderTwoWayButton, genderTwoWayVisualOne, genderTwoWayVisualTwo, false, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             isMale = false;
             onTDEEInformationChanged.invoke();
         }
@@ -609,7 +618,29 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         //TODO: Give errors if fields arent filled in on click
 
         if (currentCalorieResult > 0 && !isUpdatingManually) {
-            dbManager.updateGoals(CurrentProfile.id, currentCalorieResult, 0, 0,0, null);
+            dbManager.updateGoals(CurrentProfile.id, currentCalorieResult, 0, 0, 0, new EventCallback() {
+                @Override
+                public void onSuccess(@Nullable EventContext context) {
+                    dbManager.getUser(CurrentProfile.email, new EventCallback() {
+                        @Override
+                        public void onSuccess(@Nullable EventContext context) {
+                            onTDEEUserGoalUpdated.invoke();
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(@Nullable EventContext context) {
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onFailure(@Nullable EventContext context) {
+                    //Error updating automatically
+                }
+            });
         } else if (isUpdatingManually) {
             int manualCals = 0;
 
@@ -622,9 +653,34 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             if (manualCals > 0) {
-                dbManager.updateGoals(CurrentProfile.id, manualCals, 0, 0,0, null);
+                dbManager.updateGoals(CurrentProfile.id, manualCals, 0, 0, 0, new EventCallback() {
+                    @Override
+                    public void onSuccess(@Nullable EventContext context) {
+                        dbManager.getUser(CurrentProfile.email, new EventCallback() {
+                            @Override
+                            public void onSuccess(@Nullable EventContext context) {
+                                onTDEEUserGoalUpdated.invoke();
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(@Nullable EventContext context) {
+
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void onFailure(@Nullable EventContext context) {
+                        //Error updating manually
+                    }
+                });
             }
         }
+
+
     }
 
     //endregion

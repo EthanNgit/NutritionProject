@@ -47,8 +47,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private LinearLayout emptySearchLayout;
     private RecyclerView fullSearchLayout;
-
-    private CardView settingsPanel;
     private static String passedUpcId = "";
     private static Event updateSearchEvent = new Event();
 
@@ -67,8 +65,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         updateSearchEvent.addListener(this, "updateSearchResults");
 
         bottomNavView = findViewById(R.id.bottomNavigationView);
-
-        settingsPanel = findViewById(R.id.searchFilterSettingsCard);
 
         bottomNavView.setItemIconTintList(null);
 
@@ -129,7 +125,6 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         if (searchField.getText().toString().isEmpty()) { return; }
 
-        //TODO: Update a layout with information
         Context parentContext = this;
         String searchText = searchField.getText().toString().trim().toLowerCase();
         boolean shouldUseUpc = dbManager.isOnlyDigits(searchText) ? true : false;

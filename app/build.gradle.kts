@@ -12,7 +12,7 @@ android {
         minSdk = 29
         targetSdk = 34
         versionCode = 1
-        versionName = "Alpha 0.2"
+        versionName = "Alpha 0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -72,6 +72,12 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:${camerax_version}")
     implementation("androidx.camera:camera-view:${camerax_version}")
     implementation("androidx.camera:camera-extensions:${camerax_version}")
+
+    implementation("com.github.hadibtf:SemiCircleArcProgressBar:1.1.1")
+
+    implementation("com.intuit.sdp:sdp-android:1.1.0")
+    implementation("com.intuit.ssp:ssp-android:1.1.0")
+
 
     api("com.google.guava:guava:30.1-jre")
 }

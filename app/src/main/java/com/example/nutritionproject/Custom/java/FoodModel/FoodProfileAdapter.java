@@ -2,9 +2,7 @@ package com.example.nutritionproject.Custom.java.FoodModel;
 
 import com.example.nutritionproject.Custom.java.Enums.FoodTag;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
-import com.example.nutritionproject.Custom.java.UserModel.UserGoals;
 import com.google.gson.TypeAdapter;
-import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 

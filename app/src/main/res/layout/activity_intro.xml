@@ -27,8 +27,8 @@
         android:fontFamily="@font/circular"
         android:text="@string/intro_call_to_action"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textColor="@color/darkTheme_WhiteFull"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,18 +37,20 @@
 
     <Button
         android:id="@+id/introSignUpButton"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/_220sdp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_green_100dp"
         android:fontFamily="@font/circular"
         android:text="@string/signup_button_text"
         android:textAllCaps="false"
-        android:textSize="25sp"
+        android:textSize="@dimen/_18ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/introTextLabel"
-        app:layout_constraintVertical_bias="0.4"/>
+        app:layout_constraintVertical_bias="0.4"
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
     <Button
         android:id="@+id/introLoginButton"
@@ -59,11 +61,13 @@
         android:text="@string/login_text"
         android:textAllCaps="false"
         android:textColor="@color/darkTheme_WhiteMed"
-        android:textSize="16sp"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/introSignUpButton"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.1"
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

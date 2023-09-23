@@ -12,7 +12,7 @@
         android:fontFamily="@font/circular"
         android:text="@string/signup_text"
         android:textColor="@color/darkTheme_WhiteFull"
-        android:textSize="38sp"
+        android:textSize="@dimen/_30ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -27,7 +27,7 @@
         android:text="@string/signup_call_to_action"
         android:textAlignment="center"
         android:textColor="@color/darkTheme_WhiteFull"
-        android:textSize="14sp"
+        android:textSize="@dimen/_11ssp"
         app:layout_constraintBottom_toTopOf="@+id/normalSignUpLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
 
     <LinearLayout
         android:id="@+id/normalSignUpLayout"
-        android:layout_width="340dp"
+        android:layout_width="@dimen/_265sdp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
@@ -54,22 +54,22 @@
 
         <!-- "Email" Text -->
         <TextView
-            android:layout_width="340dp"
-            android:layout_height="48dp"
-            android:paddingStart="10dp"
-            android:paddingTop="22dp"
-            android:paddingEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_10sdp"
             android:text="@string/email_text"
             android:fontFamily="@font/circular"
             android:textColor="@color/darkTheme_WhiteFull"
             android:textColorHint="@color/darkTheme_WhiteFull"
-            android:textSize="12sp" />
+            android:textSize="@dimen/_10ssp" />
 
         <!-- Email Text Field -->
         <EditText
             android:id="@+id/emailTextField"
-            android:layout_width="340dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
             android:autofillHints="emailAddress"
             android:background="@drawable/bg_gray_6dp_stroke_gray"
             android:fontFamily="@font/circular_med"
@@ -77,45 +77,44 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:inputType="textEmailAddress"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
+            android:paddingStart="@dimen/_25sdp"
+            android:paddingEnd="@dimen/_25sdp"
             android:singleLine="true"
             android:textColor="@color/darkTheme_WhiteFull"
             android:textColorHint="@color/darkTheme_WhiteMed"
-            android:textSize="12sp"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintTop_toBottomOf="@+id/emailTextLabel" />
 
         <TextView
             android:id="@+id/emailErrorText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="0dp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingStart="@dimen/_15sdp"
             android:fontFamily="@font/circular_med"
-            android:text="@string/filler_error"
+            android:text="@string/filler_error_email"
             android:textColor="@color/darkTheme_Error"
-            android:textSize="12sp"
+            android:textSize="@dimen/_10ssp"
             android:visibility="gone"/>
 
         <!-- "Password" Text -->
         <TextView
-            android:layout_width="340dp"
-            android:layout_height="48dp"
-            android:paddingStart="10dp"
-            android:paddingTop="22dp"
-            android:paddingEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_10sdp"
             android:text="@string/password_text"
             android:fontFamily="@font/circular"
             android:textColor="@color/darkTheme_WhiteFull"
-            android:textSize="12sp" />
+            android:textSize="@dimen/_10ssp" />
 
         <!-- Password Text Field -->
         <EditText
             android:id="@+id/passwordTextField"
-            android:layout_width="340dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
             android:autofillHints="password"
             android:background="@drawable/bg_gray_6dp_stroke_gray"
             android:fontFamily="@font/circular_med"
@@ -123,67 +122,65 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:inputType="textPassword"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
+            android:paddingStart="@dimen/_25sdp"
+            android:paddingEnd="@dimen/_25sdp"
             android:singleLine="true"
             android:textColor="@color/darkTheme_WhiteFull"
             android:textColorHint="@color/darkTheme_WhiteMed"
-            android:textSize="12sp"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintTop_toBottomOf="@+id/emailTextLabel" />
-
 
         <TextView
             android:id="@+id/passwordErrorText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="0dp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingStart="@dimen/_15sdp"
             android:fontFamily="@font/circular_med"
             android:text="@string/filler_error"
             android:textColor="@color/darkTheme_Error"
-            android:textSize="12sp"
+            android:textSize="@dimen/_10ssp"
             android:visibility="gone"/>
 
         <Button
             android:id="@+id/signUpButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="@dimen/_42sdp"
             android:background="@drawable/bg_green_100dp"
             android:fontFamily="@font/circular"
             android:text="@string/signup_text"
             android:textAllCaps="false"
             android:textColor="@color/darkTheme_Background"
-            android:textSize="25sp" />
+            android:textSize="@dimen/_20ssp" />
 
         <TextView
             android:id="@+id/signUpErrorText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/_40sdp"
             android:fontFamily="@font/circular_med"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@color/darkTheme_Error"
             android:text="@string/filler_error"
             android:textColor="@color/darkTheme_WhiteFull"
-            android:textSize="15sp"
+            android:textSize="@dimen/_12ssp"
             android:gravity="center"
             android:visibility="gone"/>
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             app:srcCompat="@drawable/bg_gray_6dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/optionsTwoLayout"
-        android:layout_width="340dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/_265sdp"
+        android:layout_height="@dimen/_30sdp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -200,20 +197,20 @@
             android:text="@string/login_question"
             android:textAlignment="textEnd"
             android:textColor="@color/darkTheme_WhiteFull"
-            android:textSize="12sp" />
+            android:textSize="@dimen/_10ssp" />
 
         <Button
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
+            android:backgroundTint="@color/darkTheme_Transparent"
             android:fontFamily="@font/circular"
             android:text="@string/login_text"
             android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textColor="@color/darkTheme_Brand"
-            android:textSize="12sp" />
+            android:textSize="@dimen/_10ssp" />
 
     </LinearLayout>
 

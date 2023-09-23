@@ -22,7 +22,6 @@
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             android:overScrollMode="always"
-            android:layout_marginBottom="60dp"
             app:layout_constraintTop_toTopOf="parent" >
 
             <LinearLayout
@@ -33,7 +32,7 @@
                 <!--Header-->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="@dimen/_62sdp"
                     android:backgroundTint="@color/darkTheme_Background_two">
 
                     <TextView
@@ -43,19 +42,20 @@
                         android:text="@string/details_text"
                         android:textColor="@color/darkTheme_WhiteFull"
                         android:fontFamily="@font/circular"
-                        android:textSize="15dp"
-                        android:paddingTop="25dp"
-                        android:gravity="center"/>
+                        android:textSize="@dimen/_12ssp"
+                        android:paddingTop="@dimen/_23sdp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
                     <ImageView
                         android:id="@+id/backButton"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:padding="10dp"
-                        android:layout_marginTop="35dp"
-                        android:layout_marginStart="35dp"
-                        android:src="@drawable/ic_backarrow"
-                        />
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_27sdp"
+                        android:layout_marginTop="@dimen/_27sdp"
+                        android:padding="@dimen/_7sdp"
+                        android:src="@drawable/ic_backarrow" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -68,16 +68,14 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:paddingStart="23dp"
+                        android:layout_marginTop="@dimen/_23sdp"
+                        android:paddingStart="@dimen/_18sdp"
                         android:text="@string/details_text"
-                        android:textSize="18dp"
+                        android:textSize="@dimen/_14sdp"
                         android:fontFamily="@font/circular"
-                        android:textColor="@color/darkTheme_WhiteFull"/>
-
-
-
-
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
                 </LinearLayout>
 
@@ -87,8 +85,6 @@
         </ScrollView>
 
     </LinearLayout>
-
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

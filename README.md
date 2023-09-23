@@ -58,6 +58,7 @@ Passive Plans (Will do slowly / is on back burner):
 * Switch "Custom...Method" classes to static (so events can be called on multiple layers at once)
 * Create more event callbacks (and be more descriptive)
 * Switch to php (server side) local time
+* Switching to sdp and ssp, just found out, this is a large chunk of time i need to reinvest...
    
 
 

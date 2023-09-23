@@ -2,9 +2,10 @@
 Full Stack Android Mobile Application.
 
 Current Version:
-* V: 0.3 Heavy php update, added macro counting and user history functionality
+* V: 0.3.1.1 Switched completely to scalable dp units (I found out the hard way), also started hosting db on droplet.
 
 Past Versions:
+* V: 0.3 Heavy php update, added macro counting and user history functionality
 * 0.2.4.1 Added the base ui for search and add function base app is about finished, working on recipe next
 * 0.2.3.1 Added add and search functionality (still need ui), took years to debug gson and php. Added more event functionality, and more dev qol (had calc test, will get back soon)
 * 0.2.2.1 Added Barcode scanner after 6 tries (Had to use Kotlin, could not get it right with java), still needs more QOL, for better scanning UX

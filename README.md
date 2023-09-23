@@ -2,17 +2,18 @@
 Full Stack Android Mobile Application.
 
 Current Version:
-* 0.2.4.1 Added the base ui for search and add function base app is about finished, working on recipe next
+* V: 0.3 Heavy php update, added macro counting and user history functionality
 
 Past Versions:
+* 0.2.4.1 Added the base ui for search and add function base app is about finished, working on recipe next
 * 0.2.3.1 Added add and search functionality (still need ui), took years to debug gson and php. Added more event functionality, and more dev qol (had calc test, will get back soon)
 * 0.2.2.1 Added Barcode scanner after 6 tries (Had to use Kotlin, could not get it right with java), still needs more QOL, for better scanning UX
-* 0.2.1.1 Fixed some last second food object problems I figured out (serving size)\
+* 0.2.1.1 Fixed some last second food object problems I figured out (serving size)
 * V: 0.2 Food and nutrient Objects, along with there serialization adapters, started the barcode scanner.
 * 0.1.4.2 / 0.1.4.3 Fixing a git error i made and finishing up
 * 0.1.4.1 Added reset password and otp generation (for security reasons probly shift it over to php hosting otp instead, but ill leave that out as of now)
 * 0.1.3.1 Added most menus, added auto generated profile picture
-* 0.1.2.1 Added settings, logout, and more ui.\
+* 0.1.2.1 Added settings, logout, and more ui.
 * 0.1.1.1 Added manual TDEE option, finished setting base dashboard up
 * V: 0.1 Login / Register System with mySQL database Android preferences for Remember me TDEE Calculator
 
@@ -29,9 +30,11 @@ Plans:
    * Barcode functionality ✅
    * Adding / Searching ui (search lists and add forms) ✅
  * V. 0.3
-   * Macro counting
+   * Macro counting ✅
    * Meal Planner
-   * User history
+   * Meal History
+   * User history ✅
+   * Day review
    * Object based personal recipe items
  * V. 0.4
    * Data analysis
@@ -44,6 +47,7 @@ Potential Plans:
 * Resarch into more security for the database
 * Add a barcode api to show what the item would be if it isnt added
 * Stronger / More user friendly search algorithm
+* Security update (given that i were inclined to publicly release this, there is some must-do changes)
 * Api for the food database (most likely to happen, with python)
 * Admin console for regulating db (most likely to happen, with wpf c#)
   * Ability to verify products easily
@@ -53,6 +57,8 @@ Passive Plans (Will do slowly / is on back burner):
 * Switch to a strings xml layout (also dimesions)
 * Switch "Custom...Method" classes to static (so events can be called on multiple layers at once)
 * Create more event callbacks (and be more descriptive)
+* Switch to php (server side) local time
+* Switching to sdp and ssp, just found out, this is a large chunk of time i need to reinvest...
    
 
 

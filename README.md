@@ -33,14 +33,14 @@ Plans:
  * V. 0.3
    * Macro counting ✅
    * Meal Planner
-   * Meal History
    * User history ✅
-   * Day review
    * Object based personal recipe items
    * fix mobile port ui
    * add alcohol macro
  * V. 0.4
    * Data analysis
+   * Meal History
+   * Day review
  * V. 0.5
    * Undecided (Most likely polish and implementing some potential features if I feel the need to)
 

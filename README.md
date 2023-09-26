@@ -37,6 +37,8 @@ Plans:
    * User history ✅
    * Day review
    * Object based personal recipe items
+   * fix mobile port ui
+   * add alcohol macro
  * V. 0.4
    * Data analysis
  * V. 0.5

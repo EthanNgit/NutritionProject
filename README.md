@@ -1,6 +1,9 @@
 # NutritionProject
 Full Stack Android Mobile Application.
 
+!! Notice !!:
+* Haitus: I want try to make a feature I really got caught up in being interested in, but I have no experience doing it, I will take a week and come back with something.
+
 Current Version:
 * V: 0.3.1.1 Switched completely to scalable dp units (I found out the hard way), also started hosting db on droplet.
 

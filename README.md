@@ -12,18 +12,22 @@ Current Version:
   </ul>
  </details>
  <details><summary>V2</summary>
-  * 0.2.3.1 Added add and search functionality (still need ui), took years to debug gson and php. Added more event functionality, and more dev qol (had calc test, will get back soon)
-  * 0.2.2.1 Added Barcode scanner after 6 tries (Had to use Kotlin, could not get it right with java), still needs more QOL, for better scanning UX
-  * 0.2.1.1 Fixed some last second food object problems I figured out (serving size)
-  * V: 0.2 Food and nutrient Objects, along with there serialization adapters, started the barcode scanner.
+  <ul>
+   <li> 0.2.3.1 Added add and search functionality (still need ui), took years to debug gson and php. Added more event functionality, and more dev qol (had calc test, will get back soon) </li>
+   <li> 0.2.2.1 Added Barcode scanner after 6 tries (Had to use Kotlin, could not get it right with java), still needs more QOL, for better scanning UX </li>
+   <li> 0.2.1.1 Fixed some last second food object problems I figured out (serving size) </li>
+   <li> V: 0.2 Food and nutrient Objects, along with there serialization adapters, started the barcode scanner. </li>
+  </ul>
  </details>
  <details><summary>V1</summary>
-  * 0.1.4.2 / 0.1.4.3 Fixing a git error i made and finishing up
-  * 0.1.4.1 Added reset password and otp generation (for security reasons probly shift it over to php hosting otp instead, but ill leave that out as of now)
-  * 0.1.3.1 Added most menus, added auto generated profile picture
-  * 0.1.2.1 Added settings, logout, and more ui.
-  * 0.1.1.1 Added manual TDEE option, finished setting base dashboard up
-  * V: 0.1 Login / Register System with mySQL database Android preferences for Remember me TDEE Calculator
+  <ul>
+   <li> 0.1.4.2 / 0.1.4.3 Fixing a git error i made and finishing up </li>
+   <li> 0.1.4.1 Added reset password and otp generation (for security reasons probly shift it over to php hosting otp instead, but ill leave that out as of now) </li>
+   <li> 0.1.3.1 Added most menus, added auto generated profile picture </li>
+   <li> 0.1.2.1 Added settings, logout, and more ui. </li>
+   <li> 0.1.1.1 Added manual TDEE option, finished setting base dashboard up</li>
+   <li> V: 0.1 Login / Register System with mySQL database Android preferences for Remember me TDEE Calculator</li>
+  </ul>
  </details>
 </details>
 

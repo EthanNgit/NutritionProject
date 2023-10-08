@@ -10,7 +10,7 @@ Current Version:
 <details><summary>History</summary>
  <details><summary>V3</summary>
   <ul>
-   <li> V: 0.3 Heavy php update, added macro counting and user history functionality</li>
+   <li> <input type="checkbox" disabled checked /> V: 0.3 Heavy php update, added macro counting and user history functionality</li>
   </ul>
  </details>
  <details><summary>V2</summary>

@@ -2,6 +2,8 @@
 Full Stack Android Mobile Application.
 > Current version: V: 0.3.1.1 Switched completely to scalable dp units (I found out the hard way), also started hosting db on droplet.
 
+### About
+
 ## Past versions
 > Documentation of each git release is contained and stored.
 

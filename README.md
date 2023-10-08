@@ -110,6 +110,7 @@ This application is built similarly to other fitness apps, with some improvments
  </details>
 </details>
 
-
+## Resources
+> I would not of been able to get so far without the thanks of these.
 
 

@@ -17,6 +17,8 @@ This application is built similarly to other fitness apps, with some improvments
 
 ## Walkthrough
 > TBC
+<img src="https://github.com/EthanNgit/NutritionProject/assets/105979510/e9baa7f6-8dda-44ea-8416-c642b4095906" width="300">
+
 
 ## Past versions
 > Documentation of each git release is contained and stored.

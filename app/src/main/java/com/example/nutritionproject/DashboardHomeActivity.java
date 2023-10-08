@@ -2,10 +2,14 @@ package com.example.nutritionproject;
 
 import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+
+import androidx.constraintlayout.core.motion.utils.TypedValues;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -23,16 +27,28 @@ import android.widget.TextView;
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Custom.UI.FoodListAdapter;
+import com.example.nutritionproject.Custom.java.Custom.UI.MealListAdapter;
+import com.example.nutritionproject.Custom.java.Custom.UI.RecyclerViewInterface;
+import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
+import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
+import com.example.nutritionproject.Custom.java.UserModel.UserProfile;
+import com.example.nutritionproject.Custom.java.UserModel.UserProfileStaticRefOther;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
 
 import org.joda.time.LocalDate;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import me.bastanfar.semicirclearcprogressbar.SemiCircleArcProgressBar;
 
-public class DashboardHomeActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener {
+public class DashboardHomeActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener, RecyclerViewInterface {
 
     //region References
     private BottomNavigationView bottomNavView;
@@ -50,6 +66,13 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     private SemiCircleArcProgressBar calProgressBar;
     private TextView currentCalorieText;
     private TextView currentGoalCalorieText;
+    private TextView currentProteinText;
+    private TextView currentProteinGoalText;
+    private TextView currentCarbText;
+    private TextView currentCarbGoalText;
+    private TextView currentFatText;
+    private TextView currentFatGoalText;
+
 
     private RecyclerView fullMealHistoryLayout;
     private LinearLayout emptyMealHistoryLayout;
@@ -66,7 +89,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_dashboard_home);
 
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
-        TdeeActivity.onTDEEUserGoalUpdated.addListener(this, "checkCalorieProgress");
+        dbManager.onUserCurrentNutritionUpdateSuccess.addListener(this, "checkCalorieProgress");
+        UserProfileStaticRefOther.onUserMealHistoryUpdate.addListener(this, "updateMealHistory");
 
         //region Main find
         profileButton = findViewById(R.id.profileButton);
@@ -81,6 +105,12 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         calProgressBar = findViewById(R.id.calProgressBar);
         currentCalorieText = findViewById(R.id.currentCalorieLabel);
         currentGoalCalorieText = findViewById(R.id.currentGoalCalorieLabel);
+        currentProteinText = findViewById(R.id.protein_value);
+        currentProteinGoalText = findViewById(R.id.total_protein_value);
+        currentCarbText = findViewById(R.id.carb_value);
+        currentCarbGoalText = findViewById(R.id.total_carb_value);
+        currentFatText = findViewById(R.id.fat_value);
+        currentFatGoalText = findViewById(R.id.total_fat_value);
         //endregion
         //region Meals find
         fullMealHistoryLayout = findViewById(R.id.mealPlannerRecyclerView);
@@ -103,20 +133,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         emptyAddMealButton.setOnClickListener(this);
         //endregion
 
-        setProfileButton();
         setHomeWidgets();
-
-        dbManager.updateNutrition(CurrentProfile.id, 0, 0, 0, 0, String.valueOf(new LocalDate()), new EventCallback() {
-            @Override
-            public void onSuccess(@Nullable EventContext context) {
-                Log.d("NORTH_", "Updated");
-            }
-
-            @Override
-            public void onFailure(@Nullable EventContext context) {
-                Log.d("NORTH_", "did not update");
-            }
-        });
 
     }
 
@@ -151,21 +168,64 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
 
     //region reusable Methods
     private void setHomeWidgets() {
-        //Calorie progress
+        // Set Data
+        getFirstTimeData();
+
+        // Recent meal history
+        updateMealHistory();
+
+        // Calorie progress
         checkCalorieProgress();
 
-        //Recent meal history
-        updateMealHistory();
+        // Profile Button
+        setProfileButton();
+    }
+
+    private void updateMealRecyclerView(ArrayList<MealProfile> meals) {
+        if (meals.size() > 0) {
+            RecyclerViewInterface recyclerViewInterface = this;
+            MealListAdapter adapter = new MealListAdapter(this, meals, recyclerViewInterface);
+            fullMealHistoryLayout.setAdapter(adapter);
+            fullMealHistoryLayout.setLayoutManager(new LinearLayoutManager(this));
+        }
+    }
+
+
+    private void getFirstTimeData() {
+
+        dbManager.updateNutrition(CurrentProfile.id, 0,0,0,0, UserProfileStaticRefOther.userMealHistory, String.valueOf(new LocalDate()), null);
+        dbManager.getMeals(1, new EventCallback() {
+            @Override
+            public void onSuccess(@Nullable EventContext context) {
+                ArrayList<MealProfile> meals = (ArrayList<MealProfile>) context.getData();
+
+                if (!meals.isEmpty()) {
+                    fullMealHistoryLayout.setVisibility(View.VISIBLE);
+                    emptyMealHistoryLayout.setVisibility(View.GONE);
+                }
+
+                updateMealRecyclerView(meals);
+            }
+
+            @Override
+            public void onFailure(@Nullable EventContext context) {
+                emptyMealHistoryLayout.setVisibility(View.VISIBLE);
+                fullMealHistoryLayout.setVisibility(View.GONE);
+            }
+        });
+
 
     }
 
-    private void updateMealHistory() {
+    public void updateMealHistory() {
         //TODO: implement meal history searching and saving
         emptyMealHistoryLayout.setVisibility(View.VISIBLE);
         fullMealHistoryLayout.setVisibility(View.GONE);
+
+        updateMealRecyclerView(UserProfileStaticRefOther.userMealHistory);
     }
 
-    private void checkCalorieProgress() {
+    public void checkCalorieProgress() {
         //TODO: Implement simple round progress bar ui
         if (CurrentProfile.goals.calories == 0) {
             firstTimeCalCard.setVisibility(View.VISIBLE);
@@ -177,18 +237,22 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
             double calPercent = ((double) CurrentProfile.currentMacros.calories / (double) CurrentProfile.goals.calories) * 100.0;
             calProgressBar.setPercent((int)calPercent);
 
-            SpannableStringBuilder curCalBuilder = new SpannableStringBuilder();
-            String kcalAmtString = String.valueOf(CurrentProfile.currentMacros.calories);
-            String kcalString = " kcal";
-            SpannableString kcalAmtSpannable = new SpannableString(kcalAmtString);
-            kcalAmtSpannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkTheme_Brand)), 0, kcalAmtString.length(), 0);
-            SpannableString kcalSpannable = new SpannableString(kcalString);
-            kcalSpannable.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.darkTheme_WhiteFull)), 0, kcalString.length(), 0);
-            curCalBuilder.append(kcalAmtSpannable);
-            curCalBuilder.append(kcalSpannable);
-
+            SpannableStringBuilder curCalBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.calories, R.color.darkTheme_Brand, R.color.darkTheme_WhiteMed);
             currentCalorieText.setText(curCalBuilder, TextView.BufferType.SPANNABLE);
             currentGoalCalorieText.setText("of " + String.valueOf(CurrentProfile.goals.calories) + " kcal");
+
+            SpannableStringBuilder curProBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.proteins, R.color.darkTheme_Protein, R.color.darkTheme_WhiteMed);
+            currentProteinText.setText(curProBuilder, TextView.BufferType.SPANNABLE);
+            currentProteinGoalText.setText("of " + String.valueOf(CurrentProfile.goals.proteins) + " protein");
+
+            SpannableStringBuilder curCarBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.carbs, R.color.darkTheme_Carb, R.color.darkTheme_WhiteMed);
+            currentCarbText.setText(curCarBuilder, TextView.BufferType.SPANNABLE);
+            currentCarbGoalText.setText("of " + String.valueOf(CurrentProfile.goals.carbs) + " carbs");
+
+            SpannableStringBuilder curFatBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.fats, R.color.darkTheme_Fat, R.color.darkTheme_WhiteMed);
+            currentFatText.setText(curFatBuilder, TextView.BufferType.SPANNABLE);
+            currentFatGoalText.setText("of " + String.valueOf(CurrentProfile.goals.fats) + " fats");
+
         }
 
     }
@@ -197,7 +261,12 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         CustomUIMethods.setProfileButton(this, profileButton, CurrentProfile.userColorHex, profileButtonText, CurrentProfile.email);
     }
 
+    @Override
+    public void onItemClick(int position) {
+
+    }
 
 
     //endregion
+
 }

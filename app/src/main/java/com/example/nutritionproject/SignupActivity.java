@@ -14,7 +14,6 @@ import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 
 import java.lang.reflect.Method;
-import java.util.concurrent.Executors;
 
 public class SignupActivity extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener {
 

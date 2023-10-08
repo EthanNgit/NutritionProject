@@ -5,8 +5,6 @@ import androidx.annotation.Nullable;
 
 import com.example.nutritionproject.Custom.java.Enums.FoodTag;
 
-import org.joda.time.LocalDate;
-
 import java.util.HashMap;
 import java.util.Set;
 
@@ -41,11 +39,11 @@ public class FoodProfile {
     public String toString() {
         HashMap<String, Object> profileMap = new HashMap<>();
 
-        if (!upcId.isEmpty()) profileMap.put("UpcId", upcId);
+        if (upcId != null && !upcId.isEmpty()) profileMap.put("UpcId", upcId);
         profileMap.put("Name", name);
         profileMap.put("DateAdded", dateAdded);
         profileMap.put("IsCommon", isCommon);
-        if (!brandName.isEmpty()) profileMap.put("BrandName", brandName);
+        if (brandName != null && !brandName.isEmpty()) profileMap.put("BrandName", brandName);
         profileMap.put("IsVerified", isVerified);
 
         String normalString = "";
@@ -59,7 +57,7 @@ public class FoodProfile {
         // Cut off first ", "
         normalString = normalString.substring(2);
 
-        if (tags != null || !tags.isEmpty()) {
+        if (tags != null && !tags.isEmpty()) {
             // Add in ", " manually since it does not have a toString override
             String tagsPrefix = ", FoodTags : { ";
             String tagsString = "";

@@ -76,6 +76,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/darkTheme_Background"
         app:itemBackground="@null"
         app:itemIconTint="@color/darkTheme_WhiteFull"
         app:itemTextColor="@color/darkTheme_WhiteFull"

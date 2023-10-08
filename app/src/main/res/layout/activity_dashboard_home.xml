@@ -59,7 +59,7 @@
                         android:layout_height="match_parent"
                         android:text="@string/filler_profile_text"
                         android:textSize="@dimen/_20ssp"
-                        android:textColor="@color/darkTheme_Background"
+                        android:textColor="@color/darkTheme_Black"
                         android:fontFamily="@font/circular_med"
                         android:gravity="center"
                         android:maxLines="1"
@@ -88,7 +88,7 @@
                     app:cardPreventCornerOverlap="true"
                     android:layout_margin="@dimen/_15sdp"
                     app:cardBackgroundColor="@color/darkTheme_Background_two"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -143,7 +143,7 @@
                     app:cardPreventCornerOverlap="true"
                     android:layout_margin="@dimen/_15sdp"
                     app:cardBackgroundColor="@color/darkTheme_Background_two"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <me.bastanfar.semicirclearcprogressbar.SemiCircleArcProgressBar
                         android:id="@+id/calProgressBar"
@@ -163,7 +163,8 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:paddingBottom="@dimen/_24sdp"
-                        android:text="@string/filler_kcal"
+                        android:textSize="@dimen/_15ssp"
+                        android:text="@string/kcal_text"
                         android:maxLines="1"
                         android:ellipsize="end"/>
 
@@ -179,7 +180,84 @@
                         android:maxLines="1"
                         android:ellipsize="end"/>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_gravity="bottom|center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/protein_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/protein_text"
+                                android:textColor="@color/darkTheme_Protein"
+                                android:textSize="@dimen/_15ssp"/>
+                            <TextView
+                                android:id="@+id/total_protein_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/filler_protein"
+                                android:textColor="@color/darkTheme_WhiteMed"
+                                android:textSize="@dimen/_10ssp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/carb_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/carbs_text"
+                                android:textColor="@color/darkTheme_Carb"
+                                android:textSize="@dimen/_15ssp"/>
+                            <TextView
+                                android:id="@+id/total_carb_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/filler_carbs"
+                                android:textColor="@color/darkTheme_WhiteMed"
+                                android:textSize="@dimen/_10ssp"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/fat_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fats_text"
+                                android:textColor="@color/darkTheme_Fat"
+                                android:textSize="@dimen/_15ssp"/>
+                            <TextView
+                                android:id="@+id/total_fat_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/filler_fats"
+                                android:textColor="@color/darkTheme_WhiteMed"
+                                android:textSize="@dimen/_10ssp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 
@@ -293,13 +371,11 @@
                                 <androidx.cardview.widget.CardView
                                     android:id="@+id/addBtn"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/_38sdp"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_15sdp"
                                     android:layout_marginBottom="@dimen/_15sdp"
                                     app:cardCornerRadius="@dimen/_100sdp"
-                                    android:layout_gravity="center"
-
-                                    android:backgroundTint="@color/darkTheme_Background_two">
+                                    android:layout_gravity="center">
 
                                     <Button
                                         android:id="@+id/emptyAddMealButton"
@@ -338,6 +414,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/darkTheme_Background"
         app:itemBackground="@null"
         app:itemIconTint="@color/darkTheme_WhiteFull"
         app:itemTextColor="@color/darkTheme_WhiteFull"

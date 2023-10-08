@@ -67,6 +67,9 @@ dependencies {
     implementation("com.google.mlkit:barcode-scanning:17.2.0")
     implementation("com.google.mlkit:object-detection:17.0.0")
 
+    implementation("com.google.mlkit:text-recognition:16.0.0");
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0");
+
     val camerax_version = "1.3.0-rc01"
     implementation("androidx.camera:camera-core:${camerax_version}")
     implementation("androidx.camera:camera-lifecycle:${camerax_version}")
@@ -77,7 +80,6 @@ dependencies {
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
     implementation("com.intuit.ssp:ssp-android:1.1.0")
-
 
     api("com.google.guava:guava:30.1-jre")
 }

@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:text="A"
                 android:textSize="@dimen/_20ssp"
-                android:textColor="@color/darkTheme_Background"
+                android:textColor="@color/darkTheme_Black"
                 android:gravity="center"/>
 
         </androidx.cardview.widget.CardView>
@@ -40,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="false"
+            android:layout_marginEnd="@dimen/_45sdp"
             android:paddingStart="@dimen/_62sdp"
             android:paddingTop="@dimen/_13sdp"
             android:text="@string/filler_food_name"
@@ -54,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="false"
+            android:layout_marginEnd="@dimen/_100sdp"
             android:paddingStart="@dimen/_62sdp"
             android:paddingTop="@dimen/_33sdp"
             android:text="@string/filler_food_info"

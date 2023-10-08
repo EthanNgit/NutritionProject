@@ -7,8 +7,8 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="10dp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_margin="@dimen/_6sdp"
         android:backgroundTint="@color/darkTheme_Background"
         app:cardCornerRadius="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:text="A"
                 android:textSize="@dimen/_18ssp"
-                android:textColor="@color/darkTheme_Background"
+                android:textColor="@color/darkTheme_Black"
                 android:gravity="center"/>
 
         </androidx.cardview.widget.CardView>
@@ -41,20 +41,27 @@
             android:id="@+id/listItemName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:paddingStart="@dimen/_62sdp"
-            android:paddingTop="@dimen/_13sdp"
+            android:paddingTop="@dimen/_20sdp"
             android:text="@string/filler_food_name"
             android:textColor="@color/darkTheme_WhiteFull"
-            android:textSize="@dimen/_16sdp"/>
+            android:textSize="@dimen/_16sdp"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
         <TextView
             android:id="@+id/listItemDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="@dimen/_62sdp"
-            android:paddingTop="@dimen/_32sdp"
+            android:layout_marginEnd="@dimen/_100sdp"
+            android:paddingTop="@dimen/_42sdp"
             android:text="@string/filler_food_info_time"
-            android:textColor="@color/darkTheme_WhiteFull"/>
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
         <Button
             android:id="@+id/moreInfoButton"
@@ -62,6 +69,7 @@
             android:layout_height="@dimen/_25sdp"
             android:background="@drawable/bg_green_100dp"
             android:layout_gravity="end|center_vertical"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:text="More info"
             android:textAllCaps="false"

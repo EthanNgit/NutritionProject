@@ -1,9 +1,11 @@
 package com.example.nutritionproject.Custom.java.FoodModel;
 
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 
-import com.example.nutritionproject.Custom.java.Enums.Measurement;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
+import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMeasurement;
 
 import java.util.HashMap;
 
@@ -11,9 +13,9 @@ public class FoodNutrition {
     public double calories;
     public double servingSize;
     public String servingMeasurement;
-    public HashMap<Nutrient, Double> nutrients;
+    public HashMap<Nutrient, Pair<Double, NutrientMeasurement>> nutrients;
 
-    public FoodNutrition(double calories, double servingSize, String servingMeasurement, HashMap<Nutrient, Double> nutrients) {
+    public FoodNutrition(double calories, double servingSize, String servingMeasurement, HashMap<Nutrient, Pair<Double, NutrientMeasurement>> nutrients) {
         this.calories = calories;
         this.servingSize = servingSize;
         this.servingMeasurement = servingMeasurement;
@@ -26,7 +28,7 @@ public class FoodNutrition {
         String mapString = "";
 
         for (Nutrient nutrient : nutrients.keySet()) {
-            mapString += (", " + nutrient.name() + " : " + nutrients.get(nutrient));
+            mapString += (", " + nutrient.name() + " : " + nutrients.get(nutrient).first + nutrients.get(nutrient).second);
         }
 
         mapString = mapString.substring(2);

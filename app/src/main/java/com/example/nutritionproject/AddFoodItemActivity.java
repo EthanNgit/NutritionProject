@@ -1,16 +1,20 @@
 package com.example.nutritionproject;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.camera.core.ImageAnalysis;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,18 +28,23 @@ import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
+import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMeasurement;
+import com.example.nutritionproject.Custom.java.NutritionLabelScanner.UnitCallback;
+import com.example.nutritionproject.Custom.java.NutritionLabelScanner.Utils;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.Custom.java.Utility.EventContextStrings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import org.checkerframework.checker.i18nformatter.qual.I18nMakeFormat;
 import org.joda.time.LocalDate;
 
 import java.util.HashMap;
 
 public class AddFoodItemActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, NavigationBarView.OnItemSelectedListener {
+
+    // Extremely bad practice. Only till i figure out how to better send complex data types over intents (Android only allows primitive)
+    public static HashMap<Nutrient, Pair<Double, NutrientMeasurement>> receivedMacros;
 
     private CustomDBMethods dbManager = new CustomDBMethods();
 
@@ -45,6 +54,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
 
     //region Card 1
     private CardView addCard1;
+    private TextView addItemErrorText;
 
     private EditText itemNameTextField;
     private TextView itemNameErrorText;
@@ -70,6 +80,15 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
     private EditText servingSizeTextField;
     private TextView servingErrorTextField;
 
+    private CardView scanLabelButton;
+
+    private LinearLayout secondCarouselBackButton;
+    private LinearLayout secondCarouselNextButton;
+
+    //endregion
+    //region Card3
+    private CardView addCard3;
+
     private EditText itemCalorieTextField;
     private TextView itemCalorieErrorText;
 
@@ -82,7 +101,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
     private EditText itemFatTextField;
     private TextView itemFatErrorText;
 
-    private LinearLayout secondCarouselBackButton;
+    private LinearLayout thirdCarouselBackButton;
     //endregion
 
     private boolean isCommon = true;
@@ -91,12 +110,22 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
 
     private String incUpcid = "";
 
+    private String cameraPermission = Manifest.permission.CAMERA;
+
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    startScanner();
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food_item);
 
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
+
 
         //region Searching and setting
         //region Frame items
@@ -113,6 +142,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         //endregion
         //region Finding card1
         addCard1 = findViewById(R.id.addItemCard1);
+
         itemNameTextField = findViewById(R.id.itemNameTextField);
         itemNameErrorText = findViewById(R.id.nameErrorLabelText);
         itemUPCTextField = findViewById(R.id.upcTextField);
@@ -132,7 +162,11 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         servingAmtTextField = findViewById(R.id.servingAmtTextField);
         servingSizeTextField = findViewById(R.id.servingSizeTextField);
         servingErrorTextField = findViewById(R.id.servingErrorLabelText);
+        scanLabelButton = findViewById(R.id.labelScanButton);
+        //endregion
 
+        //region Finding card3
+        addCard3 = findViewById(R.id.addCard3);
         itemCalorieTextField = findViewById(R.id.calorieTextField);
         itemCalorieErrorText = findViewById(R.id.caloriesErrorLabelText);
 
@@ -147,9 +181,13 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         //endregion
         //region Finding rest
         addButton = findViewById(R.id.addBtn);
+        addItemErrorText = findViewById(R.id.addItemErrorText);
 
         firstCarouselNextButton = findViewById(R.id.carouselForwardFirstButton);
         secondCarouselBackButton = findViewById(R.id.carouselBackSecondButton);
+        secondCarouselNextButton = findViewById(R.id.carouselForwardSecondButton);
+        thirdCarouselBackButton = findViewById(R.id.carouselBackThirdButton);
+
         //endregion
         //region Setting listeners
         itemNameTextField.setOnFocusChangeListener(this);
@@ -160,12 +198,15 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         servingSizeTextField.setOnFocusChangeListener(this);
 
         addButton.setOnClickListener(this);
+        scanLabelButton.setOnClickListener(this);
 
         itemTypeBrandedTwoWayButton.setOnClickListener(this);
         itemTypeCommonTwoWayButton.setOnClickListener(this);
 
         firstCarouselNextButton.setOnClickListener(this);
         secondCarouselBackButton.setOnClickListener(this);
+        secondCarouselNextButton.setOnClickListener(this);
+        thirdCarouselBackButton.setOnClickListener(this);
         //endregion
         //endregion
 
@@ -195,6 +236,8 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
                     //Error
                 }
             });
+        } else if (id == scanLabelButton.getId()) {
+            requestCameraAndStartScanner();
         }
 
         if (id == itemTypeCommonTwoWayButton.getId()) {
@@ -209,6 +252,10 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
             setActiveCard(2);
         } else if (id == secondCarouselBackButton.getId()) {
             setActiveCard(1);
+        } else if (id == secondCarouselNextButton.getId()) {
+            setActiveCard(3);
+        } else if (id == thirdCarouselBackButton.getId()) {
+            setActiveCard(2);
         }
     }
 
@@ -227,10 +274,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         int id = view.getId();
 
         CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{itemNameTextField, itemUPCTextField, itemBrandTextField, servingAmtTextField, servingSizeTextField}, R.drawable.bg_black_2dp_stroke_gray);
-        CustomUIMethods.setPopupMessage(this, itemNameErrorText, R.color.darkTheme_Transparent, "");
-        CustomUIMethods.setPopupMessage(this, itemUPCErrorText, R.color.darkTheme_Transparent, "");
-        CustomUIMethods.setPopupMessage(this, itemBrandErrorText, R.color.darkTheme_Transparent, "");
-        CustomUIMethods.setPopupMessage(this, servingErrorTextField, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "");
 
         if (id == itemNameTextField.getId()) {
             CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemNameTextField}, R.drawable.bg_black_2dp_stroke_white);
@@ -244,25 +288,25 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
             CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingAmtTextField}, R.drawable.bg_black_2dp_stroke_white);
         }
 
-        if (itemNameTextField.getText().length() != 0 && itemNameTextField.getText().length() < 1) {
+        if (itemNameTextField.getText().length() != 0 && itemNameTextField.getText().length() <= 1) {
             CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemNameTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, itemNameErrorText, R.color.darkTheme_Transparent, "Invalid name");
+            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid name");
         }
-        if (itemUPCTextField.getText().length() != 0 && itemUPCTextField.getText().length() <= 12) {
+        if (itemUPCTextField.getText().length() != 0 && itemUPCTextField.getText().length() != 12) {
             CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemUPCTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, itemUPCErrorText, R.color.darkTheme_Transparent, "Invalid UPC-A");
+            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid UPC-A");
         }
-        if (itemBrandTextField.getText().length() != 0 && !isCommon) {
+        if (itemBrandTextField.getText().length() != 0 && !isCommon && itemBrandTextField.getText().length() <= 1) {
             CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemBrandTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, itemBrandErrorText, R.color.darkTheme_Transparent, "Invalid brand name");
+            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid brand name");
         }
-        if (servingSizeTextField.getText().length() != 0) {
+        if (servingSizeTextField.getText().length() != 0 && itemNameTextField.getText().length() < 1) {
             CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingSizeTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, servingErrorTextField, R.color.darkTheme_Transparent, "Invalid serving size");
+            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid serving size");
         }
-        if (servingAmtTextField.getText().length() != 0) {
+        if (servingAmtTextField.getText().length() != 0 && itemNameTextField.getText().length() <= 1) {
             CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingAmtTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, servingErrorTextField, R.color.darkTheme_Transparent, "Invalid serving amount");
+            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid serving amount");
         }
 
     }
@@ -278,6 +322,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
     private void setActiveCard(int card) {
         addCard1.setVisibility(View.GONE);
         addCard2.setVisibility(View.GONE);
+        addCard3.setVisibility(View.GONE);
 
         switch (card) {
             case 1:
@@ -286,6 +331,29 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
             case 2:
                 addCard2.setVisibility(View.VISIBLE);
                 break;
+            case 3:
+                addCard3.setVisibility(View.VISIBLE);
+                if (receivedMacros != null) autoFillMacros();
+
+        }
+    }
+
+    private void autoFillMacros() {
+        if (receivedMacros.get(Nutrient.Calorie) != null) {
+            itemCalorieTextField.setText(receivedMacros.get(Nutrient.Calorie).first.toString());
+            Log.d("NORTH", "CAL SET");
+        }
+        if (receivedMacros.get(Nutrient.Protein) != null) {
+            itemProteinTextField.setText(receivedMacros.get(Nutrient.Protein).first.toString());
+            Log.d("NORTH", "PROTEin SET");
+        }
+        if (receivedMacros.get(Nutrient.TotalCarb) != null) {
+            itemCarbTextField.setText(receivedMacros.get(Nutrient.TotalCarb).first.toString());
+            Log.d("NORTH", "CARB SET");
+        }
+        if (receivedMacros.get(Nutrient.TotalFat) != null) {
+            itemFatTextField.setText(receivedMacros.get(Nutrient.TotalFat).first.toString());
+            Log.d("NORTH", "FAT SET");
         }
     }
 
@@ -317,13 +385,27 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         carbs = !carbs.isEmpty() ? carbs : "0";
         fat = !fat.isEmpty() ? fat : "0";
 
-        //TODO: check duplicate to see if it already exists in advanced setting
+        HashMap<Nutrient, Pair<Double, NutrientMeasurement>> newItemNutrients = new HashMap<>();
+        if (receivedMacros == null) {
+            //TODO: check duplicate to see if it already exists in advanced setting
+            newItemNutrients.put(Nutrient.Calorie, new Pair<>(Double.valueOf(calories), NutrientMeasurement.none));
+            newItemNutrients.put(Nutrient.Protein, new Pair<>(Double.valueOf(protein), NutrientMeasurement.g));
+            newItemNutrients.put(Nutrient.TotalCarb, new Pair<>(Double.valueOf(carbs), NutrientMeasurement.g));
+            newItemNutrients.put(Nutrient.TotalFat, new Pair<>(Double.valueOf(fat), NutrientMeasurement.g));
 
-        HashMap<Nutrient, Double> newItemNutrients = new HashMap<>();
-        newItemNutrients.put(Nutrient.Calorie, Double.valueOf(calories));
-        newItemNutrients.put(Nutrient.Protein, Double.valueOf(protein));
-        newItemNutrients.put(Nutrient.TotalCarb, Double.valueOf(carbs));
-        newItemNutrients.put(Nutrient.TotalFat, Double.valueOf(fat));
+        } else {
+            newItemNutrients = receivedMacros;
+
+            if (newItemNutrients.get(Nutrient.Calorie) == null) {
+                newItemNutrients.put(Nutrient.Calorie, new Pair<>(Double.valueOf(calories), NutrientMeasurement.none));
+            } else if (newItemNutrients.get(Nutrient.Protein) == null) {
+                newItemNutrients.put(Nutrient.Protein, new Pair<>(Double.valueOf(protein), NutrientMeasurement.g));
+            } else if (newItemNutrients.get(Nutrient.TotalCarb) == null) {
+                newItemNutrients.put(Nutrient.TotalCarb, new Pair<>(Double.valueOf(carbs), NutrientMeasurement.g));
+            } else if (newItemNutrients.get(Nutrient.TotalFat) == null) {
+                newItemNutrients.put(Nutrient.TotalFat, new Pair<>(Double.valueOf(fat), NutrientMeasurement.g));
+            }
+        }
 
         FoodNutrition newItemNutrition = new FoodNutrition(Double.valueOf(calories), Double.valueOf(servingAmt), servingSize, newItemNutrients);
         FoodProfile newItem = new FoodProfile(itemUpc, itemName, null, String.valueOf(new LocalDate()), isCommon, brandName, false, newItemNutrition);
@@ -342,6 +424,38 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         });
 
 
+    }
+
+    private void requestCameraAndStartScanner() {
+        if (ContextCompat.checkSelfPermission(this, cameraPermission) == PackageManager.PERMISSION_GRANTED) {
+            startScanner();
+        } else {
+            requestCameraPermission();
+        }
+    }
+
+    private void startScanner() {
+        NutritionScanActivity.startScanner(this, new UnitCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+        });
+    }
+
+    private void requestCameraPermission() {
+        if (shouldShowRequestPermissionRationale(cameraPermission)) {
+            Context parentContext = this;
+            Utils.cameraPermissionRequest(this, new UnitCallback() {
+                @Override
+                public void onSuccess() {
+                    Utils.openPermissionSettings(parentContext);
+                }
+            });
+
+        } else {
+            requestPermissionLauncher.launch(cameraPermission);
+        }
     }
 
 }

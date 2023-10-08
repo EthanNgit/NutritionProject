@@ -1,7 +1,10 @@
 package com.example.nutritionproject;
 
+import static com.example.nutritionproject.Custom.java.Custom.CustomConversionMethods.getAverageCaloriesPerDayFromKgsPerWeek;
+import static com.example.nutritionproject.Custom.java.Custom.CustomConversionMethods.getAverageCaloriesPerDayFromLbsPerWeek;
 import static com.example.nutritionproject.Custom.java.Custom.CustomConversionMethods.getImperialHeight;
 import static com.example.nutritionproject.Custom.java.Custom.CustomConversionMethods.getImperialWeight;
+import static com.example.nutritionproject.Custom.java.Custom.CustomConversionMethods.getMacrosFromSplit;
 import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
 import androidx.annotation.NonNull;
@@ -21,17 +24,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.nutritionproject.Custom.java.Custom.CustomConversionMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Utility.Event;
-import com.example.nutritionproject.Custom.java.Enums.WorkoutGoals;
 import com.example.nutritionproject.Custom.java.Enums.WorkoutIntensity;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +49,6 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
     public static Event onTDEEUserGoalUpdated = new Event();
 
-    private TextView headerText;
     private ImageView backBtn;
 
     private BottomNavigationView bottomNavView;
@@ -113,30 +116,29 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
     private TextView athleteExerciseButton;
     //endregion
 
-    //region goal buttons
-    private Map<TextView, ImageView> goalButtonToSelectViewMap = new HashMap<>();
-    private WorkoutGoals currentGoal = WorkoutGoals.Maintain;
+    //region goals
+        private EditText weightGoalField;
 
-    private ImageView heavyCutImageView;
-    private TextView heavyCutButton;
+    private Map<TextView, ImageView> splitButtonToSelectViewMap = new HashMap<>();
 
-    private ImageView lightCutImageView;
-    private TextView lightCutButton;
+    private ImageView splitOneImageView;
+    private TextView splitOneButton;
 
-    private ImageView maintainImageView;
-    private TextView maintainButton;
+    private ImageView splitTwoImageView;
+    private TextView splitTwoButton;
 
-    private ImageView lightBulkImageView;
-    private TextView lightBulkButton;
+    private ImageView splitThreeImageView;
+    private TextView splitThreeButton;
 
-    private ImageView heavyBulkImageView;
-    private TextView heavyBulkButton;
+    private int[] currentSplit = new int[] {40, 30, 30};
     //endregion
 
     //region Cards
     private CardView tdeeCard1;
     private CardView tdeeCard2;
     private CardView tdeeCard3;
+
+    private CardView tdeeCardManual;
 
 
     //endregion
@@ -149,15 +151,20 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
     //endregion
 
-    private TextView resultCalorieTxt;
+    //region Manual
+    private EditText calorieGoalTextField;
+    private EditText proteinPercentTextField;
+    private EditText carbPercentTextField;
+    private EditText fatPercentTextField;
 
-    private EditText manualCalorieField;
+    //endregion
+
+    private TextView resultCalorieTxt;
     private Button setGoalButton;
     private TextView manualSetGoalButton;
     private TextView automaticGetGoalButton;
 
     private boolean isUpdatingManually = false;
-
     private int currentCalorieResult = 0;
     //endregion
 
@@ -168,7 +175,6 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
-        headerText = findViewById(R.id.secondaryHeader);
         backBtn = findViewById(R.id.backButton);
         bottomNavView = findViewById(R.id.bottomNavigationView);
 
@@ -242,26 +248,24 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         //endregion
 
         //region Finding goal components
-        heavyCutButton = findViewById(R.id.heavyCutButton);
-        heavyCutImageView = findViewById(R.id.heavyCutViewer);
+            weightGoalField = findViewById(R.id.weightGoalTextField);
 
-        lightCutButton = findViewById(R.id.lightCutButton);
-        lightCutImageView = findViewById(R.id.lightCutViewer);
+            splitOneButton = findViewById(R.id.splitOneButton);
+            splitOneImageView = findViewById(R.id.splitOneViewer);
 
-        maintainButton = findViewById(R.id.maintainButton);
-        maintainImageView = findViewById(R.id.maintainViewer);
+            splitTwoButton = findViewById(R.id.splitTwoButton);
+            splitTwoImageView = findViewById(R.id.splitTwoViewer);
 
-        lightBulkButton = findViewById(R.id.lightBulkButton);
-        lightBulkImageView = findViewById(R.id.lightBulkViewer);
+            splitThreeButton = findViewById(R.id.splitThreeButton);
+            splitThreeImageView = findViewById(R.id.splitThreeViewer);
 
-        heavyBulkButton = findViewById(R.id.heavyBulkButton);
-        heavyBulkImageView = findViewById(R.id.heavyBulkViewer);
         //endregion
 
         //region Finding Card components
         tdeeCard1 = findViewById(R.id.tdeeCard1);
         tdeeCard2 = findViewById(R.id.tdeeCard2);
         tdeeCard3 = findViewById(R.id.tdeeCard3);
+        tdeeCardManual = findViewById(R.id.manualTdeeCard);
 
         //endregion
 
@@ -273,9 +277,14 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
         //endregion
 
+        //region Finding Manual components
+        calorieGoalTextField = findViewById(R.id.calorieTextField);
+        proteinPercentTextField = findViewById(R.id.proteinTextField);
+        carbPercentTextField = findViewById(R.id.carbsTextField);
+        fatPercentTextField = findViewById(R.id.fatTextField);
+        //endregion
+
         resultCalorieTxt = findViewById(R.id.calorieResultLabelText);
-        manualCalorieField = findViewById(R.id.manualResultTextField);
-        
         setGoalButton = findViewById(R.id.setGoalButton);
         manualSetGoalButton = findViewById(R.id.setManualGoalButton);
         automaticGetGoalButton = findViewById(R.id.getAutomaticGoalButton);
@@ -289,16 +298,12 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         activityButtonToSelectViewMap.put(heavyExerciseButton, heavyExerciseImageView);
         activityButtonToSelectViewMap.put(athleteExerciseButton, athleteExerciseImageView);
         //endregion
-
-        //region Filling goalButtonToSelectViewMap
-        goalButtonToSelectViewMap.put(heavyCutButton, heavyCutImageView);
-        goalButtonToSelectViewMap.put(lightCutButton, lightCutImageView);
-        goalButtonToSelectViewMap.put(maintainButton, maintainImageView);
-        goalButtonToSelectViewMap.put(lightBulkButton, lightBulkImageView);
-        goalButtonToSelectViewMap.put(heavyBulkButton, heavyBulkImageView);
+        //region Filling splitButtonToSelectViewMap
+        splitButtonToSelectViewMap.put(splitOneButton, splitOneImageView);
+        splitButtonToSelectViewMap.put(splitTwoButton, splitTwoImageView);
+        splitButtonToSelectViewMap.put(splitThreeButton, splitThreeImageView);
         //endregion
         //endregion
-
 
         //region Setting TDEE click listeners
         metricMeasurementTwoWayButton.setOnClickListener(this);
@@ -321,7 +326,7 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
             button.setOnClickListener(this);
         }
 
-        for (TextView button : goalButtonToSelectViewMap.keySet()) {
+        for (TextView button : splitButtonToSelectViewMap.keySet()) {
             button.setOnClickListener(this);
         }
 
@@ -342,7 +347,16 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         heightMetricInchesEditText.addTextChangedListener(this);
         heightImperialEditText.addTextChangedListener(this);
 
-        manualCalorieField.setOnFocusChangeListener(this);
+        weightGoalField.addTextChangedListener(this);
+
+        calorieGoalTextField.addTextChangedListener(this);
+        proteinPercentTextField.addTextChangedListener(this);
+        carbPercentTextField.addTextChangedListener(this);
+        fatPercentTextField.addTextChangedListener(this);
+
+
+        //TODO: ADD NEW FIELD TEXT CHANGED LISTENERS
+
         //endregion
 
         //endregion
@@ -401,21 +415,15 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         }
         //endregion
 
-        //region Goal N button group OnClick
-        if (id == heavyCutButton.getId()) {
-            setGoalLevel(heavyCutButton, WorkoutGoals.HeavyCut);
+        //region Split N button group OnClick
+        if (id == splitOneButton.getId()) {
+            setMacroSplit(splitOneButton,40, 30, 30);
 
-        } else if (id == lightCutButton.getId()) {
-            setGoalLevel(lightCutButton, WorkoutGoals.LightCut);
+        } else if (id == splitTwoButton.getId()) {
+            setMacroSplit(splitTwoButton,25, 30, 45);
 
-        } else if (id == maintainButton.getId()) {
-            setGoalLevel(maintainButton, WorkoutGoals.Maintain);
-
-        } else if (id == lightBulkButton.getId()) {
-            setGoalLevel(lightBulkButton, WorkoutGoals.LightBulk);
-
-        } else if (id == heavyBulkButton.getId()) {
-            setGoalLevel(heavyBulkButton, WorkoutGoals.HeavyBulk);
+        } else if (id == splitThreeButton.getId()) {
+            setMacroSplit(splitThreeButton,34, 33, 43);
 
         }
         //endregion
@@ -443,30 +451,29 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (id == manualSetGoalButton.getId()) {
             resultCalorieTxt.setVisibility(View.GONE);
-            manualCalorieField.setVisibility(View.VISIBLE);
 
-            manualCalorieField.setText("");
+            closeCards();
+            tdeeCardManual.setVisibility(View.VISIBLE);
 
             manualSetGoalButton.setVisibility(View.GONE);
             automaticGetGoalButton.setVisibility(View.VISIBLE);
-
-            CustomUIMethods.showKeyboard(this, manualCalorieField);
 
             isUpdatingManually = true;
 
         } else if (id == automaticGetGoalButton.getId()) {
             resultCalorieTxt.setVisibility(View.VISIBLE);
-            manualCalorieField.setVisibility(View.GONE);
+
+            closeCards();
+            tdeeCard1.setVisibility(View.VISIBLE);
 
             automaticGetGoalButton.setVisibility(View.GONE);
             manualSetGoalButton.setVisibility(View.VISIBLE);
 
             isUpdatingManually = false;
-
-            //uiManager.hideKeyboard(this);
         }
         //endregion
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -516,10 +523,13 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         onTDEEInformationChanged.invoke();
     }
 
-    private void setGoalLevel(TextView buttonClicked, WorkoutGoals goal) {
-        CustomUIMethods.setNListButton(this, goalButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
-        currentGoal = goal;
+    private void setMacroSplit(TextView buttonClicked, int prPercent, int caPercent, int faPercent) {
+        CustomUIMethods.setNListButton(this, splitButtonToSelectViewMap, buttonClicked, R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+        currentSplit[0] = prPercent;
+        currentSplit[1] = caPercent;
+        currentSplit[2] = faPercent;
         onTDEEInformationChanged.invoke();
+
     }
 
     private void clearMeasurementFields() {
@@ -549,7 +559,10 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         heightTxt.setText("Height (ft/in)");
         heightTxt.setVisibility(View.VISIBLE);
 
+        weightGoalField.setHint("lbs");
+
         heightMetricLayout.setVisibility(View.VISIBLE);
+
 
         onTDEEInformationChanged.invoke();
     }
@@ -564,6 +577,8 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
 
         heightTxt.setText("Height (cm)");
         heightTxt.setVisibility(View.VISIBLE);
+
+        weightGoalField.setHint("kgs");
 
         heightImperialCardView.setVisibility(View.VISIBLE);
 
@@ -588,10 +603,18 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void closeCards() {
+        tdeeCard1.setVisibility(View.GONE);
+        tdeeCard2.setVisibility(View.GONE);
+        tdeeCard3.setVisibility(View.GONE);
+        tdeeCardManual.setVisibility(View.GONE);
+    }
+
     public void setCalorieField() {
         int age;
         double weight;
         double height;
+        int calsPerDay;
 
         try {
             age = Integer.parseInt(ageTextField.getText().toString());
@@ -599,26 +622,31 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
             if (isMetric) {
                 weight = getImperialWeight(Integer.parseInt(weightMetricEditText.getText().toString()));
                 height = getImperialHeight(Integer.parseInt(heightMetricFeetEditText.getText().toString()), Integer.parseInt(heightMetricInchesEditText.getText().toString()));
+                calsPerDay = (int) Math.ceil(getAverageCaloriesPerDayFromLbsPerWeek(Double.parseDouble(weightGoalField.getText().toString())));
             } else {
                 weight = Integer.parseInt(weightImperialEditText.getText().toString());
                 height = Integer.parseInt(heightImperialEditText.getText().toString());
+                calsPerDay = (int) Math.ceil(getAverageCaloriesPerDayFromKgsPerWeek(Double.parseDouble(weightGoalField.getText().toString())));
             }
         } catch (NumberFormatException e) {
             //Empty Field exists
-            Log.d("NORTH_TDEE", "EMPTY FIELD EXISTS" + e.getMessage());
             return;
         }
 
-        Log.d("NORTH_TDEE", "SET MESSAGE");
-        currentCalorieResult = (int) Math.ceil(fitManager.getTDEE(weight, height, age, isMale, currentIntensity, currentGoal));
-        resultCalorieTxt.setText(Integer.toString(currentCalorieResult) + " Calories");
+        //TODO: change goal system
+        currentCalorieResult = (int) Math.ceil(fitManager.getTDEE(weight, height, age, isMale, currentIntensity, calsPerDay));
+        resultCalorieTxt.setText(currentCalorieResult + " Calories");
+        Log.d("NORTH_TDEE", "Calorie result changed to " + currentCalorieResult);
     }
 
     private void setGoal() {
         //TODO: Give errors if fields arent filled in on click
+        //TODO: MAKE NEW SYSTEM FOR MACRO SPLITS
 
         if (currentCalorieResult > 0 && !isUpdatingManually) {
-            dbManager.updateGoals(CurrentProfile.id, currentCalorieResult, 0, 0, 0, new EventCallback() {
+            currentSplit = CustomConversionMethods.getMacrosFromSplit(currentCalorieResult, currentSplit);
+
+            dbManager.updateGoals(CurrentProfile.id, currentCalorieResult, currentSplit[0], currentSplit[1], currentSplit[2], new EventCallback() {
                 @Override
                 public void onSuccess(@Nullable EventContext context) {
                     dbManager.getUser(CurrentProfile.email, new EventCallback() {
@@ -645,39 +673,48 @@ public class TdeeActivity extends AppCompatActivity implements View.OnClickListe
             int manualCals = 0;
 
             try {
-                manualCals = Integer.parseInt(manualCalorieField.getText().toString());
+                manualCals = Integer.parseInt(calorieGoalTextField.getText().toString());
+                currentSplit[0] = Integer.parseInt(proteinPercentTextField.getText().toString());
+                currentSplit[1] = Integer.parseInt(carbPercentTextField.getText().toString());
+                currentSplit[2] = Integer.parseInt(fatPercentTextField.getText().toString());
+
+                if (Arrays.stream(currentSplit).sum() != 100) {
+                    //Sum error
+                    return;
+                }
+
+                currentSplit = getMacrosFromSplit(manualCals, currentSplit);
+
+                if (manualCals > 0) {
+                    dbManager.updateGoals(CurrentProfile.id, manualCals, currentSplit[0], currentSplit[1], currentSplit[2], new EventCallback() {
+                        @Override
+                        public void onSuccess(@Nullable EventContext context) {
+                            dbManager.getUser(CurrentProfile.email, new EventCallback() {
+                                @Override
+                                public void onSuccess(@Nullable EventContext context) {
+                                    onTDEEUserGoalUpdated.invoke();
+                                    finish();
+                                }
+
+                                @Override
+                                public void onFailure(@Nullable EventContext context) {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFailure(@Nullable EventContext context) {
+                            //Error updating manually
+                        }
+                    });
+                }
 
             } catch (NumberFormatException e) {
                 //Error
-                return;
             }
 
-            if (manualCals > 0) {
-                dbManager.updateGoals(CurrentProfile.id, manualCals, 0, 0, 0, new EventCallback() {
-                    @Override
-                    public void onSuccess(@Nullable EventContext context) {
-                        dbManager.getUser(CurrentProfile.email, new EventCallback() {
-                            @Override
-                            public void onSuccess(@Nullable EventContext context) {
-                                onTDEEUserGoalUpdated.invoke();
-                                finish();
-                            }
 
-                            @Override
-                            public void onFailure(@Nullable EventContext context) {
-
-                            }
-                        });
-
-
-                    }
-
-                    @Override
-                    public void onFailure(@Nullable EventContext context) {
-                        //Error updating manually
-                    }
-                });
-            }
         }
 
 

@@ -1,7 +1,10 @@
 package com.example.nutritionproject.Model;
 
+import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class UserModel {
 
@@ -48,6 +51,10 @@ public class UserModel {
     @Expose
     @SerializedName("currentfats")
     private int currentFats;
+
+    @Expose
+    @SerializedName("meals")
+    private Object meals;
 
     @Expose
     @SerializedName("date")
@@ -144,6 +151,15 @@ public class UserModel {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Object getMeals() {
+        return meals;
+    }
+
+    public void setMeals(Object meals) {
+        this.meals = meals;
+    }
+
 
     public String getDate() {
         return date;

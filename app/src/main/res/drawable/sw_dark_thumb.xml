@@ -5,5 +5,5 @@
     android:viewportHeight="24">
   <path
       android:pathData="M12.26,12.13m-8.5,0a8.5,8.5 0,1 1,17 0a8.5,8.5 0,1 1,-17 0"
-      android:fillColor="#131313"/>
+      android:fillColor="@color/darkTheme_Background_two"/>
 </vector>

@@ -1,17 +1,11 @@
 package com.example.nutritionproject.Retrofit;
 
-import androidx.annotation.Nullable;
 
-import com.example.nutritionproject.Custom.java.Enums.FoodTag;
-import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
-import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
+import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.example.nutritionproject.Model.FoodModel;
 import com.example.nutritionproject.Model.UserModel;
 
-import org.joda.time.LocalDate;
-
 import java.util.List;
-import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -42,7 +36,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("addFoodItem.php")
     Call<FoodModel> addFoodItem(@Field("upcid") String upcId, @Field("name") String name, @Field("tags") String tags, @Field("dateadded") String dateAdded, @Field("common") Boolean common,
-                                @Field("companyname") String companyName, @Field("verified") boolean verified, @Field("nutrition") String nutrition);
+                                @Field("companyname") String companyName, @Field("nutrition") String nutrition);
 
     @FormUrlEncoded
     @POST("searchFoodItem.php")
@@ -50,5 +44,9 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("updateUserNutrition.php")
-    Call<UserModel> updateNutrition(@Field("userid") int userId, @Field("currentcalories") int calorie, @Field("currentprotein") int protein, @Field("currentcarbs") int carb, @Field("currentfats") int fat, @Field("date") String date);
+    Call<UserModel> updateNutrition(@Field("userid") int userId, @Field("currentcalories") int calorie, @Field("currentprotein") int protein, @Field("currentcarbs") int carb, @Field("currentfats") int fat, @Field("meals") String meals, @Field("date") String date);
+
+    @FormUrlEncoded
+    @POST("getUserMeals.php")
+    Call<UserModel> getMeals(@Field("userid") int userId);
 }

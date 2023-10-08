@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -27,7 +29,6 @@ import com.example.nutritionproject.DashboardStatsActivity;
 import com.example.nutritionproject.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Random;
 
@@ -250,5 +251,69 @@ public class CustomUIMethods {
             checkNavItem(item);
         }
     }
+
+    /**
+     *
+     * @param context Context in which this function will use
+     * @param macroAmount The current value that the macro is at
+     * @param selectedColor The color of the highlighted values
+     * @param unselectedColor The color of the non-highlighted values
+     * @return
+     */
+    public static SpannableStringBuilder getMultiColouredMacroText(Context context, int macroAmount, int selectedColor, int unselectedColor) {
+        SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
+        String macroAmtString = String.valueOf(macroAmount);
+        SpannableString macroAmtSpannable = new SpannableString(macroAmtString);
+        macroAmtSpannable.setSpan(new ForegroundColorSpan(context.getResources().getColor(selectedColor)), 0, macroAmtString.length(), 0);
+        stringBuilder.append(macroAmtSpannable);
+
+        return stringBuilder;
+    }
+
+    public static float[] generateRandomColorBasedOffBrand() {
+        Random random = new Random();
+
+        // Define the range for each color channel (R, G, B) as floats between 0 and 1
+        float min = 0.0f;
+        float max = 1.0f;
+
+        // Initialize an array to store the RGB values as floats
+        float[] color = new float[3];
+
+        // Generate random RGB values within the specified range
+        color[0] = random.nextFloat() * (max - min) + min; // Red
+        color[1] = random.nextFloat() * (max - min) + min; // Green
+        color[2] = random.nextFloat() * (max - min) + min; // Blue
+
+        // Ensure the generated color has sufficient contrast with both charcoal and orange
+        while (!hasGoodContrast(color)) {
+            color[0] = random.nextFloat() * (max - min) + min;
+            color[1] = random.nextFloat() * (max - min) + min;
+            color[2] = random.nextFloat() * (max - min) + min;
+        }
+
+        return color;
+    }
+
+    private static boolean hasGoodContrast(float[] color) {
+        // Calculate the contrast between the generated color and charcoal and orange
+        float[] charcoal = {0.0f, 0.0f, 0.0f};
+        float[] orange = {1.0f, 0.65f, 0.15f};
+
+        // You can adjust the minimum contrast value as needed
+        float minContrast = 0.2f;
+
+        // Ensure the contrast with both colors is above the minimum threshold
+        return calculateContrast(color, charcoal) >= minContrast && calculateContrast(color, orange) >= minContrast;
+    }
+
+    private static float calculateContrast(float[] color1, float[] color2) {
+        // Calculate contrast using the formula for relative luminance (Y)
+        float luminance1 = 0.299f * color1[0] + 0.587f * color1[1] + 0.114f * color1[2];
+        float luminance2 = 0.299f * color2[0] + 0.587f * color2[1] + 0.114f * color2[2];
+
+        return Math.abs(luminance1 - luminance2);
+    }
+
 
 }

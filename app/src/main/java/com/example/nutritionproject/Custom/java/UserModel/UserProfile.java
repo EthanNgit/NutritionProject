@@ -19,7 +19,7 @@ public class UserProfile {
         this.email = "";
         this.goals = new UserMacros();
         this.currentMacros = new UserMacros();
-        this.userColorHex = CustomUIMethods.getRandomLightColorHex();
+        this.userColorHex = CustomUIMethods.generateRandomColorBasedOffBrand();
     }
 
     public UserProfile(int id, String email, UserMacros goals, UserMacros currentMacros , @Nullable float[] userColorHex) {
@@ -29,7 +29,7 @@ public class UserProfile {
         this.currentMacros = currentMacros;
 
         if (userColorHex == null) {
-            this.userColorHex = CustomUIMethods.getRandomLightColorHex();
+            this.userColorHex = CustomUIMethods.generateRandomColorBasedOffBrand();
         } else {
             this.userColorHex = userColorHex;
         }

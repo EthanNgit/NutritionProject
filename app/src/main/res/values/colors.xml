@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="darkTheme_Background">#000000</color>
-    <color name="darkTheme_Background_two">#121212</color>
+    <color name="darkTheme_Background">#333333</color>
+    <color name="darkTheme_Background_two">#595959</color>
     <color name="darkTheme_Transparent">#00000000</color>
     <color name="darkTheme_Midground">#727272</color>
     <color name="darkTheme_Foreground">#121212</color>
-    <color name="darkTheme_Brand">#1dc85a</color>
+    <color name="darkTheme_Brand">#FFA726</color>
 
-    <color name="darkTheme_WhiteFull">#ffffff</color>
+    <color name="darkTheme_WhiteFull">#f2f3f4</color>
     <color name="darkTheme_WhiteHigh">#DEffffff</color>
     <color name="darkTheme_WhiteMed">#99ffffff</color>
     <color name="darkTheme_WhiteMin">#61ffffff</color>
+
+    <color name="darkTheme_Black">#000000</color>
+    <color name="darkTheme_Gray">#121212</color>
+
     <color name="darkTheme_Error">#e91429</color>
+
+    <color name="darkTheme_Protein">#4caf50</color>
+    <color name="darkTheme_Carb">#2196f3</color>
+    <color name="darkTheme_Fat">#ff5722</color>
+
+
+
 
 
     <!--

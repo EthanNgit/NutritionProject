@@ -1,15 +1,9 @@
 package com.example.nutritionproject.Model;
 
-import com.example.nutritionproject.Custom.java.Enums.FoodTag;
-import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.joda.time.LocalDate;
-
-import java.util.Set;
 
 public class FoodModel {
     @Expose

@@ -60,6 +60,7 @@ class SearchScanActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_search_scan)
 
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
+        CustomUIMethods.hideKeyboard(this);
 
         backBtn = findViewById(R.id.backButton)
         previewView = findViewById(R.id.previewView)

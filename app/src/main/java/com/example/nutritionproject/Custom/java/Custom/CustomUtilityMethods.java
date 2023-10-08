@@ -1,8 +1,7 @@
 package com.example.nutritionproject.Custom.java.Custom;
 
-import android.text.Spannable;
-
 import com.example.nutritionproject.Custom.java.Utility.Event;
+import com.example.nutritionproject.FoodItemViewActivity;
 import com.example.nutritionproject.SearchActivity;
 
 public class CustomUtilityMethods {
@@ -11,12 +10,15 @@ public class CustomUtilityMethods {
 
     // Toggle these manually for debugging purposes, I like having them when I need them,
     // but hate having them when I don't. So i made this.
-    public static boolean enableDebugs = true; // Debugs in general.
-    public static boolean enableEventDebugs = false; // Debugs that derive from Event class.
-    public static boolean enableDatabaseDebugs = true; // Debugs that derive from CustomDBMethods class.
-    public static boolean enableUIDebugs = false; // Debugs that derive from CustomUIMethods class.
+    public static final boolean enableDebugs = true; // Debugs in general.
+    public static final boolean enableEventDebugs = false; // Debugs that derive from Event class.
+    public static final boolean enableDatabaseDebugs = true; // Debugs that derive from CustomDBMethods class.
+    public static final boolean enableUIDebugs = false; // Debugs that derive from CustomUIMethods class.
 
-    public static boolean enableSearchActivityDebugs = true; // Debugs that derive from SearchActivity class.
+    public static final boolean enableSearchActivityDebugs = true; // Debugs that derive from SearchActivity class.
+
+    public static final boolean enableRecyclerViewDebugs = true; // Debugs that derive from any Recycler view.
+    public static final boolean enableProfileDebugs = true; // Debugs that derive from any Profile update view.
 
     /**
      * @param classToDebug Provide the class that the debug derives from, in which it will determine if they are to be debugged.
@@ -30,6 +32,8 @@ public class CustomUtilityMethods {
             return (enableDebugs && enableUIDebugs);
         } else if (classToDebug == SearchActivity.class) {
             return (enableDebugs && enableSearchActivityDebugs);
+        } else if (classToDebug == FoodItemViewActivity.class) {
+            return (enableDebugs && enableRecyclerViewDebugs);
         }
         return true;
     }

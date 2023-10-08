@@ -50,12 +50,12 @@
                         android:hint="@string/search_bar_text"
                         android:paddingStart="@dimen/_40sdp"
                         android:paddingTop="@dimen/_20sdp"
-                        android:singleLine="true"
                         android:textColor="@color/darkTheme_WhiteFull"
                         android:textColorHint="@color/darkTheme_WhiteMed"
                         android:textSize="@dimen/_14ssp"
+                        android:imeActionLabel="xxxx"
                         android:imeOptions="actionSearch"
-                        android:maxLines="1"/>
+                        android:maxLines="1" />
 
                     <ImageView
                         android:id="@+id/backButton"
@@ -146,6 +146,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/darkTheme_Background"
         app:itemBackground="@null"
         app:itemIconTint="@color/darkTheme_WhiteFull"
         app:itemTextColor="@color/darkTheme_WhiteFull"

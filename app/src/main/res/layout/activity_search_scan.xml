@@ -16,6 +16,8 @@
             android:id="@+id/secondaryHeader"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_70sdp"
+            android:layout_marginEnd="@dimen/_70sdp"
             android:text="@string/scan_text"
             android:textColor="@color/darkTheme_WhiteFull"
             android:fontFamily="@font/circular"

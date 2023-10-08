@@ -18,6 +18,11 @@
     <string name="back_text">Back</string>
     <string name="next_text">Next</string>
     <string name="scan_text">Scan</string>
+    <string name="kcal_text">kcal</string>
+    <string name="percent_text">%</string>
+    <string name="lbs_text">lbs</string>
+    <string name="kg_text">kgs</string>
+
 
     // Filler
     <string name="filler_email">email@email.com</string>
@@ -119,5 +124,30 @@
 
     //Search scan
     <string name="barcode_scan_success_header">Barcode found</string>
+
+    //Nutrition facts
+    <string name="nutrition_facts_text">Nutrition Facts</string>
+    <string name="serving_size_text">Serving Size</string>
+
+    //Nutrition scanner
+    <string name="scan_label">Scan label</string>
+    <string name="nutrition_facts">Nutrition facts</string>
+
+    <string name="filler_value">-</string>
+
+    <string name="servings">Servings</string>
+    <string name="serving_size">Serving size</string>
+    <string name="calories">Calories</string>
+    <string name="total_fat">Total Fat</string>
+    <string name="saturated_fat">Saturated Fat</string>
+    <string name="trans_fat">Trans Fat</string>
+    <string name="cholesterol">Cholesterol</string>
+    <string name="sodium">Sodium</string>
+    <string name="potassium">Potassium</string>
+    <string name="total_carb">Total Carbohydrate</string>
+    <string name="dietary_fiber">Dietary Fiber</string>
+    <string name="total_sugars">Total Sugars</string>
+    <string name="added_sugars">Added Sugars</string>
+    <string name="protein">Protein</string>
 
 </resources>

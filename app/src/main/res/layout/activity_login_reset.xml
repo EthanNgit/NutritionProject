@@ -8,205 +8,219 @@
     android:backgroundTint="@color/darkTheme_Background"
     tools:context=".LoginResetActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:overScrollMode="always"
-        android:layout_marginBottom="60dp"
-        app:layout_constraintTop_toTopOf="parent" >
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--Header-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_62sdp"
+            android:backgroundTint="@color/darkTheme_Background_two">
+
+            <TextView
+                android:id="@+id/secondaryHeader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_70sdp"
+                android:layout_marginEnd="@dimen/_70sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/circular"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="@dimen/_23sdp"
+                android:text="@string/reset_password_text"
+                android:textColor="@color/darkTheme_WhiteFull"
+                android:textSize="@dimen/_12ssp" />
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_27sdp"
+                android:layout_marginTop="@dimen/_27sdp"
+                android:padding="@dimen/_7sdp"
+                android:src="@drawable/ic_backarrow" />
+
+        </androidx.cardview.widget.CardView>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:scrollbars="vertical"
+            android:overScrollMode="always"
+            android:layout_marginBottom="60dp"
+            app:layout_constraintTop_toTopOf="parent" >
 
-            <!--Header-->
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_62sdp"
-                android:backgroundTint="@color/darkTheme_Background_two">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/secondaryHeader"
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/otpCard"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/reset_password_text"
-                    android:textColor="@color/darkTheme_WhiteFull"
-                    android:fontFamily="@font/circular"
-                    android:textSize="@dimen/_12ssp"
-                    android:paddingTop="@dimen/_23sdp"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
+                    android:layout_height="@dimen/_160sdp"
+                    android:layout_margin="@dimen/_15sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    android:backgroundTint="@color/darkTheme_Background_two">
 
-                <ImageView
-                    android:id="@+id/backButton"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_27sdp"
-                    android:layout_marginTop="@dimen/_27sdp"
-                    android:padding="@dimen/_7sdp"
-                    android:src="@drawable/ic_backarrow" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/otp_code_text"
+                        android:textSize="@dimen/_16ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textAlignment="center"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
-            </androidx.cardview.widget.CardView>
+                    <EditText
+                        android:id="@+id/otpTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_32sdp"
+                        android:layout_marginTop="@dimen/_32sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/bg_gray_6dp_stroke_gray"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/circular_med"
+                        android:hint="@string/otp_code_text"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_15sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textColorHint="@color/darkTheme_WhiteMed"
+                        android:textSize="@dimen/_10ssp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/otpCard"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_160sdp"
-                android:layout_margin="@dimen/_15sdp"
-                app:cardCornerRadius="@dimen/_10sdp"
-                android:backgroundTint="@color/darkTheme_Background_two">
+                    <TextView
+                        android:id="@+id/otpErrorText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_65sdp"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:paddingBottom="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:text="@string/filler_error_code"
+                        android:textColor="@color/darkTheme_Error"
+                        android:textSize="@dimen/_10ssp"
+                        android:visibility="gone"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
-                <TextView
+                    <Button
+                        android:id="@+id/verifyOTPButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/bg_green_100dp"
+                        android:fontFamily="@font/circular"
+                        android:text="@string/verify_text"
+                        android:textAllCaps="false"
+                        android:textColor="@color/darkTheme_Black"
+                        android:textSize="@dimen/_20ssp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/passwordCard"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:text="@string/otp_code_text"
-                    android:textSize="@dimen/_16ssp"
-                    android:textColor="@color/darkTheme_WhiteFull"
-                    android:textAlignment="center"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
+                    android:layout_height="@dimen/_160sdp"
+                    android:layout_margin="@dimen/_15sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    android:backgroundTint="@color/darkTheme_Background_two"
+                    android:visibility="gone">
 
-                <EditText
-                    android:id="@+id/otpTextField"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_32sdp"
-                    android:layout_marginTop="@dimen/_32sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/bg_gray_6dp_stroke_gray"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:fontFamily="@font/circular_med"
-                    android:hint="@string/otp_code_text"
-                    android:inputType="number"
-                    android:paddingStart="@dimen/_15sdp"
-                    android:paddingEnd="@dimen/_15sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/darkTheme_WhiteFull"
-                    android:textColorHint="@color/darkTheme_WhiteMed"
-                    android:textSize="@dimen/_10ssp"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/new_password_text"
+                        android:textSize="@dimen/_16ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textAlignment="center"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
-                <TextView
-                    android:id="@+id/otpErrorText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_65sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:paddingStart="@dimen/_20sdp"
-                    android:text="@string/filler_error_code"
-                    android:textColor="@color/darkTheme_Error"
-                    android:textSize="@dimen/_10ssp"
-                    android:visibility="gone"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
+                    <EditText
+                        android:id="@+id/passwordTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_32sdp"
+                        android:layout_marginTop="@dimen/_32sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:autofillHints="password"
+                        android:background="@drawable/bg_gray_6dp_stroke_gray"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="@font/circular_med"
+                        android:hint="@string/password_text"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_15sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textColorHint="@color/darkTheme_WhiteMed"
+                        android:textSize="@dimen/_10ssp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
-                <Button
-                    android:id="@+id/verifyOTPButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/bg_green_100dp"
-                    android:fontFamily="@font/circular"
-                    android:text="@string/verify_text"
-                    android:textAllCaps="false"
-                    android:textColor="@color/darkTheme_Background"
-                    android:textSize="@dimen/_20ssp"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
+                    <TextView
+                        android:id="@+id/passwordErrorText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_65sdp"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:paddingBottom="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:text="@string/filler_error_password"
+                        android:textColor="@color/darkTheme_Error"
+                        android:textSize="@dimen/_10ssp"
+                        android:visibility="gone"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/passwordCard"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_160sdp"
-                android:layout_margin="@dimen/_15sdp"
-                app:cardCornerRadius="@dimen/_10sdp"
-                android:backgroundTint="@color/darkTheme_Background_two"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:text="@string/new_password_text"
-                    android:textSize="@dimen/_16ssp"
-                    android:textColor="@color/darkTheme_WhiteFull"
-                    android:textAlignment="center"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
-
-                <EditText
-                    android:id="@+id/passwordTextField"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_32sdp"
-                    android:layout_marginTop="@dimen/_32sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:autofillHints="password"
-                    android:background="@drawable/bg_gray_6dp_stroke_gray"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:fontFamily="@font/circular_med"
-                    android:hint="@string/password_text"
-                    android:inputType="text"
-                    android:paddingStart="@dimen/_15sdp"
-                    android:paddingEnd="@dimen/_15sdp"
-                    android:singleLine="true"
-                    android:textColor="@color/darkTheme_WhiteFull"
-                    android:textColorHint="@color/darkTheme_WhiteMed"
-                    android:textSize="@dimen/_10ssp"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
-
-                <TextView
-                    android:id="@+id/passwordErrorText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_65sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:paddingStart="@dimen/_20sdp"
-                    android:text="@string/filler_error_password"
-                    android:textColor="@color/darkTheme_Error"
-                    android:textSize="@dimen/_10ssp"
-                    android:visibility="gone"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
-
-                <Button
-                    android:id="@+id/resetPasswordButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/bg_green_100dp"
-                    android:fontFamily="@font/circular"
-                    android:text="@string/reset_password_text"
-                    android:textAllCaps="false"
-                    android:textColor="@color/darkTheme_Background"
-                    android:textSize="@dimen/_20ssp"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
+                    <Button
+                        android:id="@+id/resetPasswordButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@drawable/bg_green_100dp"
+                        android:fontFamily="@font/circular"
+                        android:text="@string/reset_password_text"
+                        android:textAllCaps="false"
+                        android:textColor="@color/darkTheme_Black"
+                        android:textSize="@dimen/_20ssp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
 
 
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

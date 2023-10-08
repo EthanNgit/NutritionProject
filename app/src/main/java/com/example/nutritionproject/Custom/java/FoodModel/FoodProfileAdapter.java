@@ -1,7 +1,10 @@
 package com.example.nutritionproject.Custom.java.FoodModel;
 
+import android.util.Pair;
+
 import com.example.nutritionproject.Custom.java.Enums.FoodTag;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
+import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMeasurement;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -34,11 +37,11 @@ public class FoodProfileAdapter extends TypeAdapter<FoodProfile> {
         if (nutrition != null) {
             writer.name("calories").value(nutrition.calories);
 
-            HashMap<Nutrient, Double> nutrients = nutrition.nutrients;
+            HashMap<Nutrient, Pair<Double, NutrientMeasurement>> nutrients = nutrition.nutrients;
 
             if (nutrients != null) {
                 for (Nutrient nutrient : nutrients.keySet()) {
-                    writer.name(nutrient.name()).value(nutrients.get(nutrient));
+                    writer.name(nutrient.name()).value(nutrients.get(nutrient).first + nutrients.get(nutrient).second.name());
                 }
             }
 

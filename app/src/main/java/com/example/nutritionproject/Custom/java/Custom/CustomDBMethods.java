@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import com.example.nutritionproject.Custom.java.Enums.FoodTag;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
+import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
+import com.example.nutritionproject.Custom.java.UserModel.UserProfileStaticRefOther;
 import com.example.nutritionproject.Custom.java.Utility.Event;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.UserModel.UserMacros;
@@ -22,12 +24,16 @@ import com.example.nutritionproject.Model.FoodModel;
 import com.example.nutritionproject.Model.UserModel;
 import com.example.nutritionproject.Retrofit.ApiClient;
 import com.example.nutritionproject.Retrofit.ApiInterface;
+import com.example.nutritionproject.TdeeActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.joda.time.LocalDate;
 
 import java.lang.reflect.Type;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
@@ -87,6 +93,7 @@ public class CustomDBMethods {
 
     public Event onFoodItemSearchSuccess = new Event();
     public Event onFoodItemSearchFailure = new Event();
+
     //endregion
 
     // C# > Java (at least for anything that has interfaces; optional params and built in events are great)
@@ -297,8 +304,10 @@ public class CustomDBMethods {
      * If the user has not set goals yet, it will create a new entry with no goals.
      * If the user is creating a new days entree will automatically create a new day and store previous in history.
      */
-    public void updateNutrition(int userid, int currentCalories, int currentProtein, int currentCarbs, int currentFat, String currentDate, @Nullable EventCallback callback) {
-        Call<UserModel> userModelCall = apiInterface.updateNutrition(userid, currentCalories, currentProtein, currentCarbs, currentFat, currentDate);
+    public void updateNutrition(int userid, int currentCalories, int currentProtein, int currentCarbs, int currentFat, @Nullable ArrayList<MealProfile> meals, String currentDate, @Nullable EventCallback callback) {
+        Gson gson = new Gson();
+
+        Call<UserModel> userModelCall = apiInterface.updateNutrition(userid, currentCalories, currentProtein, currentCarbs, currentFat, meals != null ? gson.toJson(meals) : null, currentDate);
 
         userModelCall.enqueue(new Callback<UserModel>() {
             @Override
@@ -309,7 +318,18 @@ public class CustomDBMethods {
                     if (userModel.isSuccess()) {
                         if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Current nutrition successfully updated");
                         if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.userNutritionUpdateSuccess).build());
-                        onUserCurrentNutritionUpdateSuccess.invoke();
+                        getUser(CurrentProfile.email, new EventCallback() {
+                            @Override
+                            public void onSuccess(@Nullable EventContext context) {
+                                onUserCurrentNutritionUpdateSuccess.invoke();
+                                TdeeActivity.onTDEEUserGoalUpdated.invoke();
+                            }
+
+                            @Override
+                            public void onFailure(@Nullable EventContext context) {
+
+                            }
+                        });
                     } else {
                         if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Current nutrition failed to update, " + userModel.getMessage());
                         if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
@@ -325,6 +345,40 @@ public class CustomDBMethods {
                 onConnectionFailure.invoke();
             }
         });
+    }
+
+    public void getMeals(int userid, @Nullable EventCallback callback) {
+        Call<UserModel> userModelCall = apiInterface.getMeals(userid);
+
+        userModelCall.enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserModel model = response.body();
+                    Gson gson = new Gson();
+
+                    Type listType = new TypeToken<ArrayList<MealProfile>>() {}.getType();
+                    ArrayList<MealProfile> meals = gson.fromJson(gson.toJson(model.getMeals()), listType);
+                    UserProfileStaticRefOther.userMealHistory = meals;
+
+                    for (MealProfile meal: meals) {
+                        Log.d("NORTH", meal.toString());
+                    }
+                    if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "User meals retrieved with: " + meals.size());
+                    if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.foodSearchSuccess).withData(meals).build());
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                if (CustomUtilityMethods.shouldDebug(CustomDBMethods.class)) Log.d("NORTH_DATABASE", "Failed connection, " + t.getMessage());
+                if (callback != null) callback.onFailure(new EventContext.Builder().withError(EventContextStrings.connectionError).build());
+                onConnectionFailure.invoke();
+            }
+        });
+
     }
 
     /**
@@ -405,12 +459,11 @@ public class CustomDBMethods {
         String dateAdded = item.dateAdded;
         boolean isCommon = item.isCommon;
         @Nullable String brandName = item.brandName;
-        boolean isVerified = item.isVerified;
         @Nullable FoodNutrition nutrition = item.nutrition;
 
         Gson gson = new Gson();
 
-        Call<FoodModel> foodModelCall = apiInterface.addFoodItem(upcId, name, gson.toJson(tags), dateAdded, isCommon, brandName, isVerified, gson.toJson(nutrition));
+        Call<FoodModel> foodModelCall = apiInterface.addFoodItem(upcId, name, gson.toJson(tags), dateAdded, isCommon, brandName, gson.toJson(nutrition));
 
         foodModelCall.enqueue(new Callback<FoodModel>() {
             @Override
@@ -504,6 +557,14 @@ public class CustomDBMethods {
                 new UserMacros(user.getCalorie(), user.getProtein(), user.getCarb(), user.getFat()),
                 new UserMacros(user.getCurrentCalories(), user.getCurrentProtein(), user.getCurrentCarbs(), user.getCurrentFats()),
                 null);
+    }
+
+    public void updateUserNutritionWithMeal(MealProfile meal) {
+        UserProfileStaticRefOther.userMealHistory.add(meal);
+        UserProfileStaticRefOther.onUserMealHistoryUpdate.invoke();
+
+        updateNutrition(CurrentProfile.id, (int) meal.totalCalories, (int) meal.totalProtein, (int) meal.totalCarbs,
+                (int) meal.totalFats, UserProfileStaticRefOther.userMealHistory, String.valueOf(new LocalDate()), null);
     }
 
     public static boolean isEmailValid(CharSequence email) {

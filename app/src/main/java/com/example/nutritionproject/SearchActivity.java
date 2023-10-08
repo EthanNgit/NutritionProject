@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,21 +23,23 @@ import android.widget.TextView;
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Custom.UI.FoodListAdapter;
+import com.example.nutritionproject.Custom.java.Custom.UI.RecyclerViewInterface;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.example.nutritionproject.Custom.java.Utility.Event;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener {
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener, RecyclerViewInterface {
 
     //TODO: I am not sure if I exactly like this setup, but i will stick with it till I feel need to add Callbacks and Parameters to events
 
     private final CustomDBMethods dbManager = new CustomDBMethods();
+    private ArrayList<FoodProfile> profiles;
 
     private BottomNavigationView bottomNavView;
 
@@ -88,14 +91,18 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         backBtn.setOnClickListener(this);
         barcodeBtn.setOnClickListener(this);
         addItemBtn.setOnClickListener(this);
+        searchField.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
 
         searchField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (event == null || event.getAction() != KeyEvent.ACTION_DOWN)
                     return false;
 
-                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+
+                // This seems broken on androids part, phone returns null, but emulator returns the correct thing.
+                if(actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_NULL){
                     updateSearchResults();
                 }
                 return false;
@@ -116,28 +123,29 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(SearchActivity.this, AddFoodItemActivity.class));
         }
 
-
     }
 
 
     public void updateSearchResults() {
         if (!passedUpcId.isEmpty()) { searchField.setText(passedUpcId); }
 
-        if (searchField.getText().toString().isEmpty()) { return; }
+        if (searchField.getText().toString().length() <= 1) { return; }
 
         Context parentContext = this;
         String searchText = searchField.getText().toString().trim().toLowerCase();
         boolean shouldUseUpc = dbManager.isOnlyDigits(searchText) ? true : false;
+
+        RecyclerViewInterface recyclerViewInterface = this;
         dbManager.searchFoodItem(shouldUseUpc ? searchText : "", shouldUseUpc ? "" : searchText, new EventCallback() {
             @Override
             public void onSuccess(@Nullable EventContext context) {
                 emptySearchLayout.setVisibility(View.GONE);
                 fullSearchLayout.setVisibility(View.VISIBLE);
 
-                ArrayList<FoodProfile> profiles = (ArrayList<FoodProfile>) context.getData();
+                profiles = (ArrayList<FoodProfile>) context.getData();
 
                 if (profiles.size() > 0) {
-                    FoodListAdapter adapter = new FoodListAdapter(parentContext, profiles);
+                    FoodListAdapter adapter = new FoodListAdapter(parentContext, profiles, recyclerViewInterface);
                     fullSearchLayout.setAdapter(adapter);
                     fullSearchLayout.setLayoutManager(new LinearLayoutManager(parentContext));
                 }
@@ -162,4 +170,28 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+        if (profiles == null) return;
+
+        //TODO: MAKE GSON WORK FOR SOME REASON.
+
+        FoodProfile profile = profiles.get(position);
+
+        Intent intent = new Intent(this, FoodItemViewActivity.class);
+
+        Gson gson = new Gson();
+
+        intent.putExtra("name", profile.name);
+        intent.putExtra("upcid", profile.upcId);
+        intent.putExtra("dateadded", profile.dateAdded);
+        intent.putExtra("tags", gson.toJson(profile.tags));
+        intent.putExtra("common", profile.isCommon);
+        intent.putExtra("brand", profile.brandName);
+        intent.putExtra("verified", profile.isVerified);
+        intent.putExtra("nutrition", gson.toJson(profile.nutrition));
+
+
+        startActivity(intent);
+    }
 }

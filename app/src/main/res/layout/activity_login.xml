@@ -182,7 +182,7 @@
             android:fontFamily="@font/circular"
             android:text="@string/login_text"
             android:textAllCaps="false"
-            android:textColor="@color/darkTheme_Background"
+            android:textColor="@color/darkTheme_Black"
             android:textSize="@dimen/_20ssp"
             android:maxLines="1"
             android:ellipsize="end"/>

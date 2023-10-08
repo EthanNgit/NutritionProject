@@ -112,5 +112,11 @@ This application is built similarly to other fitness apps, with some improvments
 
 ## Resources
 > I would not of been able to get so far without the thanks of these.
+*  [Google ML kit (Nutrition scanner & Barcode scanner)](https://developers.google.com/ml-kit)
+*  [Retrofit 2](https://square.github.io/retrofit/)
+*  [Scalable dp](https://github.com/intuit/sdp)
+*  [Scalable sp](https://github.com/intuit/ssp)
+*  [Semi-circle progress bar](https://github.com/hadibtf/SemiCircleArcProgressBar)
+  
 
 

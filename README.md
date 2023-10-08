@@ -1,6 +1,6 @@
 # NutritionProject
 Full Stack Android Mobile Application.
-> Current version: V: 0.3.1.1 Switched completely to scalable dp units (I found out the hard way), also started hosting db on droplet.
+> Current version: V: 0.3.2.1 Massive. Theme update. Nutrition scanner integration. Basic macro statistics. Meal objects / Recipe objects. Php update. etc.
 
 ## About
 This application is built similarly to other fitness apps, with some improvments I personally would like in a fitness app. It contains more ease of use when it comes to adding items to your daily meals compared to other apps. The app contains a custom database that will be able to house thousands of items for users to search for and add into their macros. The app skips over the useless mumbo jumbo that make other apps clunky like recipes and workouts. Realistically workouts have nothing to do counting macros directly (not accounting for the extra tdee), as in they do not need to suggest me to do 15 sets of crunches 3 times a day, it is outside the scope of a nutritional app. The app takes in the least amount of personal data possible, just an email and a password. This is for the users privacy, as why do I need a name, I only need to be able to associate your account, which can be done with those only. There is a built in tdee calculator that compares in accuracy to other online ones. There is a lot of details skimmed over in this section, but I beleive it to be enough to breifly introduce you to my application 
@@ -26,6 +26,7 @@ This application is built similarly to other fitness apps, with some improvments
 <details><summary>History</summary>
  <details><summary>V3</summary>
   <ul>
+    <li> V: 0.3.1.1 Switched completely to scalable dp units (I found out the hard way), also started hosting db on droplet.</li>
    <li> V: 0.3 Heavy php update, added macro counting and user history functionality</li>
   </ul>
  </details>
@@ -73,9 +74,9 @@ This application is built similarly to other fitness apps, with some improvments
  <details><summary>V3</summary>
   <ul>
    <li> :heavy_check_mark: Macro counting </li>
-   <li> :x: Meal Planner </li>
+   <li> :heavy_check_mark: Meal Planner </li>
    <li> :heavy_check_mark: User history </li>
-   <li> :x: Object based personal recipe items </li>
+   <li> :heavy_check_mark: Object based personal recipe items </li>
    <li> :heavy_check_mark: Fix mobile port ui </li>
    <li> :heavy_check_mark: Add alcohol macro </li>
    <li> :heavy_check_mark: Nutrition label scanner </li>

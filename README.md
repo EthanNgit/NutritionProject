@@ -10,12 +10,12 @@ Current Version:
 <details><summary>History</summary>
  <details><summary>V3</summary>
   <ul>
-   <li> <input type="checkbox" disabled checked /> V: 0.3 Heavy php update, added macro counting and user history functionality</li>
+   <li> V: 0.3 Heavy php update, added macro counting and user history functionality</li>
   </ul>
  </details>
  <details><summary>V2</summary>
   <ul>
-   <li> 0.2.3.1 Added add and search functionality (still need ui), took years to debug gson and php. Added more event functionality, and more dev qol (had calc test, will get back soon) </li>
+   <li> - [] 0.2.3.1 Added add and search functionality (still need ui), took years to debug gson and php. Added more event functionality, and more dev qol (had calc test, will get back soon) </li>
    <li> 0.2.2.1 Added Barcode scanner after 6 tries (Had to use Kotlin, could not get it right with java), still needs more QOL, for better scanning UX </li>
    <li> 0.2.1.1 Fixed some last second food object problems I figured out (serving size) </li>
    <li> V: 0.2 Food and nutrient Objects, along with there serialization adapters, started the barcode scanner. </li>

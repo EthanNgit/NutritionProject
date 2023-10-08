@@ -36,7 +36,7 @@ Current Version:
 ## Future plans
 > Plans and structure for each version planned along with the already completed versions.
 
-<details><summary>History</summary>
+<details><summary>Roadmap</summary>
  <details><summary>V1</summary>
   <ul>
    <li> V: 0.3 Heavy php update, added macro counting and user history functionality</li>

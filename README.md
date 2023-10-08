@@ -77,29 +77,27 @@ Current Version:
    <li> :x: Undecided (Most likely polish and implementing some potential features if I feel the need to) </li>
   </ul>
  </details>
+ <details><summary>Potential plans</summary>
+  <ul>
+   <li> :x: Search settings (would have to create a new relationship table in db to then be able to sort by those instead of the json method in use currently) </li>
+   <li> :x: Database based reset password </li>
+   <li> :x: Resarch into more security for the database </li>
+   <li> :x: Add a barcode api to show what the item would be if it isnt added </li>
+   <li> :x: Stronger / More user friendly search algorithm </li>
+   <li> :x: Security update (given that i were inclined to publicly release this, there is some must-do changes) </li>
+   <li> :x: Api for the food database (most likely to happen, with python) </li>
+   <li> :x: Admin console for regulating db (most likely to happen, with wpf c#) </li>
+  </ul>
+ </details>
+  <details><summary>Passive plans</summary>
+  <ul>
+   <li> :x: Switch to a strings xml layout (also dimesions) </li>
+   <li> :x: Switch "Custom...Method" classes to static (so events can be called on multiple layers at once) </li>
+   <li> :x: Create more event callbacks (and be more descriptive) </li>
+   <li> :x: Switch to php (server side) local time </li>
+   <li> :heavy_check_mark: Switching to sdp and ssp, just found out, this is a large chunk of time i need to reinvest... </li>
+ </details>
 </details>
-
-
-
-Potential Plans:
-* Search settings (would have to create a new relationship table in db to then be able to sort by those instead of the json method in use currently)
-* Database based reset password
-* Resarch into more security for the database
-* Add a barcode api to show what the item would be if it isnt added
-* Stronger / More user friendly search algorithm
-* Security update (given that i were inclined to publicly release this, there is some must-do changes)
-* Api for the food database (most likely to happen, with python)
-* Admin console for regulating db (most likely to happen, with wpf c#)
-  * Ability to verify products easily
-  * Ability to implement a check feature (someone adds item -> they use temperary version of it -> admin checks it -> admin can add it to db)
-
-Passive Plans (Will do slowly / is on back burner):
-* Switch to a strings xml layout (also dimesions)
-* Switch "Custom...Method" classes to static (so events can be called on multiple layers at once)
-* Create more event callbacks (and be more descriptive)
-* Switch to php (server side) local time
-* Switching to sdp and ssp, just found out, this is a large chunk of time i need to reinvest...
-   
 
 
 

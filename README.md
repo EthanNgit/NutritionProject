@@ -85,13 +85,6 @@ Current Version:
  </details>
 </details>
 
-Plans: 
- * V. 0.1 ✅
-  *  ✅
-  * ✅
-  * ✅
-  *  ✅
- 
 
 
 Potential Plans:

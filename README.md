@@ -5,6 +5,8 @@ Current Version:
 * V: 0.3.1.1 Switched completely to scalable dp units (I found out the hard way), also started hosting db on droplet.
 
 ## Past versions
+> Documentation of each git release is contained and stored.
+
 <details><summary>History</summary>
  <details><summary>V3</summary>
   <ul>
@@ -30,21 +32,6 @@ Current Version:
   </ul>
  </details>
 </details>
-
-
-Past Versions:
-
-* 0.2.4.1 Added the base ui for search and add function base app is about finished, working on recipe next
-* 0.2.3.1 Added add and search functionality (still need ui), took years to debug gson and php. Added more event functionality, and more dev qol (had calc test, will get back soon)
-* 0.2.2.1 Added Barcode scanner after 6 tries (Had to use Kotlin, could not get it right with java), still needs more QOL, for better scanning UX
-* 0.2.1.1 Fixed some last second food object problems I figured out (serving size)
-* V: 0.2 Food and nutrient Objects, along with there serialization adapters, started the barcode scanner.
-* 0.1.4.2 / 0.1.4.3 Fixing a git error i made and finishing up
-* 0.1.4.1 Added reset password and otp generation (for security reasons probly shift it over to php hosting otp instead, but ill leave that out as of now)
-* 0.1.3.1 Added most menus, added auto generated profile picture
-* 0.1.2.1 Added settings, logout, and more ui.
-* 0.1.1.1 Added manual TDEE option, finished setting base dashboard up
-* V: 0.1 Login / Register System with mySQL database Android preferences for Remember me TDEE Calculator
 
 Plans: 
  * V. 0.1 ✅

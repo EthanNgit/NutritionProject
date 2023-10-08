@@ -33,31 +33,66 @@ Current Version:
  </details>
 </details>
 
+## Future plans
+> Plans and structure for each version planned along with the already completed versions.
+
+<details><summary>History</summary>
+ <details><summary>V1</summary>
+  <ul>
+   <li> V: 0.3 Heavy php update, added macro counting and user history functionality</li>
+   
+  </ul>
+ </details>
+ <details><summary>V2</summary>
+  <ul>
+   <li> Base Login system (Register / Login / Remember me / Forgot Password) </li>
+   <li> Tdee calculator </li>
+   <li> Dashboard ui  </li>
+   <li> Other base uis (profile, settings, other smaller menus...) </li>
+  </ul>
+ </details>
+ <details><summary>V3</summary>
+  <ul>
+   <li> Food item database system </li>
+   <li> Adding functionality </li>
+   <li> Searching functionality </li>
+   <li> Barcode functionality </li>
+   <li> Adding / Searching ui (search lists and add forms) </li>
+  </ul>
+ </details>
+ <details><summary>V4</summary>
+  <ul>
+   <li> Macro counting </li>
+   <li> Meal Planner </li>
+   <li> User history </li>
+   <li> Object based personal recipe items </li>
+   <li> Fix mobile port ui </li>
+   <li> Add alcohol macro </li>
+   <li> Nutrition label scanner </li>
+  </ul>
+ </details>
+ <details><summary>V5</summary>
+  <ul>
+   <li> Data analysis </li>
+   <li> Meal History </li>
+   <li> Day review </li>
+  </ul>
+ </details>
+ <details><summary>V6</summary>
+  <ul>
+   <li> Undecided (Most likely polish and implementing some potential features if I feel the need to) </li>
+  </ul>
+ </details>
+</details>
+
 Plans: 
  * V. 0.1 ✅
-  * Base Login system (Register / Login / Remember me / Forgot Password) ✅
-  * Tdee ✅
-  * Dashboard ui ✅
-  * Other base uis (profile, settings, other smaller menus...) ✅
- * V. 0.2 ✅
-   * Food item database system ✅
-   * Adding functionality ✅
-   * Searching functionality✅
-   * Barcode functionality ✅
-   * Adding / Searching ui (search lists and add forms) ✅
- * V. 0.3
-   * Macro counting ✅
-   * Meal Planner
-   * User history ✅
-   * Object based personal recipe items
-   * fix mobile port ui ✅
-   * add alcohol macro
- * V. 0.4
-   * Data analysis
-   * Meal History
-   * Day review
- * V. 0.5
-   * Undecided (Most likely polish and implementing some potential features if I feel the need to)
+  *  ✅
+  * ✅
+  * ✅
+  *  ✅
+ 
+
 
 Potential Plans:
 * Search settings (would have to create a new relationship table in db to then be able to sort by those instead of the json method in use currently)

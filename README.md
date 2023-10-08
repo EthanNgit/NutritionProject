@@ -15,6 +15,9 @@ This application is built similarly to other fitness apps, with some improvments
   <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/4c810dc9-b3f9-482c-b260-3ae6a70ebb88" width="25">
   <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/99985008-ff10-40da-b45b-9db73f33b1e3" width="25">
 
+## Walkthrough
+> TBC
+
 ## Past versions
 > Documentation of each git release is contained and stored.
 

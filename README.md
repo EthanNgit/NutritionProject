@@ -39,47 +39,42 @@ Current Version:
 <details><summary>Roadmap</summary>
  <details><summary>V1</summary>
   <ul>
-   <li> :heavy_check_mark: V: 0.3 Heavy php update, added macro counting and user history functionality</li>
+   <li> :heavy_check_mark: Base Login system (Register / Login / Remember me / Forgot Password) </li>
+   <li> :heavy_check_mark: Tdee calculator </li>
+   <li> :heavy_check_mark: Dashboard ui  </li>
+   <li> :heavy_check_mark: Other base uis (profile, settings, other smaller menus...) </li>
   </ul>
  </details>
  <details><summary>V2</summary>
   <ul>
-   <li> Base Login system (Register / Login / Remember me / Forgot Password) </li>
-   <li> Tdee calculator </li>
-   <li> Dashboard ui  </li>
-   <li> Other base uis (profile, settings, other smaller menus...) </li>
+   <li> :heavy_check_mark: Food item database system </li>
+   <li> :heavy_check_mark: Adding functionality </li>
+   <li> :heavy_check_mark: Searching functionality </li>
+   <li> :heavy_check_mark: Barcode functionality </li>
+   <li> :heavy_check_mark: Adding / Searching ui (search lists and add forms) </li>
   </ul>
  </details>
  <details><summary>V3</summary>
   <ul>
-   <li> Food item database system </li>
-   <li> Adding functionality </li>
-   <li> Searching functionality </li>
-   <li> Barcode functionality </li>
-   <li> Adding / Searching ui (search lists and add forms) </li>
+   <li> :heavy_check_mark: Macro counting </li>
+   <li> :x: Meal Planner </li>
+   <li> :heavy_check_mark: User history </li>
+   <li> :x: Object based personal recipe items </li>
+   <li> :heavy_check_mark: Fix mobile port ui </li>
+   <li> :heavy_check_mark: Add alcohol macro </li>
+   <li> :heavy_check_mark: Nutrition label scanner </li>
   </ul>
  </details>
  <details><summary>V4</summary>
   <ul>
-   <li> Macro counting </li>
-   <li> Meal Planner </li>
-   <li> User history </li>
-   <li> Object based personal recipe items </li>
-   <li> Fix mobile port ui </li>
-   <li> Add alcohol macro </li>
-   <li> Nutrition label scanner </li>
+   <li> :x: Data analysis </li>
+   <li> :x: Meal History </li>
+   <li> :x: Day review </li>
   </ul>
  </details>
  <details><summary>V5</summary>
   <ul>
-   <li> Data analysis </li>
-   <li> Meal History </li>
-   <li> Day review </li>
-  </ul>
- </details>
- <details><summary>V6</summary>
-  <ul>
-   <li> Undecided (Most likely polish and implementing some potential features if I feel the need to) </li>
+   <li> :x: Undecided (Most likely polish and implementing some potential features if I feel the need to) </li>
   </ul>
  </details>
 </details>

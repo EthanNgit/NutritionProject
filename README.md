@@ -39,7 +39,7 @@ Current Version:
 <details><summary>Roadmap</summary>
  <details><summary>V1</summary>
   <ul>
-   <li> - [] V: 0.3 Heavy php update, added macro counting and user history functionality</li>
+   <li> :heavy_check_mark: V: 0.3 Heavy php update, added macro counting and user history functionality</li>
   </ul>
  </details>
  <details><summary>V2</summary>

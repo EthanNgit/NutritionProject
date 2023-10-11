@@ -76,6 +76,8 @@ This application is built similarly to other fitness apps, with some improvments
   <ul>
    <li> :heavy_check_mark: Macro counting </li>
    <li> :heavy_check_mark: Meal Planner </li>
+    <li> :x: Add meal layout </li>
+    <li> :x: Meal view layout </li>
    <li> :heavy_check_mark: User history </li>
    <li> :heavy_check_mark: Object based personal recipe items </li>
    <li> :heavy_check_mark: Fix mobile port ui </li>

@@ -36,7 +36,7 @@
                 android:ellipsize="end"/>
 
             <ImageView
-                android:id="@+id/backButton"
+                android:id="@+id/backBtn"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_27sdp"

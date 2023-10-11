@@ -1,12 +1,12 @@
 package com.example.nutritionproject.Model;
 
-import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class UserModel {
+public class UserModel
+{
 
     @Expose
     @SerializedName("id")

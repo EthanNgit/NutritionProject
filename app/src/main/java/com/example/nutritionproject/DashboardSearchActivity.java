@@ -11,59 +11,62 @@ import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.databinding.ActivityDashboardHomeBinding;
+import com.example.nutritionproject.databinding.ActivityDashboardSearchBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class DashboardSearchActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener {
-
-    private BottomNavigationView bottomNavView;
-
+public class DashboardSearchActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener
+{
     private final CustomFitMethods fitManager = new CustomFitMethods();
-
-    private TextView searchButton;
-
-
+    private ActivityDashboardSearchBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_search);
+        binding = ActivityDashboardSearchBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
+        handleUI();
+    }
+
+    public void handleUI()
+    {
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
-        bottomNavView = findViewById(R.id.bottomNavigationView);
+        binding.bottomNavigationView.setItemIconTintList(null);
+        binding.bottomNavigationView.getMenu().findItem(R.id.searchBtn).setChecked(true);
+        binding.bottomNavigationView.setOnItemSelectedListener(this);
 
-        searchButton = findViewById(R.id.searchBtn);
-
-        bottomNavView.setItemIconTintList(null);
-
-        bottomNavView.getMenu().findItem(R.id.searchBtn).setChecked(true);
-
-        bottomNavView.setOnItemSelectedListener(this);
-
-        searchButton.setOnClickListener(this);
+        binding.searchBtn.setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         int id = view.getId();
 
-        if (id == searchButton.getId()) {
+        if (id == binding.searchBtn.getId())
+        {
             startActivity(new Intent(DashboardSearchActivity.this, SearchActivity.class));
         }
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
         int id = item.getItemId();
 
-        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, binding.bottomNavigationView, item);
 
         return false;
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
+    public void onPointerCaptureChanged(boolean hasCapture)
+    {
         super.onPointerCaptureChanged(hasCapture);
     }
 }

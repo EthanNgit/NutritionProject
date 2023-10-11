@@ -1,7 +1,8 @@
 package com.example.nutritionproject.Custom.java.Enums;
 
 
-public enum Nutrient {
+public enum Nutrient
+{
     //Main
     Calorie,
     Protein,

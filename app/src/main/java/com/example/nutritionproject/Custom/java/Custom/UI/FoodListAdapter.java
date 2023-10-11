@@ -19,79 +19,87 @@ import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMeasurement;
 import com.example.nutritionproject.R;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyViewHolder> {
+public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyViewHolder>
+{
     private final RecyclerViewInterface recyclerViewInterface;
-    Context context;
     ArrayList<FoodProfile> profileList;
+    Context context;
 
 
-    public FoodListAdapter(Context context, ArrayList<FoodProfile> profileList, RecyclerViewInterface recyclerViewInterface) {
+    public FoodListAdapter(Context context, ArrayList<FoodProfile> profileList, RecyclerViewInterface recyclerViewInterface)
+    {
         this.recyclerViewInterface = recyclerViewInterface;
-        this.context = context;
         this.profileList = profileList;
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public FoodListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FoodListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.food_list_view, parent, false);
-        return new FoodListAdapter.MyViewHolder(view, recyclerViewInterface);
+        FoodListAdapter.MyViewHolder foodViewHolder = new FoodListAdapter.MyViewHolder(view, recyclerViewInterface);
+
+        return foodViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodListAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FoodListAdapter.MyViewHolder holder, int position)
+    {
         FoodProfile curProfile = profileList.get(position);
 
         CustomUIMethods.setProfileButton(context, holder.imageIcon, CustomUIMethods.generateRandomColorBasedOffBrand(), holder.imageIconText, curProfile.name);
-        holder.itemName.setText(curProfile.name);
-        Gson gson = new Gson();
-        // is common / brand | xxx cal | xxx protein
+
         String detailString = curProfile.isCommon ? "Common" : curProfile.brandName + " | "
                 + (int) curProfile.nutrition.calories + " Cal | "
                 + curProfile.nutrition.nutrients.getOrDefault(Nutrient.Protein, new Pair<>(0.0, NutrientMeasurement.none)).first.intValue() + " P";
-        holder.itemDetails.setText(detailString);
 
-        if (curProfile.isVerified) {
-            holder.itemVerified.setVisibility(View.VISIBLE);
-        } else {
-            holder.itemVerified.setVisibility(View.GONE);
-        }
+        holder.itemName.setText(curProfile.name);
+        holder.itemDetails.setText(detailString);
+        holder.itemVerified.setVisibility((curProfile.isVerified) ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public int getItemCount() {
-        return profileList.size();
+    public int getItemCount()
+    {
+        int profileListSize = profileList.size();
+
+        return profileListSize;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        CardView imageIcon;
+    public static class MyViewHolder extends RecyclerView.ViewHolder
+    {
         TextView imageIconText;
-        TextView itemName;
-        TextView itemDetails;
         ImageView itemVerified;
+        TextView itemDetails;
+        CardView imageIcon;
+        TextView itemName;
 
-        public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
+        public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface)
+        {
             super(itemView);
 
-            imageIcon = itemView.findViewById(R.id.listItemIcon);
             imageIconText = itemView.findViewById(R.id.listItemIconText);
-            itemName = itemView.findViewById(R.id.listItemName);
-            itemDetails = itemView.findViewById(R.id.listItemDetails);
             itemVerified = itemView.findViewById(R.id.listItemVerified);
+            itemDetails = itemView.findViewById(R.id.listItemDetails);
+            imageIcon = itemView.findViewById(R.id.listItemIcon);
+            itemName = itemView.findViewById(R.id.listItemName);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View v) {
-                    if (recyclerViewInterface != null) {
+                public void onClick(View v)
+                {
+                    if (recyclerViewInterface != null)
+                    {
                         int pos = getAdapterPosition();
 
-                        if (pos != RecyclerView.NO_POSITION) {
+                        if (pos != RecyclerView.NO_POSITION)
+                        {
                             recyclerViewInterface.onItemClick(pos);
                         }
                     }

@@ -34,6 +34,8 @@ import com.example.nutritionproject.Custom.java.NutritionLabelScanner.Utils;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.Custom.java.Utility.EventContextStrings;
+import com.example.nutritionproject.databinding.ActivityAddFoodItemBinding;
+import com.example.nutritionproject.databinding.ActivityFoodItemViewBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -41,341 +43,267 @@ import org.joda.time.LocalDate;
 
 import java.util.HashMap;
 
-public class AddFoodItemActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, NavigationBarView.OnItemSelectedListener {
+public class AddFoodItemActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener, NavigationBarView.OnItemSelectedListener
+{
 
     // Extremely bad practice. Only till i figure out how to better send complex data types over intents (Android only allows primitive)
     public static HashMap<Nutrient, Pair<Double, NutrientMeasurement>> receivedMacros;
-
     private CustomDBMethods dbManager = new CustomDBMethods();
-
-    private ImageView backBtn;
-
-    private BottomNavigationView bottomNavView;
-
-    //region Card 1
-    private CardView addCard1;
-    private TextView addItemErrorText;
-
-    private EditText itemNameTextField;
-    private TextView itemNameErrorText;
-
-    private EditText itemUPCTextField;
-    private TextView itemUPCErrorText;
-
-    private TextView itemTypeCommonTwoWayButton;
-    private TextView itemTypeBrandedTwoWayButton;
-    private ImageView itemTypeWayVisualOne;
-    private ImageView itemTypeWayVisualTwo;
-
-    private LinearLayout itemBrandLayout;
-    private EditText itemBrandTextField;
-    private TextView itemBrandErrorText;
-
-    private LinearLayout firstCarouselNextButton;
-    //endregion
-    //region Card 2
-    private CardView addCard2;
-
-    private EditText servingAmtTextField;
-    private EditText servingSizeTextField;
-    private TextView servingErrorTextField;
-
-    private CardView scanLabelButton;
-
-    private LinearLayout secondCarouselBackButton;
-    private LinearLayout secondCarouselNextButton;
-
-    //endregion
-    //region Card3
-    private CardView addCard3;
-
-    private EditText itemCalorieTextField;
-    private TextView itemCalorieErrorText;
-
-    private EditText itemProteinTextField;
-    private TextView itemProteinErrorText;
-
-    private EditText itemCarbTextField;
-    private TextView itemCarbErrorText;
-
-    private EditText itemFatTextField;
-    private TextView itemFatErrorText;
-
-    private LinearLayout thirdCarouselBackButton;
-    //endregion
-
     private boolean isCommon = true;
-
-    private Button addButton;
-
     private String incUpcid = "";
-
     private String cameraPermission = Manifest.permission.CAMERA;
-
     private ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted ->
+            {
+                if (isGranted)
+                {
                     startScanner();
                 }
             });
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_food_item);
+    private ActivityAddFoodItemBinding binding;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        binding = ActivityAddFoodItemBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
+        handleUI();
+    }
+
+    private void handleUI()
+    {
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
+        binding.bottomNavigationView.setItemIconTintList(null);
+        binding.bottomNavigationView.getMenu().findItem(R.id.searchBtn).setChecked(true);
+        binding.bottomNavigationView.setOnItemSelectedListener(this);
 
-        //region Searching and setting
-        //region Frame items
-        backBtn = findViewById(R.id.backButton);
-        bottomNavView = findViewById(R.id.bottomNavigationView);
+        binding.servingSizeTextField.setOnFocusChangeListener(this);
+        binding.servingAmtTextField.setOnFocusChangeListener(this);
+        binding.itemNameTextField.setOnFocusChangeListener(this);
+        binding.brandTextField.setOnFocusChangeListener(this);
+        binding.upcTextField.setOnFocusChangeListener(this);
 
-        bottomNavView.setItemIconTintList(null);
-
-        bottomNavView.getMenu().findItem(R.id.searchBtn).setChecked(true);
-
-        bottomNavView.setOnItemSelectedListener(this);
-
-        backBtn.setOnClickListener(this);
-        //endregion
-        //region Finding card1
-        addCard1 = findViewById(R.id.addItemCard1);
-
-        itemNameTextField = findViewById(R.id.itemNameTextField);
-        itemNameErrorText = findViewById(R.id.nameErrorLabelText);
-        itemUPCTextField = findViewById(R.id.upcTextField);
-        itemUPCErrorText = findViewById(R.id.upcErrorLabelText);
-
-        itemTypeCommonTwoWayButton = findViewById(R.id.commonButton);
-        itemTypeBrandedTwoWayButton = findViewById(R.id.brandedButton);
-        itemTypeWayVisualOne = findViewById(R.id.itemTypeTwoWayVisualOne);
-        itemTypeWayVisualTwo = findViewById(R.id.itemTypeTwoWayVisualTwo);
-
-        itemBrandLayout = findViewById(R.id.brandNameLayout);
-        itemBrandTextField = findViewById(R.id.brandTextField);
-        itemBrandErrorText = findViewById(R.id.brandErrorLabelText);
-        //endregion
-        //region Finding card2
-        addCard2 = findViewById(R.id.addCard2);
-        servingAmtTextField = findViewById(R.id.servingAmtTextField);
-        servingSizeTextField = findViewById(R.id.servingSizeTextField);
-        servingErrorTextField = findViewById(R.id.servingErrorLabelText);
-        scanLabelButton = findViewById(R.id.labelScanButton);
-        //endregion
-
-        //region Finding card3
-        addCard3 = findViewById(R.id.addCard3);
-        itemCalorieTextField = findViewById(R.id.calorieTextField);
-        itemCalorieErrorText = findViewById(R.id.caloriesErrorLabelText);
-
-        itemProteinTextField = findViewById(R.id.proteinTextField);
-        itemProteinErrorText = findViewById(R.id.proteinErrorLabelText);
-
-        itemCarbTextField = findViewById(R.id.carbsTextField);
-        itemCarbErrorText = findViewById(R.id.carbsErrorLabelText);
-
-        itemFatTextField = findViewById(R.id.fatTextField);
-        itemFatErrorText = findViewById(R.id.fatErrorLabelText);
-        //endregion
-        //region Finding rest
-        addButton = findViewById(R.id.addBtn);
-        addItemErrorText = findViewById(R.id.addItemErrorText);
-
-        firstCarouselNextButton = findViewById(R.id.carouselForwardFirstButton);
-        secondCarouselBackButton = findViewById(R.id.carouselBackSecondButton);
-        secondCarouselNextButton = findViewById(R.id.carouselForwardSecondButton);
-        thirdCarouselBackButton = findViewById(R.id.carouselBackThirdButton);
-
-        //endregion
-        //region Setting listeners
-        itemNameTextField.setOnFocusChangeListener(this);
-        itemUPCTextField.setOnFocusChangeListener(this);
-        itemBrandTextField.setOnFocusChangeListener(this);
-
-        servingAmtTextField.setOnFocusChangeListener(this);
-        servingSizeTextField.setOnFocusChangeListener(this);
-
-        addButton.setOnClickListener(this);
-        scanLabelButton.setOnClickListener(this);
-
-        itemTypeBrandedTwoWayButton.setOnClickListener(this);
-        itemTypeCommonTwoWayButton.setOnClickListener(this);
-
-        firstCarouselNextButton.setOnClickListener(this);
-        secondCarouselBackButton.setOnClickListener(this);
-        secondCarouselNextButton.setOnClickListener(this);
-        thirdCarouselBackButton.setOnClickListener(this);
-        //endregion
-        //endregion
+        binding.carouselForwardSecondBtn.setOnClickListener(this);
+        binding.carouselForwardFirstBtn.setOnClickListener(this);
+        binding.carouselBackSecondBtn.setOnClickListener(this);
+        binding.carouselBackThirdBtn.setOnClickListener(this);
+        binding.labelScanBtn.setOnClickListener(this);
+        binding.brandedBtn.setOnClickListener(this);
+        binding.commonBtn.setOnClickListener(this);
+        binding.backBtn.setOnClickListener(this);
+        binding.addBtn.setOnClickListener(this);
 
         Intent intent = this.getIntent();
-        if (intent != null && intent.getStringExtra("upcid") != null) {
+        if (intent != null && intent.getStringExtra("upcid") != null)
+        {
             incUpcid = getIntent().getStringExtra("upcid");
-            itemUPCTextField.setText(incUpcid);
+            binding.upcTextField.setText(incUpcid);
         }
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         int id = view.getId();
 
-        if (id == backBtn.getId()) {
-            //Give Warning about save if the fields changed
+        if (id == binding.backBtn.getId())
+        {
             finish();
-        } else if (id == addButton.getId()) {
-            addItem(new EventCallback() {
+        }
+        else if (id == binding.addBtn.getId())
+        {
+            addItem(new EventCallback()
+            {
                 @Override
-                public void onSuccess(@Nullable EventContext context) {
+                public void onSuccess(@Nullable EventContext context)
+                {
                     finish();
                 }
 
                 @Override
-                public void onFailure(@Nullable EventContext context) {
+                public void onFailure(@Nullable EventContext context)
+                {
                     //Error
                 }
             });
-        } else if (id == scanLabelButton.getId()) {
+        }
+        else if (id == binding.labelScanBtn.getId())
+        {
             requestCameraAndStartScanner();
         }
 
-        if (id == itemTypeCommonTwoWayButton.getId()) {
-            CustomUIMethods.setTwoWayButton(this, itemTypeCommonTwoWayButton, itemTypeBrandedTwoWayButton, itemTypeWayVisualOne, itemTypeWayVisualTwo, true,  R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+        if (id == binding.commonBtn.getId())
+        {
+            CustomUIMethods.setTwoWayButton(this, binding.commonBtn, binding.brandedBtn, binding.itemTypeTwoWayVisualOne,
+                    binding.itemTypeTwoWayVisualTwo, true,  R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             setBrandField(true);
-        } else if (id == itemTypeBrandedTwoWayButton.getId()) {
-            CustomUIMethods.setTwoWayButton(this, itemTypeCommonTwoWayButton, itemTypeBrandedTwoWayButton, itemTypeWayVisualOne, itemTypeWayVisualTwo, false,  R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
+        }
+        else if (id == binding.brandedBtn.getId())
+        {
+            CustomUIMethods.setTwoWayButton(this, binding.commonBtn, binding.brandedBtn, binding.itemTypeTwoWayVisualOne,
+                    binding.itemTypeTwoWayVisualTwo, false,  R.color.darkTheme_Background, R.color.darkTheme_WhiteMed);
             setBrandField(false);
         }
 
-        if (id == firstCarouselNextButton.getId()) {
+        if (id == binding.carouselForwardFirstBtn.getId())
+        {
             setActiveCard(2);
-        } else if (id == secondCarouselBackButton.getId()) {
+        }
+        else if (id == binding.carouselBackSecondBtn.getId())
+        {
             setActiveCard(1);
-        } else if (id == secondCarouselNextButton.getId()) {
+        }
+        else if (id == binding.carouselForwardSecondBtn.getId())
+        {
             setActiveCard(3);
-        } else if (id == thirdCarouselBackButton.getId()) {
+        }
+        else if (id ==  binding.carouselBackThirdBtn.getId())
+        {
             setActiveCard(2);
         }
     }
 
-    private void setBrandField(boolean isCommonP) {
-        isCommon = isCommonP;
+    private void setBrandField(boolean isCommonP)
+    {
+        int visibilityOption = isCommonP ? View.GONE : View.VISIBLE;
 
-        if (isCommon) {
-            itemBrandLayout.setVisibility(View.GONE);
-        } else {
-            itemBrandLayout.setVisibility(View.VISIBLE);
-        }
+        binding.brandNameLayout.setVisibility(visibilityOption);
     }
 
     @Override
-    public void onFocusChange(View view, boolean hasFocus) {
+    public void onFocusChange(View view, boolean hasFocus)
+    {
         int id = view.getId();
 
-        CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{itemNameTextField, itemUPCTextField, itemBrandTextField, servingAmtTextField, servingSizeTextField}, R.drawable.bg_black_2dp_stroke_gray);
-        CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "");
+        CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{binding.itemNameTextField, binding.upcTextField,
+                binding.brandTextField, binding.servingAmtTextField, binding.servingSizeTextField}, R.drawable.bg_black_2dp_stroke_gray);
+        CustomUIMethods.setPopupMessage(this, binding.addItemErrorText, R.color.darkTheme_Error, "");
 
-        if (id == itemNameTextField.getId()) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemNameTextField}, R.drawable.bg_black_2dp_stroke_white);
-        } else if (id == itemUPCTextField.getId()) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemUPCTextField}, R.drawable.bg_black_2dp_stroke_white);
-        } else if (id == itemBrandTextField.getId()) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemBrandTextField}, R.drawable.bg_black_2dp_stroke_white);
-        } else if (id == servingSizeTextField.getId()) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingSizeTextField}, R.drawable.bg_black_2dp_stroke_white);
-        } else if (id == servingAmtTextField.getId()) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingAmtTextField}, R.drawable.bg_black_2dp_stroke_white);
+        if (id == binding.itemNameTextField.getId())
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.itemNameTextField}, R.drawable.bg_black_2dp_stroke_white);
         }
-
-        if (itemNameTextField.getText().length() != 0 && itemNameTextField.getText().length() <= 1) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemNameTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid name");
+        else if (id == binding.upcTextField.getId())
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.upcTextField}, R.drawable.bg_black_2dp_stroke_white);
         }
-        if (itemUPCTextField.getText().length() != 0 && itemUPCTextField.getText().length() != 12) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemUPCTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid UPC-A");
+        else if (id == binding.brandTextField.getId())
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.brandTextField}, R.drawable.bg_black_2dp_stroke_white);
         }
-        if (itemBrandTextField.getText().length() != 0 && !isCommon && itemBrandTextField.getText().length() <= 1) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {itemBrandTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid brand name");
+        else if (id == binding.servingAmtTextField.getId())
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.servingAmtTextField}, R.drawable.bg_black_2dp_stroke_white);
         }
-        if (servingSizeTextField.getText().length() != 0 && itemNameTextField.getText().length() < 1) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingSizeTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid serving size");
-        }
-        if (servingAmtTextField.getText().length() != 0 && itemNameTextField.getText().length() <= 1) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {servingAmtTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, addItemErrorText, R.color.darkTheme_Error, "Invalid serving amount");
+        else if (id == binding.servingSizeTextField.getId())
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.servingSizeTextField}, R.drawable.bg_black_2dp_stroke_white);
         }
 
+        if (binding.itemNameTextField.getText().length() != 0 && binding.itemNameTextField.getText().length() <= 1)
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.itemNameTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, binding.nameErrorLabelText, R.color.darkTheme_Error, "Invalid name");
+        }
+        if (binding.upcTextField.getText().length() != 0 && binding.upcTextField.getText().length() != 12)
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.upcTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, binding.upcErrorLabelText, R.color.darkTheme_Error, "Invalid UPC-A");
+        }
+        if (binding.brandTextField.getText().length() != 0 && !isCommon && binding.brandTextField.getText().length() <= 1)
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.brandTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, binding.brandErrorLabelText, R.color.darkTheme_Error, "Invalid brand name");
+        }
+        if (binding.servingAmtTextField.getText().length() != 0 && binding.servingAmtTextField.getText().length() < 1)
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.servingAmtTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, binding.servingAmtTextField, R.color.darkTheme_Error, "Invalid serving size");
+        }
+        if (binding.servingSizeTextField.getText().length() != 0 && binding.servingSizeTextField.getText().length() <= 1)
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.servingSizeTextField}, R.drawable.bg_black_2dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, binding.servingAmtTextField, R.color.darkTheme_Error, "Invalid serving amount");
+        }
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
         int id = item.getItemId();
 
-        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, binding.bottomNavigationView, item);
+
         return false;
     }
 
-    private void setActiveCard(int card) {
-        addCard1.setVisibility(View.GONE);
-        addCard2.setVisibility(View.GONE);
-        addCard3.setVisibility(View.GONE);
+    private void setActiveCard(int card)
+    {
+        binding.addCard1.setVisibility(View.GONE);
+        binding.addCard2.setVisibility(View.GONE);
+        binding.addCard3.setVisibility(View.GONE);
 
-        switch (card) {
+        switch (card)
+        {
             case 1:
-                addCard1.setVisibility(View.VISIBLE);
+                binding.addCard1.setVisibility(View.VISIBLE);
                 break;
             case 2:
-                addCard2.setVisibility(View.VISIBLE);
+                binding.addCard2.setVisibility(View.VISIBLE);
                 break;
             case 3:
-                addCard3.setVisibility(View.VISIBLE);
+                binding.addCard3.setVisibility(View.VISIBLE);
                 if (receivedMacros != null) autoFillMacros();
-
         }
     }
 
-    private void autoFillMacros() {
-        if (receivedMacros.get(Nutrient.Calorie) != null) {
-            itemCalorieTextField.setText(receivedMacros.get(Nutrient.Calorie).first.toString());
-            Log.d("NORTH", "CAL SET");
+    private void autoFillMacros()
+    {
+        if (receivedMacros.get(Nutrient.Calorie) != null)
+        {
+           binding.calorieTextField.setText(receivedMacros.get(Nutrient.Calorie).first.toString());
         }
-        if (receivedMacros.get(Nutrient.Protein) != null) {
-            itemProteinTextField.setText(receivedMacros.get(Nutrient.Protein).first.toString());
-            Log.d("NORTH", "PROTEin SET");
+        if (receivedMacros.get(Nutrient.Protein) != null)
+        {
+            binding.proteinTextField.setText(receivedMacros.get(Nutrient.Protein).first.toString());
         }
-        if (receivedMacros.get(Nutrient.TotalCarb) != null) {
-            itemCarbTextField.setText(receivedMacros.get(Nutrient.TotalCarb).first.toString());
-            Log.d("NORTH", "CARB SET");
+        if (receivedMacros.get(Nutrient.TotalCarb) != null)
+        {
+            binding.carbsTextField.setText(receivedMacros.get(Nutrient.TotalCarb).first.toString());
         }
-        if (receivedMacros.get(Nutrient.TotalFat) != null) {
-            itemFatTextField.setText(receivedMacros.get(Nutrient.TotalFat).first.toString());
-            Log.d("NORTH", "FAT SET");
+        if (receivedMacros.get(Nutrient.TotalFat) != null)
+        {
+            binding.fatTextField.setText(receivedMacros.get(Nutrient.TotalFat).first.toString());
         }
     }
 
-    private void addItem(@Nullable EventCallback callback) {
-        //TODO: make form more advanced for adding vitamins and types of, perhaps by scanning nutrition label
-        String itemName = itemNameTextField.getText().toString();
-        String itemUpc = itemUPCTextField.getText().toString();
-        //Tags
-        String brandName = itemBrandTextField.getText().toString();
-        String servingAmt = servingAmtTextField.getText().toString();
-        String servingSize = servingSizeTextField.getText().toString();
-        String calories = itemCalorieTextField.getText().toString();
-        String protein = itemProteinTextField.getText().toString();
-        String carbs = itemCarbTextField.getText().toString();
-        String fat = itemFatTextField.getText().toString();
+    private void addItem(@Nullable EventCallback callback)
+    {
+        String itemUpc = binding.upcTextField.getText().toString();
+        String itemName = binding.itemNameTextField.getText().toString();
+        String brandName = binding.brandTextField.getText().toString();
+        String servingSize = binding.servingSizeTextField.getText().toString();
+        String servingAmt = binding.servingAmtTextField.getText().toString();
+        String calories = binding.calorieTextField.getText().toString();
+        String protein = binding.proteinTextField.getText().toString();
+        String carbs = binding.carbsTextField.getText().toString();
+        String fat = binding.fatTextField.getText().toString();
 
-        if (itemName.isEmpty() || servingAmt.isEmpty() || servingSize.isEmpty()) {
+        if (itemName.isEmpty() || servingAmt.isEmpty() || servingSize.isEmpty())
+        {
             callback.onFailure(new EventContext.Builder().withError("Empty fields").build());
+
             return;
         }
-        if (!isCommon && brandName.isEmpty()){
+        if (!isCommon && brandName.isEmpty())
+        {
             callback.onFailure(new EventContext.Builder().withError("Empty fields").build());
+
             return;
         }
 
@@ -386,23 +314,33 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         fat = !fat.isEmpty() ? fat : "0";
 
         HashMap<Nutrient, Pair<Double, NutrientMeasurement>> newItemNutrients = new HashMap<>();
-        if (receivedMacros == null) {
-            //TODO: check duplicate to see if it already exists in advanced setting
+
+        if (receivedMacros == null)
+        {
             newItemNutrients.put(Nutrient.Calorie, new Pair<>(Double.valueOf(calories), NutrientMeasurement.none));
             newItemNutrients.put(Nutrient.Protein, new Pair<>(Double.valueOf(protein), NutrientMeasurement.g));
             newItemNutrients.put(Nutrient.TotalCarb, new Pair<>(Double.valueOf(carbs), NutrientMeasurement.g));
             newItemNutrients.put(Nutrient.TotalFat, new Pair<>(Double.valueOf(fat), NutrientMeasurement.g));
 
-        } else {
+        }
+        else
+        {
             newItemNutrients = receivedMacros;
 
-            if (newItemNutrients.get(Nutrient.Calorie) == null) {
+            if (newItemNutrients.get(Nutrient.Calorie) == null)
+            {
                 newItemNutrients.put(Nutrient.Calorie, new Pair<>(Double.valueOf(calories), NutrientMeasurement.none));
-            } else if (newItemNutrients.get(Nutrient.Protein) == null) {
+            }
+            else if (newItemNutrients.get(Nutrient.Protein) == null)
+            {
                 newItemNutrients.put(Nutrient.Protein, new Pair<>(Double.valueOf(protein), NutrientMeasurement.g));
-            } else if (newItemNutrients.get(Nutrient.TotalCarb) == null) {
+            }
+            else if (newItemNutrients.get(Nutrient.TotalCarb) == null)
+            {
                 newItemNutrients.put(Nutrient.TotalCarb, new Pair<>(Double.valueOf(carbs), NutrientMeasurement.g));
-            } else if (newItemNutrients.get(Nutrient.TotalFat) == null) {
+            }
+            else if (newItemNutrients.get(Nutrient.TotalFat) == null)
+            {
                 newItemNutrients.put(Nutrient.TotalFat, new Pair<>(Double.valueOf(fat), NutrientMeasurement.g));
             }
         }
@@ -410,52 +348,65 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         FoodNutrition newItemNutrition = new FoodNutrition(Double.valueOf(calories), Double.valueOf(servingAmt), servingSize, newItemNutrients);
         FoodProfile newItem = new FoodProfile(itemUpc, itemName, null, String.valueOf(new LocalDate()), isCommon, brandName, false, newItemNutrition);
 
-
-        dbManager.addFoodItem(newItem, new EventCallback() {
+        dbManager.addFoodItem(newItem, new EventCallback()
+        {
             @Override
-            public void onSuccess(@Nullable EventContext context) {
+            public void onSuccess(@Nullable EventContext context)
+            {
                 callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.success).build());
             }
 
             @Override
-            public void onFailure(@Nullable EventContext context) {
+            public void onFailure(@Nullable EventContext context)
+            {
                 callback.onFailure(new EventContext.Builder().withError(EventContextStrings.responseError).build());
             }
         });
-
-
     }
 
-    private void requestCameraAndStartScanner() {
-        if (ContextCompat.checkSelfPermission(this, cameraPermission) == PackageManager.PERMISSION_GRANTED) {
+    private void requestCameraAndStartScanner()
+    {
+        int currentPermission = ContextCompat.checkSelfPermission(this, cameraPermission);
+
+        if (currentPermission == PackageManager.PERMISSION_GRANTED)
+        {
             startScanner();
-        } else {
+        }
+        else
+        {
             requestCameraPermission();
         }
     }
 
-    private void startScanner() {
-        NutritionScanActivity.startScanner(this, new UnitCallback() {
+    private void startScanner()
+    {
+        NutritionScanActivity.startScanner(this, new UnitCallback()
+        {
             @Override
-            public void onSuccess() {
+            public void onSuccess()
+            {
 
             }
         });
     }
 
-    private void requestCameraPermission() {
-        if (shouldShowRequestPermissionRationale(cameraPermission)) {
+    private void requestCameraPermission()
+    {
+        if (shouldShowRequestPermissionRationale(cameraPermission))
+        {
             Context parentContext = this;
-            Utils.cameraPermissionRequest(this, new UnitCallback() {
+            Utils.cameraPermissionRequest(this, new UnitCallback()
+            {
                 @Override
-                public void onSuccess() {
+                public void onSuccess()
+                {
                     Utils.openPermissionSettings(parentContext);
                 }
             });
-
-        } else {
+        }
+        else
+        {
             requestPermissionLauncher.launch(cameraPermission);
         }
     }
-
 }

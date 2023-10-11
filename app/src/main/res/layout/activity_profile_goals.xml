@@ -36,7 +36,7 @@
                 android:ellipsize="end"/>
 
             <ImageView
-                android:id="@+id/backButton"
+                android:id="@+id/backBtn"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_27sdp"
@@ -175,7 +175,7 @@
                             android:textSize="@dimen/_16ssp"/>
 
                         <Button
-                            android:id="@+id/takeCalorieEstimateButton"
+                            android:id="@+id/tdeeBtn"
                             android:layout_width="@dimen/_115sdp"
                             android:layout_height="@dimen/_32sdp"
                             android:layout_gravity="end|center_vertical"

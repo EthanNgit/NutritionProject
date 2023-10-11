@@ -5,7 +5,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class FoodModel {
+public class FoodModel
+{
     @Expose
     @SerializedName("id")
     private int id;

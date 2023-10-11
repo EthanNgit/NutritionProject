@@ -1,6 +1,7 @@
 package com.example.nutritionproject.Custom.java.Utility;
 
-public class EventContextStrings {
+public class EventContextStrings
+{
 
     // Generic responses
     public static final String invalidInput = "Invalid input";

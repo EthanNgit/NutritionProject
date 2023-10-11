@@ -58,7 +58,7 @@
                         android:maxLines="1" />
 
                     <ImageView
-                        android:id="@+id/backButton"
+                        android:id="@+id/backBtn"
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_5sdp"
@@ -67,7 +67,7 @@
                         android:src="@drawable/ic_backarrow" />
 
                     <ImageView
-                        android:id="@+id/barcodeScanButton"
+                        android:id="@+id/barcodeScanBtn"
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="right"

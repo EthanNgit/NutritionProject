@@ -44,7 +44,7 @@
                     android:ellipsize="end"/>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/profileButton"
+                    android:id="@+id/profileBtn"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginEnd="@dimen/_19sdp"
@@ -54,7 +54,7 @@
                     android:layout_gravity="center_vertical">
 
                     <TextView
-                        android:id="@+id/profileButtonText"
+                        android:id="@+id/profileBtnText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/filler_profile_text"
@@ -115,7 +115,7 @@
                         />
 
                     <Button
-                        android:id="@+id/takeCalorieEstimateButton"
+                        android:id="@+id/tdeeBtn"
                         android:layout_width="@dimen/_92sdp"
                         android:layout_height="@dimen/_32sdp"
                         android:layout_gravity="end|center_vertical"
@@ -291,7 +291,7 @@
                             android:ellipsize="end"/>
 
                         <Button
-                            android:id="@+id/addMealButton"
+                            android:id="@+id/addMealBtn"
                             android:layout_width="@dimen/_78sdp"
                             android:layout_height="@dimen/_25sdp"
                             android:layout_marginEnd="@dimen/_15sdp"
@@ -378,7 +378,7 @@
                                     android:layout_gravity="center">
 
                                     <Button
-                                        android:id="@+id/emptyAddMealButton"
+                                        android:id="@+id/emptyAddMealBtn"
                                         android:layout_width="@dimen/_100sdp"
                                         android:layout_height="@dimen/_32sdp"
                                         android:layout_gravity="center"

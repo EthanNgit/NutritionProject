@@ -18,240 +18,203 @@ import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
+import com.example.nutritionproject.databinding.ActivityFoodItemViewBinding;
+import com.example.nutritionproject.databinding.ActivityLoginBinding;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Method;
 
-public class LoginActivity extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-
-    //region References
+public class LoginActivity extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener
+{
     private CustomDBMethods dbManager = new CustomDBMethods();
-
     public static String otpEmail;
-
-    private EditText emailField;
-    private EditText passwordField;
-
-    private TextView emailErrorView;
-    private TextView passwordErrorView;
-    private TextView errorView;
-
-    private Switch rememberMeSwitch;
     private boolean shouldRememberMe;
+    private ActivityLoginBinding binding;
 
-    private Button signUpBtn;
-    private Button forgotPasswordBtn;
-    private Button loginBtn;
-
-    //endregion
-
-    //region Override Methods
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
+        handleUI();
+    }
+
+    private void handleUI()
+    {
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
-        emailField = findViewById(R.id.emailTextField);
-        passwordField = findViewById(R.id.passwordTextField);
+        binding.emailTextField.setOnFocusChangeListener(this);
+        binding.passwordTextField.setOnFocusChangeListener(this);
 
-        emailErrorView = findViewById(R.id.emailErrorText);
-        passwordErrorView = findViewById(R.id.passwordErrorText);
-        errorView = findViewById(R.id.loginErrorText);
+        binding.forgotPasswordBtn.setOnClickListener(this);
+        binding.registerBtn.setOnClickListener(this);
+        binding.loginBtn.setOnClickListener(this);
 
-        rememberMeSwitch = findViewById(R.id.rememberMeSwitch);
-
-        signUpBtn = findViewById(R.id.signUpButton);
-        forgotPasswordBtn = findViewById(R.id.forgotPasswordButton);
-        loginBtn = findViewById(R.id.loginButton);
-
-        emailField.setOnFocusChangeListener(this);
-        passwordField.setOnFocusChangeListener(this);
-
-        signUpBtn.setOnClickListener(this);
-        forgotPasswordBtn.setOnClickListener(this);
-        loginBtn.setOnClickListener(this);
-
-        rememberMeSwitch.setOnCheckedChangeListener(this);
+        binding.rememberMeSwitch.setOnCheckedChangeListener(this);
 
         addListeners();
-
-    }
-
-
-    @Override
-    public void onFocusChange(View view, boolean b) {
-        int id = view.getId();
-
-        CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{emailField, passwordField}, R.drawable.bg_gray_6dp_stroke_gray);
-        CustomUIMethods.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "");
-        CustomUIMethods.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "");
-
-
-        if (id == emailField.getId()) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_white);
-        } else if (id == passwordField.getId()) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_white);
-        }
-
-        if (emailField.getText().length() != 0 && !dbManager.isEmailValid(CustomDBMethods.formatEmail(emailField.getText().toString()))) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {emailField}, R.drawable.bg_gray_6dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
-        }
-        if (passwordField.getText().length() != 0 && !dbManager.isPasswordValid(passwordField.getText().toString().trim())) {
-            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {passwordField}, R.drawable.bg_gray_6dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, passwordErrorView, R.color.darkTheme_Transparent, "Invalid password");
-        }
-
     }
 
     @Override
-    public void onClick(View view) {
+    public void onFocusChange(View view, boolean b)
+    {
         int id = view.getId();
 
-        if (id == forgotPasswordBtn.getId()) {
+        CustomUIMethods.setTextFieldBackgrounds(this, new EditText[]{binding.emailTextField, binding.passwordTextField}, R.drawable.bg_gray_6dp_stroke_gray);
+        CustomUIMethods.setPopupMessage(this, binding.emailErrorText, R.color.darkTheme_Transparent, "");
+        CustomUIMethods.setPopupMessage(this, binding.passwordErrorText, R.color.darkTheme_Transparent, "");
+
+        if (id == binding.emailTextField.getId())
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.emailTextField}, R.drawable.bg_gray_6dp_stroke_white);
+        }
+        else if (id == binding.passwordTextField.getId())
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.passwordTextField}, R.drawable.bg_gray_6dp_stroke_white);
+        }
+
+        if (binding.emailTextField.getText().length() != 0 && !dbManager.isEmailValid(CustomDBMethods.formatEmail(binding.emailTextField.getText().toString())))
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.emailTextField}, R.drawable.bg_gray_6dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, binding.emailErrorText, R.color.darkTheme_Transparent, "Invalid email");
+        }
+        if (binding.passwordTextField.getText().length() != 0 && !dbManager.isPasswordValid(binding.passwordTextField.getText().toString().trim()))
+        {
+            CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.passwordTextField}, R.drawable.bg_gray_6dp_stroke_red);
+            CustomUIMethods.setPopupMessage(this, binding.passwordErrorText, R.color.darkTheme_Transparent, "Invalid password");
+        }
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        int id = view.getId();
+
+        if (id == binding.forgotPasswordBtn.getId())
+        {
             forgotPassword();
-        } else if (id == loginBtn.getId()) {
-            dbManager.login(CustomDBMethods.formatEmail(emailField.getText().toString()), passwordField.getText().toString().trim(), null);
-
-        } else if (id == signUpBtn.getId()) {
-            startActivity(new Intent(LoginActivity.this, SignupActivity.class));
-            finish();
-
         }
+        else if (id == binding.loginBtn.getId())
+        {
+            dbManager.login(CustomDBMethods.formatEmail(binding.emailTextField.getText().toString()), binding.passwordTextField.getText().toString().trim(), null);
+        }
+        else if (id == binding.registerBtn.getId())
+        {
+            startActivity(new Intent(LoginActivity.this, SignupActivity.class));
 
+            finish();
+        }
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if (compoundButton.getId() == rememberMeSwitch.getId()) {
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+    {
+        if (compoundButton.getId() == binding.rememberMeSwitch.getId())
+        {
             shouldRememberMe = b;
         }
-
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         removeListeners();
-        super.onDestroy();
 
+        super.onDestroy();
     }
 
-    //endregion
-
-    //region Main Methods
-    private void addListeners() {
-        dbManager.onLoginSuccess.addListener(this, "loginSuccessCallback");
-        dbManager.onLoginFailure.addListener(this, "loginFailureCallback");
+    private void addListeners()
+    {
         dbManager.onRecoveryMailSentSuccess.addListener(this, "passwordResetSuccessCallback");
         dbManager.onRecoveryMailSentFailure.addListener(this, "passwordResetFailureCallback");
         dbManager.onRecoveryOTPExpired.addListener(this, "recoveryOTPExpiredCallback");
         dbManager.onConnectionFailure.addListener(this, "connectionFailureCallback");
-
+        dbManager.onLoginSuccess.addListener(this, "loginSuccessCallback");
+        dbManager.onLoginFailure.addListener(this, "loginFailureCallback");
     }
 
-    private void removeListeners() {
-        dbManager.onLoginSuccess.removeListener(this, "loginSuccessCallback");
-        dbManager.onLoginFailure.removeListener(this, "loginFailureCallback");
+    private void removeListeners()
+    {
         dbManager.onRecoveryMailSentSuccess.removeListener(this, "passwordResetSuccessCallback");
         dbManager.onRecoveryMailSentFailure.removeListener(this, "passwordResetFailureCallback");
         dbManager.onRecoveryOTPExpired.removeListener(this, "recoveryOTPExpiredCallback");
         dbManager.onConnectionFailure.removeListener(this, "connectionFailureCallback");
-
+        dbManager.onLoginSuccess.removeListener(this, "loginSuccessCallback");
+        dbManager.onLoginFailure.removeListener(this, "loginFailureCallback");
     }
 
-    private void setLoginPreferences() {
-        Gson gson = new Gson();
+    private void setLoginPreferences()
+    {
         SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("rememberMe", shouldRememberMe? "true" : "false");
-        editor.putString("email", shouldRememberMe? CustomDBMethods.formatEmail(emailField.getText().toString()) : "");
-        editor.putString("password", shouldRememberMe? passwordField.getText().toString().trim() : "");
-        editor.apply();
 
+        editor.putString("rememberMe", shouldRememberMe? "true" : "false");
+        editor.putString("email", shouldRememberMe? CustomDBMethods.formatEmail(binding.emailTextField.getText().toString()) : "");
+        editor.putString("password", shouldRememberMe? binding.passwordTextField.getText().toString().trim() : "");
+        editor.apply();
     }
 
-    private void forgotPassword() {
-        if (emailField.getText().toString().isEmpty()) {
-            //Give Error
-            CustomUIMethods.setPopupMessage(this, emailErrorView, R.color.darkTheme_Transparent, "Invalid email");
-            CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Enter email to be sent a recovery mail");
+    private void forgotPassword()
+    {
+        if (binding.emailTextField.getText().toString().isEmpty())
+        {
+            CustomUIMethods.setPopupMessage(this, binding.emailErrorText, R.color.darkTheme_Transparent, "Invalid email");
+            CustomUIMethods.setPopupMessage(this, binding.loginErrorText, R.color.darkTheme_Error, "Enter email to be sent a recovery mail");
 
             return;
         }
 
-        final Context outerContext = this;
-        dbManager.getUser(CustomDBMethods.formatEmail(emailField.getText().toString()), new EventCallback() {
-
+        Context outerContext = this;
+        dbManager.getUser(CustomDBMethods.formatEmail(binding.emailTextField.getText().toString()), new EventCallback()
+        {
             @Override
-            public void onSuccess(EventContext context) {
-                dbManager.resetPassword(CustomDBMethods.formatEmail(emailField.getText().toString()), null);
+            public void onSuccess(EventContext context)
+            {
+                dbManager.resetPassword(CustomDBMethods.formatEmail(binding.emailTextField.getText().toString()), null);
             }
 
             @Override
-            public void onFailure(EventContext context) {
-                CustomUIMethods.setPopupMessage(outerContext, errorView, R.color.darkTheme_Error, "User has not registered an account");
+            public void onFailure(EventContext context)
+            {
+                CustomUIMethods.setPopupMessage(outerContext, binding.loginErrorText, R.color.darkTheme_Error, "User has not registered an account");
             }
         });
-
     }
 
-    //endregion
-
-    //region Callback Methods
-    public Method loginSuccessCallback() {
-        Log.d("NORTH_LOGIN", "Login Success Event Fired");
-
+    public void loginSuccessCallback()
+    {
         setLoginPreferences();
         startActivity(new Intent(LoginActivity.this, DashboardHomeActivity.class));
+
         finish();
-
-        return null;
-
     }
 
-    public Method loginFailureCallback() {
-        Log.d("NORTH_LOGIN", "Login Failure Event Fired");
-
-        CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Email or password is incorrect.");
-
-        return null;
-
+    public void loginFailureCallback()
+    {
+        CustomUIMethods.setPopupMessage(this, binding.loginErrorText, R.color.darkTheme_Error, "Email or password is incorrect.");
     }
 
-    public Method passwordResetSuccessCallback() {
-        //open OTP stuff
-
-        otpEmail = CustomDBMethods.formatEmail(emailField.getText().toString());
+    public void passwordResetSuccessCallback()
+    {
+        otpEmail = CustomDBMethods.formatEmail(binding.emailTextField.getText().toString());
         startActivity(new Intent(LoginActivity.this, LoginResetActivity.class));
-
-        Log.d("NORTH_TEXT", "OTP PASSWORD IS: " + dbManager.currentOTPValue);
-
-        return null;
     }
 
-    public Method passwordResetFailureCallback() {
-
-        CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "Recovery mail failed to send.");
-
-        return null;
+    public void passwordResetFailureCallback()
+    {
+        CustomUIMethods.setPopupMessage(this, binding.loginErrorText, R.color.darkTheme_Error, "Recovery mail failed to send.");
     }
 
-    public Method recoveryOTPExpiredCallback() {
-        Log.d("NORTH_TEXT", "OTP PASSWORD HAS EXPIRED");
-
-        return null;
-    }
-
-    public Method connectionFailureCallback() {
-        Log.d("NORTH_LOGIN", "Connection Failure Event Fired");
-
-        CustomUIMethods.setPopupMessage(this, errorView, R.color.darkTheme_Error, "No Internet Connection.");
-
-        return null;
+    public void recoveryOTPExpiredCallback()
+    {
 
     }
 
-    //endregion
+    public void connectionFailureCallback()
+    {
+        CustomUIMethods.setPopupMessage(this, binding.loginErrorText, R.color.darkTheme_Error, "No Internet Connection.");
+    }
 }

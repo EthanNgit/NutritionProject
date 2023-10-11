@@ -29,8 +29,8 @@ import com.google.mlkit.vision.common.InputImage
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class SearchScanActivity : AppCompatActivity(), View.OnClickListener {
-
+class SearchScanActivity : AppCompatActivity(), View.OnClickListener
+{
     private val cameraPermission = Manifest.permission.CAMERA;
 
     private lateinit var cameraSelector: CameraSelector
@@ -49,20 +49,23 @@ class SearchScanActivity : AppCompatActivity(), View.OnClickListener {
 
     private var latestUpcId : String = ""
 
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-        if (!isGranted) {
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission())
+    { isGranted ->
+        if (!isGranted)
+        {
             finish()
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_scan)
 
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
         CustomUIMethods.hideKeyboard(this);
 
-        backBtn = findViewById(R.id.backButton)
+        backBtn = findViewById(R.id.backBtn)
         previewView = findViewById(R.id.previewView)
         infoCard = findViewById(R.id.barcodeFoundLayout)
         infoSearchBtn = findViewById(R.id.searchBtn)
@@ -89,37 +92,37 @@ class SearchScanActivity : AppCompatActivity(), View.OnClickListener {
         requestCameraAndStartScanner()
     }
 
-    override fun onClick(v: View?) {
+    override fun onClick(v: View?)
+    {
         val id = v?.id
 
-        if (id == backBtn.id) {
+        if (id == backBtn.id)
+        {
             finish()
         }
 
-        if (id == infoBackBtn.id) {
+        if (id == infoBackBtn.id)
+        {
             infoCard.visibility = View.GONE
-            //Resume Scanning
-        } else if (id == infoSearchBtn.id) {
-            //Open search activity and start search
+        }
+        else if (id == infoSearchBtn.id)
+        {
             SearchActivity.setPassedUpcId(latestUpcId);
+
             finish();
-
-        } else if (id == infoAddBtn.id) {
-            //Open Add form
-
-            //Go To add item menu (send with upcid)
+        }
+        else if (id == infoAddBtn.id)
+        {
             var intent = Intent(this@SearchScanActivity, AddFoodItemActivity::class.java);
             intent.putExtra("upcid", latestUpcId)
             startActivity(intent)
+
             finish()
-
         }
-
     }
 
-
-
-    private fun bindCameraPreview() {
+    private fun bindCameraPreview()
+    {
         cameraPreview = Preview.Builder()
             .setTargetRotation(previewView.display.rotation)
             .build()
@@ -127,7 +130,8 @@ class SearchScanActivity : AppCompatActivity(), View.OnClickListener {
         processCameraProvider.bindToLifecycle(this, cameraSelector, cameraPreview)
     }
 
-    private fun bindInputAnalyzer() {
+    private fun bindInputAnalyzer()
+    {
         val barcodeScanner: BarcodeScanner = BarcodeScanning.getClient(
             BarcodeScannerOptions.Builder()
                 .setBarcodeFormats(Barcode.FORMAT_UPC_A)
@@ -140,7 +144,8 @@ class SearchScanActivity : AppCompatActivity(), View.OnClickListener {
 
         val cameraExecutor: ExecutorService = Executors.newSingleThreadExecutor()
 
-        imageAnalysis.setAnalyzer(cameraExecutor) {imageProxy ->
+        imageAnalysis.setAnalyzer(cameraExecutor)
+        {imageProxy ->
             processImageProxy(barcodeScanner, imageProxy)
         }
 
@@ -148,7 +153,8 @@ class SearchScanActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     @SuppressLint("UnsafeOptInUsageError")
-    private fun processImageProxy(barcodeScanner: BarcodeScanner, imageProxy: ImageProxy) {
+    private fun processImageProxy(barcodeScanner: BarcodeScanner, imageProxy: ImageProxy)
+    {
         val inputImage = InputImage.fromMediaImage(imageProxy.image!!, imageProxy.imageInfo.rotationDegrees)
 
         barcodeScanner.process(inputImage)
@@ -172,30 +178,40 @@ class SearchScanActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun requestCameraAndStartScanner() {
-        if (isPermissionGranted(cameraPermission)) {
+    private fun requestCameraAndStartScanner()
+    {
+        if (isPermissionGranted(cameraPermission))
+        {
             //start scanner
-        } else {
+        }
+        else
+        {
             requestCameraPermission();
         }
     }
 
-    private fun requestCameraPermission() {
-        when {
-            shouldShowRequestPermissionRationale(cameraPermission) -> {
+    private fun requestCameraPermission()
+    {
+        when
+        {
+            shouldShowRequestPermissionRationale(cameraPermission) ->
+            {
                 cameraPermissionRequest {
                     openPermissionSetting()
                 }
             }
-            else -> {
+            else ->
+            {
                 requestPermissionLauncher.launch(cameraPermission)
             }
         }
     }
 
-    companion object {
+    companion object
+    {
         private var onScan: ((barcodes: List<Barcode>) -> Unit)? = null
-        fun startScanner(context : Context, onScan: (barcodes: List<Barcode>)-> Unit) {
+        fun startScanner(context : Context, onScan: (barcodes: List<Barcode>)-> Unit)
+        {
             this.onScan = onScan
             Intent(context, SearchScanActivity::class.java).also {
                 context.startActivity(it)

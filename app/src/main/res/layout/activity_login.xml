@@ -174,7 +174,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_32sdp"
@@ -188,7 +188,7 @@
             android:ellipsize="end"/>
 
         <Button
-            android:id="@+id/forgotPasswordButton"
+            android:id="@+id/forgotPasswordBtn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:backgroundTint="@color/darkTheme_Transparent"
@@ -249,7 +249,7 @@
             android:ellipsize="end"/>
 
         <Button
-            android:id="@+id/signUpButton"
+            android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -1,6 +1,7 @@
 package com.example.nutritionproject.Custom.java.Enums;
 
-public enum FoodTag {
+public enum FoodTag
+{
     Healthy,
     Unhealthy,
 

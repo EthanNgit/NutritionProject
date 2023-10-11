@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <Button
-        android:id="@+id/introSignUpButton"
+        android:id="@+id/registerBtn"
         android:layout_width="@dimen/_220sdp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_green_100dp"
@@ -53,7 +53,7 @@
         android:ellipsize="end"/>
 
     <Button
-        android:id="@+id/introLoginButton"
+        android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/darkTheme_Transparent"
@@ -65,7 +65,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introSignUpButton"
+        app:layout_constraintTop_toBottomOf="@+id/registerBtn"
         app:layout_constraintVertical_bias="0.1"
         android:maxLines="1"
         android:ellipsize="end"/>

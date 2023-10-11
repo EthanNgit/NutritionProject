@@ -36,7 +36,7 @@
                 android:textSize="@dimen/_12ssp" />
 
             <ImageView
-                android:id="@+id/backButton"
+                android:id="@+id/backBtn"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_27sdp"
@@ -61,7 +61,7 @@
 
                 <!--Card 1-->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/addItemCard1"
+                    android:id="@+id/addCard1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_420sdp"
                     android:layout_gravity="center"
@@ -266,7 +266,7 @@
 
                         <!--Item type Two Way Button-->
                         <androidx.cardview.widget.CardView
-                            android:layout_width="@dimen/_285sdp"
+                            android:layout_width="@dimen/_275sdp"
                             android:layout_height="@dimen/_26sdp"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_8sdp"
@@ -276,14 +276,14 @@
 
                             <ImageView
                                 android:id="@+id/itemTypeTwoWayVisualOne"
-                                android:layout_width="@dimen/_142sdp"
+                                android:layout_width="@dimen/_137sdp"
                                 android:layout_height="match_parent"
                                 android:padding="@dimen/_1sdp"
                                 android:src="@drawable/bg_green_2dp" />
 
                             <TextView
-                                android:id="@+id/commonButton"
-                                android:layout_width="@dimen/_142sdp"
+                                android:id="@+id/commonBtn"
+                                android:layout_width="@dimen/_137sdp"
                                 android:layout_height="match_parent"
                                 android:ellipsize="end"
                                 android:gravity="center"
@@ -294,18 +294,18 @@
 
                             <ImageView
                                 android:id="@+id/itemTypeTwoWayVisualTwo"
-                                android:layout_width="@dimen/_142sdp"
+                                android:layout_width="@dimen/_137sdp"
                                 android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_142sdp"
+                                android:layout_marginStart="@dimen/_137sdp"
                                 android:padding="@dimen/_1sdp"
                                 android:src="@drawable/bg_green_2dp"
                                 android:visibility="gone" />
 
                             <TextView
-                                android:id="@+id/brandedButton"
-                                android:layout_width="@dimen/_142sdp"
+                                android:id="@+id/brandedBtn"
+                                android:layout_width="@dimen/_137sdp"
                                 android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_142sdp"
+                                android:layout_marginStart="@dimen/_137sdp"
                                 android:ellipsize="end"
                                 android:fontFamily="@font/circular_med"
                                 android:gravity="center"
@@ -403,7 +403,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:id="@+id/carouselBackFirstButton"
+                                    android:id="@+id/carouselBackFirstBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.5"
@@ -430,7 +430,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:id="@+id/carouselForwardFirstButton"
+                                    android:id="@+id/carouselForwardFirstBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="end"
@@ -594,7 +594,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/labelScanButton"
+                            android:id="@+id/labelScanBtn"
                             android:layout_width="@dimen/_135sdp"
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="center_vertical"
@@ -655,7 +655,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:id="@+id/carouselBackSecondButton"
+                                    android:id="@+id/carouselBackSecondBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.5"
@@ -682,7 +682,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:id="@+id/carouselForwardSecondButton"
+                                    android:id="@+id/carouselForwardSecondBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="end"
@@ -984,7 +984,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:id="@+id/carouselBackThirdButton"
+                                    android:id="@+id/carouselBackThirdBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.5"
@@ -1011,7 +1011,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:id="@+id/carouselForwardThirdButton"
+                                    android:id="@+id/carouselForwardThirdBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="end"

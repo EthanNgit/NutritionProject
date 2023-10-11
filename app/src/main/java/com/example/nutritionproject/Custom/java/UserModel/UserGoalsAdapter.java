@@ -6,10 +6,12 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class UserGoalsAdapter extends TypeAdapter<UserMacros> {
+public class UserGoalsAdapter extends TypeAdapter<UserMacros>
+{
 
     @Override
-    public void write(JsonWriter writer, UserMacros value) throws IOException {
+    public void write(JsonWriter writer, UserMacros value) throws IOException
+    {
         writer.beginObject();
 
         writer.name("calorie").value(value.calories);
@@ -21,7 +23,8 @@ public class UserGoalsAdapter extends TypeAdapter<UserMacros> {
     }
 
     @Override
-    public UserMacros read(JsonReader in) throws IOException {
+    public UserMacros read(JsonReader in) throws IOException
+    {
         return null;
     }
 

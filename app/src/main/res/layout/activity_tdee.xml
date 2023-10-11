@@ -36,7 +36,7 @@
                 android:ellipsize="end"/>
 
             <ImageView
-                android:id="@+id/backButton"
+                android:id="@+id/backBtn"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_27sdp"
@@ -110,7 +110,7 @@
                                 android:src="@drawable/bg_green_2dp" />
 
                             <TextView
-                                android:id="@+id/metricMeasurementButton"
+                                android:id="@+id/metricMeasurementBtn"
                                 android:layout_width="@dimen/_142sdp"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -129,7 +129,7 @@
                                 android:visibility="gone"/>
 
                             <TextView
-                                android:id="@+id/imperialMeasurementButton"
+                                android:id="@+id/imperialMeasurementBtn"
                                 android:layout_width="@dimen/_142sdp"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/_142sdp"
@@ -421,7 +421,7 @@
                                 android:src="@drawable/bg_green_2dp" />
 
                             <TextView
-                                android:id="@+id/maleGenderButton"
+                                android:id="@+id/maleGenderBtn"
                                 android:layout_width="@dimen/_142sdp"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -440,7 +440,7 @@
                                 android:visibility="gone"/>
 
                             <TextView
-                                android:id="@+id/femaleGenderButton"
+                                android:id="@+id/femaleGenderBtn"
                                 android:layout_width="@dimen/_142sdp"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="@dimen/_142sdp"
@@ -474,7 +474,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:id="@+id/carouselBackFirstButton"
+                                    android:id="@+id/carouselBackFirstBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.5"
@@ -500,7 +500,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:id="@+id/carouselForwardFirstButton"
+                                    android:id="@+id/carouselForwardFirstBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="end"
@@ -584,7 +584,7 @@
                                 android:visibility="visible" />
 
                             <TextView
-                                android:id="@+id/sedentaryExerciseButton"
+                                android:id="@+id/sedentaryExerciseBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -616,7 +616,7 @@
                                 android:visibility="invisible" />
 
                             <TextView
-                                android:id="@+id/lightExerciseButton"
+                                android:id="@+id/lightExerciseBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -648,7 +648,7 @@
                                 android:visibility="invisible" />
 
                             <TextView
-                                android:id="@+id/moderateExerciseButton"
+                                android:id="@+id/moderateExerciseBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -680,7 +680,7 @@
                                 android:visibility="invisible" />
 
                             <TextView
-                                android:id="@+id/heavyExerciseButton"
+                                android:id="@+id/heavyExerciseBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -712,7 +712,7 @@
                                 android:visibility="invisible" />
 
                             <TextView
-                                android:id="@+id/athleteButton"
+                                android:id="@+id/athleteBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -747,7 +747,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:id="@+id/carouselBackSecondButton"
+                                    android:id="@+id/carouselBackSecondBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.5"
@@ -773,7 +773,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:id="@+id/carouselForwardSecondButton"
+                                    android:id="@+id/carouselForwardSecondBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.5"
@@ -900,7 +900,7 @@
                                 android:visibility="visible" />
 
                             <TextView
-                                android:id="@+id/splitOneButton"
+                                android:id="@+id/splitOneBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -931,7 +931,7 @@
                                 android:visibility="gone" />
 
                             <TextView
-                                android:id="@+id/splitTwoButton"
+                                android:id="@+id/splitTwoBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -963,7 +963,7 @@
                                 android:visibility="gone" />
 
                             <TextView
-                                android:id="@+id/splitThreeButton"
+                                android:id="@+id/splitThreeBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/circular_med"
@@ -1008,7 +1008,7 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:id="@+id/carouselBackThirdButton"
+                                    android:id="@+id/carouselBackThirdBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.5"
@@ -1034,7 +1034,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
-                                    android:id="@+id/carouselForwardThirdButton"
+                                    android:id="@+id/carouselForwardThirdBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.5"
@@ -1386,7 +1386,7 @@
 
                         <!--Set Goal Button-->
                         <Button
-                            android:id="@+id/setGoalButton"
+                            android:id="@+id/setGoalBtn"
                             android:layout_width="@dimen/_250sdp"
                             android:layout_height="@dimen/_40sdp"
                             android:layout_gravity="center"
@@ -1398,7 +1398,7 @@
                             android:textSize="@dimen/_18ssp" />
 
                         <TextView
-                            android:id="@+id/setManualGoalButton"
+                            android:id="@+id/setManualGoalBtn"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
                             android:fontFamily="@font/circular_med"
@@ -1409,7 +1409,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
-                            android:id="@+id/getAutomaticGoalButton"
+                            android:id="@+id/getAutomaticGoalBtn"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
                             android:fontFamily="@font/circular_med"

@@ -6,16 +6,20 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class UserProfileAdapter extends TypeAdapter<UserProfile> {
+public class UserProfileAdapter extends TypeAdapter<UserProfile>
+{
 
     @Override
-    public void write(JsonWriter writer, UserProfile value) throws IOException {
+    public void write(JsonWriter writer, UserProfile value) throws IOException
+    {
         writer.beginObject();
 
-        writer.name("id").value(value.id);
         writer.name("email").value(value.email);
+        writer.name("id").value(value.id);
+
         UserMacros goals = value.goals;
-        if (goals != null) {
+        if (goals != null)
+        {
             writer.name("calorie").value(goals.calories);
             writer.name("protein").value(goals.proteins);
             writer.name("carb").value(goals.carbs);
@@ -26,7 +30,8 @@ public class UserProfileAdapter extends TypeAdapter<UserProfile> {
     }
 
     @Override
-    public UserProfile read(JsonReader in) throws IOException {
+    public UserProfile read(JsonReader in) throws IOException
+    {
         return null;
     }
 

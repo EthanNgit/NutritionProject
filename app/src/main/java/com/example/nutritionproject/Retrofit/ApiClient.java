@@ -6,22 +6,24 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiClient {
+public class ApiClient
+{
     //public static final String BASE_URL = "http://10.0.2.2:80/nutrutionprojectdb/";
     public static final String BASE_URL = "http://164.92.81.125/nutritiondb/";
 
     public static Retrofit retrofit = null;
 
-    public static Retrofit getApiClient() {
-        if (retrofit == null) {
-            Gson gson = new GsonBuilder()
-                    .setLenient()
-                    .create();
-            retrofit = new retrofit2.Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
+    public static Retrofit getApiClient()
+    {
+        if (retrofit != null) return retrofit;
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        retrofit = new retrofit2.Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
         return  retrofit;
     }

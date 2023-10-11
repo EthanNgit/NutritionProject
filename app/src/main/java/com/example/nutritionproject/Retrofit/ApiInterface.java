@@ -12,7 +12,8 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-public interface ApiInterface {
+public interface ApiInterface
+{
     @FormUrlEncoded
     @POST("login.php")
     Call<UserModel> login(@Field("email") String email, @Field("password") String password);
@@ -46,7 +47,4 @@ public interface ApiInterface {
     @POST("updateUserNutrition.php")
     Call<UserModel> updateNutrition(@Field("userid") int userId, @Field("currentcalories") int calorie, @Field("currentprotein") int protein, @Field("currentcarbs") int carb, @Field("currentfats") int fat, @Field("meals") String meals, @Field("date") String date);
 
-    @FormUrlEncoded
-    @POST("getUserMeals.php")
-    Call<UserModel> getMeals(@Field("userid") int userId);
 }

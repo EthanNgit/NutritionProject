@@ -3,8 +3,6 @@ package com.example.nutritionproject.Custom.java.Utility;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.nutritionproject.Custom.java.Custom.CustomUtilityMethods;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -13,63 +11,68 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Event {
+public class Event
+{
 
     //Custom made class to mimic C# event callback, since I am comfortable with them
-    public EventCallback callback;
     private Map<Context, Set<Method>> objectToListenersMap = new HashMap<>();
+    public EventCallback callback;
 
-    public void addListener(Context context, String listener) {
-        if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", "Added listener");
-        try {
+    public void addListener(Context context, String listener)
+    {
+        try
+        {
             Method method = context.getClass().getDeclaredMethod(listener);
 
-            if (objectToListenersMap.containsKey(context)) {
-                // add listener to list
+            if (objectToListenersMap.containsKey(context))
+            {
                 objectToListenersMap.get(context).add(method);
-            } else {
-                // put in new entry
+            }
+            else
+            {
                 objectToListenersMap.put(context, new HashSet<>(Arrays.asList(method)));
             }
 
-        } catch (NoSuchMethodException e) {
-            if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", e.getMessage());
+        }
+        catch (NoSuchMethodException e)
+        {
+
         }
     }
 
-    public void removeListener(Context context, String listener) {
-        if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", "Removed listener");
-        try {
+    public void removeListener(Context context, String listener)
+    {
+        try
+        {
             Method method = context.getClass().getDeclaredMethod(listener);
 
-            if (objectToListenersMap.containsKey(context)) {
-                // remove listener from list
+            if (objectToListenersMap.containsKey(context))
+            {
                 objectToListenersMap.get(context).remove(method);
             }
-        } catch (NoSuchMethodException e) {
-            if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", e.getMessage());
         }
+        catch (NoSuchMethodException e)
+        {
 
+        }
     }
 
     public void invoke()
     {
-        if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", "Invocation occurred");
-
-        for (Context context : objectToListenersMap.keySet()) {
-
-            for (Method method : objectToListenersMap.get(context)) {
-                try {
+        for (Context context : objectToListenersMap.keySet())
+        {
+            for (Method method : objectToListenersMap.get(context))
+            {
+                try
+                {
                     method.invoke(context);
-                } catch (IllegalAccessException e) {
-                    if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", e.getMessage());
-                } catch (InvocationTargetException e) {
-                    if (CustomUtilityMethods.shouldDebug(Event.class)) Log.d("NORTH_EVENT", e.getMessage());
+                }
+                catch (IllegalAccessException | InvocationTargetException e)
+                {
+
                 }
             }
-
         }
-
     }
 }
 

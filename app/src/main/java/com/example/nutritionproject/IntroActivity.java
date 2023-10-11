@@ -9,73 +9,77 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
+import com.example.nutritionproject.databinding.ActivityIntroBinding;
 
-public class IntroActivity extends AppCompatActivity implements View.OnClickListener{
-
+public class IntroActivity extends AppCompatActivity implements View.OnClickListener
+{
     private final CustomDBMethods dbManager = new CustomDBMethods();
-    private Button loginBtn;
-    private Button signUpBtn;
+    private ActivityIntroBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        setContentView(R.layout.activity_intro);
+        binding = ActivityIntroBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
+        handleUI();
+    }
+
+    private void handleUI()
+    {
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
-        loginBtn = findViewById(R.id.introLoginButton);
-        signUpBtn = findViewById(R.id.introSignUpButton);
-
-        loginBtn.setOnClickListener(this);
-        signUpBtn.setOnClickListener(this);
+        binding.loginBtn.setOnClickListener(this);
+        binding.registerBtn.setOnClickListener(this);
 
         SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
 
-        //preferences.edit().clear().commit();
-
         String rememberMeString = preferences.getString("rememberMe", "");
-
-        //TODO: potential bad practice, not sure if it matters since its on device pref only...
         String skipEmail = preferences.getString("email", "");
         String skipPassword = preferences.getString("password", "");
 
-        if (rememberMeString.equals("true") && !skipEmail.isEmpty() && !skipPassword.isEmpty()) {
-            //TODO: Update to saving userprofile and authenticating though there, when profiles are needed
-
-            //TODO: Create Error when Database is not online / No internet connection, currently Crashes application
-            dbManager.login(skipEmail, skipPassword, new EventCallback() {
+        if (rememberMeString.equals("true") && !skipEmail.isEmpty() && !skipPassword.isEmpty())
+        {
+            dbManager.login(skipEmail, skipPassword, new EventCallback()
+            {
                 @Override
-                public void onSuccess(@Nullable EventContext context) {
+                public void onSuccess(@Nullable EventContext context)
+                {
                     startActivity(new Intent(IntroActivity.this, DashboardHomeActivity.class));
+
                     finish();
                 }
 
                 @Override
-                public void onFailure(@Nullable EventContext context) {
+                public void onFailure(@Nullable EventContext context)
+                {
                     startActivity(new Intent(IntroActivity.this, LoginActivity.class));
+
                     finish();
                 }
             });
-
-
         }
-
-
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         int id = view.getId();
-        if (id == R.id.introLoginButton) {
+
+        if (id == R.id.loginBtn)
+        {
             startActivity(new Intent(IntroActivity.this, LoginActivity.class));
-        } else if (id == R.id.introSignUpButton) {
+        }
+        else if (id == R.id.registerBtn)
+        {
             startActivity(new Intent(IntroActivity.this, SignupActivity.class));
         }
     }

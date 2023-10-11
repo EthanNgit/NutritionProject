@@ -5,39 +5,42 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.nutritionproject.databinding.ActivityDashboardStatsBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class DashboardStatsActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
-
-    private BottomNavigationView bottomNavView;
-
-    private final CustomFitMethods fitManager = new CustomFitMethods();
+public class DashboardStatsActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener
+{
+    private ActivityDashboardStatsBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_stats);
+        binding = ActivityDashboardStatsBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
+        handleUI();
+    }
+
+    private void handleUI()
+    {
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
-        bottomNavView = findViewById(R.id.bottomNavigationView);
-
-        bottomNavView.setItemIconTintList(null);
-
-        bottomNavView.getMenu().findItem(R.id.statsBtn).setChecked(true);
-
-        bottomNavView.setOnItemSelectedListener(this);
+        binding.bottomNavigationView.setItemIconTintList(null);
+        binding.bottomNavigationView.getMenu().findItem(R.id.statsBtn).setChecked(true);
+        binding.bottomNavigationView.setOnItemSelectedListener(this);
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
         int id = item.getItemId();
 
-        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, binding.bottomNavigationView, item);
 
         return false;
     }

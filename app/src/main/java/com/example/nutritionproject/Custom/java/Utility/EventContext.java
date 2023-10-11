@@ -1,6 +1,7 @@
 package com.example.nutritionproject.Custom.java.Utility;
 
-public class EventContext {
+public class EventContext
+{
     private String message;
     private String error;
     private Object data;
@@ -23,33 +24,42 @@ public class EventContext {
     }
 
 
-    private EventContext(Builder builder) {
+    private EventContext(Builder builder)
+    {
         this.message = builder.message;
         this.error = builder.error;
         this.data = builder.data;
     }
 
-    public static class Builder {
+    public static class Builder
+    {
         private String message;
         private String error;
         private Object data;
 
-        public Builder() {
+        public Builder()
+        {
 
         }
 
-        public Builder withMessage(String message) {
+        public Builder withMessage(String message)
+        {
             this.message = message;
+
             return this;
         }
 
-        public Builder withError(String error) {
+        public Builder withError(String error)
+        {
             this.error = error;
+
             return this;
         }
 
-        public Builder withData(Object data) {
+        public Builder withData(Object data)
+        {
             this.data = data;
+
             return this;
         }
 

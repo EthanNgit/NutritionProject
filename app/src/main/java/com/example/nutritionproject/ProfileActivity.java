@@ -2,136 +2,123 @@ package com.example.nutritionproject;
 
 import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.annotation.NonNull;
 
-import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
+import android.content.pm.PackageInfo;
+import android.content.Intent;
 import android.view.MenuItem;
+import android.os.Bundle;
+
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
-import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.nutritionproject.databinding.ActivityProfileBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener {
-    private final CustomFitMethods fitManager = new CustomFitMethods();
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener
+{
     private final CustomDBMethods dbManager = new CustomDBMethods();
-
-    private BottomNavigationView bottomNavView;
-
-    private ImageView backBtn;
-
-    private CardView detailsButton;
-    private TextView emailTextLabel;
-
-    private CardView goalsButton;
-    private TextView goalsTextLabel;
-
-    private TextView versionTextLabel;
-
-    private CardView logOutButton;
-    private TextView logOutTextLabel;
+    private ActivityProfileBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
+        handleUI();
+    }
+
+    private void handleUI()
+    {
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
         TdeeActivity.onTDEEUserGoalUpdated.addListener(this, "updateCalories");
 
-        bottomNavView = findViewById(R.id.bottomNavigationView);
+        binding.bottomNavigationView.setItemIconTintList(null);
+        binding.bottomNavigationView.getMenu().findItem(R.id.homeBtn).setChecked(true);
+        binding.bottomNavigationView.setOnItemSelectedListener(this);
 
-        backBtn = findViewById(R.id.backButton);
+        binding.backBtn.setOnClickListener(this);
+        binding.goalsBtn.setOnClickListener(this);
+        binding.logoutBtn.setOnClickListener(this);
+        binding.detailsBtn.setOnClickListener(this);
 
-        detailsButton = findViewById(R.id.detailsButton);
-        emailTextLabel = findViewById(R.id.emailTextLabel);
 
-        goalsButton = findViewById(R.id.goalsButton);
-        goalsTextLabel = findViewById(R.id.goalsTextLabel);
-
-        versionTextLabel = findViewById(R.id.versionTextLabel);
-
-        logOutButton = findViewById(R.id.logoutButton);
-        logOutTextLabel = findViewById(R.id.logoutTextLabel);
-
-        bottomNavView.setItemIconTintList(null);
-
-        bottomNavView.getMenu().findItem(R.id.homeBtn).setChecked(true);
-
-        bottomNavView.setOnItemSelectedListener(this);
-
-        backBtn.setOnClickListener(this);
-        detailsButton.setOnClickListener(this);
-        goalsButton.setOnClickListener(this);
-        logOutButton.setOnClickListener(this);
-
-        emailTextLabel.setText(CurrentProfile.email);
+        binding.emailTextLabel.setText(CurrentProfile.email);
         updateCalories();
 
         PackageManager manager = getPackageManager();
         PackageInfo info = null;
 
-        try {
+        try
+        {
             info = manager.getPackageInfo(
                     getPackageName(), 0);
+
             String version = info.versionName;
-            versionTextLabel.setText(version);
-
-        } catch (PackageManager.NameNotFoundException e) {
-            versionTextLabel.setText("1.0");
-
+            binding.versionTextLabel.setText(version);
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            binding.versionTextLabel.setText("1.0");
         }
 
-        logOutTextLabel.setText("You are currently logged in as " + CurrentProfile.email);
-
+        binding.logoutTextLabel.setText("You are currently logged in as " + CurrentProfile.email);
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
+
         TdeeActivity.onTDEEUserGoalUpdated.removeListener(this, "updateCalories");
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         int id = view.getId();
 
-        if (id == backBtn.getId()) {
+        if (id == binding.backBtn.getId())
+        {
             finish();
         }
 
-        if (id == detailsButton.getId()) {
+        if (id == binding.detailsBtn.getId())
+        {
             startActivity(new Intent(ProfileActivity.this, ProfileDetailsActivity.class));
-        } else if (id == goalsButton.getId()) {
+        }
+        else if (id == binding.goalsBtn.getId())
+        {
             startActivity(new Intent(ProfileActivity.this, ProfileGoalsActivity.class));
-        } else if (id == logOutButton.getId()) {
+        }
+        else if (id == binding.logoutBtn.getId())
+        {
             dbManager.logout(this);
 
             startActivity(new Intent(ProfileActivity.this, IntroActivity.class));
+
             finish();
         }
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
         int id = item.getItemId();
 
-        CustomUIMethods.setBottomNavBar(this, id, bottomNavView, item);
+        CustomUIMethods.setBottomNavBar(this, id, binding.bottomNavigationView, item);
 
         return false;
     }
 
-    public void updateCalories() {
-        goalsTextLabel.setText(CurrentProfile.goals.calories + " Calories");
+    public void updateCalories()
+    {
+        binding.goalsTextLabel.setText(CurrentProfile.goals.calories + " Calories");
     }
 
 }

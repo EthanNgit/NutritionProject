@@ -34,7 +34,7 @@
                 android:gravity="center"/>
 
             <ImageView
-                android:id="@+id/backButton"
+                android:id="@+id/backBtn"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_27sdp"
@@ -76,7 +76,7 @@
                         android:textColor="@color/darkTheme_WhiteFull"/>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/detailsButton"
+                        android:id="@+id/detailsBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="0dp"
@@ -121,7 +121,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/goalsButton"
+                        android:id="@+id/goalsBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="0dp"
@@ -210,7 +210,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/termsAndConditionsButton"
+                        android:id="@+id/termsAndConditionsBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="0dp"
@@ -246,7 +246,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/creditsButton"
+                        android:id="@+id/creditsBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="0dp"
@@ -293,7 +293,7 @@
                         android:textColor="@color/darkTheme_WhiteFull"/>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/logoutButton"
+                        android:id="@+id/logoutBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="0dp"

@@ -150,4 +150,11 @@
     <string name="added_sugars">Added Sugars</string>
     <string name="protein">Protein</string>
 
+    //Meals
+    <string name="meal_name">Meal name</string>
+    <string name="add_meal">Add meal</string>
+    <string name="remove_meal">Remove meal</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="no_ingredients">No ingredients added</string>
+
 </resources>

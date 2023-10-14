@@ -2,6 +2,8 @@ package com.example.nutritionproject;
 
 import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,10 +25,9 @@ import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.example.nutritionproject.Custom.java.UserModel.UserProfileStaticRefOther;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
-import com.example.nutritionproject.databinding.ActivityAddFoodItemBinding;
 import com.example.nutritionproject.databinding.ActivityDashboardHomeBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
 
 import org.joda.time.LocalDate;
 
@@ -52,9 +53,6 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     {
         CustomUIMethods.setAndroidUI(this, R.color.darkTheme_Background);
 
-        dbManager.onUserCurrentNutritionUpdateSuccess.addListener(this, "checkCalorieProgress");
-        UserProfileStaticRefOther.onUserMealHistoryUpdate.addListener(this, "updateMealHistory");
-
         binding.bottomNavigationView.setItemIconTintList(null);
         binding.bottomNavigationView.getMenu().findItem(R.id.homeBtn).setChecked(true);
         binding.bottomNavigationView.setOnItemSelectedListener(this);
@@ -67,6 +65,13 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         setHomeWidgets();
     }
 
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result ->
+            {
+                getUserNutrition();
+            });
+
     @Override
     public void onClick(View view)
     {
@@ -74,16 +79,32 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
 
         if (id == binding.profileBtn.getId())
         {
-            startActivity(new Intent(DashboardHomeActivity.this, ProfileActivity.class));
+            Intent intent = new Intent(DashboardHomeActivity.this, ProfileActivity.class);
+            activityResultLauncher.launch(intent);
         }
         if (id == binding.tdeeBtn.getId())
         {
-            startActivity(new Intent(DashboardHomeActivity.this, TdeeActivity.class));
+            Intent intent = new Intent(DashboardHomeActivity.this, TdeeActivity.class);
+            activityResultLauncher.launch(intent);
         }
         if (id == binding.addMealBtn.getId() || id == binding.emptyAddMealBtn.getId())
         {
-            //TODO: Bring to add meal screen, search screen, or something.
+            Intent intent = new Intent(DashboardHomeActivity.this, AddMealItemActivity.class);
+            activityResultLauncher.launch(intent);
         }
+    }
+
+    @Override
+    public void onItemClick(int position)
+    {
+        MealProfile meal = UserProfileStaticRefOther.userMealHistory.get(position);
+        Gson gson = new Gson();
+        String mealJson = gson.toJson(meal);
+
+        Intent intent = new Intent(DashboardHomeActivity.this, MealItemViewActivity.class);
+        intent.putExtra("mealJson", mealJson);
+
+        activityResultLauncher.launch(intent);
     }
 
     @Override
@@ -91,51 +112,35 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     {
         int id = item.getItemId();
 
-        CustomUIMethods.setBottomNavBar(this, id, binding.bottomNavigationView, item);
+        CustomUIMethods.setBottomNavBar(this, activityResultLauncher, binding.bottomNavigationView, item);
 
         return false;
     }
 
     private void setHomeWidgets()
     {
-        getFirstTimeData();
-
-        updateMealHistory();
-
-        checkCalorieProgress();
+        getUserNutrition();
 
         setProfileButton();
     }
 
-    private void updateMealRecyclerView(ArrayList<MealProfile> meals)
-    {
-        if (meals.size() > 0)
-        {
-            RecyclerViewInterface recyclerViewInterface = this;
-            MealListAdapter adapter = new MealListAdapter(this, meals, recyclerViewInterface);
-
-            binding.mealPlannerRecyclerView.setAdapter(adapter);
-            binding.mealPlannerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        }
-    }
-
-    private void getFirstTimeData()
+    private void getUserNutrition()
     {
         dbManager.updateNutrition(CurrentProfile.id, 0, 0, 0, 0,
                 UserProfileStaticRefOther.userMealHistory, String.valueOf(new LocalDate()), null, new EventCallback()
-        {
-            @Override
-            public void onSuccess(@Nullable EventContext context)
-            {
-                checkMeals(context);
-            }
+                {
+                    @Override
+                    public void onSuccess(@Nullable EventContext context)
+                    {
+                        checkMeals(context);
+                    }
 
-            @Override
-            public void onFailure(@Nullable EventContext context)
-            {
-                checkMeals(context);
-            }
-        });
+                    @Override
+                    public void onFailure(@Nullable EventContext context)
+                    {
+                        checkMeals(context);
+                    }
+                });
     }
 
     public void checkMeals(EventContext context)
@@ -160,12 +165,20 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public void updateMealHistory()
+    private void updateMealRecyclerView(ArrayList<MealProfile> meals)
     {
-        binding.emptyMealPlannerLayout.setVisibility(View.VISIBLE);
-        binding.mealPlannerRecyclerView.setVisibility(View.GONE);
+        if (meals.size() > 0)
+        {
+            RecyclerViewInterface recyclerViewInterface = this;
+            MealListAdapter adapter = new MealListAdapter(this, meals, recyclerViewInterface);
 
-        updateMealRecyclerView(UserProfileStaticRefOther.userMealHistory);
+            binding.mealPlannerRecyclerView.setAdapter(adapter);
+            binding.mealPlannerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
+        else
+        {
+            Log.d("north","empty");
+        }
     }
 
     public void checkCalorieProgress()
@@ -181,6 +194,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
             binding.calProgressChartCard.setVisibility(View.VISIBLE);
 
             double calPercent = ((double) CurrentProfile.currentMacros.calories / (double) CurrentProfile.goals.calories) * 100.0;
+            calPercent = calPercent > 100.0 ? 100.0 : calPercent;
+
             binding.calProgressBar.setPercent((int)calPercent);
 
             SpannableStringBuilder curCalBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.calories, R.color.darkTheme_Brand, R.color.darkTheme_WhiteMed);
@@ -204,11 +219,5 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     private void setProfileButton()
     {
         CustomUIMethods.setProfileButton(this, binding.profileBtn, CurrentProfile.userColorHex, binding.profileBtnText, CurrentProfile.email);
-    }
-
-    @Override
-    public void onItemClick(int position)
-    {
-
     }
 }

@@ -18,7 +18,6 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class DashboardSearchActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener
 {
-    private final CustomFitMethods fitManager = new CustomFitMethods();
     private ActivityDashboardSearchBinding binding;
 
     @Override
@@ -57,9 +56,7 @@ public class DashboardSearchActivity extends AppCompatActivity implements Naviga
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
-        int id = item.getItemId();
-
-        CustomUIMethods.setBottomNavBar(this, id, binding.bottomNavigationView, item);
+        CustomUIMethods.setBottomNavBar(this, null, binding.bottomNavigationView, item);
 
         return false;
     }

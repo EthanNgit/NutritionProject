@@ -21,6 +21,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".MealItemViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddMealItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".NutritionScanActivity"
             android:exported="false" />
         <activity
@@ -85,10 +91,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

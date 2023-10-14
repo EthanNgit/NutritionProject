@@ -1,6 +1,8 @@
 package com.example.nutritionproject;
 
 
+import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -12,9 +14,12 @@ import android.view.View;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.UserModel.UserProfileStaticRefOther;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.databinding.ActivityIntroBinding;
+
+import org.joda.time.LocalDate;
 
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -53,9 +58,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onSuccess(@Nullable EventContext context)
                 {
-                    startActivity(new Intent(IntroActivity.this, DashboardHomeActivity.class));
-
-                    finish();
+                    getFirstTimeData();
                 }
 
                 @Override
@@ -82,6 +85,27 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         {
             startActivity(new Intent(IntroActivity.this, SignupActivity.class));
         }
+    }
+
+    private void getFirstTimeData()
+    {
+        dbManager.updateNutrition(CurrentProfile.id, 0, 0, 0, 0,
+                null, String.valueOf(new LocalDate()), null, new EventCallback()
+                {
+                    @Override
+                    public void onSuccess(@Nullable EventContext context)
+                    {
+                        startActivity(new Intent(IntroActivity.this, DashboardHomeActivity.class));
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(@Nullable EventContext context)
+                    {
+                        startActivity(new Intent(IntroActivity.this, DashboardHomeActivity.class));
+                        finish();
+                    }
+                });
     }
 
 }

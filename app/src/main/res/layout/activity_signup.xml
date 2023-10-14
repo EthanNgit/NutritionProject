@@ -203,6 +203,7 @@
             android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:outlineProvider="none"
             android:layout_weight="1"
             android:backgroundTint="@color/darkTheme_Transparent"
             android:fontFamily="@font/circular"

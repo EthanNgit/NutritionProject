@@ -1,5 +1,7 @@
 package com.example.nutritionproject;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,9 +9,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +27,7 @@ import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.Custom.UI.FoodListAdapter;
 import com.example.nutritionproject.Custom.java.Custom.UI.RecyclerViewInterface;
+import com.example.nutritionproject.Custom.java.Enums.ActivityResultCodes;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.example.nutritionproject.Custom.java.Utility.Event;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
@@ -42,6 +47,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private static Event updateSearchEvent = new Event();
     private ArrayList<FoodProfile> profiles;
     private static String passedUpcId = "";
+    boolean searchingForIngredient = false;
+    private FoodProfile searchedIngredient;
     private ActivitySearchBinding binding;
 
     public static void setPassedUpcId(String upcId)
@@ -96,6 +103,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 return false;
             }
         });
+
+        Intent intent = this.getIntent();
+        if (intent != null && intent.getBooleanExtra("searchForIngredient", false))
+        {
+            searchingForIngredient = getIntent().getBooleanExtra("searchForIngredient", false);
+        }
     }
 
     @Override
@@ -157,12 +170,22 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    ActivityResultLauncher<Intent> launchActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result ->
+            {
+                if (result.getResultCode() == ActivityResultCodes.FoodItemView.getCode())
+                {
+                    Intent intent = result.getData();
+                    setResult(ActivityResultCodes.SearchView.getCode(), intent);
+                    finish();
+                }
+            });
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) 
     {
-        int id = item.getItemId();
-
-        CustomUIMethods.setBottomNavBar(this, id, binding.bottomNavigationView, item);
+        CustomUIMethods.setBottomNavBar(this, null, binding.bottomNavigationView, item);
 
         return false;
     }
@@ -187,7 +210,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         intent.putExtra("brand", profile.brandName);
         intent.putExtra("verified", profile.isVerified);
         intent.putExtra("nutrition", gson.toJson(profile.nutrition));
+        intent.putExtra("isIngredient", searchingForIngredient);
 
-        startActivity(intent);
+        if (searchingForIngredient)
+        {
+            launchActivityResultLauncher.launch(intent);
+        }
+        else {
+            startActivity(intent);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.nutritionproject.Custom.java.FoodModel;
 
+import android.util.Log;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMe
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MealProfile {
@@ -54,5 +56,34 @@ public class MealProfile {
         return String.format("Meal Profile { %s { %s }, TimeAdded %s , TotalCalories %s, TotalProtein %s, TotalCarbs %s, TotalFats %s} ",
                 mealName, profileString, timeAdded, totalCalories, totalProtein, totalCarbs, totalFats);
 
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj)
+    {
+        if (this == null) return false;
+        if (obj == null) return false;
+
+        MealProfile otherMeal = (MealProfile) obj;
+
+        if (!mealName.equals(otherMeal.mealName)) return false;
+
+        HashMap<Nutrient, Pair<Double, NutrientMeasurement>> nutrients;
+        HashMap<Nutrient, Pair<Double, NutrientMeasurement>> otherNutrients;
+
+        for (int i = 0; i < mealComposition.size(); i++)
+        {
+            if (otherMeal.mealComposition.get(i) == null) return false;
+
+            nutrients = mealComposition.get(i).nutrition.nutrients;
+            otherNutrients = otherMeal.mealComposition.get(i).nutrition.nutrients;
+
+            if (!nutrients.equals(otherNutrients))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

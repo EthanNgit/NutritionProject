@@ -1,6 +1,8 @@
 package com.example.nutritionproject.Retrofit;
 
 
+import androidx.annotation.Nullable;
+
 import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.example.nutritionproject.Model.FoodModel;
 import com.example.nutritionproject.Model.UserModel;

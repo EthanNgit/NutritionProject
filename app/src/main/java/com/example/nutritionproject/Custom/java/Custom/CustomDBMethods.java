@@ -325,12 +325,20 @@ public class CustomDBMethods
      * @apiNote Provide user id belonging to the account, along with the current macros and an optional callback.
      * If the user has not set goals yet, it will create a new entry with no goals.
      * If the user is creating a new days entree will automatically create a new day and store previous in history.
+     * To clear meal history pass an empty list, passing null does not update the history.
      */
     public void updateNutrition(int userid, int currentCalories, int currentProtein, int currentCarbs, int currentFat, @Nullable ArrayList<MealProfile> meals, String currentDate, @Nullable EventCallback nutritionUpdatecallback, @Nullable EventCallback profileUpdateCallback)
     {
         Gson gson = new Gson();
+        String nullString = "";
 
-        Call<UserModel> userModelCall = apiInterface.updateNutrition(userid, currentCalories, currentProtein, currentCarbs, currentFat, meals != null ? gson.toJson(meals) : null, currentDate);
+        if (meals != null && meals.size() == 0)
+        {
+            meals = null;
+            nullString = "[]";
+        }
+
+        Call<UserModel> userModelCall = apiInterface.updateNutrition(userid, currentCalories, currentProtein, currentCarbs, currentFat, meals != null ? gson.toJson(meals) : nullString, currentDate);
 
         userModelCall.enqueue(new Callback<UserModel>()
         {
@@ -373,6 +381,7 @@ public class CustomDBMethods
             {
                 if (nutritionUpdatecallback != null) nutritionUpdatecallback.onFailure(new EventContext.Builder().withError(EventContextStrings.connectionError).build());
                 onConnectionFailure.invoke();
+                Log.d("NORTH", t.getMessage());
             }
         });
     }
@@ -589,6 +598,19 @@ public class CustomDBMethods
 
         updateNutrition(CurrentProfile.id, (int) meal.totalCalories, (int) meal.totalProtein, (int) meal.totalCarbs,
                 (int) meal.totalFats, UserProfileStaticRefOther.userMealHistory, String.valueOf(new LocalDate()), null, null);
+    }
+
+    public void removeMealFromNutrition(MealProfile meal)
+    {
+        UserProfileStaticRefOther.userMealHistory.remove(meal);
+
+        int negativeCalories = (int) meal.totalCalories * -1;
+        int negativeProtein = (int) meal.totalProtein * -1;
+        int negativeCarbs = (int) meal.totalCarbs * -1;
+        int negativeFats = (int) meal.totalFats * -1;
+
+        updateNutrition(CurrentProfile.id, negativeCalories, negativeProtein, negativeCarbs, negativeFats,
+                UserProfileStaticRefOther.userMealHistory, String.valueOf(new LocalDate()), null, null);
     }
 
     public static boolean isEmailValid(CharSequence email)

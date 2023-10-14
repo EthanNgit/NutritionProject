@@ -1,0 +1,76 @@
+--Calories (Parse Even Numbers Only)--
+calorie,calories,cal,cals,kilocalorie,kilocalories,kcal,kcals
+--Protein--
+protein,proteins
+--Carb--
+carb, carbs,carbohydrate,carbohydrates,total carb,total carbs,total carbohydrate,total carbohydrates
+--Dietary Fiber--
+dietary fiber,dietary fibers,fiber,fibers,dietary fibre,dietary fibres,fibre,fibres
+Total Sugars
+total sugars,total sugar,sugar
+--Added Sugars--
+added sugars,added sugar
+--Fat--
+fat,fats,total fat,total fats
+--Saturated Fat-
+sat fat,sat. fat,sat fats,sat. fats,saturated fat,saturated fats
+--Trans Fat--
+tran fat,trans fat,tran. fat,trans. fat
+--Cholesterol--
+cholesterol
+--Sodium--
+sodium
+--Biotin--
+biotin,biotina,biotine,biotine-d,coenzyme r,d-biotin,vitamin b7,vitamin h,vitamine b7,vitamine h,w factor,cis-hexahydro-2-oxo-1h-thieno[3,4-d]-imidazole-4-valeric acid.
+--Choline--
+choline,choline bitartrate,choline chloride,choline dihydrogen
+--Folate--
+folate,folic acid,dihydrofolate,dfh,tetrahydrofolate,thf,methylenetetrahydrofolate,5-methyltetrahydrofolate,5-mthf
+--Niacin--
+niacin,vit b3,vit. b3,vitamin b3,vitamine b3,nicotinic acid,pyridine-3-carboxylic acid,nicotinamide,pyridine-3-carboxamide,nicotinamide riboside
+--A--
+vit a,vit. a,vitamin a,vitamine a,retinol,retinyl esters
+--B5--
+vit b5,vit. b5,vitamin b5,vitamine b5,pantothenic acid,calcium pantothenate
+--B6--
+vit b6,vit. b6,vitamin b6,vitamine b6,pyridoxal,pyridoxamine,pyridoxine hydrochloride,pyridoxal-5-phosphate
+--B12--
+vit b12,vit. b12,vitamin b12,vitamine b12,cyanocobalamin,adenosylcobalamin,methylcobalamin,hydroxycobalamin
+--C--
+vit c,vit. c,vitamin c,vitamine c,antiscorbutic agent,ascorbic acid,calcium ascorbate,dehydroascorbic acid,sodium ascorbate
+--D--
+vit d,vit. d,vitamin d,vitamine d,calciferol,delta d3,dht,dht intensol,drisdol,hectorol,rayaldee,rocaltrol,zemplar
+--E--
+vit e,vit. e,vitamin e,vitamine e,tocopherol,alpha-tocopherol
+--K--
+vit k,vit. k,vitamin k,vitamine k
+--Thiamine--
+thiamine
+--Riboflavin--
+riboflavin,vit b2,vit. b2,vitamin b2,vitamine b2
+--Calcium--
+calc.,calcium,calcium carbonate
+--Chloride--
+chloride
+--Chromium--
+chromium,chromium 3,chromium picolinate,trivalent chromium.
+--Copper--
+copper,cupric oxide,cupric sulfate,copper amino acid chelates,copper gluconate.
+--Iodine--
+iodine,iodide,organic iodine,potassium iodide,sodium iodide.
+--Iron--
+iron,accrufer,auryxia,beefiron wine,bifera,elite iron,femiron,feosol,fergon,ferrex 150,hemocyte
+--Magnesium--
+magnesium,magnesium citrate,magnesium glycinate,magnesium chloride,magnesium lactate,magnesium malate,magnesium taurate,magnesium sulfate,magnesium oxide
+--Maganese--
+maganese,manganese citrate,manganese gluconate,manganese sulfate
+--Molybdenum--
+molybdenum,molybdenum chloride,sodium molybdate,molybdenum glycinate,molybdenum amino acid chelate
+--Phosphorus--
+phosphorus,dipotassium phosphate,disodium phosphate,phosphatidylcholine,phosphatidylserine
+--Potassium--
+potassium,effer-k,glu-k,kcare et,k-lyte,k-lyte cl,k-tab,potassimin,tri-k,urocit-k 10
+--Selenium--
+selenium,selenious acid,selenium methylselenocysteine,selenomethionine,sodium selenite.
+--Zinc--
+zinc,galzin,m2 zinc 50,orazinc 110,orazinc 220,zinc-220,zinc chelated,zn plus protein

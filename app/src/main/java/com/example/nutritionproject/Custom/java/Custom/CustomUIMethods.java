@@ -21,6 +21,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
@@ -145,23 +147,46 @@ public class CustomUIMethods
      * @param buttonToVisualMap Map in format of <Button, Visual>
      * @param currentView Button that has been Selected
      * @param selectedTextColor Text color of the selected button
-     * @param deselectedTextColor Text color of the unselected button
+     * @param unselectedTextColor Text color of the unselected button
      */
-    public static void setNListButton(Context context, Map<TextView, ImageView> buttonToVisualMap, TextView currentView, int selectedTextColor, int deselectedTextColor)
+    public static void setNListButton(Context context, Map<TextView, ImageView> buttonToVisualMap, TextView currentView, int selectedTextColor, int unselectedTextColor)
     {
         if (!buttonToVisualMap.containsKey(currentView)) return;
 
         int selectedColor = ContextCompat.getColor(context, selectedTextColor);
-        int deselectedColor = ContextCompat.getColor(context, deselectedTextColor);
+        int unselectedColor = ContextCompat.getColor(context, unselectedTextColor);
 
         for (Map.Entry<TextView, ImageView> entry: buttonToVisualMap.entrySet())
         {
             entry.getValue().setVisibility(View.INVISIBLE);
-            entry.getKey().setTextColor(deselectedColor);
+            entry.getKey().setTextColor(unselectedColor);
         }
 
         buttonToVisualMap.get(currentView).setVisibility(View.VISIBLE);
         currentView.setTextColor(selectedColor);
+    }
+
+    /**
+     *
+     * @param context Context in which this function will use
+     * @param dropdownIcon The indicator icon, usually an arrow
+     * @param drowdownMenu The menu / contents this dropdown will display
+     */
+    public static void toggleDropdown(Context context, View dropdownIcon, View drowdownMenu)
+    {
+        int selectedColor = ContextCompat.getColor(context, R.color.darkTheme_WhiteFull);
+        int unselectedColor = ContextCompat.getColor(context, R.color.darkTheme_WhiteFull);
+
+        if (drowdownMenu.getVisibility() != View.VISIBLE)
+        {
+            drowdownMenu.setVisibility(View.VISIBLE);
+            dropdownIcon.setScaleY(-1);
+        }
+        else
+        {
+            drowdownMenu.setVisibility(View.GONE);
+            dropdownIcon.setScaleY(1);
+        }
     }
 
     /**
@@ -232,34 +257,74 @@ public class CustomUIMethods
 
     /**
      * @param context Context in which this function will use
-     * @param id Id that is gotten from an onclick view
      * @param bottomNavView the layouts bottomNavigationView
      * @param item the item that has been selected from the bottomNavigationView
      */
-    public static void setBottomNavBar(Context context, int id, BottomNavigationView bottomNavView, MenuItem item)
+    public static void setBottomNavBar(Context context, @Nullable ActivityResultLauncher<Intent> activityResultLauncher, BottomNavigationView bottomNavView, MenuItem item)
     {
+        int id = item.getItemId();
+
+        if (!shouldFinishActivity(context, id)) return;
+
         uncheckAllNavItems(bottomNavView.getMenu());
 
         if (id == R.id.homeBtn)
         {
-            context.startActivity(new Intent(((Activity)context), DashboardHomeActivity.class));
+            Intent intent = new Intent(((Activity)context), DashboardHomeActivity.class);
+            launchActivity(context, activityResultLauncher, intent);
+
             ((Activity) context).finish();
+
             checkNavItem(item);
         }
         else if (id == R.id.searchBtn)
         {
-            context.startActivity(new Intent(((Activity)context), DashboardSearchActivity.class));
+            Intent intent = new Intent(((Activity)context), DashboardSearchActivity.class);
+            launchActivity(context, activityResultLauncher, intent);
+
             ((Activity) context).finish();
 
             checkNavItem(item);
         }
         else if (id == R.id.statsBtn)
         {
-            context.startActivity(new Intent(((Activity)context), DashboardStatsActivity.class));
+            Intent intent = new Intent(((Activity)context), DashboardStatsActivity.class);
+            launchActivity(context, activityResultLauncher, intent);
+
             ((Activity) context).finish();
 
             checkNavItem(item);
         }
+    }
+
+    private static void launchActivity(Context context, @Nullable ActivityResultLauncher<Intent> activityResultLauncher, Intent intent)
+    {
+        if (activityResultLauncher == null)
+        {
+            context.startActivity(intent);
+        }
+        else
+        {
+            activityResultLauncher.launch(intent);
+        }
+    }
+
+    private static boolean shouldFinishActivity(Context context, int id)
+    {
+        if (context.getClass() == DashboardHomeActivity.class && id == R.id.homeBtn)
+        {
+            return false;
+        }
+        else if (context.getClass() == DashboardSearchActivity.class && id == R.id.searchBtn)
+        {
+            return false;
+        }
+        else if (context.getClass() == DashboardStatsActivity.class && id == R.id.statsBtn)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     /**

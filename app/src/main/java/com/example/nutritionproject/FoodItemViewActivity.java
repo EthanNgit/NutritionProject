@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Enums.ActivityResultCodes;
 import com.example.nutritionproject.Custom.java.Enums.FoodTag;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
@@ -46,6 +48,7 @@ public class FoodItemViewActivity extends AppCompatActivity implements Navigatio
     HashMap<Nutrient, TextView> nutrientToTextMap = new HashMap<>();
     private FoodProfile baseItem;
     private double macroRatio = 1;
+    private boolean isSearchingIngredient = false;
     private ActivityFoodItemViewBinding binding;
 
     @Override
@@ -102,7 +105,7 @@ public class FoodItemViewActivity extends AppCompatActivity implements Navigatio
                 try
                 {
                     macroRatio = Double.valueOf(s.toString());
-                    setUI();
+                    setNutritionFacts();
                 }
                 catch (NumberFormatException e)
                 {
@@ -133,10 +136,18 @@ public class FoodItemViewActivity extends AppCompatActivity implements Navigatio
             String brand = intent.getStringExtra("brand");
             boolean verified = intent.getBooleanExtra("verified", false);
             FoodNutrition nutrition = gson.fromJson(intent.getStringExtra("nutrition"), FoodNutrition.class);
+            isSearchingIngredient = intent.getBooleanExtra("isIngredient", false);
 
             baseItem = new FoodProfile(upcId, itemName, tags, dateAdded, common, brand, verified, nutrition);
 
-            setUI();
+            binding.header.setText(baseItem.name);
+
+            setNutritionFacts();
+
+            if (isSearchingIngredient)
+            {
+                binding.addBtn.setText(getString(R.string.add_meal));
+            }
         }
         else
         {
@@ -144,11 +155,8 @@ public class FoodItemViewActivity extends AppCompatActivity implements Navigatio
         }
     }
 
-
-    private void setUI() {
-        //if (CustomUtilityMethods.shouldDebug(this.getClass())) Log.d("NORTH_RECYCLERVIEW", "Food item view opened successfully");
-        binding.header.setText(baseItem.name);
-
+    private void setNutritionFacts()
+    {
         binding.servingSizeValue.setText(baseItem.nutrition.servingSize * macroRatio + " " + baseItem.nutrition.servingMeasurement);
 
         HashMap<Nutrient, Pair<Double, NutrientMeasurement>> itemNutrients = baseItem.nutrition.nutrients;
@@ -199,8 +207,17 @@ public class FoodItemViewActivity extends AppCompatActivity implements Navigatio
 
             newItem.nutrition.nutrients = newNutrientsMap;
 
-            MealProfile newMeal = new MealProfile(newItem.name, new ArrayList<>(Arrays.asList(newItem)));
-            dbManager.updateUserNutritionWithMeal(newMeal);
+            if (isSearchingIngredient) {
+                Gson gson = new Gson();
+                Intent intent = new Intent();
+                intent.putExtra("ingredient", gson.toJson(newItem));
+                setResult(ActivityResultCodes.FoodItemView.getCode(), intent);
+            }
+            else
+            {
+                MealProfile newMeal = new MealProfile(newItem.name, new ArrayList<>(Arrays.asList(newItem)));
+                dbManager.updateUserNutritionWithMeal(newMeal);
+            }
 
             finish();
         }
@@ -209,9 +226,7 @@ public class FoodItemViewActivity extends AppCompatActivity implements Navigatio
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
-        int id = item.getItemId();
-
-        CustomUIMethods.setBottomNavBar(this, id, binding.bottomNavigationView, item);
+        CustomUIMethods.setBottomNavBar(this,null, binding.bottomNavigationView, item);
 
         return false;
     }

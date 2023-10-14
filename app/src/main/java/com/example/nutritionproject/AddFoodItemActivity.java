@@ -235,9 +235,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
-        int id = item.getItemId();
-
-        CustomUIMethods.setBottomNavBar(this, id, binding.bottomNavigationView, item);
+        CustomUIMethods.setBottomNavBar(this, null, binding.bottomNavigationView, item);
 
         return false;
     }

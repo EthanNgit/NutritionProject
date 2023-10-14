@@ -5,6 +5,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -93,6 +94,7 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyView
         TextView itemDetails;
         CardView imageIcon;
         TextView itemName;
+        Button itemInfoBtn;
 
 
         public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface)
@@ -103,8 +105,9 @@ public class MealListAdapter extends RecyclerView.Adapter<MealListAdapter.MyView
             itemDetails = itemView.findViewById(R.id.listItemDetails);
             imageIcon = itemView.findViewById(R.id.listItemIcon);
             itemName = itemView.findViewById(R.id.listItemName);
+            itemInfoBtn = itemView.findViewById(R.id.moreInfoButton);
 
-            itemView.setOnClickListener(new View.OnClickListener()
+            itemInfoBtn.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)

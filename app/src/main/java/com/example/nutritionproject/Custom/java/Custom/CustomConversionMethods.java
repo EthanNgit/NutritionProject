@@ -1,5 +1,7 @@
 package com.example.nutritionproject.Custom.java.Custom;
 
+import android.util.Log;
+
 import java.time.LocalDateTime;
 
 public class CustomConversionMethods
@@ -103,6 +105,8 @@ public class CustomConversionMethods
         minute = minute.length() != 2 ? "0" + minute : minute;
         second = second.length() != 2 ? "0" + second : second;
 
+        Log.d("north", hour + "-" + minute + "-" + second);
+
         return (hour + "-" + minute + "-" + second);
     }
 
@@ -118,7 +122,7 @@ public class CustomConversionMethods
         boolean isPm = false;
 
         int hour = Integer.parseInt(militaryTime.substring(0,2));
-        int minute = Integer.parseInt(militaryTime.substring(militaryTime.length() - 2));
+        String minute = militaryTime.substring(militaryTime.length() - 2);
 
         if (hour >= 12)
         {

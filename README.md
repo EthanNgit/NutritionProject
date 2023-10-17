@@ -127,6 +127,7 @@ This application is built similarly to other fitness apps, with some improvments
 *  [Scalable dp](https://github.com/intuit/sdp)
 *  [Scalable sp](https://github.com/intuit/ssp)
 *  [Semi-circle progress bar](https://github.com/hadibtf/SemiCircleArcProgressBar)
+*  [Single row calender](https://github.com/miso01/SingleRowCalendar)
   
 
 

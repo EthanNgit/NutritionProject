@@ -67,7 +67,7 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
             @Override
             public void onFailure(@Nullable EventContext context)
             {
-                //
+                //ああ
             }
         });
 

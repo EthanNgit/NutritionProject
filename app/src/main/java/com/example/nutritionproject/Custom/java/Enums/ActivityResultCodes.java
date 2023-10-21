@@ -3,7 +3,8 @@ package com.example.nutritionproject.Custom.java.Enums;
 public enum ActivityResultCodes
 {
     FoodItemView(7488),
-    SearchView(2807);
+    SearchView(2807),
+    StatsEditWidget(2994);
 
     private int code;
     private ActivityResultCodes(int code)

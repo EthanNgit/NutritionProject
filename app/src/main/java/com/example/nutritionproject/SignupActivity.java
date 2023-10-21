@@ -1,5 +1,6 @@
 package com.example.nutritionproject;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Utility.EventCallback;
+import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.databinding.ActivityProfileGoalsBinding;
 import com.example.nutritionproject.databinding.ActivitySignupBinding;
 

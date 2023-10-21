@@ -12,7 +12,7 @@ public class ApiClient
     public static final String BASE_URL = "http://164.92.81.125/nutritiondb/";
 
     public static Retrofit retrofit = null;
-
+//
     public static Retrofit getApiClient()
     {
         if (retrofit != null) return retrofit;

@@ -96,7 +96,7 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
 
                         if (pos != RecyclerView.NO_POSITION)
                         {
-                            recyclerViewInterface.onItemClick(pos);
+                            recyclerViewInterface.onItemClick(0, pos);
                         }
                     }
                 }

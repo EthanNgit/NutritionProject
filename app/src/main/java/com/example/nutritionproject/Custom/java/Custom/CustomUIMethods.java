@@ -32,6 +32,9 @@ import com.example.nutritionproject.DashboardStatsActivity;
 import com.example.nutritionproject.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
 import java.util.Map;
 import java.util.Random;
 
@@ -334,16 +337,27 @@ public class CustomUIMethods
      * @param unselectedColor The color of the non-highlighted values
      * @return
      */
-    public static SpannableStringBuilder getMultiColouredMacroText(Context context, int macroAmount, int selectedColor, int unselectedColor)
+    public static SpannableStringBuilder getMultiColouredMacroText(Context context, int macroAmount, @Nullable String macroTag, int selectedColor, int unselectedColor)
     {
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
+
         String macroAmtString = String.valueOf(macroAmount);
         SpannableString macroAmtSpannable = new SpannableString(macroAmtString);
         macroAmtSpannable.setSpan(new ForegroundColorSpan(context.getResources().getColor(selectedColor)), 0, macroAmtString.length(), 0);
+
         stringBuilder.append(macroAmtSpannable);
+
+        if (macroTag != null)
+        {
+            SpannableString macroTagSpannable = new SpannableString(macroTag);
+            macroTagSpannable.setSpan(new ForegroundColorSpan(context.getResources().getColor(unselectedColor)), 0, macroTag.length(), 0);
+
+            stringBuilder.append(macroTagSpannable);
+        }
 
         return stringBuilder;
     }
+
 
     public static float[] generateRandomColorBasedOffBrand()
     {
@@ -393,6 +407,8 @@ public class CustomUIMethods
 
         return Math.abs(luminance1 - luminance2);
     }
+
+    
 
 
 }

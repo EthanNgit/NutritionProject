@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_calendar_item"
+    android:layout_width="@dimen/_35sdp"
+    android:layout_height="@dimen/_35sdp"
+    android:layout_marginStart="@dimen/_2sdp"
+    android:layout_marginEnd="@dimen/_2sdp"
+    android:backgroundTint="@color/darkTheme_Background_two"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dayCalendarItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/darkTheme_WhiteMed"
+        android:text="Mon"
+        android:textSize="@dimen/_9ssp" />
+
+    <TextView
+        android:id="@+id/dateCalendarItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/darkTheme_WhiteMed"
+        android:text="31"
+        android:textSize="@dimen/_11ssp" />
+
+</androidx.cardview.widget.CardView>

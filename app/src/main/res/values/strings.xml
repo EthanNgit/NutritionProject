@@ -157,4 +157,9 @@
     <string name="ingredients">Ingredients</string>
     <string name="no_ingredients">No ingredients added</string>
 
+    //Stats
+    <string name="edit_widgets">Edit widgets</string>
+    <string name="all_widgets">All widgets</string>
+
+
 </resources>

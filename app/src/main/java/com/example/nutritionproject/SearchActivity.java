@@ -192,7 +192,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
 
     @Override
-    public void onItemClick(int position) 
+    public void onItemClick(int clickId, int position)
     {
         if (profiles == null) return;
 

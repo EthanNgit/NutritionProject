@@ -237,7 +237,7 @@ public class AddMealItemActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onItemClick(int position)
+    public void onItemClick(int clickId, int position)
     {
         ingredients.remove(ingredients.get(position));
 

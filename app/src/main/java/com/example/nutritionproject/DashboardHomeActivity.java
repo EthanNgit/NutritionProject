@@ -95,7 +95,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     }
 
     @Override
-    public void onItemClick(int position)
+    public void onItemClick(int clickId, int position)
     {
         MealProfile meal = UserProfileStaticRefOther.userMealHistory.get(position);
         Gson gson = new Gson();
@@ -198,19 +198,19 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
 
             binding.calProgressBar.setPercent((int)calPercent);
 
-            SpannableStringBuilder curCalBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.calories, R.color.darkTheme_Brand, R.color.darkTheme_WhiteMed);
+            SpannableStringBuilder curCalBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.calories, null, R.color.darkTheme_Brand, R.color.darkTheme_WhiteMed);
             binding.currentGoalCalorieLabel.setText("of " + String.valueOf(CurrentProfile.goals.calories) + " kcal");
             binding.currentCalorieLabel.setText(curCalBuilder, TextView.BufferType.SPANNABLE);
 
-            SpannableStringBuilder curProBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.proteins, R.color.darkTheme_Protein, R.color.darkTheme_WhiteMed);
+            SpannableStringBuilder curProBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.proteins, null, R.color.darkTheme_Protein, R.color.darkTheme_WhiteMed);
             binding.proteinValue.setText(curProBuilder, TextView.BufferType.SPANNABLE);
             binding.totalProteinValue.setText("of " + String.valueOf(CurrentProfile.goals.proteins) + " protein");
 
-            SpannableStringBuilder curCarBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.carbs, R.color.darkTheme_Carb, R.color.darkTheme_WhiteMed);
+            SpannableStringBuilder curCarBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.carbs, null, R.color.darkTheme_Carb, R.color.darkTheme_WhiteMed);
             binding.totalCarbValue.setText("of " + String.valueOf(CurrentProfile.goals.carbs) + " carbs");
             binding.carbValue.setText(curCarBuilder, TextView.BufferType.SPANNABLE);
 
-            SpannableStringBuilder curFatBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.fats, R.color.darkTheme_Fat, R.color.darkTheme_WhiteMed);
+            SpannableStringBuilder curFatBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.fats, null, R.color.darkTheme_Fat, R.color.darkTheme_WhiteMed);
             binding.totalFatValue.setText("of " + String.valueOf(CurrentProfile.goals.fats) + " fats");
             binding.fatValue.setText(curFatBuilder, TextView.BufferType.SPANNABLE);
         }

@@ -1,5 +1,6 @@
 package com.example.nutritionproject;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;

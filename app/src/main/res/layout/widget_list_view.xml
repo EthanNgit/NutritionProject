@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_margin="@dimen/_2sdp"
+        android:backgroundTint="@color/darkTheme_Background"
+        app:cardCornerRadius="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/bg_green_100dp"
+            android:backgroundTint="@color/darkTheme_WhiteMed"/>
+
+        <ImageView
+            android:id="@+id/listItemIcon"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center_vertical"
+            app:tint="@color/darkTheme_WhiteMed"
+            android:layout_marginStart="@dimen/_10sdp" />
+
+        <TextView
+            android:id="@+id/listItemName"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:paddingStart="@dimen/_62sdp"
+            android:gravity="center_vertical"
+            android:text="@string/filler_food_name"
+            android:textColor="@color/darkTheme_WhiteFull"
+            android:textSize="@dimen/_16sdp"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <ImageView
+            android:id="@+id/listItemMinusBtn"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_10sdp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/ic_subtract"
+            app:tint="@color/darkTheme_Error"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/listItemAddBtn"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_10sdp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/ic_add"
+            app:tint="@color/darkTheme_Brand"
+            android:visibility="gone"/>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

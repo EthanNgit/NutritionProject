@@ -100,7 +100,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.MyView
 
                         if (pos != RecyclerView.NO_POSITION)
                         {
-                            recyclerViewInterface.onItemClick(pos);
+                            recyclerViewInterface.onItemClick(0, pos);
                         }
                     }
                 }

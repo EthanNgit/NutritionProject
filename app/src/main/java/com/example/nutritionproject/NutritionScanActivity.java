@@ -30,6 +30,8 @@ import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMeasurement;
 import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutritionLabelParser;
 import com.example.nutritionproject.Custom.java.NutritionLabelScanner.UnitCallback;
+import com.example.nutritionproject.Custom.java.Utility.EventCallback;
+import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.databinding.ActivityFoodItemViewBinding;
 import com.example.nutritionproject.databinding.ActivityNutritionScanBinding;
 import com.google.android.gms.tasks.OnFailureListener;

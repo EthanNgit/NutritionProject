@@ -18,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,26 +44,138 @@
                     android:maxLines="1"
                     android:ellipsize="end"/>
 
+                <ImageView
+                    android:id="@+id/settingsBtn"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_19sdp"
+                    android:layout_marginTop="@dimen/_19sdp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_cog"/>
 
             </LinearLayout>
 
+            <!--Date selector-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="@dimen/_30sdp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
+                    <TextView
+                        android:id="@+id/monthLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_19sdp"
+                        android:text="SELECT A DATE"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textSize="@dimen/_12ssp"/>
+
+                    <TextView
+                        android:id="@+id/yearLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:textColor="@color/darkTheme_WhiteMed"
+                        android:textSize="@dimen/_12ssp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="end|center">
+
+                        <Button
+                            android:id="@+id/leftBtn"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:scaleX="0.5"
+                            android:scaleY="0.5"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:rotation="270"
+                            android:background="@drawable/ic_dropdown_arrow"/>
+
+                        <Button
+                            android:id="@+id/rightBtn"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:scaleX="0.5"
+                            android:scaleY="0.5"
+                            android:layout_marginRight="@dimen/_17sdp"
+                            android:rotation="90"
+                            android:background="@drawable/ic_dropdown_arrow" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
-
+                <com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
+                    android:id="@+id/main_single_row_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:deselection="false"
+                    app:longPress="false"
+                    app:multiSelection="false" />
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widgetLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_140sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:backgroundTint="@color/darkTheme_Background_two">
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_140sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:backgroundTint="@color/darkTheme_Background_two">
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_140sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:backgroundTint="@color/darkTheme_Background_two">
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_140sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:backgroundTint="@color/darkTheme_Background_two">
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"/>
 
         </LinearLayout>
 

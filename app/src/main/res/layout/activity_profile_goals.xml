@@ -58,8 +58,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -82,11 +80,17 @@
                         app:cardCornerRadius="@dimen/_10sdp"
                         android:backgroundTint="@color/darkTheme_Background_two">
 
-                        <ImageView
+                        <org.eazegraph.lib.charts.PieChart
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/macroPieChart"
                             android:layout_width="@dimen/_85sdp"
                             android:layout_height="@dimen/_85sdp"
-                            android:layout_margin="@dimen/_8sdp"
-                            android:background="@drawable/bg_green_100dp"/>
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="25dp"
+                            app:egUseInnerPadding="false"
+                            app:egInnerPaddingColor="@color/darkTheme_Background_two"
+                            android:layout_marginBottom="15dp"
+                            />
                         
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -104,7 +108,8 @@
                                     android:layout_width="@dimen/_11sdp"
                                     android:layout_height="@dimen/_11sdp"
                                     android:layout_marginStart="@dimen/_17sdp"
-                                    android:background="@drawable/bg_white_6dp"/>
+                                    android:background="@drawable/bg_white_6dp"
+                                    android:backgroundTint="@color/darkTheme_Protein"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -126,7 +131,8 @@
                                     android:layout_width="@dimen/_11sdp"
                                     android:layout_height="@dimen/_11sdp"
                                     android:layout_marginStart="@dimen/_17sdp"
-                                    android:background="@drawable/bg_white_6dp"/>
+                                    android:background="@drawable/bg_white_6dp"
+                                    android:backgroundTint="@color/darkTheme_Carb"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -148,7 +154,8 @@
                                     android:layout_width="@dimen/_11sdp"
                                     android:layout_height="@dimen/_11sdp"
                                     android:layout_marginStart="@dimen/_17sdp"
-                                    android:background="@drawable/bg_white_6dp"/>
+                                    android:background="@drawable/bg_white_6dp"
+                                    android:backgroundTint="@color/darkTheme_Fat"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -163,23 +170,60 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/calorieResultLabelText"
+                            android:id="@+id/calorie_value"
                             android:layout_width="@dimen/_115sdp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_17sdp"
-                            android:layout_marginTop="@dimen/_38sdp"
+                            android:layout_marginTop="@dimen/_25sdp"
                             android:layout_gravity="end"
                             android:gravity="center"
                             android:text="@string/filler_calories"
                             android:textColor="@color/darkTheme_WhiteFull"
                             android:textSize="@dimen/_16ssp"/>
 
+                        <TextView
+                            android:id="@+id/protein_value"
+                            android:layout_width="@dimen/_115sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_17sdp"
+                            android:layout_marginTop="@dimen/_45sdp"
+                            android:layout_gravity="end"
+                            android:gravity="center"
+                            android:text="@string/filler_protein"
+                            android:textColor="@color/darkTheme_WhiteFull"
+                            android:textSize="@dimen/_12ssp"/>
+
+                        <TextView
+                            android:id="@+id/carb_value"
+                            android:layout_width="@dimen/_115sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_17sdp"
+                            android:layout_marginTop="@dimen/_60sdp"
+                            android:layout_gravity="end"
+                            android:gravity="center"
+                            android:text="@string/filler_carbs"
+                            android:textColor="@color/darkTheme_WhiteFull"
+                            android:textSize="@dimen/_12ssp"/>
+
+                        <TextView
+                            android:id="@+id/fat_value"
+                            android:layout_width="@dimen/_115sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_17sdp"
+                            android:layout_marginTop="@dimen/_75sdp"
+                            android:layout_gravity="end"
+                            android:gravity="center"
+                            android:text="@string/filler_fats"
+                            android:textColor="@color/darkTheme_WhiteFull"
+                            android:textSize="@dimen/_12ssp"/>
+
                         <Button
                             android:id="@+id/tdeeBtn"
                             android:layout_width="@dimen/_115sdp"
                             android:layout_height="@dimen/_32sdp"
-                            android:layout_gravity="end|center_vertical"
+                            android:layout_gravity="end|center_vertical|bottom"
                             android:layout_marginEnd="@dimen/_18sdp"
+                            android:layout_marginBottom="@dimen/_18sdp"
                             android:background="@drawable/bg_green_100dp"
                             android:text="Change goals"
                             android:textSize="@dimen/_11ssp"
@@ -187,8 +231,6 @@
                             android:textAllCaps="false" />
 
                     </androidx.cardview.widget.CardView>
-
-
 
                 </LinearLayout>
 

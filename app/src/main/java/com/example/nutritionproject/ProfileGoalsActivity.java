@@ -2,14 +2,21 @@ package com.example.nutritionproject;
 
 import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
 import android.content.Intent;
+import android.text.SpannableStringBuilder;
 import android.view.MenuItem;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import com.example.nutritionproject.Custom.java.Custom.CustomStatsMethods;
+import com.example.nutritionproject.Custom.java.UserModel.UserProfile;
+import com.example.nutritionproject.Custom.java.Utility.EventCallback;
+import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.databinding.ActivityProfileGoalsBinding;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.google.android.material.navigation.NavigationBarView;
@@ -45,7 +52,33 @@ public class ProfileGoalsActivity extends AppCompatActivity implements Navigatio
 
     public void updateGoals()
     {
-        binding.calorieResultLabelText.setText(String.valueOf(CurrentProfile.goals.calories) + " Calories");
+        int calorieGoal = CurrentProfile.goals.calories;
+        int proteinGoal = CurrentProfile.goals.proteins;
+        int carbsGoal = CurrentProfile.goals.carbs;
+        int fatsGoal = CurrentProfile.goals.fats;
+
+        int calorieColor = R.color.darkTheme_Brand;
+        int proteinColor = R.color.darkTheme_Protein;
+        int carbsColor = R.color.darkTheme_Carb;
+        int fatsColor = R.color.darkTheme_Fat;
+
+        String[] labels = {"Protein", "Carbs", "Fats"};
+        int[] values = {proteinGoal * 4, carbsGoal * 4, fatsGoal * 9};
+        int[] colors = {proteinColor, carbsColor, fatsColor};
+
+        CustomStatsMethods.fillPieChart(this, binding.macroPieChart, labels, values, colors);
+
+        SpannableStringBuilder curCalBuilder = CustomUIMethods.getMultiColouredMacroText(this, calorieGoal, " Calories", R.color.darkTheme_Brand, R.color.darkTheme_WhiteMed);
+        binding.calorieValue.setText(curCalBuilder, TextView.BufferType.SPANNABLE);
+
+        SpannableStringBuilder curProBuilder = CustomUIMethods.getMultiColouredMacroText(this, proteinGoal, "g Protein", R.color.darkTheme_Protein, R.color.darkTheme_WhiteMed);
+        binding.proteinValue.setText(curProBuilder, TextView.BufferType.SPANNABLE);
+
+        SpannableStringBuilder curCarBuilder = CustomUIMethods.getMultiColouredMacroText(this, carbsGoal, "g Carbs", R.color.darkTheme_Carb, R.color.darkTheme_WhiteMed);
+        binding.carbValue.setText(curCarBuilder, TextView.BufferType.SPANNABLE);
+
+        SpannableStringBuilder curFatBuilder = CustomUIMethods.getMultiColouredMacroText(this, fatsGoal, "g Fats", R.color.darkTheme_Fat, R.color.darkTheme_WhiteMed);
+        binding.fatValue.setText(curFatBuilder, TextView.BufferType.SPANNABLE);
     }
 
     @Override

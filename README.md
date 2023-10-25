@@ -109,6 +109,8 @@ This application is built similarly to other fitness apps, with some improvments
    <li> :x: Security update (given that i were inclined to publicly release this, there is some must-do changes) </li>
    <li> :x: Api for the food database (most likely to happen, with python) </li>
    <li> :x: Ordering options for widgets </li>
+   <li> :x: Expanded details for widgets </li>
+   <li> :x: Weight loss widgets / more widgets </li>
    <li> :x: Admin console for regulating db (most likely to happen, with wpf c#) </li>
   </ul>
  </details>

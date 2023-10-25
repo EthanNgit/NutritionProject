@@ -96,6 +96,7 @@ This application is built similarly to other fitness apps, with some improvments
  </details>
  <details><summary>V5</summary>
   <ul>
+   <li> :x: Search page recent meals</li>
    <li> :x: Profile details page</li>
    <li> :x: Profile tos page</li>
    <li> :x: Profile cerdits page</li>

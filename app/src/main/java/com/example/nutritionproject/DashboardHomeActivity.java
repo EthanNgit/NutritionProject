@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
@@ -47,6 +48,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         setContentView(view);
 
         handleUI();
+
     }
 
     public void handleUI()
@@ -177,7 +179,7 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         }
         else
         {
-            Log.d("north","empty");
+            // empty
         }
     }
 
@@ -194,11 +196,18 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
             binding.calProgressChartCard.setVisibility(View.VISIBLE);
 
             double calPercent = ((double) CurrentProfile.currentMacros.calories / (double) CurrentProfile.goals.calories) * 100.0;
-            calPercent = calPercent > 100.0 ? 100.0 : calPercent;
+            boolean shouldUseErrorColor = false;
+
+            if (calPercent > 100.0)
+            {
+                calPercent = 100.0;
+                shouldUseErrorColor = true;
+                binding.calProgressBar.setProgressBarColor(ContextCompat.getColor(this, R.color.darkTheme_Calorie_Error));
+            }
 
             binding.calProgressBar.setPercent((int)calPercent);
 
-            SpannableStringBuilder curCalBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.calories, null, R.color.darkTheme_Brand, R.color.darkTheme_WhiteMed);
+            SpannableStringBuilder curCalBuilder = CustomUIMethods.getMultiColouredMacroText(this, CurrentProfile.currentMacros.calories, null, shouldUseErrorColor? R.color.darkTheme_Calorie_Error : R.color.darkTheme_Brand, R.color.darkTheme_WhiteMed);
             binding.currentGoalCalorieLabel.setText("of " + String.valueOf(CurrentProfile.goals.calories) + " kcal");
             binding.currentCalorieLabel.setText(curCalBuilder, TextView.BufferType.SPANNABLE);
 

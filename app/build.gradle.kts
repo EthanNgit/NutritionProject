@@ -12,7 +12,7 @@ android {
         minSdk = 29
         targetSdk = 34
         versionCode = 1
-        versionName = "Alpha 0.3"
+        versionName = "Alpha 0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -85,6 +85,7 @@ dependencies {
     implementation("com.nineoldandroids:library:2.4.0")
 
     implementation("com.michalsvec:single-row-calednar:1.0.0")
+    implementation("com.github.skydoves:progressview:1.1.3")
 
     api("com.google.guava:guava:30.1-jre")
 }

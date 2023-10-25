@@ -20,7 +20,7 @@ import java.util.Date
 class SingleRowCalendar {
     private val calendar = Calendar.getInstance()
     private var currentMonth = 0
-    private val onDateChanged = Event()
+    private var lastDateRecorded = ""
 
     constructor(singleRowCalendar : SingleRowCalendar,
                 monthLabel : TextView,
@@ -63,6 +63,13 @@ class SingleRowCalendar {
                 val cal = Calendar.getInstance()
                 cal.time = date
 
+                if (lastDateRecorded == date.toString())
+                {
+                    return true;
+                }
+
+                lastDateRecorded = date.toString()
+
                 callback?.onSuccess(EventContext.Builder().withData(date).build())
 
                 return true
@@ -73,8 +80,6 @@ class SingleRowCalendar {
             override fun whenSelectionChanged(isSelected: Boolean, position: Int, date: Date) {
                 monthLabel.text = "${DateUtils.getMonthName(date)} "
                 yearLabel.text = DateUtils.getYear(date)
-
-
 
                 super.whenSelectionChanged(isSelected, position, date)
             }

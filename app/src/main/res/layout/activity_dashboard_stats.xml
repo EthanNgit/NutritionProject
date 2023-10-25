@@ -136,38 +136,1804 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/calorie_widget"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_140sdp"
+                    android:layout_height="@dimen/_160sdp"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardCornerRadius="@dimen/_5sdp"
                     android:backgroundTint="@color/darkTheme_Background_two">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="@string/calorie_widget_name"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/_6sdp"
+                        android:src="@drawable/ic_dropdown_arrow"
+                        android:rotation="90"
+                        android:visibility="invisible"/>
+
+                    <me.bastanfar.semicirclearcprogressbar.SemiCircleArcProgressBar
+                        android:id="@+id/calorie_widget_progress_bar_0"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_55sdp"
+                        android:layout_gravity="center_vertical"
+                        app:percent="10"
+                        app:progressBarColor="@color/darkTheme_Brand"
+                        app:progressBarWidth="40"
+                        app:progressPlaceHolderColor="@color/darkTheme_Background"
+                        app:progressPlaceHolderWidth="50" />
+
+                    <TextView
+                        android:id="@+id/calorie_widget_value_text"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:text="@string/kcal_text"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_105sdp"
+                        android:orientation="horizontal">
+
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/calorie_widget_progress_bar_1"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            android:layout_marginBottom="@dimen/_45sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            app:progressView_colorBackground="@color/darkTheme_Background"
+                            app:progressView_colorProgress="@color/darkTheme_Brand"
+                            app:progressView_progress="0"
+                            app:progressView_orientation="vertical"
+                            app:progressView_min="0"
+                            app:progressView_max="1"
+                            app:progressView_progressFromPrevious="true"
+                            app:progressView_autoAnimate="true"
+                            app:progressView_animation="decelerate"
+                            app:progressView_radius="@dimen/_100sdp"/>
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/calorie_widget_progress_bar_2"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            android:layout_marginBottom="@dimen/_45sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            app:progressView_colorBackground="@color/darkTheme_Background"
+                            app:progressView_colorProgress="@color/darkTheme_Brand"
+                            app:progressView_progress="0"
+                            app:progressView_orientation="vertical"
+                            app:progressView_min="0"
+                            app:progressView_max="1"
+                            app:progressView_progressFromPrevious="true"
+                            app:progressView_autoAnimate="true"
+                            app:progressView_animation="decelerate"
+                            app:progressView_radius="@dimen/_100sdp"/>
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/calorie_widget_progress_bar_3"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            android:layout_marginBottom="@dimen/_45sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            app:progressView_colorBackground="@color/darkTheme_Background"
+                            app:progressView_colorProgress="@color/darkTheme_Brand"
+                            app:progressView_progress="0"
+                            app:progressView_orientation="vertical"
+                            app:progressView_min="0"
+                            app:progressView_max="1"
+                            app:progressView_progressFromPrevious="true"
+                            app:progressView_autoAnimate="true"
+                            app:progressView_animation="decelerate"
+                            app:progressView_radius="@dimen/_100sdp"/>
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/calorie_widget_progress_bar_4"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            android:layout_marginBottom="@dimen/_45sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            app:progressView_colorBackground="@color/darkTheme_Background"
+                            app:progressView_colorProgress="@color/darkTheme_Brand"
+                            app:progressView_progress="0"
+                            app:progressView_orientation="vertical"
+                            app:progressView_min="0"
+                            app:progressView_max="1"
+                            app:progressView_progressFromPrevious="true"
+                            app:progressView_autoAnimate="true"
+                            app:progressView_animation="decelerate"
+                            app:progressView_radius="@dimen/_100sdp"/>
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/calorie_widget_progress_bar_5"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            android:layout_marginBottom="@dimen/_45sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            app:progressView_colorBackground="@color/darkTheme_Background"
+                            app:progressView_colorProgress="@color/darkTheme_Brand"
+                            app:progressView_progress="0"
+                            app:progressView_orientation="vertical"
+                            app:progressView_min="0"
+                            app:progressView_max="1"
+                            app:progressView_progressFromPrevious="true"
+                            app:progressView_autoAnimate="true"
+                            app:progressView_animation="decelerate"
+                            app:progressView_radius="@dimen/_100sdp"/>
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/calorie_widget_progress_bar_6"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            android:layout_marginBottom="@dimen/_45sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            app:progressView_colorBackground="@color/darkTheme_Background"
+                            app:progressView_colorProgress="@color/darkTheme_Brand"
+                            app:progressView_progress="0"
+                            app:progressView_orientation="vertical"
+                            app:progressView_min="0"
+                            app:progressView_max="1"
+                            app:progressView_progressFromPrevious="true"
+                            app:progressView_autoAnimate="true"
+                            app:progressView_animation="decelerate"
+                            app:progressView_radius="@dimen/_100sdp"/>
+                        <com.skydoves.progressview.ProgressView
+                            android:id="@+id/calorie_widget_progress_bar_7"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            android:layout_marginBottom="@dimen/_45sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            app:progressView_colorBackground="@color/darkTheme_Background"
+                            app:progressView_colorProgress="@color/darkTheme_Brand"
+                            app:progressView_progress="0"
+                            app:progressView_orientation="vertical"
+                            app:progressView_min="0"
+                            app:progressView_max="1"
+                            app:progressView_progressFromPrevious="true"
+                            app:progressView_autoAnimate="true"
+                            app:progressView_animation="decelerate"
+                            app:progressView_radius="@dimen/_100sdp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_105sdp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="M"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="T"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="W"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="T"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="F"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="S"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="S"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/calorie_widget_average_intake_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="bottom"
+                        android:gravity="center|top"
+                        android:textSize="@dimen/_13ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:maxLines="1"
+                        android:text="Average intake ..." />
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/macros_widget"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_140sdp"
+                    android:layout_height="@dimen/_160sdp"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardCornerRadius="@dimen/_5sdp"
                     android:backgroundTint="@color/darkTheme_Background_two">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="@string/macros_widget_name"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/_6sdp"
+                        android:src="@drawable/ic_dropdown_arrow"
+                        android:rotation="90"
+                        android:visibility="invisible"/>
+
+                    <org.eazegraph.lib.charts.PieChart
+                        android:id="@+id/macro_widget_pie_chart"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:egUseInnerPadding="false"
+                        app:egInnerPaddingColor="@color/darkTheme_Background_two" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_52sdp"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/_108sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingBottom="@dimen/_4sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_11sdp"
+                                android:layout_height="@dimen/_11sdp"
+                                android:layout_marginStart="@dimen/_17sdp"
+                                android:background="@drawable/bg_white_6dp"
+                                android:backgroundTint="@color/darkTheme_Protein"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="@dimen/_12sdp"
+                                android:text="@string/protein_text"
+                                android:textColor="@color/darkTheme_WhiteFull"
+                                android:textSize="@dimen/_8ssp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingBottom="5dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_11sdp"
+                                android:layout_height="@dimen/_11sdp"
+                                android:layout_marginStart="@dimen/_17sdp"
+                                android:background="@drawable/bg_white_6dp"
+                                android:backgroundTint="@color/darkTheme_Carb"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="@dimen/_12sdp"
+                                android:text="@string/carbs_text"
+                                android:textColor="@color/darkTheme_WhiteFull"
+                                android:textSize="@dimen/_8ssp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingBottom="5dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_11sdp"
+                                android:layout_height="@dimen/_11sdp"
+                                android:layout_marginStart="@dimen/_17sdp"
+                                android:background="@drawable/bg_white_6dp"
+                                android:backgroundTint="@color/darkTheme_Fat"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="@dimen/_12sdp"
+                                android:text="@string/fats_text"
+                                android:textColor="@color/darkTheme_WhiteFull"
+                                android:textSize="@dimen/_8ssp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_105sdp"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_1_1"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Background"
+                                app:progressView_colorProgress="@color/darkTheme_Protein"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_1_2"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Carb"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_1_3"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Fat"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_2_1"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Background"
+                                app:progressView_colorProgress="@color/darkTheme_Protein"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_2_2"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Carb"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_2_3"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Fat"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_3_1"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Background"
+                                app:progressView_colorProgress="@color/darkTheme_Protein"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_3_2"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Carb"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_3_3"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Fat"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_4_1"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Background"
+                                app:progressView_colorProgress="@color/darkTheme_Protein"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_4_2"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Carb"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_4_3"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Fat"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_5_1"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Background"
+                                app:progressView_colorProgress="@color/darkTheme_Protein"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_5_2"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Carb"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_5_3"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Fat"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_6_1"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Background"
+                                app:progressView_colorProgress="@color/darkTheme_Protein"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_6_2"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Carb"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_6_3"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Fat"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_7_1"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Background"
+                                app:progressView_colorProgress="@color/darkTheme_Protein"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_7_2"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Carb"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+
+                            <com.skydoves.progressview.ProgressView
+                                android:id="@+id/macro_widget_progress_bar_7_3"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:layout_marginBottom="@dimen/_45sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                app:progressView_colorBackground="@color/darkTheme_Transparent"
+                                app:progressView_colorProgress="@color/darkTheme_Fat"
+                                app:progressView_progress="0"
+                                app:progressView_orientation="vertical"
+                                app:progressView_min="0"
+                                app:progressView_max="1"
+                                app:progressView_progressFromPrevious="true"
+                                app:progressView_autoAnimate="true"
+                                app:progressView_animation="decelerate"
+                                app:progressView_radius="@dimen/_100sdp"/>
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_105sdp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:fontFamily="@font/circular"
+                            android:gravity="center|bottom"
+                            android:text="M"
+                            android:textColor="@color/darkTheme_WhiteMed" />
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="T"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="W"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="T"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="F"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="S"/>
+                        <TextView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center|bottom"
+                            android:textColor="@color/darkTheme_WhiteMed"
+                            android:fontFamily="@font/circular"
+                            android:text="S"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/macro_widget_average_ratios"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/_105sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:gravity="center|top"
+                        android:textSize="@dimen/_13ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:maxLines="1"
+                        android:text="Average ratio ..." />
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/weight_widget"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_140sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardCornerRadius="@dimen/_5sdp"
-                    android:backgroundTint="@color/darkTheme_Background_two">
+                    android:backgroundTint="@color/darkTheme_Background_two"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/darkTheme_WhiteMed"
+                        android:textSize="@dimen/_15ssp"
+                        android:text="Weight widget"
+                        android:alpha="0.1"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="@string/weight_widget_name"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"/>
+
+                    <ImageView
+                        android:id="@+id/weightWidgetBtn"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/_6sdp"
+                        android:src="@drawable/ic_dropdown_arrow"
+                        android:rotation="90"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:gravity="center"
+                        android:text="@string/weight_widget_filler"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textSize="@dimen/_13ssp" />
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/goals_widget"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_160sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:backgroundTint="@color/darkTheme_Background_two">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="@string/goals_widget_name"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/_6sdp"
+                        android:src="@drawable/ic_dropdown_arrow"
+                        android:rotation="90"
+                        android:visibility="invisible"/>
+
+                    <org.eazegraph.lib.charts.PieChart
+                        android:id="@+id/macroPieChart"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:egUseInnerPadding="false"
+                        app:egInnerPaddingColor="@color/darkTheme_Background_two" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_52sdp"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/_108sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingBottom="@dimen/_4sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_11sdp"
+                                android:layout_height="@dimen/_11sdp"
+                                android:layout_marginStart="@dimen/_17sdp"
+                                android:background="@drawable/bg_white_6dp"
+                                android:backgroundTint="@color/darkTheme_Protein"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="@dimen/_12sdp"
+                                android:text="@string/protein_text"
+                                android:textColor="@color/darkTheme_WhiteFull"
+                                android:textSize="@dimen/_8ssp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingBottom="5dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_11sdp"
+                                android:layout_height="@dimen/_11sdp"
+                                android:layout_marginStart="@dimen/_17sdp"
+                                android:background="@drawable/bg_white_6dp"
+                                android:backgroundTint="@color/darkTheme_Carb"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="@dimen/_12sdp"
+                                android:text="@string/carbs_text"
+                                android:textColor="@color/darkTheme_WhiteFull"
+                                android:textSize="@dimen/_8ssp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingBottom="5dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_11sdp"
+                                android:layout_height="@dimen/_11sdp"
+                                android:layout_marginStart="@dimen/_17sdp"
+                                android:background="@drawable/bg_white_6dp"
+                                android:backgroundTint="@color/darkTheme_Fat"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="@dimen/_12sdp"
+                                android:text="@string/fats_text"
+                                android:textColor="@color/darkTheme_WhiteFull"
+                                android:textSize="@dimen/_8ssp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/goal_widget_calorie_value"
+                        android:layout_width="@dimen/_115sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_55sdp"
+                        android:layout_marginTop="@dimen/_35sdp"
+                        android:layout_gravity="end"
+                        android:gravity="center"
+                        android:text="@string/filler_calories"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textSize="@dimen/_18ssp"/>
+
+                    <TextView
+                        android:id="@+id/goal_widget_protein_value"
+                        android:layout_width="@dimen/_115sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_55sdp"
+                        android:layout_marginTop="@dimen/_65sdp"
+                        android:layout_gravity="end"
+                        android:gravity="center"
+                        android:text="@string/filler_protein"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textSize="@dimen/_14ssp"/>
+
+                    <TextView
+                        android:id="@+id/goal_widget_carb_value"
+                        android:layout_width="@dimen/_115sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_55sdp"
+                        android:layout_marginTop="@dimen/_85sdp"
+                        android:layout_gravity="end"
+                        android:gravity="center"
+                        android:text="@string/filler_carbs"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textSize="@dimen/_14ssp"/>
+
+                    <TextView
+                        android:id="@+id/goal_widget_fat_value"
+                        android:layout_width="@dimen/_115sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_55sdp"
+                        android:layout_marginTop="@dimen/_105sdp"
+                        android:layout_gravity="end"
+                        android:gravity="center"
+                        android:text="@string/filler_fats"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:textSize="@dimen/_14ssp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/streaks_widget"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_140sdp"
                     android:layout_margin="@dimen/_5sdp"
                     app:cardCornerRadius="@dimen/_5sdp"
                     android:backgroundTint="@color/darkTheme_Background_two">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="@string/streaks_widget_name"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/_6sdp"
+                        android:src="@drawable/ic_dropdown_arrow"
+                        android:rotation="90"
+                        android:visibility="invisible"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="0.5">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/darkTheme_WhiteFull"
+                                android:textSize="@dimen/_15ssp"
+                                android:textAlignment="center"
+                                android:paddingBottom="@dimen/_10sdp"
+                                android:text="Login"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                app:cardCornerRadius="@dimen/_100sdp"
+                                android:layout_gravity="center"
+                                android:backgroundTint="@color/darkTheme_Background">
+
+                                <TextView
+                                    android:id="@+id/loginStreakText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textColor="@color/darkTheme_WhiteFull"
+                                    android:textSize="@dimen/_20ssp"
+                                    android:text="1000"
+                                    android:maxLength="4"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="0.5"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/darkTheme_WhiteFull"
+                                android:textSize="@dimen/_15ssp"
+                                android:textAlignment="center"
+                                android:paddingBottom="@dimen/_10sdp"
+                                android:text="Diet"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                app:cardCornerRadius="@dimen/_100sdp"
+                                android:layout_gravity="center"
+                                android:backgroundTint="@color/darkTheme_Background">
+
+                                <TextView
+                                    android:id="@+id/dietStreakText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textColor="@color/darkTheme_WhiteFull"
+                                    android:textSize="@dimen/_20ssp"
+                                    android:text="1000"
+                                    android:maxLength="4"/>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/nutrition_widget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:backgroundTint="@color/darkTheme_Background_two">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="@string/nutrition_widget_name"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/_6sdp"
+                        android:src="@drawable/ic_dropdown_arrow"
+                        android:rotation="90"
+                        android:visibility="invisible"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_35sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:backgroundTint="@color/darkTheme_Background">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardElevation="0dp"
+                                android:backgroundTint="@color/darkTheme_Transparent">
+
+                                <TextView
+                                    android:id="@+id/dropdownBtn"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="@dimen/_10sdp"
+                                    android:text="@string/nutrition_facts"
+                                    android:textColor="@color/darkTheme_WhiteMed"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:textAlignment="center"/>
+
+                                <ImageView
+                                    android:id="@+id/dropdownIcon"
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_marginEnd="@dimen/_20sdp"
+                                    android:layout_gravity="end"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:background="@drawable/ic_dropdown_arrow" />
+
+                            </androidx.cardview.widget.CardView>
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_marginEnd="@dimen/_6sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:background="@color/darkTheme_Background_two"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/mealIngredientNutritionFacts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_40sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:visibility="gone">
+
+                            <!--Calories-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/nutrition_facts"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_17ssp" />
+
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_3sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_10sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                            </LinearLayout>
+
+                            <!--Calories-->
+                            <LinearLayout
+                                android:id="@+id/calorie_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/calories"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_17ssp" />
+
+                                    <TextView
+                                        android:id="@+id/calorie_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_16ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_3sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_10sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                            </LinearLayout>
+
+                            <!--Fat-->
+                            <LinearLayout
+                                android:id="@+id/fat_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!--Total Fat-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:fontFamily="@font/circular"
+                                        android:text="@string/total_fat"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/total_fat_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                                <!--Saturated Fat-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:paddingStart="@dimen/_15sdp"
+                                        android:text="@string/saturated_fat"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/saturated_fat_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                                <!--Trans Fat-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:paddingStart="@dimen/_15sdp"
+                                        android:text="@string/trans_fat"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/trans_fat_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                            </LinearLayout>
+
+                            <!--Cholesterol-->
+                            <LinearLayout
+                                android:id="@+id/cholesterol_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!--Cholesterol-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:fontFamily="@font/circular"
+                                        android:text="@string/cholesterol"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/cholesterol_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                            </LinearLayout>
+
+                            <!--Sodium-->
+                            <LinearLayout
+                                android:id="@+id/sodium_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!--Sodium-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:fontFamily="@font/circular"
+                                        android:text="@string/sodium"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/sodium_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                            </LinearLayout>
+
+                            <!--Potassium-->
+                            <LinearLayout
+                                android:id="@+id/potassium_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!--Potassium-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:fontFamily="@font/circular"
+                                        android:text="@string/potassium"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/potassium_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                            </LinearLayout>
+
+                            <!--Carbs-->
+                            <LinearLayout
+                                android:id="@+id/carbs_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!--Total Carb-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:fontFamily="@font/circular"
+                                        android:text="@string/total_carb"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/total_carb_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                                <!--Dietary Fiber-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:paddingStart="@dimen/_15sdp"
+                                        android:text="@string/dietary_fiber"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/dietary_fiber_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                                <!--Total Sugars-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:paddingStart="@dimen/_15sdp"
+                                        android:text="@string/total_sugars"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/total_sugar_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginStart="@dimen/_25sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                                <!--Added Sugars-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:paddingStart="@dimen/_25sdp"
+                                        android:text="@string/added_sugars"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/added_sugar_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                            </LinearLayout>
+
+                            <!--Protein-->
+                            <LinearLayout
+                                android:id="@+id/protein_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!--Protein-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:fontFamily="@font/circular"
+                                        android:text="@string/protein"
+                                        android:textColor="@color/darkTheme_WhiteFull"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                    <TextView
+                                        android:id="@+id/protein_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.5"
+                                        android:text="@string/filler_value"
+                                        android:textAlignment="viewEnd"
+                                        android:textColor="@color/darkTheme_Brand"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:background="@color/darkTheme_WhiteFull" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
 
                 </androidx.cardview.widget.CardView>
 

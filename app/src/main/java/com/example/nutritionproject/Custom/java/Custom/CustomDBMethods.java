@@ -13,6 +13,7 @@ import com.example.nutritionproject.Custom.java.Enums.FoodTag;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
+import com.example.nutritionproject.Custom.java.HistoryModel.HistoryProfile;
 import com.example.nutritionproject.Custom.java.UserModel.UserProfileStaticRefOther;
 import com.example.nutritionproject.Custom.java.Utility.Event;
 import com.example.nutritionproject.Custom.java.Utility.EventCallback;
@@ -21,12 +22,14 @@ import com.example.nutritionproject.Custom.java.UserModel.UserProfile;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.Custom.java.Utility.EventContextStrings;
 import com.example.nutritionproject.Model.FoodModel;
+import com.example.nutritionproject.Model.HistoryModel;
 import com.example.nutritionproject.Model.UserModel;
 import com.example.nutritionproject.Retrofit.ApiClient;
 import com.example.nutritionproject.Retrofit.ApiInterface;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.checkerframework.checker.units.qual.A;
 import org.joda.time.LocalDate;
 
 import java.lang.reflect.Type;
@@ -465,6 +468,42 @@ public class CustomDBMethods
         });
     }
 
+    public void getHistoryOfWeekFrom(int userid, String date, @Nullable EventCallback callback)
+    {
+        Call<ArrayList<HistoryModel>> historyModelCall = apiInterface.getWeekOfHistory(userid, date);
+
+        historyModelCall.enqueue(new Callback<ArrayList<HistoryModel>>()
+        {
+            @Override
+            public void onResponse(Call<ArrayList<HistoryModel>> call, Response<ArrayList<HistoryModel>> response)
+            {
+                ArrayList<HistoryModel> historyModels = response.body();
+                ArrayList<HistoryProfile> historyProfiles = new ArrayList<>();
+
+                Gson gson = new Gson();
+                Type setType = new TypeToken<ArrayList<MealProfile>>(){}.getType();
+                for(HistoryModel model : historyModels)
+                {
+                    historyProfiles.add(new HistoryProfile(model.getCalorie(), model.getProtein(), model.getCarb(), model.getFat(), model.getAlcohol(),
+                            model.getEndCalorie(), model.getEndProtein(), model.getEndCarb(), model.getEndFat(), model.getEndAlcohol(),
+                            gson.fromJson(model.getMeals(), setType), model.getDate(), model.getSteak()));
+
+                }
+
+                Log.d("NORTH_DATABASE", historyProfiles.size() + " Search results found");
+                if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.success).withData(historyProfiles).build());
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<HistoryModel>> call, Throwable t)
+            {
+                Log.d("NORTH_DATABASE", 0 + " Search results found");
+                if (callback != null) callback.onSuccess(new EventContext.Builder().withMessage(EventContextStrings.success).withData(new ArrayList<>()).build());
+            }
+        });
+    }
+
     //endregion
 
     //region Food db Methods
@@ -585,9 +624,10 @@ public class CustomDBMethods
 
     public static void setUserProfile(UserModel user)
     {
+        //TODO: update with alcohol...
         CurrentProfile = new UserProfile(user.getId(), user.getEmail(),
-                new UserMacros(user.getCalorie(), user.getProtein(), user.getCarb(), user.getFat()),
-                new UserMacros(user.getCurrentCalories(), user.getCurrentProtein(), user.getCurrentCarbs(), user.getCurrentFats()),
+                new UserMacros(user.getCalorie(), user.getProtein(), user.getCarb(), user.getFat(), 0),
+                new UserMacros(user.getCurrentCalories(), user.getCurrentProtein(), user.getCurrentCarbs(), user.getCurrentFats(), 0),
                 null);
     }
 

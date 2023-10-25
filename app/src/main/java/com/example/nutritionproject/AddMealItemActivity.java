@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
 import com.example.nutritionproject.Custom.java.Custom.UI.FoodListAdapter;
 import com.example.nutritionproject.Custom.java.Custom.UI.IngredientListAdapter;
 import com.example.nutritionproject.Custom.java.Custom.UI.RecyclerViewInterface;
+import com.example.nutritionproject.Custom.java.Custom.UI.Widget.WidgetObject;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMeasurement;
@@ -31,7 +33,9 @@ import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -41,6 +45,7 @@ import java.util.Locale;
 
 public class AddMealItemActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener, RecyclerViewInterface
 {
+    private final static int RECENT_MEAL_HISTORY_MAX_SIZE = 5;
     private CustomDBMethods dbManager = new CustomDBMethods();
     private MealProfile thisMeal;
     private ArrayList<FoodProfile> ingredients = new ArrayList<>();
@@ -202,8 +207,40 @@ public class AddMealItemActivity extends AppCompatActivity implements View.OnCli
 
             dbManager.updateUserNutritionWithMeal(thisMeal);
 
+            addMealToPreferences();
+
             finish();
         }
+    }
+
+    private void addMealToPreferences()
+    {
+        Gson gson = new Gson();
+
+        SharedPreferences preferences = getSharedPreferences("meals", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        String jsonString = preferences.getString("recent_meals", null);
+        Type listType = new TypeToken<ArrayList<MealProfile>>() {}.getType();
+
+        ArrayList<MealProfile> recentMeals = new ArrayList<>();
+
+        if (jsonString != null)
+        {
+            recentMeals = gson.fromJson(jsonString, listType);
+            recentMeals.add(thisMeal);
+
+            while (recentMeals.size() > RECENT_MEAL_HISTORY_MAX_SIZE)
+            {
+                recentMeals.remove(0);
+            }
+        }
+        else
+        {
+            recentMeals.add(thisMeal);
+        }
+
+        editor.putString("recent_meals", gson.toJson(recentMeals));
+        editor.apply();
     }
 
     @Override

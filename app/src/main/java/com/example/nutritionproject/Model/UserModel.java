@@ -37,6 +37,11 @@ public class UserModel
     private int fat;
 
     @Expose
+    @SerializedName("alcohol")
+    private int alcohol;
+
+
+    @Expose
     @SerializedName("currentcalories")
     private int currentCalories;
 
@@ -53,12 +58,30 @@ public class UserModel
     private int currentFats;
 
     @Expose
+    @SerializedName("currentalcohol")
+    private int currentAlcohol;
+
+    @Expose
     @SerializedName("meals")
     private Object meals;
 
     @Expose
     @SerializedName("date")
     private String date;
+
+    public Object getEntrees()
+    {
+        return entrees;
+    }
+
+    public void setEntrees(Object entrees)
+    {
+        this.entrees = entrees;
+    }
+
+    @Expose
+    @SerializedName("history")
+    private Object entrees;
 
     @Expose
     @SerializedName("success")
@@ -132,6 +155,26 @@ public class UserModel
         this.currentFats = currentFats;
     }
 
+    public int getAlcohol()
+    {
+        return alcohol;
+    }
+
+    public void setAlcohol(int alcohol)
+    {
+        this.alcohol = alcohol;
+    }
+
+    public int getCurrentAlcohol()
+    {
+        return currentAlcohol;
+    }
+
+    public void setCurrentAlcohol(int currentAlcohol)
+    {
+        this.currentAlcohol = currentAlcohol;
+    }
+
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
@@ -168,6 +211,7 @@ public class UserModel
     public void setDate(String date) {
         this.date = date;
     }
+
 
     public boolean isSuccess() {
         return success;

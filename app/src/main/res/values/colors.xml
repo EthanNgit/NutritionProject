@@ -21,7 +21,7 @@
     <color name="darkTheme_Carb">#2196f3</color>
     <color name="darkTheme_Fat">#ff5722</color>
 
-    <color name="darkTheme_Calorie_Error">#FF6B40</color>
+    <color name="darkTheme_Calorie_Error">#DC143C</color>
 
     <color name="widget_fire">#FFA500</color>
     <color name="widget_metal">#555555</color>

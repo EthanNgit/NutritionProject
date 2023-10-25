@@ -161,5 +161,15 @@
     <string name="edit_widgets">Edit widgets</string>
     <string name="all_widgets">All widgets</string>
 
+    //Widigts
+    <string name="calorie_widget_name">Calories </string>
+    <string name="macros_widget_name">Macronutrients </string>
+    <string name="weight_widget_name">Weight </string>
+    <string name="goals_widget_name">Goals </string>
+    <string name="streaks_widget_name">Streak </string>
+    <string name="nutrition_widget_name">Nutrition </string>
+
+    <string name="weight_widget_filler">Lost X pounds \nover the last month </string>
+    <string name="widget_no_data">No data found </string>
 
 </resources>

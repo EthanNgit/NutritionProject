@@ -4,6 +4,10 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
+import androidx.core.content.ContextCompat;
+
+import com.example.nutritionproject.R;
+
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
@@ -48,5 +52,13 @@ public class CustomStatsMethods
         }
 
         return false;
+    }
+
+    public static boolean clearPieChart(Context context, PieChart chart, int background)
+    {
+        chart.clearChart();
+        chart.addPieSlice(new PieModel("", 1, ContextCompat.getColor(context, background)));
+
+        return true;
     }
 }

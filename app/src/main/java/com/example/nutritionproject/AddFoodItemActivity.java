@@ -223,12 +223,12 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
         if (binding.servingAmtTextField.getText().length() != 0 && binding.servingAmtTextField.getText().length() < 1)
         {
             CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.servingAmtTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, binding.servingAmtTextField, R.color.darkTheme_Error, "Invalid serving size");
+            CustomUIMethods.setPopupMessage(this, binding.servingErrorLabelText, R.color.darkTheme_Error, "Invalid serving size");
         }
         if (binding.servingSizeTextField.getText().length() != 0 && binding.servingSizeTextField.getText().length() <= 1)
         {
             CustomUIMethods.setTextFieldBackgrounds(this, new EditText[] {binding.servingSizeTextField}, R.drawable.bg_black_2dp_stroke_red);
-            CustomUIMethods.setPopupMessage(this, binding.servingAmtTextField, R.color.darkTheme_Error, "Invalid serving amount");
+            CustomUIMethods.setPopupMessage(this, binding.servingErrorLabelText, R.color.darkTheme_Error, "Invalid serving amount");
         }
     }
 
@@ -319,7 +319,6 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
             newItemNutrients.put(Nutrient.Protein, new Pair<>(Double.valueOf(protein), NutrientMeasurement.g));
             newItemNutrients.put(Nutrient.TotalCarb, new Pair<>(Double.valueOf(carbs), NutrientMeasurement.g));
             newItemNutrients.put(Nutrient.TotalFat, new Pair<>(Double.valueOf(fat), NutrientMeasurement.g));
-
         }
         else
         {
@@ -343,7 +342,7 @@ public class AddFoodItemActivity extends AppCompatActivity implements View.OnCli
             }
         }
 
-        FoodNutrition newItemNutrition = new FoodNutrition(Double.valueOf(calories), Double.valueOf(servingAmt), servingSize, newItemNutrients);
+        FoodNutrition newItemNutrition = new FoodNutrition(newItemNutrients.get(Nutrient.Calorie).first, Double.valueOf(servingAmt), servingSize, newItemNutrients);
         FoodProfile newItem = new FoodProfile(itemUpc, itemName, null, String.valueOf(new LocalDate()), isCommon, brandName, false, newItemNutrition);
 
         dbManager.addFoodItem(newItem, new EventCallback()

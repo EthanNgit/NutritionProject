@@ -20,13 +20,14 @@ import com.example.nutritionproject.databinding.ActivityDashboardHomeBinding;
 import com.example.nutritionproject.databinding.ActivityStatsEditWidgetBinding;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class StatsEditWidgetActivity extends AppCompatActivity implements View.OnClickListener, NavigationBarView.OnItemSelectedListener, RecyclerViewInterface
 {
     private ArrayList<WidgetObject> widgets = new ArrayList<>();
-    private ArrayList<WidgetObject> activeWidgets = new ArrayList<>();
     WidgetListAdapter adapter;
     private ActivityStatsEditWidgetBinding binding;
     @Override
@@ -55,25 +56,13 @@ public class StatsEditWidgetActivity extends AppCompatActivity implements View.O
 
     private void handleWidgets()
     {
-        WidgetObject caloriesWidget = new WidgetObject(Widget.Calorie.getId(), "Calorie Widget",
-                R.drawable.ic_fire, R.color.widget_fire, true);
-        WidgetObject macrosWidget = new WidgetObject(Widget.Macros.getId(), "Macros Widget",
-                R.drawable.ic_fire, R.color.darkTheme_Brand, true);
-        WidgetObject weightWidget = new WidgetObject(Widget.Weight.getId(), "Weight Widget",
-                R.drawable.ic_weight, R.color.widget_metal, true);
-        WidgetObject goalsWidget = new WidgetObject(Widget.Goals.getId(), "Goals Widget",
-                R.drawable.ic_goals, R.color.widget_goal, false);
-        WidgetObject streaksWidget = new WidgetObject(Widget.Streaks.getId(), "Streaks Widget",
-                R.drawable.ic_streak, R.color.widget_streak, true);
-        WidgetObject nutritionWidget = new WidgetObject(Widget.Nutrition.getId(), "Nutrition Widget",
-                R.drawable.ic_fire, R.color.darkTheme_Brand, false);
+        String jsonString = getIntent().getStringExtra("widgets");
+        Type listType = new TypeToken<ArrayList<WidgetObject>>() {}.getType();
+        Gson gson = new Gson();
 
-        widgets.add(caloriesWidget);
-        widgets.add(macrosWidget);
-        widgets.add(weightWidget);
-        widgets.add(goalsWidget);
-        widgets.add(streaksWidget);
-        widgets.add(nutritionWidget);
+        if (jsonString == null) finish();
+
+        widgets = gson.fromJson(jsonString, listType);
 
         updateWidgets();
     }

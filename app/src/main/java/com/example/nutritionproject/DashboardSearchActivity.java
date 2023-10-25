@@ -2,8 +2,10 @@ package com.example.nutritionproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,12 +13,20 @@ import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomFitMethods;
 import com.example.nutritionproject.Custom.java.Custom.CustomUIMethods;
+import com.example.nutritionproject.Custom.java.Custom.UI.MealListAdapter;
+import com.example.nutritionproject.Custom.java.Custom.UI.RecyclerViewInterface;
+import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.example.nutritionproject.databinding.ActivityDashboardHomeBinding;
 import com.example.nutritionproject.databinding.ActivityDashboardSearchBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-public class DashboardSearchActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+public class DashboardSearchActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, View.OnClickListener, RecyclerViewInterface
 {
     private ActivityDashboardSearchBinding binding;
 
@@ -40,6 +50,37 @@ public class DashboardSearchActivity extends AppCompatActivity implements Naviga
         binding.bottomNavigationView.setOnItemSelectedListener(this);
 
         binding.searchBtn.setOnClickListener(this);
+
+        getRecentMealHistory();
+    }
+
+    private void getRecentMealHistory()
+    {
+        SharedPreferences preferences = getSharedPreferences("meals", MODE_PRIVATE);
+        String jsonString = preferences.getString("recent_meals", null);
+        Type listType = new TypeToken<ArrayList<MealProfile>>() {}.getType();
+        Gson gson = new Gson();
+
+        if (jsonString != null)
+        {
+            binding.recentRecipesLabel.setVisibility(View.VISIBLE);
+            binding.recentRecipeCard.setVisibility(View.VISIBLE);
+
+            ArrayList<MealProfile> mealProfiles = gson.fromJson(jsonString, listType);
+
+            if (mealProfiles.size() > 0)
+            {
+                RecyclerViewInterface recyclerViewInterface = this;
+                MealListAdapter adapter = new MealListAdapter(this, mealProfiles, recyclerViewInterface);
+
+                binding.recentRecipeRecyclerView.setAdapter(adapter);
+                binding.recentRecipeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            }
+        }
+        else {
+            binding.recentRecipesLabel.setVisibility(View.GONE);
+            binding.recentRecipeCard.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -65,5 +106,11 @@ public class DashboardSearchActivity extends AppCompatActivity implements Naviga
     public void onPointerCaptureChanged(boolean hasCapture)
     {
         super.onPointerCaptureChanged(hasCapture);
+    }
+
+    @Override
+    public void onItemClick(int clickId, int position)
+    {
+
     }
 }

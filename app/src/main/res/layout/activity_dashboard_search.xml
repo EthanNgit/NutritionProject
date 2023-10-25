@@ -91,6 +91,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <TextView
+                        android:id="@+id/recentRecipesLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="@dimen/_32sdp"
@@ -101,12 +102,26 @@
                         android:maxLines="1"
                         android:ellipsize="end"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recentRecipeRecycletView"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/recentRecipeCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"/>
+                        android:layout_margin="@dimen/_14sdp"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        android:backgroundTint="@color/darkTheme_Background_two">
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recentRecipeRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            tools:listitem="@layout/meal_list_view"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"/>
 
 
                 </LinearLayout>

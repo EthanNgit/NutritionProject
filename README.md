@@ -89,14 +89,18 @@ This application is built similarly to other fitness apps, with some improvments
  </details>
  <details><summary>V4</summary>
   <ul>
-   <li> :x: Data analysis </li>
-   <li> :x: Meal History </li>
-   <li> :x: Day review </li>
+   <li> :heavy_check_mark: Data analysis </li>
+   <li> :heavy_check_mark: Meal History </li>
+   <li> :heavy_check_mark: Day review </li>
   </ul>
  </details>
  <details><summary>V5</summary>
   <ul>
-   <li> :x: Undecided (Most likely polish and implementing some potential features if I feel the need to) </li>
+   <li> :x: Profile details page</li>
+   <li> :x: Profile tos page</li>
+   <li> :x: Profile cerdits page</li>
+   <li> :x: code cleaning</li>
+   <li> :x: last minute bug catches</li>
   </ul>
  </details>
  <details><summary>Potential plans</summary>

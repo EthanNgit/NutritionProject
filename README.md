@@ -1,6 +1,6 @@
 # NutritionProject
 Full Stack Android Mobile Application.
-> Current version: V: 0.3.4.1 Meal system, polish, finished up.
+> Current version: V: 0.4 Starting stats, finished most base ui.
 
 ## About
 This application is built similarly to other fitness apps, with some improvments I personally would like in a fitness app. It contains more ease of use when it comes to adding items to your daily meals compared to other apps. The app contains a custom database that will be able to house thousands of items for users to search for and add into their macros. The app skips over the useless mumbo jumbo that make other apps clunky like recipes and workouts. Realistically workouts have nothing to do counting macros directly (not accounting for the extra tdee), as in they do not need to suggest me to do 15 sets of crunches 3 times a day, it is outside the scope of a nutritional app. The app takes in the least amount of personal data possible, just an email and a password. This is for the users privacy, as why do I need a name, I only need to be able to associate your account, which can be done with those only. There is a built in tdee calculator that compares in accuracy to other online ones. There is a lot of details skimmed over in this section, but I beleive it to be enough to breifly introduce you to my application 
@@ -26,6 +26,7 @@ This application is built similarly to other fitness apps, with some improvments
 <details><summary>History</summary>
  <details><summary>V3</summary>
   <ul>
+    <li> V: 0.3.4.1 Meal system, polish, finished up.</li>
     <li> V: 0.3.3.1 Code cleanup, changed styles to something more managable, and few bug fixes with the previous update.</li>
     <li> V: 0.3.2.1 Massive. Theme update. Nutrition scanner integration. Basic macro statistics. Meal objects / Recipe objects. Php update. etc.</li>
     <li> V: 0.3.1.1 Switched completely to scalable dp units (I found out the hard way), also started hosting db on droplet.</li>
@@ -88,14 +89,19 @@ This application is built similarly to other fitness apps, with some improvments
  </details>
  <details><summary>V4</summary>
   <ul>
-   <li> :x: Data analysis </li>
-   <li> :x: Meal History </li>
-   <li> :x: Day review </li>
+   <li> :heavy_check_mark: Data analysis </li>
+   <li> :heavy_check_mark: Meal History </li>
+   <li> :heavy_check_mark: Day review </li>
   </ul>
  </details>
  <details><summary>V5</summary>
   <ul>
-   <li> :x: Undecided (Most likely polish and implementing some potential features if I feel the need to) </li>
+   <li> :x: Search page recent meals</li>
+   <li> :x: Profile details page</li>
+   <li> :x: Profile tos page</li>
+   <li> :x: Profile cerdits page</li>
+   <li> :x: code cleaning</li>
+   <li> :x: last minute bug catches</li>
   </ul>
  </details>
  <details><summary>Potential plans</summary>
@@ -108,6 +114,8 @@ This application is built similarly to other fitness apps, with some improvments
    <li> :x: Security update (given that i were inclined to publicly release this, there is some must-do changes) </li>
    <li> :x: Api for the food database (most likely to happen, with python) </li>
    <li> :x: Ordering options for widgets </li>
+   <li> :x: Expanded details for widgets </li>
+   <li> :x: Weight loss widgets / more widgets </li>
    <li> :x: Admin console for regulating db (most likely to happen, with wpf c#) </li>
   </ul>
  </details>

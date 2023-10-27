@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.nutritionproject.AddFoodItemActivity;
 import com.example.nutritionproject.Custom.java.Enums.FoodTag;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
@@ -21,6 +22,7 @@ import com.example.nutritionproject.Custom.java.UserModel.UserMacros;
 import com.example.nutritionproject.Custom.java.UserModel.UserProfile;
 import com.example.nutritionproject.Custom.java.Utility.EventContext;
 import com.example.nutritionproject.Custom.java.Utility.EventContextStrings;
+import com.example.nutritionproject.LoginActivity;
 import com.example.nutritionproject.Model.FoodModel;
 import com.example.nutritionproject.Model.HistoryModel;
 import com.example.nutritionproject.Model.UserModel;
@@ -29,12 +31,12 @@ import com.example.nutritionproject.Retrofit.ApiInterface;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.checkerframework.checker.units.qual.A;
 import org.joda.time.LocalDate;
 
 import java.lang.reflect.Type;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
@@ -444,6 +446,7 @@ public class CustomDBMethods
                     Gson gson = new Gson();
 
                     Type listType = new TypeToken<ArrayList<MealProfile>>() {}.getType();
+
                     ArrayList<MealProfile> meals = gson.fromJson(gson.toJson(userModel.getMeals()), listType);
                     UserProfileStaticRefOther.userMealHistory = meals;
 
@@ -617,7 +620,12 @@ public class CustomDBMethods
         {
             CurrentProfile = null;
 
-            SharedPreferences preferences = context.getSharedPreferences("login", MODE_PRIVATE);
+            // Clear all static variables
+            UserProfileStaticRefOther.ResetStaticReferences();
+            AddFoodItemActivity.receivedMacros = new HashMap<>();
+            LoginActivity.otpEmail = "";
+
+            SharedPreferences preferences = context.getSharedPreferences("_Login", MODE_PRIVATE);
             preferences.edit().clear().apply();
         }
     }
@@ -631,7 +639,7 @@ public class CustomDBMethods
                 null);
     }
 
-    public void updateUserNutritionWithMeal(MealProfile meal)
+    public void addMealToNutrition(MealProfile meal)
     {
         UserProfileStaticRefOther.userMealHistory.add(meal);
         UserProfileStaticRefOther.onUserMealHistoryUpdate.invoke();

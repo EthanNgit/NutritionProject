@@ -136,6 +136,53 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/no_goals_warning"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:backgroundTint="@color/darkTheme_Background_two">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="@string/notice_text"
+                        android:textSize="@dimen/_15ssp"
+                        android:textColor="@color/darkTheme_WhiteFull"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_100sdp"
+                        android:gravity="center_vertical"
+                        android:text="@string/widget_no_goals_label"
+                        android:textColor="@color/darkTheme_WhiteFull"
+                        android:maxLines="2"
+                        android:ellipsize="end"/>
+
+                    <Button
+                        android:id="@+id/tdeeBtn"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:background="@drawable/bg_green_100dp"
+                        android:text="@string/first_time_set_tdee_card_set_goal"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/circular"
+                        android:textAllCaps="false" />
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
                     android:id="@+id/calorie_widget"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_160sdp"

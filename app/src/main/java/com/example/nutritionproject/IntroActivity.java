@@ -45,7 +45,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         binding.loginBtn.setOnClickListener(this);
         binding.registerBtn.setOnClickListener(this);
 
-        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("_Login", MODE_PRIVATE);
 
         String rememberMeString = preferences.getString("rememberMe", "");
         String skipEmail = preferences.getString("email", "");

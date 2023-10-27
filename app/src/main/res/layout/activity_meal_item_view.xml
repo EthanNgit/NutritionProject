@@ -631,7 +631,24 @@
                             android:textColor="@color/darkTheme_Black"
                             android:textSize="@dimen/_20ssp"
                             android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:ellipsize="end"
+                            android:visibility="gone"/>
+
+                        <Button
+                            android:id="@+id/addBtn"
+                            android:layout_width="@dimen/_200sdp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_green_100dp"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/circular"
+                            android:text="@string/add_meal"
+                            android:textAllCaps="false"
+                            android:textColor="@color/darkTheme_Black"
+                            android:textSize="@dimen/_20ssp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:visibility="gone"/>
 
                     </LinearLayout>
 

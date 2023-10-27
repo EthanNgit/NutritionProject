@@ -12,6 +12,7 @@ import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import kotlin.Triple;
 
@@ -22,6 +23,12 @@ public class CustomStatsMethods
         if (labels.length == values.length && values.length == colors.length && labels.length >= 0)
         {
             chart.clearChart();
+
+            if (Arrays.stream(values).sum() == 0)
+            {
+                clearPieChart(context, chart, R.color.darkTheme_Background);
+                return false;
+            }
 
             ArrayList<Triple<String, Integer, Integer>> pieSliceData = new ArrayList<>();
 

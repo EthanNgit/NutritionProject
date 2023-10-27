@@ -87,7 +87,7 @@
                     app:cardPreventCornerOverlap="true"
                     android:layout_margin="@dimen/_15sdp"
                     app:cardBackgroundColor="@color/darkTheme_Background_two"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -142,7 +142,7 @@
                     app:cardPreventCornerOverlap="true"
                     android:layout_margin="@dimen/_15sdp"
                     app:cardBackgroundColor="@color/darkTheme_Background_two"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <me.bastanfar.semicirclearcprogressbar.SemiCircleArcProgressBar
                         android:id="@+id/calProgressBar"

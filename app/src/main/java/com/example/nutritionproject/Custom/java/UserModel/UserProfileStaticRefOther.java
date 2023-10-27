@@ -11,4 +11,10 @@ public class UserProfileStaticRefOther
     public static ArrayList<MealProfile> userMealHistory = new ArrayList<>();
 
     public static Event onUserMealHistoryUpdate = new Event();
+
+    public static void ResetStaticReferences()
+    {
+        userMealHistory = new ArrayList<>();
+        onUserMealHistoryUpdate = new Event();
+    }
 }

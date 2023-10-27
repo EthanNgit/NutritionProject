@@ -21,6 +21,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileCreditsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileTOSActivity"
+            android:exported="false" />
+        <activity
             android:name=".StatsEditWidgetActivity"
             android:exported="false" />
         <activity

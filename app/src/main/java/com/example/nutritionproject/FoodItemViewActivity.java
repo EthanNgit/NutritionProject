@@ -7,14 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
@@ -26,9 +21,7 @@ import com.example.nutritionproject.Custom.java.FoodModel.FoodNutrition;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMeasurement;
-import com.example.nutritionproject.databinding.ActivityDashboardStatsBinding;
 import com.example.nutritionproject.databinding.ActivityFoodItemViewBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -216,7 +209,7 @@ public class FoodItemViewActivity extends AppCompatActivity implements Navigatio
             else
             {
                 MealProfile newMeal = new MealProfile(newItem.name, new ArrayList<>(Arrays.asList(newItem)));
-                dbManager.updateUserNutritionWithMeal(newMeal);
+                dbManager.addMealToNutrition(newMeal);
             }
 
             finish();

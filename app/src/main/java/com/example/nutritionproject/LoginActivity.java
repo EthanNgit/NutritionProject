@@ -1,5 +1,7 @@
 package com.example.nutritionproject;
 
+import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -149,7 +151,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnFocusChan
 
     private void setLoginPreferences()
     {
-        SharedPreferences preferences = getSharedPreferences("login", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("_Login", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putString("rememberMe", shouldRememberMe? "true" : "false");

@@ -1,5 +1,7 @@
 package com.example.nutritionproject;
 
+import static com.example.nutritionproject.Custom.java.Custom.CustomDBMethods.CurrentProfile;
+
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +22,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.nutritionproject.Custom.java.Custom.CustomDBMethods;
-import com.example.nutritionproject.Custom.java.Custom.UI.FoodListAdapter;
 import com.example.nutritionproject.Custom.java.Custom.UI.IngredientListAdapter;
 import com.example.nutritionproject.Custom.java.Custom.UI.RecyclerViewInterface;
-import com.example.nutritionproject.Custom.java.Custom.UI.Widget.WidgetObject;
 import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMeasurement;
@@ -39,7 +39,6 @@ import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -75,6 +74,37 @@ public class AddMealItemActivity extends AppCompatActivity implements View.OnCli
         binding.backBtn.setOnClickListener(this);
         binding.dropdownBtn.setOnClickListener(this);
         binding.ingredientsSearchBtn.setOnClickListener(this);
+
+        binding.itemNameTextField.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                if (binding.itemNameTextField.length() > 1)
+                {
+                    binding.mealErrorText.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                if (binding.itemNameTextField.length() <= 1)
+                {
+                    binding.mealErrorText.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    binding.mealErrorText.setVisibility(View.GONE);
+                }
+            }
+        });
 
         nutrientToTextMap.put(Nutrient.Calorie, binding.calorieValue);
         nutrientToTextMap.put(Nutrient.TotalFat, binding.totalFatValue);
@@ -205,11 +235,15 @@ public class AddMealItemActivity extends AppCompatActivity implements View.OnCli
             //TODO: Add to a personal database slice of their recipes.
             thisMeal = new MealProfile(mealName, ingredients);
 
-            dbManager.updateUserNutritionWithMeal(thisMeal);
+            dbManager.addMealToNutrition(thisMeal);
 
             addMealToPreferences();
 
             finish();
+        }
+        else
+        {
+            binding.mealErrorText.setVisibility(View.VISIBLE);
         }
     }
 
@@ -217,7 +251,7 @@ public class AddMealItemActivity extends AppCompatActivity implements View.OnCli
     {
         Gson gson = new Gson();
 
-        SharedPreferences preferences = getSharedPreferences("meals", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(CurrentProfile.id+"_Meals", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         String jsonString = preferences.getString("recent_meals", null);
         Type listType = new TypeToken<ArrayList<MealProfile>>() {}.getType();

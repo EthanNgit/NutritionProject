@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NutritionProject</string>
+    <string name="app_name">Ntrition</string>
 
     // Common
     <string name="login_text">Login</string>
@@ -22,6 +22,7 @@
     <string name="percent_text">%</string>
     <string name="lbs_text">lbs</string>
     <string name="kg_text">kgs</string>
+    <string name="notice_text">Notice</string>
 
 
     // Filler
@@ -156,6 +157,8 @@
     <string name="remove_meal">Remove meal</string>
     <string name="ingredients">Ingredients</string>
     <string name="no_ingredients">No ingredients added</string>
+    <string name="meal_error">Meal name too short \nor no ingredients added</string>
+
 
     //Stats
     <string name="edit_widgets">Edit widgets</string>
@@ -171,5 +174,6 @@
 
     <string name="weight_widget_filler">Lost X pounds \nover the last month </string>
     <string name="widget_no_data">No data found </string>
+    <string name="widget_no_goals_label">Incomplete data may show. \nSet goals to view more. </string>
 
 </resources>

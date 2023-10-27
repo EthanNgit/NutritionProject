@@ -103,6 +103,7 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
 
         binding.settingsBtn.setOnClickListener(this);
         binding.dropdownBtn.setOnClickListener(this);
+        binding.tdeeBtn.setOnClickListener(this);
 
         calendar = new SingleRowCalendar(binding.mainSingleRowCalendar, binding.monthLabel, binding.yearLabel, binding.leftBtn, binding.rightBtn, new EventCallback()
         {
@@ -136,6 +137,10 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
 
                         if (savedHistories.size() == 0)
                         {
+                            savedHistories.add(new HistoryProfile(goalMacros.calories, goalMacros.proteins, goalMacros.carbs, goalMacros.fats,
+                                    goalMacros.alcohol, currentMacros.calories, currentMacros.proteins, currentMacros.carbs, currentMacros.fats, currentMacros.alcohol,
+                                    UserProfileStaticRefOther.userMealHistory, today, 0));
+
                             handleWidget();
                             return;
                         }
@@ -146,7 +151,7 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
                                     goalMacros.alcohol, currentMacros.calories, currentMacros.proteins, currentMacros.carbs, currentMacros.fats, currentMacros.alcohol,
                                     UserProfileStaticRefOther.userMealHistory, today, savedHistories.get(savedHistories.size() - 1).getStreak() + 1));
 
-                            Log.d("North", savedHistories.get(savedHistories.size() - 1).getStreak() + " ");
+                            Log.d("North", savedHistories.size() + " size ");
                         }
 
                         handleWidget();
@@ -180,6 +185,9 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
 
     private void handleWidget()
     {
+        int isWarningVisible = CurrentProfile.goals.calories == 0 ? View.VISIBLE : View.GONE;
+        binding.noGoalsWarning.setVisibility(isWarningVisible);
+
         if (allWidgets == null)
         {
             // Check preferences for a saved layout
@@ -223,7 +231,7 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
 
     private void getWidgetPreferences()
     {
-        SharedPreferences preferences = getSharedPreferences("stats", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(CurrentProfile.id+"_Stats", MODE_PRIVATE);
         String jsonString = preferences.getString("stats_widgets", null);
         Type listType = new TypeToken<ArrayList<WidgetObject>>() {}.getType();
 
@@ -266,7 +274,7 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
     {
         Log.d("NORTH", "PREFERENCES SAVED");
 
-        SharedPreferences preferences = getSharedPreferences("stats", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(CurrentProfile.id+"_Stats", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putString("stats_widgets", gson.toJson(allWidgets));
@@ -495,6 +503,7 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
         {
             if (profile.getDate().equals(currentDate))
             {
+                Log.d("NORTH", "IS TODAY");
                 CustomStatsMethods.clearPieChart(this, binding.macroPieChart, R.color.darkTheme_Background);
 
                 int calorieGoal = (int) profile.getCalorie();
@@ -573,21 +582,24 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
                     {
                         for (FoodProfile foodProfile: mealProfile.mealComposition)
                         {
-                            for (Nutrient nutrient : foodProfile.nutrition.nutrients.keySet())
+                            if (foodProfile.nutrition.nutrients != null)
                             {
-                                if (totalNutrients.get(nutrient) != null)
+                                for (Nutrient nutrient : foodProfile.nutrition.nutrients.keySet())
                                 {
-                                    // add to the value
-                                    Pair<Double, NutrientMeasurement> oldPair = foodProfile.nutrition.nutrients.get(nutrient);
-                                    double newValue = oldPair.first + totalNutrients.get(nutrient).first;
+                                    if (totalNutrients.get(nutrient) != null)
+                                    {
+                                        // add to the value
+                                        Pair<Double, NutrientMeasurement> oldPair = foodProfile.nutrition.nutrients.get(nutrient);
+                                        double newValue = oldPair.first + totalNutrients.get(nutrient).first;
 
-                                    Pair<Double, NutrientMeasurement> newPair = new Pair<Double, NutrientMeasurement>(newValue, oldPair.second);
+                                        Pair<Double, NutrientMeasurement> newPair = new Pair<Double, NutrientMeasurement>(newValue, oldPair.second);
 
-                                    totalNutrients.put(nutrient, newPair);
-                                }
-                                else
-                                {
-                                    totalNutrients.put(nutrient, foodProfile.nutrition.nutrients.get(nutrient));
+                                        totalNutrients.put(nutrient, newPair);
+                                    }
+                                    else
+                                    {
+                                        totalNutrients.put(nutrient, foodProfile.nutrition.nutrients.get(nutrient));
+                                    }
                                 }
                             }
                         }
@@ -631,8 +643,9 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
                 {
                     allWidgets = gson.fromJson(jsonString, listType);
                     setWidgetPreferences();
-                    handleWidget();
                 }
+
+                handleWidget();
             });
 
     @Override
@@ -652,6 +665,13 @@ public class DashboardStatsActivity extends AppCompatActivity implements View.On
         {
             Intent intent = new Intent(DashboardStatsActivity.this, StatsEditWidgetActivity.class);
             intent.putExtra("widgets", gson.toJson(allWidgets));
+
+            activityResultLauncher.launch(intent);
+        }
+
+        if (id == binding.tdeeBtn.getId())
+        {
+            Intent intent = new Intent(DashboardStatsActivity.this, TdeeActivity.class);
 
             activityResultLauncher.launch(intent);
         }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,8 +16,6 @@ import com.example.nutritionproject.Custom.java.Enums.Nutrient;
 import com.example.nutritionproject.Custom.java.FoodModel.FoodProfile;
 import com.example.nutritionproject.Custom.java.FoodModel.MealProfile;
 import com.example.nutritionproject.Custom.java.NutritionLabelScanner.NutrientMeasurement;
-import com.example.nutritionproject.Custom.java.UserModel.UserProfileStaticRefOther;
-import com.example.nutritionproject.databinding.ActivityDashboardHomeBinding;
 import com.example.nutritionproject.databinding.ActivityMealItemViewBinding;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
@@ -70,6 +67,7 @@ public class MealItemViewActivity extends AppCompatActivity implements Navigatio
         binding.potassiumLayout.setVisibility(View.GONE);
 
         binding.rmvBtn.setOnClickListener(this);
+        binding.addBtn.setOnClickListener(this);
         binding.backBtn.setOnClickListener(this);
 
         Intent intent = this.getIntent();
@@ -79,6 +77,17 @@ public class MealItemViewActivity extends AppCompatActivity implements Navigatio
             String jsonString = getIntent().getStringExtra("mealJson");
 
             meal = gson.fromJson(jsonString, MealProfile.class);
+
+            if (intent.getBooleanExtra("add", false) == true)
+            {
+                binding.rmvBtn.setVisibility(View.GONE);
+                binding.addBtn.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                binding.addBtn.setVisibility(View.GONE);
+                binding.rmvBtn.setVisibility(View.VISIBLE);
+            }
         }
         else
         {
@@ -103,10 +112,21 @@ public class MealItemViewActivity extends AppCompatActivity implements Navigatio
         {
             removeMeal();
         }
+        else if (id == binding.addBtn.getId())
+        {
+            addMeal();
+        }
         else if (id == binding.backBtn.getId())
         {
             finish();
         }
+    }
+
+    private void addMeal()
+    {
+        dbManager.addMealToNutrition(meal);
+
+        finish();
     }
 
     private void removeMeal()

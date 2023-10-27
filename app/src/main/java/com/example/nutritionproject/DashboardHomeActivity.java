@@ -48,7 +48,6 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
         setContentView(view);
 
         handleUI();
-
     }
 
     public void handleUI()
@@ -187,11 +186,13 @@ public class DashboardHomeActivity extends AppCompatActivity implements View.OnC
     {
         if (CurrentProfile.goals.calories == 0)
         {
+            Log.d("NORTH", "OPTION A");
             binding.firstTimeCalSetCard.setVisibility(View.VISIBLE);
             binding.calProgressChartCard.setVisibility(View.GONE);
         }
         else
         {
+            Log.d("NORTH", "OPTION B");
             binding.firstTimeCalSetCard.setVisibility(View.GONE);
             binding.calProgressChartCard.setVisibility(View.VISIBLE);
 

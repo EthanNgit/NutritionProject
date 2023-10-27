@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageInfo;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.os.Bundle;
 
@@ -48,6 +49,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         binding.backBtn.setOnClickListener(this);
         binding.goalsBtn.setOnClickListener(this);
+        binding.termsAndConditionsBtn.setOnClickListener(this);
+        binding.creditsBtn.setOnClickListener(this);
         binding.logoutBtn.setOnClickListener(this);
         binding.detailsBtn.setOnClickListener(this);
 
@@ -98,6 +101,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         else if (id == binding.goalsBtn.getId())
         {
             startActivity(new Intent(ProfileActivity.this, ProfileGoalsActivity.class));
+        }
+        else if (id == binding.termsAndConditionsBtn.getId())
+        {
+            startActivity(new Intent(ProfileActivity.this, ProfileTOSActivity.class));
+        }
+        else if (id == binding.creditsBtn.getId())
+        {
+            startActivity(new Intent(ProfileActivity.this, ProfileCreditsActivity.class));
         }
         else if (id == binding.logoutBtn.getId())
         {

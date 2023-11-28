@@ -105,7 +105,7 @@ public class CustomDBMethods
         try
         {
             String senderEmail = "ethannorthprojects@gmail.com";
-            String senderPassword = "kfdhbdtmmctolsna";
+            String senderPassword = "asdfasd";
             String senderHost = "smtp.gmail.com";
 
             Properties properties = System.getProperties();

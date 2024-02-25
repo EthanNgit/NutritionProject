@@ -5,15 +5,16 @@ Full Stack Android Mobile Application.
 ## About
 This application is built similarly to other fitness apps, with some improvments I personally would like in a fitness app. It contains more ease of use when it comes to adding items to your daily meals compared to other apps. The app contains a custom database that will be able to house thousands of items for users to search for and add into their macros. The app skips over the useless mumbo jumbo that make other apps clunky like recipes and workouts. Realistically workouts have nothing to do counting macros directly (not accounting for the extra tdee), as in they do not need to suggest me to do 15 sets of crunches 3 times a day, it is outside the scope of a nutritional app. The app takes in the least amount of personal data possible, just an email and a password. This is for the users privacy, as why do I need a name, I only need to be able to associate your account, which can be done with those only. There is a built in tdee calculator that compares in accuracy to other online ones. There is a lot of details skimmed over in this section, but I beleive it to be enough to breifly introduce you to my application 
 ### Tools used
-  <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/f5bcb158-4cc5-4fb1-80cf-b8a0d5eee308" width="25">
-  <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/76fe004e-7850-4413-b4ce-76846b1627d8" width="25">
-  <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/8d424c1e-41f6-40e5-a0e9-ea1e93db785d" width="25">
-  <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/b8f5e779-8c93-4671-bc53-c8fe7f4337a9" width="25">
-  <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/ee26ef22-635c-42ad-950b-0fd0c040032c" width="25">
-  <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/898835d7-8ec0-4a67-949c-46ddc802e9e2" width="25">
-  <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/cf187ce3-129f-46e4-95bf-69feb928825c" width="25">
-  <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/4c810dc9-b3f9-482c-b260-3ae6a70ebb88" width="25">
-  <img src="https://github.com/EthanNgit/EthanNgit/assets/105979510/99985008-ff10-40da-b45b-9db73f33b1e3" width="25">
+  <p float="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg" width="25">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg" width="25">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" width="25">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" width="25">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xml/xml-original.svg" width="25">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" width="25">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" width="25">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/digitalocean/digitalocean-original.svg" width="25"/>
+</p>
 
 ## Walkthrough
 > TBC
